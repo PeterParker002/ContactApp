@@ -1,0 +1,261 @@
+
+
+document.querySelector(".message")?.addEventListener("click", (e) => {
+	e.target.style.display = "none";
+});
+
+document.querySelector(".close-email-form")?.addEventListener("click", () => {
+	document.querySelector(".add-email-form").classList.toggle("hide");
+});
+
+document.querySelector(".close-mobile-form")?.addEventListener("click", () => {
+	document.querySelector(".add-mobile-form").classList.toggle("hide");
+});
+
+document.querySelector(".close-contact-form")?.addEventListener("click", () => {
+	document.querySelector(".add-contact-form").classList.toggle("hide");
+});
+
+document.querySelector(".close-group-form")?.addEventListener("click", () => {
+	document.querySelector(".add-group-form").classList.toggle("hide");
+});
+
+document.querySelector(".add-contact-popup")?.addEventListener("click", () => {
+	document.querySelector(".add-contact-form").classList.toggle("hide");
+});
+
+document.querySelector(".add-group-popup")?.addEventListener("click", () => {
+	document.querySelector(".add-group-form").classList.toggle("hide");
+});
+
+document.querySelector(".add-email-icon")?.addEventListener("click", () => {
+	document.querySelector(".add-email-form").classList.toggle("hide");
+});
+
+document.querySelector(".add-mobile-icon")?.addEventListener("click", () => {
+	document.querySelector(".add-mobile-form").classList.toggle("hide");
+});
+
+document
+	.querySelector(".close-group-contact-form")
+	?.addEventListener("click", () => {
+		document.querySelector(".add-group-contact-form").classList.toggle("hide");
+	});
+
+document.querySelector(".edit-profile")?.addEventListener("click", () => {
+	document.querySelector(".edit-profile-form").classList.toggle("hide");
+});
+
+document.querySelector(".close-profile-form")?.addEventListener("click", () => {
+	document.querySelector(".edit-profile-form").classList.toggle("hide");
+});
+
+document.querySelector(".add-mail-btn")?.addEventListener("click", () => {
+	let noOfEmails = document.querySelectorAll(".email-field").length;
+	if (+noOfEmails + 1 > 5) {
+		const msg = document.createElement("div");
+		msg.className = "message";
+		msg.innerText = "Maximum Entries Reached";
+		msg?.addEventListener("click", (e) => {
+			e.target.style.display = "none";
+		});
+		document.body.insertBefore(msg, document.body.firstChild);
+		document.querySelector(".add-mail-btn").setAttribute("disabled", true);
+
+		setTimeout(() => {
+			msg.remove();
+		}, 2000);
+	} else {
+		const div = document.createElement("div");
+		div.className = "field";
+		const field = document.createElement("input");
+		field.type = "email";
+		field.name = "email";
+		field.placeholder = "Enter another email";
+		field.className = "email-field";
+		field.pattern = "[a-zA-Z]+(.[a-zA-Z0-9]+)*@[a-zA-Z]+.[a-zA-Z]{2,3}";
+		field.title = "Email should look like: example@gmail.com";
+		field.required = true;
+		const deleteBtn = document.createElement("span");
+		deleteBtn?.addEventListener("click", (e) => {
+			document.querySelector(".email-fields").removeChild(field.parentElement);
+			noOfEmails = document.querySelectorAll(".email-field").length;
+			document.querySelector(".add-mail-btn").removeAttribute("disabled");
+		});
+		deleteBtn.innerHTML =
+			'<img src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="32">';
+		div.appendChild(field);
+		div.appendChild(deleteBtn);
+		document.querySelector(".email-fields").appendChild(div);
+		noOfEmails = document.querySelectorAll(".email-field").length;
+	}
+});
+
+document.querySelector(".add-mobile-btn")?.addEventListener("click", () => {
+	let noOfMobiles = document.querySelectorAll(".mobile-field").length;
+	if (+noOfMobiles + 1 > 5) {
+		const msg = document.createElement("div");
+		msg.className = "message";
+		msg.innerText = "Maximum Entries Reached";
+		msg?.addEventListener("click", (e) => {
+			e.target.style.display = "none";
+		});
+		document.body.insertBefore(msg, document.body.firstChild);
+		document.querySelector(".add-mobile-btn").setAttribute("disabled", true);
+
+		setTimeout(() => {
+			msg.remove();
+		}, 2000);
+	} else {
+		const div = document.createElement("div");
+		div.className = "field";
+		const field = document.createElement("input");
+		field.type = "mobile";
+		field.name = "mobile";
+		field.placeholder = "Enter another mobile number";
+		field.className = "mobile-field";
+		field.pattern = "[0-9]{10}";
+		field.title = "Mobile Number should look like: 1234567890";
+		field.required = true;
+		const deleteBtn = document.createElement("span");
+		deleteBtn?.addEventListener("click", (e) => {
+			document.querySelector(".mobile-fields").removeChild(field.parentElement);
+			noOfMobiles = document.querySelectorAll(".mobile-field").length;
+			document.querySelector(".add-mobile-btn").removeAttribute("disabled");
+		});
+		deleteBtn.innerHTML =
+			'<img src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="32">';
+		div.appendChild(field);
+		div.appendChild(deleteBtn);
+		document.querySelector(".mobile-fields").appendChild(div);
+		noOfMobiles = document.querySelectorAll(".mobile-field").length;
+	}
+});
+
+let currentContact = "";
+let isOpen = false;
+
+document.querySelectorAll(".contact-name").forEach((name) =>
+	name?.addEventListener("click", (e) => {
+		if (currentContact === e.target.dataset.id) {
+			document.querySelector(".contact-container").classList.toggle("hide");
+			isOpen = false;
+		} else {
+			currentContact = e.target.dataset.id;
+			let con_id = e.target.dataset.id;
+			fetch("http://localhost:8080/contact/" + con_id)
+				.then((res) => res.json())
+				.then((data) => {
+					document.querySelector(".contact-fname").innerText = data.fname+" "+data.mname+" "+data.lname;
+					document.querySelector(".c-fname").innerText = data.fname;
+					document.querySelector(".c-mname").innerText = data.mname;
+					document.querySelector(".c-lname").innerText = data.lname;
+					document.querySelector(".c-gender").innerText = data.gender;
+					document.querySelector(".c-notes").innerText = data.notes;
+					document.querySelector(".c-home").innerText = data.home;
+					document.querySelector(".c-work").innerText = data.work;
+					document.querySelector(".c-dob").innerText = data.dob;
+					document.querySelector(".c-mail").innerText = data.mail;
+					document.querySelector(".c-mobile").innerText = data.mobile;
+				});
+			if (!isOpen) {
+				document.querySelector(".contact-container").classList.toggle("hide");
+				isOpen = true;
+			}
+		}
+	})
+);
+
+document.querySelectorAll(".group-name").forEach((group) =>
+	group?.addEventListener("click", (e) => {
+		const growAnime = [{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }];
+
+		const growTiming = {
+			duration: 250,
+			iterations: 1,
+		};
+		const shrinkAnime = [
+			{ transform: "scaleY(1)" },
+			{ transform: "scaleY(0)" },
+		];
+
+		const shrinkTiming = {
+			duration: 250,
+			iterations: 1,
+		};
+
+		let cardNumber = e.target.dataset.order;
+		let container = document.querySelector(`.c${cardNumber}`);
+
+		if (container.style.minHeight === "75px") {
+			container.style.minHeight = "0";
+			container.style.padding = "0";
+			container.animate(shrinkAnime, shrinkTiming);
+			container.querySelectorAll(".contact").forEach((c) => {
+				c.animate(shrinkAnime, shrinkTiming);
+			});
+		} else {
+			container.style.minHeight = "75px";
+			container.style.padding = "1rem";
+			container.animate(growAnime, growTiming);
+			container.querySelectorAll(".contact").forEach((c) => {
+				c.animate(growAnime, growTiming);
+			});
+		}
+		container.scrollIntoView({ behavior: "smooth", block: "start" });
+	})
+);
+
+document.querySelectorAll(".add-group-contact-btn").forEach((user) =>
+	user?.addEventListener("click", (e) => {
+		let availableContacts = document
+			.querySelector(".add-group-contact-form")
+			.querySelectorAll("contact-option").length;
+		let group_id = e.target.dataset.id;
+		fetch("http://localhost:8080/getContactsByGroup/" + group_id)
+			.then((res) => res.json())
+			.then((d) => {
+				if (d.contacts.length > 0) {
+					document.querySelector(".current-group-name").innerText = d.name;
+					document.querySelector("#hidden-group-id").value = group_id;
+					document.querySelector(".filtered-contacts").innerHTML = "";
+					d.contacts.forEach((cont) => {
+						const div = document.createElement("div");
+						div.className = "contact-option";
+						const inp = document.createElement("input");
+						inp.type = "checkbox";
+						inp.name = "contact";
+						inp.id = "contact" + availableContacts;
+						inp.value = "" + cont.id;
+						const lab = document.createElement("label");
+						lab.htmlFor = "contact" + availableContacts;
+						lab.innerText = cont.fname;
+						availableContacts++;
+						div.appendChild(inp);
+						div.appendChild(lab);
+						document.querySelector(".filtered-contacts").appendChild(div);
+					});
+					document
+						.querySelector(".add-group-contact-form")
+						.classList.toggle("hide");
+				} else {
+					const msg = document.createElement("div");
+					msg.className = "message";
+					msg.innerText = "Group Already Full";
+					msg?.addEventListener("click", (e) => {
+						e.target.style.display = "none";
+					});
+					document.body.insertBefore(msg, document.body.firstChild);
+					setTimeout(() => {
+						msg.remove();
+					}, 2000);
+				}
+			});
+	})
+);
+
+const msg = document.querySelector('.message');
+
+setTimeout(() => {
+	msg.remove();
+}, 2000);

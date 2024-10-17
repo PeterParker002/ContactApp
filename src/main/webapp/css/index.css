@@ -1,0 +1,131 @@
+:root {
+	--gradient-start-color: #c60045;
+	--gradient-stop-color: #014c69;
+	--button-gradient: linear-gradient(135deg, #a74cf2, #3963d7);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Montserrat", sans-serif;
+}
+
+body {
+	width: 100%;
+	min-height: 100vh;
+	background: linear-gradient(45deg, #2c3e50 25%, #000000 100%);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.wrapper {
+	width: 50%;
+	min-height: 50vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+	background: var(--button-gradient);
+	border-radius: 25px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+	padding: 2rem;
+	color: white;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 5rem;
+}
+
+.container>a {
+	text-decoration: none;
+	color: black;
+	background: white;
+	border-radius: 5px;
+	padding: 0.75rem 1rem;
+	/* border: 2px solid black; */
+	font-size: 1.2rem;
+}
+
+.wrapper>form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1.5rem;
+}
+
+form input {
+	width: 80%;
+	padding: 0.75rem 1rem;
+	border-radius: 10px;
+	outline: none;
+	border: 2px solid black;
+	font-size: 1.2rem;
+	resize: vertical;
+}
+
+form input[type="submit"] {
+	width: max-content;
+	padding: 1rem 2rem;
+	cursor: pointer;
+}
+
+.message {
+	position: absolute;
+	min-width: 250px;
+	top: 5%;
+	left: calc(50% - 125px);
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+	background: linear-gradient(#ffe, #fff);
+	border-radius: 15px;
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.75);
+	cursor: pointer;
+	z-index: 100;
+}
+
+.message::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 4%;
+	width: 92%;
+	height: 5px;
+	border-radius: 5px;
+	background: var(--button-gradient);
+	/* background: linear-gradient(45deg, #00FF9C, #B6FFA1); */
+	animation: toast 2s linear forwards;
+}
+
+@keyframes toast { 
+	100% {
+	width: 0;
+}
+}
+.sign-up-link {
+	font-size: 1.2rem;
+}
+
+.sign-up-link a {
+	text-decoration: none;
+	color: #fff;
+	transition: all 150ms ease-in;
+}
+
+.sign-up-link a:hover {
+	font-size: 1.25rem;
+	text-decoration: underline;
+}

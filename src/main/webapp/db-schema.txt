@@ -1,0 +1,40 @@
+Contacts App (DB Schema):
+
+Tables:
+
+ - contact Information
+ - General Information
+ - Personal Information
+
+Table Description:
+
+ - contact Information
+  - employee id
+  - email
+   - employee id
+   - id
+   - email address
+   - primary
+  - password
+
+ - General Details
+  - id
+  - employee id
+  - first name
+  - middle name [Optional]
+  - last name 
+  - nickname [Optional]
+  - mobile number
+   - employee id
+   - id
+   - number
+   - type
+
+ - Personal Details
+  - id
+  - employee id
+  - gender
+  - Date Of Birth [Optional]
+  - Notes [Optional]
+  - Home address [Optional]
+  - Work address [Optional]
