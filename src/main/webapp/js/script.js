@@ -215,7 +215,8 @@ document.querySelectorAll(".add-group-contact-btn").forEach((user) =>
 		fetch("http://localhost:8080/getContactsByGroup/" + group_id)
 			.then((res) => res.json())
 			.then((d) => {
-				if (d.contacts.length > 0) {
+				console.log(d.contacts);
+				if (d.status == 1) {
 					document.querySelector(".current-group-name").innerText = d.name;
 					document.querySelector("#hidden-group-id").value = group_id;
 					document.querySelector(".filtered-contacts").innerHTML = "";

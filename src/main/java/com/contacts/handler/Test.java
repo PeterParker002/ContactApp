@@ -1,13 +1,16 @@
 package com.contacts.handler;
 
-import com.lambdaworks.crypto.SCryptUtil;
+import java.util.ArrayList;
+
+import com.contacts.querylayer.Column;
+import com.contacts.querylayer.QueryBuilder;
 
 public class Test {
 	public static void main(String[] args) {
-		int N = 32; // CPU cost
-		int r = 20; // Memory Cost
-		int p = 2; // Parallelization
-		String hashed = SCryptUtil.scrypt("121212", N, r, p);
-		System.out.println(SCryptUtil.check("121212", hashed));
+		QueryBuilder ql = new QueryBuilder();
+		ql.selectTable("User_email_ids");
+		ArrayList<Column> cols = new ArrayList<>();
+		ql.selectColumn("a", "as");
+		System.out.println(ql.build());
 	}
 }

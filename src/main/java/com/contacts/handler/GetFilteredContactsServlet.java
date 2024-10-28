@@ -46,10 +46,16 @@ public class GetFilteredContactsServlet extends HttpServlet {
 				output.put("contacts", contacts);
 				response.getWriter().println(output.toString());
 			} else {
-				response.getWriter().println(String.format(JsonString, 0, groupName, ""));
+				output.put("status", 0);
+				output.put("name", groupName);
+				output.put("contacts", "[]");
+				response.getWriter().println(output.toString());
 			}
 		} catch (NumberFormatException | SQLException | ClassNotFoundException n) {
-			response.getWriter().println(String.format(JsonString, -1, "", ""));
+			output.put("status", -1);
+			output.put("name", "");
+			output.put("contacts", "[]");
+			response.getWriter().println(output.toString());
 		}
 	}
 }
