@@ -1,17 +1,21 @@
 package com.contacts.querylayer;
 
-public class Condition {
+public class Condition<T> {
 	public Column column;
 	public String operator;
-	public String value;
+	public T value;
 
-	public Condition(Column column, String operator, String value) {
+	public Condition(Column column, String operator, T value) {
 		this.column = column;
 		this.operator = operator;
 		this.value = value;
 	}
 
 	public String toString() {
-		return this.column.name + this.operator + "\"" + this.value + "\"";
+		if (this.value instanceof String) {
+			return this.column.toString() + this.operator + "\"" + this.value + "\"";
+		} else {
+			return this.column.toString() + this.operator + this.value;
+		}
 	}
 }

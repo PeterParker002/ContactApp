@@ -13,6 +13,8 @@ import com.contacts.dao.UserDAO;
 
 @WebServlet("/makePrimary/*")
 public class ChangePrimaryMailServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			HttpSession session = request.getSession();

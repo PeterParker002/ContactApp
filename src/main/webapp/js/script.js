@@ -146,7 +146,7 @@ document.querySelectorAll(".contact-name").forEach((name) =>
 			fetch("http://localhost:8080/contact/" + con_id)
 				.then((res) => res.json())
 				.then((data) => {
-					document.querySelector(".contact-fname").innerText = data.fname+" "+data.mname+" "+data.lname;
+					document.querySelector(".contact-fname").innerText = data.fname + " " + data.mname + " " + data.lname;
 					document.querySelector(".c-fname").innerText = data.fname;
 					document.querySelector(".c-mname").innerText = data.mname;
 					document.querySelector(".c-lname").innerText = data.lname;

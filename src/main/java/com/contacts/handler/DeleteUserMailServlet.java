@@ -13,6 +13,8 @@ import com.contacts.dao.UserDAO;
 
 @WebServlet("/deleteMail/*")
 public class DeleteUserMailServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
 			HttpSession session = request.getSession();

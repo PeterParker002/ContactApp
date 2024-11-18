@@ -16,6 +16,8 @@ import com.contacts.model.Contact;
 
 @WebServlet("/add-contact")
 public class AddContactServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("/");
 	}

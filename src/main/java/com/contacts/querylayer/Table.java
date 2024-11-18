@@ -1,20 +1,36 @@
 package com.contacts.querylayer;
 
-public class Table {
-	public String name;
-	public String alias;
+import com.contacts.utils.Database.TableInfo;
 
-	public Table(String name) {
+public class Table {
+	public TableInfo name;
+	public String alias;
+	public boolean defaultAlias = false;
+
+	public Table(TableInfo name) {
 		this.name = name;
 		this.alias = "";
 	}
 
-	public Table(String name, String alias) {
+	public Table(TableInfo name, String alias) {
 		this.name = name;
 		this.alias = alias;
 	}
 
+	public void setDefaultAlias() {
+		this.defaultAlias = true;
+		this.alias = this.name.toString();
+	}
+
+	public TableInfo getName() {
+		return name;
+	}
+
 	public String toString() {
-		return (this.name + " " + this.alias).trim();
+		if (this.defaultAlias) {
+			return this.name.toString();
+		} else {
+			return this.alias.equals("") ? this.name.toString() : (this.name + " AS " + this.alias).trim();
+		}
 	}
 }

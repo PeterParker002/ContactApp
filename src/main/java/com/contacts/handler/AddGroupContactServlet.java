@@ -15,6 +15,8 @@ import com.contacts.dao.UserDAO;
 
 @WebServlet("/add-group-contact")
 public class AddGroupContactServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int group_id = Integer.parseInt(request.getParameter("group-id"));
 		String[] contacts = request.getParameterValues("contact");

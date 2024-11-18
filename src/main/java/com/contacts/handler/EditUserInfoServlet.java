@@ -14,6 +14,8 @@ import com.contacts.model.User;
 
 @WebServlet("/edit-profile")
 public class EditUserInfoServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		int user_id = (int) session.getAttribute("user");

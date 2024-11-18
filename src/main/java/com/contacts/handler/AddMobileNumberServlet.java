@@ -1,7 +1,6 @@
 package com.contacts.handler;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.BatchUpdateException;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -17,6 +16,8 @@ import com.contacts.dao.UserDAO;
 
 @WebServlet("/add-mobile-number")
 public class AddMobileNumberServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.sendRedirect("/");
 	}

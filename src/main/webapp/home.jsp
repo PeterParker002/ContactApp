@@ -300,7 +300,7 @@ ArrayList<Group> groups = u.getGroups(id);
 					%>
 					<div class="mail">
 						<span class="left-side"> <%
- if (mail.isPrimary()) {
+ if (mail.getPrimary()) {
  %> <a href="#" class="primary"><img
 								src="assets/star-svgrepo-com.svg" alt="primary" width="24" /></a> <%
  } else {
@@ -309,7 +309,7 @@ ArrayList<Group> groups = u.getGroups(id);
  }
  %> <span><%=mail.getMail()%></span>
 						</span> <span class="right-side"> <%
- if (!mail.isPrimary()) {
+ if (!mail.getPrimary()) {
  %> <a href="deleteMail/<%=mail.getId()%>"> <img
 								src="assets/delete-icon.svg" alt="delete-mail" width="24">
 						</a> <%

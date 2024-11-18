@@ -19,9 +19,10 @@ import com.contacts.model.Contact;
 public class GetFilteredContactsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
-		String JsonString = "{\"status\": %d, \"name\": \"%s\", \"contacts\": %s }";
+//		String JsonString = "{\"status\": %d, \"name\": \"%s\", \"contacts\": %s }";
 		JSONObject output = new JSONObject();
 		try {
 			int group_id = Integer.parseInt(request.getPathInfo().substring(1));
@@ -31,10 +32,10 @@ public class GetFilteredContactsServlet extends HttpServlet {
 			ArrayList<Contact> rs = c.getContactsByGroupId(user_id, group_id);
 			String groupName = c.getGroupNameById(group_id);
 			if (rs.size() > 0) {
-				JSONObject contactJson = new JSONObject();
-				String finalString = "";
+//				String finalString = "";
 				ArrayList<JSONObject> contacts = new ArrayList<>();
 				for (Contact cont : rs) {
+					JSONObject contactJson = new JSONObject();
 					contactJson.put("id", cont.getContact_id());
 					contactJson.put("fname", cont.getFirstName());
 					contactJson.put("mname", cont.getMiddleName());

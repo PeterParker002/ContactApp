@@ -9,19 +9,25 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.ContactDAO;
 
 @WebServlet("/contact/*")
 public class GetContactInfoServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 //		String JsonString = "{\"status\": %d, \"fname\": \"%s\", \"mname\": \"%s\", \"lname\": \"%s\", \"gender\": \"%s\", \"notes\": \"%s\", \"dob\": \"%s\", \"home\": \"%s\", \"work\": \"%s\", \"mail\": \"%s\", \"mobile\": \"%s\" }";
 		JSONObject json = new JSONObject();
 		try {
 			int contact_id = Integer.parseInt(request.getPathInfo().substring(1));
+			HttpSession session = request.getSession(false);
+			int user_id = (int) session.getAttribute("user");
 			ContactDAO c = new ContactDAO();
-			ResultSet rs = c.getContactInfo(contact_id);
+			ResultSet rs = c.getContactInfo(contact_id, user_id);
 			if (rs.next()) {
 				json.put("status", 1);
 				json.put("fname", rs.getString(1));

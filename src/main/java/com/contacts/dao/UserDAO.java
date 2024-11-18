@@ -7,10 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.mindrot.jbcrypt.BCrypt;
-
 import com.contacts.model.Contact;
 import com.contacts.model.Group;
 import com.contacts.model.Mail;

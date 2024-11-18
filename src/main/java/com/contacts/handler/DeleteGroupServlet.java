@@ -13,6 +13,8 @@ import com.contacts.dao.ContactDAO;
 
 @WebServlet("/delete-group")
 public class DeleteGroupServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		int group_id = Integer.parseInt(request.getParameter("group-id"));
 		HttpSession session = request.getSession();

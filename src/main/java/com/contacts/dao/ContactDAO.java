@@ -78,14 +78,15 @@ public class ContactDAO {
 		return contacts;
 	}
 
-	public ResultSet getContactInfo(int contact_id) throws ClassNotFoundException, SQLException {
+	public ResultSet getContactInfo(int contact_id, int user_id) throws ClassNotFoundException, SQLException {
 		Connection con = getConnection();
 		// PreparedStatement ps = con.prepareStatement(
 		// "select first_name, gender, notes, date_of_birth from Contacts where
 		// contact_id=?;");
 		PreparedStatement ps = con.prepareStatement(
-				"select c.first_name, c.middle_name, c.last_name, c.gender, c.notes, c.date_of_birth, c.home_address, c.work_address, ma.email, mo.mobile_number from Contacts c inner join contacts_mail_ids ma on c.contact_id=ma.contact_id inner join contacts_mobile_numbers mo on c.contact_id=mo.contact_id where c.contact_id=?;");
+				"select c.first_name, c.middle_name, c.last_name, c.gender, c.notes, c.date_of_birth, c.home_address, c.work_address, ma.email, mo.mobile_number from Contacts c inner join contacts_mail_ids ma on c.contact_id=ma.contact_id inner join contacts_mobile_numbers mo on c.contact_id=mo.contact_id where c.contact_id=? and c.user_id=?;");
 		ps.setInt(1, contact_id);
+		ps.setInt(2, user_id);
 		return ps.executeQuery();
 	}
 
@@ -123,7 +124,6 @@ public class ContactDAO {
 		ps.setInt(2, group_id);
 		ResultSet r = ps.executeQuery();
 		if (r.next()) {
-
 			PreparedStatement mail_ps = con.prepareStatement(
 					"select contact_id, first_name, middle_name, last_name from Contacts where user_id=? and contact_id not in (select contact_id from Group_info where group_id=?);");
 			mail_ps.setInt(1, user_id);

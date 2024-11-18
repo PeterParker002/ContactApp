@@ -1,31 +1,35 @@
 package com.contacts.model;
 
 public class Mail {
-    private int id;
-    private String mail;
-    private boolean isPrimary;
+	private int id;
+	private String mail;
+	private boolean isPrimary;
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getMail() {
-        return mail;
-    }
+	public String getMail() {
+		return mail;
+	}
 
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 
-    public boolean isPrimary() {
-        return isPrimary;
-    }
+	public boolean getPrimary() {
+		return isPrimary;
+	}
 
-    public void setPrimary(boolean isPrimary) {
-        this.isPrimary = isPrimary;
-    }
+	public void setPrimary(boolean isPrimary) {
+		this.isPrimary = isPrimary;
+	}
+	
+	public String toString() {
+		return this.mail;
+	}
 }
