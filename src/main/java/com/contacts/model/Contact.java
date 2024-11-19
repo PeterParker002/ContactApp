@@ -2,6 +2,7 @@ package com.contacts.model;
 
 public class Contact {
     private int contact_id;
+    private int user_id;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -100,4 +101,13 @@ public class Contact {
     public void setContact_id(int contact_id) {
         this.contact_id = contact_id;
     }
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+    
 }

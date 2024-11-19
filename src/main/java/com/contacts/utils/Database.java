@@ -5,7 +5,7 @@ public class Database {
 	public enum TableInfo implements DatabaseImpl {
 		USER("User"), USEREMAIL("User_mail_ids"), USERMOBILENUMBER("user_mobile_numbers"), CONTACTS("Contacts"),
 		CONTACTMAIL("contacts_mail_ids"), CONTACTMOBILENUMBER("contacts_mobile_numbers"), GROUPINFO("Group_info"),
-		GROUPDETAILS("Group_details");
+		GROUPDETAILS("Group_details"), SAMPLE("Sample");
 
 		private String table;
 
@@ -62,14 +62,14 @@ public class Database {
 		}
 	}
 
-	public enum Contact implements DatabaseImpl {
+	public enum Contacts implements DatabaseImpl {
 		CONTACTID("contact_id"), USERID("user_id"), FIRSTNAME("first_name"), MIDDLENAME("middle_name"),
 		LASTNAME("last_name"), GENDER("gender"), DATEOFBIRTH("date_of_birth"), NOTES("notes"),
 		HOMEADDRESS("home_address"), WORKADDRESS("work_address");
 
 		private String col;
 
-		private Contact(String col) {
+		private Contacts(String col) {
 			this.col = col;
 		}
 
@@ -79,7 +79,7 @@ public class Database {
 	}
 
 	public enum ContactMail implements DatabaseImpl {
-		CONTACTID("contact_id"), EMAIL("email");
+		ID("id"), CONTACTID("contact_id"), EMAIL("email");
 
 		private String col;
 
@@ -93,7 +93,7 @@ public class Database {
 	}
 
 	public enum ContactMobileNumber implements DatabaseImpl {
-		CONTACTID("contact_id"), MOBILENUMBER("mobile_number");
+		ID("id"), CONTACTID("contact_id"), MOBILENUMBER("mobile_number");
 
 		private String col;
 
@@ -121,11 +121,25 @@ public class Database {
 	}
 
 	public enum GroupDetails implements DatabaseImpl {
-		GROUPID("group_id"), CONTACTID("contact_id"), GROUPNAME("group_name");
+		GROUPID("group_id"), USERID("user_id"), GROUPNAME("group_name");
 
 		private String col;
 
 		private GroupDetails(String col) {
+			this.col = col;
+		}
+
+		public String toString() {
+			return this.col;
+		}
+	}
+
+	public enum Sample implements DatabaseImpl {
+		AGE("age"), NAME("name");
+
+		private String col;
+
+		private Sample(String col) {
 			this.col = col;
 		}
 
