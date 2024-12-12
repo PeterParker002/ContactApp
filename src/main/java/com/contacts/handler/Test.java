@@ -2,35 +2,55 @@ package com.contacts.handler;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
+//import java.util.Scanner;
+import java.util.HashMap;
 
+import com.contacts.model.User;
 import com.contacts.dao.UserDAO;
+//import com.contacts.dao.UserDAO;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
+//import com.contacts.model.MobileNumber;
 //import com.contacts.model.Mail;
-import com.contacts.model.User;
+//import com.contacts.model.User;
 import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
 import com.contacts.querylayer.Table;
-import com.contacts.utils.Database.Sample;
+import com.contacts.utils.Database.ContactMail;
+import com.contacts.utils.Database.ContactMobileNumber;
+import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.TableInfo;
 import com.contacts.utils.Database.UserEmail;
 import com.contacts.utils.Database.UserMobileNumber;
-//import com.contacts.utils.Database.UserEmail;
-//import com.contacts.utils.Database.UserMobileNumber;
 import com.contacts.utils.Database.Users;
-import com.contacts.utils.DatabaseImpl;
 import com.contacts.utils.JoinTypes;
 import com.contacts.utils.Operators;
+//import com.contacts.querylayer.Table;
+//import com.contacts.utils.Database.Sample;
+//import com.contacts.utils.Database.TableInfo;
+//import com.contacts.utils.Database.UserEmail;
+//import com.contacts.utils.Database.UserMobileNumber;
+//import com.contacts.utils.Database.UserEmail;
+//import com.contacts.utils.Database.UserMobileNumber;
+//import com.contacts.utils.Database.Users;
+//import com.contacts.utils.DatabaseImpl;
+//import com.contacts.utils.JoinTypes;
+//import com.contacts.utils.Operators;
 
 // select*from User u join(select user_id,group_concat(id)id,group_concat(email)email from User_mail_ids group by user_id)as um on u.user_id=um.user_id join(select user_id,group_concat(id)id,group_concat(mobile_number)mobile_number from user_mobile_numbers group by user_id)as mob on u.user_id=mob.user_id where u.user_id=1
 
 public class Test {
-	@SuppressWarnings("unchecked")
-	public static void main(String[] args) throws IllegalAccessException, InvocationTargetException {
+//	@SuppressWarnings("unchecked")
+	public static void main(String[] args)
+			throws IllegalAccessException, InvocationTargetException, InstantiationException, IllegalArgumentException,
+			NoSuchMethodException, SecurityException, ClassNotFoundException, SQLException {
 //		String password = "";
 //		String email = "";
 //		QueryBuilder qb = new QueryBuilder();
@@ -75,10 +95,117 @@ public class Test {
 //			e.printStackTrace();
 //		}
 
+//		QueryBuilder qb = new QueryBuilder();
+//		QueryExecutor qx = new QueryExecutor();
+//
+////	 select c.contact_id, c.first_name, c.middle_name, c.last_name, ma.email, mo.mobile_number from Contacts c inner join contacts_mail_ids ma on c.contact_id=ma.contact_id inner join contacts_mobile_numbers mo on c.contact_id=mo.contact_id where c.user_id=?;
+//		qb.selectTable(TableInfo.CONTACTS, "c");
+//		Table c_mail = new Table(TableInfo.CONTACTMAIL, "ma");
+//		Table c_mob = new Table(TableInfo.CONTACTMOBILENUMBER, "mo");
+//		qb.selectColumn(new Column(Contacts.CONTACTID, "", "", qb.table));
+//		qb.selectColumn(new Column(Contacts.FIRSTNAME, "", "", qb.table));
+//		qb.selectColumn(new Column(Contacts.MIDDLENAME, "", "", qb.table));
+//		qb.selectColumn(new Column(Contacts.LASTNAME, "", "", qb.table));
+//		qb.selectColumn(new Column(ContactMail.EMAIL, "", "", c_mail));
+//		qb.selectColumn(new Column(ContactMobileNumber.MOBILENUMBER, "", "", c_mob));
+//		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table), new Column(ContactMail.CONTACTID, "", "", c_mail));
+//		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table), new Column(ContactMobileNumber.CONTACTID, "", "", c_mob));
+//		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, true);
+//
+//		System.out.println(qb.build().toString());
+
+//		UserDAO userdao = new UserDAO();
+
 		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+//		select * from User user join User_mail_ids mails on user.user_id=mails.user_id where mails.email=?;
+		qb.selectTable(TableInfo.USER);
+//		Table emailTable = new Table(TableInfo.USEREMAIL);
+		Table mobileTable = new Table(TableInfo.USERMOBILENUMBER);
+//		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+//				new Column(UserEmail.USERID, "", "", emailTable));
+		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+				new Column(UserMobileNumber.USERID, "", "", mobileTable));
+//		qb.setCondition(new Column(UserEmail.EMAIL, "", "", emailTable), Operators.EQUAL, email);
+		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, 1);
+//		System.out.println(qb.build());
+		HashMap<String, Object> userWithMail = qx.executeJoinQuery(qb.build());
+//		userWithMail.forEach((k, v) -> {
+//			System.out.println(k + " -> " + v);
+//		});
+		System.out.println(userWithMail);
+		User user = (User) userWithMail.get(qb.table.name.toString());
+//		User user = new User();
+//		ArrayList<Mail> mails = (ArrayList<Mail>) userWithMail.get(emailTable.name.toString());
+//		for (Mail mail : mails)
+//			user.setEmail(mail);
+		
+		ArrayList<MobileNumber> mobiles = (ArrayList<MobileNumber>) userWithMail.get(mobileTable.name.toString());
+		for (MobileNumber mobile: mobiles)
+			user.setMobileNumber(mobile);
+
+		// User u = userdao.login("abc@gmail.com", "1233546");
+		Method[] ms = user.getClass().getDeclaredMethods();
+		for (Method m : ms) {
+			if (m.getName().startsWith("get")) {
+				System.out.println(m.getName() + " -> " + m.invoke(user));
+			}
+		}
+
+//		QueryBuilder qb = new QueryBuilder();
+//		QueryExecutor qx = new QueryExecutor();
+
+//		qb.selectTable(TableInfo.USER);
+////		qb.selectColumn(new Column(UserEmail.EMAIL, "", "", new Table(TableInfo.USEREMAIL)));
+//		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, 1);
+//
+//		try {
+//			qb = qb.build();
+//			System.out.println(qb.QueryString);
+//			ArrayList<User> users = (ArrayList<User>) qx.executeQuery(qb);
+//			for (User u: users) {
+//				Method[] ms = u.getClass().getDeclaredMethods();
+//				for (Method m : ms) {
+//					if (m.getName().startsWith("get")) {
+//						System.out.println(m.getName() + " -> " + m.invoke(u));
+//					}
+//				}
+//			}
+//			System.out.println(users);
+//		} catch (ClassNotFoundException | SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
+//		public ArrayList<?> executeQueryNew(QueryBuilder query)
+//				throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException {
+//			Connection con = getConnection();
+//			PreparedStatement ps = con.prepareStatement(query.toString());
+//			ResultSet rs = ps.executeQuery();
+//			while (rs.next()) {
+//				ResultSetMetaData metadata = rs.getMetaData();
+//				for (int i = 1; i <= metadata.getColumnCount(); i++) {
+//					Method[] ms = metadata.getClass().getDeclaredMethods();
+//					for (Method m : ms) {
+//						if (m.getName().startsWith("get")) {
+//							if (m.canAccess(metadata)) {
+//								if (m.getParameterCount() == 0) {
+//									System.out.println(m.getName() + " -> " + m.invoke(metadata));
+//								} else {
+//									System.out.println(m.getName() + " -> " + m.invoke(metadata, i));
+//								}
+//							}
+//						}
+//					}
+//					System.out.println("\n");
+//				}
+//			}
+//			ArrayList<String> a = new ArrayList<String>();
+//			return a;
+//		}
 
 		/* Insert Query */
-		
+
 //		qb.insertTable(TableInfo.USER);
 //		qb.insertValuesToColumns(new Column(Users.USERNAME, "", "", qb.table), "sample");
 //		qb.insertValuesToColumns(new Column(Users.PASSWORD, "", "", qb.table), "sample");
@@ -91,31 +218,31 @@ public class Test {
 //		qb.insertValuesToColumns(new Column(Users.WORKADDRESS, "", "", qb.table), "sample");
 //		qb.insertValuesToColumns(new Column(Users.NOTES, "", "", qb.table), "sample");
 //		qb.insertValuesToColumns(new Column(Users.ISHASHED, "", "", qb.table), 1);
-		
+
 		/* Update Query */
-		
+
 //		qb.updateTable(TableInfo.USER);
 //		qb.updateColumn(new Column(Users.PASSWORD, "", "", qb.table), "sample12122321");
 //		qb.setCondition(new Column(Users.USERNAME, "", "", qb.table), Operators.EQUAL, "sample");
-		
+
 		/* Delete Query */
-		
+
 //		qb.deleteTable(TableInfo.USER);
 //		qb.setCondition(new Column(Users.USERID, "" ,"" ,qb.table), Operators.EQUAL, 28);
-		
-		QueryExecutor qx = new QueryExecutor();
-		try {
-			int result = qx.executeAndUpdate(qb.build());
-			if (result > 0) {
-//				System.out.println("New Row Inserted Successfully!");
-//				System.out.println("Row Updated Successfully!");
-				System.out.println("Row deleted Successfully!");
-			} else {
-				System.out.println("Something went wrong!");
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+//		QueryExecutor qx = new QueryExecutor();
+//		try {
+//			int result = qx.executeAndUpdate(qb.build());
+//			if (result > 0) {
+////				System.out.println("New Row Inserted Successfully!");
+////				System.out.println("Row Updated Successfully!");
+//				System.out.println("Row deleted Successfully!");
+//			} else {
+//				System.out.println("Something went wrong!");
+//			}
+//		} catch (ClassNotFoundException | SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 }

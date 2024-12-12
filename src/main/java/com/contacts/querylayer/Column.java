@@ -4,12 +4,14 @@ import com.contacts.querylayer.QueryBuilder.statementFormat;
 import com.contacts.utils.DatabaseImpl;
 
 public class Column {
+	public DatabaseImpl db_name;
 	public String name;
 	public String alias;
 	public Table table;
 	public String aggregateFunction;
 
 	public Column(DatabaseImpl name, String alias, String aggregate, Table table) {
+		this.db_name = name;
 		this.name = name.toString();
 		this.alias = alias;
 		this.table = table;

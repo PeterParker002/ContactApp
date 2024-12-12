@@ -26,6 +26,10 @@ public class User {
 		this.email.add(mail);
 	}
 
+	public void setEmail(ArrayList<Mail> mail) {
+		this.email = mail;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -104,6 +108,10 @@ public class User {
 
 	public void setMobileNumber(MobileNumber mobileNumber) {
 		this.mobileNumber.add(mobileNumber);
+	}
+
+	public void setMobileNumber(ArrayList<MobileNumber> mobileNumber) {
+		this.mobileNumber = mobileNumber;
 	}
 
 	public String getPassword() {

@@ -1,5 +1,6 @@
 package com.contacts.dao;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,12 +8,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.mindrot.jbcrypt.BCrypt;
 import com.contacts.model.Contact;
 import com.contacts.model.Group;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
 import com.contacts.model.User;
+import com.contacts.querylayer.Column;
+import com.contacts.querylayer.QueryBuilder;
+import com.contacts.querylayer.QueryExecutor;
+import com.contacts.querylayer.Table;
+import com.contacts.utils.JoinTypes;
+import com.contacts.utils.Operators;
+import com.contacts.utils.Database.Contacts;
+import com.contacts.utils.Database.GroupInfo;
+import com.contacts.utils.Database.TableInfo;
+import com.contacts.utils.Database.UserEmail;
+import com.contacts.utils.Database.UserMobileNumber;
+import com.contacts.utils.Database.Users;
 import com.lambdaworks.crypto.SCryptUtil;
 
 public class UserDAO {
@@ -60,7 +75,7 @@ public class UserDAO {
 			PreparedStatement mail_ps = con
 					.prepareStatement("insert into User_mail_ids (user_id, email, isPrimary) values (?, ?, ?);");
 			mail_ps.setInt(1, user_id);
-			mail_ps.setString(2, user.getEmail().get(0).getMail());
+			mail_ps.setString(2, user.getEmail().get(0).getEmail());
 			mail_ps.setBoolean(3, true);
 			if (mail_ps.executeUpdate() > 0) {
 				PreparedStatement mobile_ps = con
@@ -106,6 +121,31 @@ public class UserDAO {
 		}
 	}
 
+	public User login(String email, String password)
+			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+//		select * from User user join User_mail_ids mails on user.user_id=mails.user_id where mails.email=?;
+		qb.selectTable(TableInfo.USER, "user");
+		Table emailTable = new Table(TableInfo.USEREMAIL, "mail");
+		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+				new Column(UserEmail.USERID, "", "", emailTable));
+//		qb.setCondition(new Column(UserEmail.EMAIL, "", "", emailTable), Operators.EQUAL, email);
+		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, 1);
+//		System.out.println(qb.build());
+		HashMap<String, Object> userWithMail = qx.executeJoinQuery(qb.build());
+		userWithMail.forEach((k, v) -> {
+			System.out.println(k + " -> " + v);
+		});
+		User user = (User) userWithMail.get(qb.table.name.toString());
+//		User user = new User();
+		ArrayList<Mail> mails = (ArrayList<Mail>) userWithMail.get(emailTable.name.toString());
+		for (Mail mail : mails)
+			user.setEmail(mail);
+		return user;
+	}
+
 	public boolean addEmails(int user_id, String[] emails) throws ClassNotFoundException, SQLException {
 		Connection con = getConnection();
 		PreparedStatement ps = con
@@ -139,6 +179,7 @@ public class UserDAO {
 		return false;
 	}
 
+//	ok
 	public boolean checkIsPrimaryMail(int mail_id) throws ClassNotFoundException, SQLException {
 		Connection con = getConnection();
 		PreparedStatement ps1 = con.prepareStatement("select isPrimary from User_mail_ids where id=?;");
@@ -208,41 +249,61 @@ public class UserDAO {
 		return r;
 	}
 
-	public User customGetUserInfo(int user_id) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(
-				"select username, first_name, middle_name, last_name, gender, date_of_birth, notes, home_address, work_address from User where user_id=?;");
-		ps.setInt(1, user_id);
-		ResultSet r = ps.executeQuery();
-		r.next();
-		User user = new User();
-		user.setUsername(r.getString("username"));
-		user.setFirstName(r.getString("first_name"));
-		user.setMiddleName(r.getString("middle_name"));
-		user.setLastName(r.getString("last_name"));
-		user.setGender(r.getString("gender"));
-		user.setDateOfBirth(r.getString("date_of_birth"));
-		user.setNotes(r.getString("notes"));
-		user.setHomeAddress(r.getString("home_address"));
-		user.setWorkAddress(r.getString("work_address"));
-		ResultSet mail_rs = getUserMail(user_id);
-		while (mail_rs.next()) {
-			Mail mail = new Mail();
-			mail.setId(mail_rs.getInt(1));
-			mail.setMail(mail_rs.getString(2));
-			mail.setPrimary(mail_rs.getBoolean(3));
-			user.setEmail(mail);
-		}
-		ResultSet mobile_rs = getUserMobileNumber(user_id);
-		while (mobile_rs.next()) {
-			MobileNumber mobile = new MobileNumber();
-			mobile.setId(mobile_rs.getInt(1));
-			mobile.setMobileNumber(mobile_rs.getLong(2));
-			user.setMobileNumber(mobile);
-		}
+	public User customGetUserInfo(int user_id)
+			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException {
+//		Connection con = getConnection();
+//		PreparedStatement ps = con.prepareStatement(
+//				"select username, first_name, middle_name, last_name, gender, date_of_birth, notes, home_address, work_address from User where user_id=?;");
+//		ps.setInt(1, user_id);
+//		ResultSet r = ps.executeQuery();
+//		r.next();
+		QueryBuilder qb = new QueryBuilder();
+		qb.selectTable(TableInfo.USER);
+		qb.selectColumn(new Column(Users.USERID, "", "", qb.table));
+		qb.selectColumn(new Column(Users.USERNAME, "", "", qb.table));
+		qb.selectColumn(new Column(Users.FIRSTNAME, "", "", qb.table));
+		qb.selectColumn(new Column(Users.MIDDLENAME, "", "", qb.table));
+		qb.selectColumn(new Column(Users.LASTNAME, "", "", qb.table));
+		qb.selectColumn(new Column(Users.DATEOFBIRTH, "", "", qb.table));
+		qb.selectColumn(new Column(Users.GENDER, "", "", qb.table));
+		qb.selectColumn(new Column(Users.NOTES, "", "", qb.table));
+		qb.selectColumn(new Column(Users.HOMEADDRESS, "", "", qb.table));
+		qb.selectColumn(new Column(Users.WORKADDRESS, "", "", qb.table));
+		qb.selectColumn(new Column(Users.ISHASHED, "", "", qb.table));
+		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, user_id);
+		QueryExecutor qx = new QueryExecutor();
+		ArrayList<User> r = (ArrayList<User>) qx.executeQuery(qb.build());
+		User user = r.get(0);
+//		user.setUsername(r.getString("username"));
+//		user.setFirstName(r.getString("first_name"));
+//		user.setMiddleName(r.getString("middle_name"));
+//		user.setLastName(r.getString("last_name"));
+//		user.setGender(r.getString("gender"));
+//		user.setDateOfBirth(r.getString("date_of_birth"));
+//		user.setNotes(r.getString("notes"));
+//		user.setHomeAddress(r.getString("home_address"));
+//		user.setWorkAddress(r.getString("work_address"));
+//		ResultSet mail_rs = getUserMail(user_id);
+//		while (mail_rs.next()) {
+//			Mail mail = new Mail();
+//			mail.setId(mail_rs.getInt(1));
+//			mail.setEmail(mail_rs.getString(2));
+//			mail.setIsPrimary(mail_rs.getBoolean(3));
+//			user.setEmail(mail);
+//		}
+		user.setEmail(getUserMailNew(user_id));
+//		ResultSet mobile_rs = getUserMobileNumber(user_id);
+//		while (mobile_rs.next()) {
+//			MobileNumber mobile = new MobileNumber();
+//			mobile.setId(mobile_rs.getInt(1));
+//			mobile.setMobileNumber(mobile_rs.getLong(2));
+//			user.setMobileNumber(mobile);
+//		}
+		user.setMobileNumber(getUserMobileNumberNew(user_id));
 		return user;
 	}
 
+//	ok
 	public ResultSet getUserMail(int user_id) throws ClassNotFoundException, SQLException {
 		Connection con = getConnection();
 		PreparedStatement ps = con.prepareStatement("select id, email, isPrimary  from User_mail_ids where user_id=?;");
@@ -251,12 +312,38 @@ public class UserDAO {
 		return r;
 	}
 
+	public ArrayList<Mail> getUserMailNew(int user_id)
+			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException {
+		QueryBuilder qb = new QueryBuilder();
+		qb.selectTable(TableInfo.USEREMAIL);
+		qb.selectColumn(new Column(UserEmail.ID, "", "", qb.table));
+		qb.selectColumn(new Column(UserEmail.EMAIL, "", "", qb.table));
+		qb.selectColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table));
+		qb.setCondition(new Column(UserEmail.USERID, "", "", qb.table), Operators.EQUAL, user_id);
+		QueryExecutor qx = new QueryExecutor();
+		ArrayList<Mail> r = (ArrayList<Mail>) qx.executeQuery(qb.build());
+		return r;
+	}
+
+//	ok
 	public ResultSet getUserMobileNumber(int user_id) throws ClassNotFoundException, SQLException {
 		Connection con = getConnection();
 		PreparedStatement ps = con
-				.prepareStatement("select id, mobile_number  from user_mobile_numbers where user_id=?;");
+				.prepareStatement("select id, mobile_number from user_mobile_numbers where user_id=?;");
 		ps.setInt(1, user_id);
 		ResultSet r = ps.executeQuery();
+		return r;
+	}
+
+	public ArrayList<MobileNumber> getUserMobileNumberNew(int user_id)
+			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException {
+		QueryBuilder qb = new QueryBuilder();
+		qb.selectTable(TableInfo.USERMOBILENUMBER);
+		qb.selectColumn(new Column(UserMobileNumber.ID, "", "", qb.table));
+		qb.selectColumn(new Column(UserMobileNumber.MOBILENUMBER, "", "", qb.table));
+		qb.setCondition(new Column(UserMobileNumber.USERID, "", "", qb.table), Operators.EQUAL, user_id);
+		QueryExecutor qx = new QueryExecutor();
+		ArrayList<MobileNumber> r = (ArrayList<MobileNumber>) qx.executeQuery(qb.build());
 		return r;
 	}
 
@@ -310,6 +397,27 @@ public class UserDAO {
 		}
 		return contacts;
 	}
+
+//	public ArrayList<Contact> getContactsByGroupNew(int group_id) throws SQLException, ClassNotFoundException {
+//		QueryBuilder qb = new QueryBuilder();
+//		qb.selectTable(TableInfo.CONTACTS, "c");
+//		Table secondTable = new Table(TableInfo.GROUPINFO, "g");
+//		qb.selectColumn(new Column(Contacts.CONTACTID, "", "", qb.table));
+//		qb.selectColumn(new Column(Contacts.FIRSTNAME, "", "", qb.table));
+//		qb.selectColumn(new Column(Contacts.MIDDLENAME, "", "", qb.table));
+//		qb.selectColumn(new Column(Contacts.LASTNAME, "", "", qb.table));
+//		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+//				new Column(GroupInfo.CONTACTID, "", "", secondTable));
+//		qb.setCondition(new Column(GroupInfo.GROUPID, "", "", secondTable), Operators.EQUAL, group_id);
+//		QueryExecutor qx = new QueryExecutor();
+//		ArrayList<Contact> contacts = new ArrayList<Contact>();
+//		try {
+//			contacts = (ArrayList<Contact>) qx.executeQuery(qb.build());
+//		} catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | SQLException e) {
+//			System.out.println("Error Occured: " + e);
+//		}
+//		return contacts;
+//	}
 
 	public boolean addGroup(int user_id, String name, ArrayList<Integer> contact_ids)
 			throws SQLException, ClassNotFoundException {

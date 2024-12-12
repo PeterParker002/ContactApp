@@ -35,7 +35,7 @@ public class SignupServlet extends HttpServlet {
 			mobile.setMobileNumber(Long.parseLong(request.getParameter("mobile")));
 			user.setMobileNumber(mobile);
 			Mail mail = new Mail();
-			mail.setMail(request.getParameter("email"));
+			mail.setEmail(request.getParameter("email"));
 			user.setEmail(mail);
 			user.setNotes(request.getParameter("notes"));
 			user.setHomeAddress(request.getParameter("home"));
@@ -47,7 +47,7 @@ public class SignupServlet extends HttpServlet {
 		}
 		response.setContentType("text/html");
 		UserDAO userdao = new UserDAO();
-		if (user.getUsername().length() < 1 || user.getEmail().get(0).getMail().length() < 1
+		if (user.getUsername().length() < 1 || user.getEmail().get(0).getEmail().length() < 1
 				|| user.getPassword().length() < 6) {
 			out.println("<div class='message'>Sign Up Failed</div>");
 			request.getRequestDispatcher("signup.jsp").include(request, response);

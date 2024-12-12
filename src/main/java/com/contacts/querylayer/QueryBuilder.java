@@ -56,7 +56,7 @@ public class QueryBuilder {
 	public OrderBy order_by;
 	public LinkedHashMap<Column, Value<?>> values = new LinkedHashMap<Column, Value<?>>();
 	public String limit = "";
-	public boolean singleTable = true;
+//	public boolean singleTable = true;
 
 	public enum resultModifierOptions {
 		ALL, DISTINCT
@@ -88,6 +88,16 @@ public class QueryBuilder {
 			this.columns.forEach(col -> columnsList.add(col.toString()));
 			String columnsString = String.join(", ", columnsList);
 			return columnsString;
+		}
+		if (join.size() > 0) {
+			String AllColumnString = this.table.alias + "." + ALL_COLUMNS;
+			for (Join j : this.join) {
+				if (j.column1.table == this.table)
+					AllColumnString += ", " + j.column2.table.alias + "." + ALL_COLUMNS;
+				else
+					AllColumnString += ", " + j.column1.table.alias + "." + ALL_COLUMNS;
+			}
+			return AllColumnString;
 		}
 		return ALL_COLUMNS;
 	}

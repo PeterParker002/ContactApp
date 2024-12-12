@@ -300,16 +300,16 @@ ArrayList<Group> groups = u.getGroups(id);
 					%>
 					<div class="mail">
 						<span class="left-side"> <%
- if (mail.getPrimary()) {
+ if (mail.getIsPrimary()) {
  %> <a href="#" class="primary"><img
 								src="assets/star-svgrepo-com.svg" alt="primary" width="24" /></a> <%
  } else {
  %> <a href="makePrimary/<%=mail.getId()%>" class="non-primary"><img
 								src="assets/star-gray.svg" alt="primary" width="24" /></a> <%
  }
- %> <span><%=mail.getMail()%></span>
+ %> <span><%=mail.getEmail()%></span>
 						</span> <span class="right-side"> <%
- if (!mail.getPrimary()) {
+ if (!mail.getIsPrimary()) {
  %> <a href="deleteMail/<%=mail.getId()%>"> <img
 								src="assets/delete-icon.svg" alt="delete-mail" width="24">
 						</a> <%

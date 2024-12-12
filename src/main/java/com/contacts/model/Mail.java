@@ -13,23 +13,23 @@ public class Mail {
 		this.id = id;
 	}
 
-	public String getMail() {
+	public String getEmail() {
 		return mail;
 	}
 
-	public void setMail(String mail) {
+	public void setEmail(String mail) {
 		this.mail = mail;
 	}
 
-	public boolean getPrimary() {
+	public boolean getIsPrimary() {
 		return isPrimary;
 	}
 
-	public void setPrimary(boolean isPrimary) {
+	public void setIsPrimary(boolean isPrimary) {
 		this.isPrimary = isPrimary;
 	}
-	
+
 	public String toString() {
-		return this.mail;
+		return this.id + " -> " + this.mail;
 	}
 }

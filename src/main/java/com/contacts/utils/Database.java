@@ -21,7 +21,7 @@ public class Database {
 	public enum Users implements DatabaseImpl {
 		USERID("user_id"), USERNAME("username"), PASSWORD("password"), FIRSTNAME("first_name"),
 		MIDDLENAME("middle_name"), LASTNAME("last_name"), GENDER("gender"), DATEOFBIRTH("date_of_birth"),
-		NOTES("notes"), HOMEADDRESS("home_address"), WORKADDRESS("work_address"), ISHASHED("isHashed");
+		NOTES("notes"), HOMEADDRESS("home_address"), WORKADDRESS("work_address"), ISHASHED("isHashed"), POJO("User");
 
 		private String col;
 
@@ -35,7 +35,7 @@ public class Database {
 	}
 
 	public enum UserEmail implements DatabaseImpl {
-		USERID("user_id"), EMAIL("email"), ISPRIMARY("isPrimary"), ID("id");
+		USERID("user_id"), EMAIL("email"), ISPRIMARY("isPrimary"), ID("id"), POJO("Mail");
 
 		private String col;
 
@@ -49,7 +49,7 @@ public class Database {
 	}
 
 	public enum UserMobileNumber implements DatabaseImpl {
-		USERID("user_id"), MOBILENUMBER("mobile_number"), ID("id");
+		USERID("user_id"), MOBILENUMBER("mobile_number"), ID("id"), POJO("MobileNumber");
 
 		private String col;
 
@@ -65,7 +65,7 @@ public class Database {
 	public enum Contacts implements DatabaseImpl {
 		CONTACTID("contact_id"), USERID("user_id"), FIRSTNAME("first_name"), MIDDLENAME("middle_name"),
 		LASTNAME("last_name"), GENDER("gender"), DATEOFBIRTH("date_of_birth"), NOTES("notes"),
-		HOMEADDRESS("home_address"), WORKADDRESS("work_address");
+		HOMEADDRESS("home_address"), WORKADDRESS("work_address"), POJO("Contact");
 
 		private String col;
 
@@ -79,7 +79,7 @@ public class Database {
 	}
 
 	public enum ContactMail implements DatabaseImpl {
-		ID("id"), CONTACTID("contact_id"), EMAIL("email");
+		ID("id"), CONTACTID("contact_id"), EMAIL("email"), POJO("Mail");
 
 		private String col;
 
@@ -93,7 +93,7 @@ public class Database {
 	}
 
 	public enum ContactMobileNumber implements DatabaseImpl {
-		ID("id"), CONTACTID("contact_id"), MOBILENUMBER("mobile_number");
+		ID("id"), CONTACTID("contact_id"), MOBILENUMBER("mobile_number"), POJO("MobileNumber");
 
 		private String col;
 
@@ -107,7 +107,7 @@ public class Database {
 	}
 
 	public enum GroupInfo implements DatabaseImpl {
-		GROUPID("group_id"), CONTACTID("contact_id");
+		GROUPID("group_id"), CONTACTID("contact_id"), POJO("Group");
 
 		private String col;
 
@@ -121,7 +121,7 @@ public class Database {
 	}
 
 	public enum GroupDetails implements DatabaseImpl {
-		GROUPID("group_id"), USERID("user_id"), GROUPNAME("group_name");
+		GROUPID("group_id"), USERID("user_id"), GROUPNAME("group_name"), POJO("Group");
 
 		private String col;
 
