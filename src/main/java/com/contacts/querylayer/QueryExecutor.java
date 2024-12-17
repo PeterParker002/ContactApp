@@ -52,70 +52,20 @@ public class QueryExecutor {
 		return con;
 	}
 
-//	public HashMap<String, Object> executeJoinQuery(QueryBuilder query)
-//			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
-//			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
-//		Connection con = getConnection();
-//		PreparedStatement ps = con.prepareStatement(query.toString());
-//		ResultSet rs = ps.executeQuery();
-//		HashMap<String, Object> data = new HashMap<String, Object>();
-//		while (rs.next()) {
-//			ResultSetMetaData metadata = rs.getMetaData();
-//			int cursor = 1;
-//			Object pojo = null;
-//			while (cursor < metadata.getColumnCount()) {
-//					/*& query.table.name.toString().equals(metadata.getTableName(cursor))) {*/
-//				if (!data.containsKey(metadata.getTableName(cursor))) {					
-//					Class<?> pojoClass = getModelClassForTable(metadata.getTableName(cursor));
-//					pojo = pojoClass.getDeclaredConstructor().newInstance();
-//				}
-//				else {
-//					pojo = data.get(metadata.getTableName(cursor));
-//				}
-//				Method[] ms = pojo.getClass().getDeclaredMethods();
-//				for (Method m : ms) {
-//					if (m.getName().startsWith("set")) {
-//						if (m.getName().substring(3)
-//								.equalsIgnoreCase(metadata.getColumnName(cursor).replace("_", ""))) {
-//							switch (metadata.getColumnTypeName(cursor)) {
-//							case "INT":
-//								m.invoke(pojo, rs.getInt(metadata.getColumnName(cursor)));
-//								break;
-//							case "VARCHAR":
-//							case "TEXT":
-//							case "CHAR":
-//							case "DATE":
-//								m.invoke(pojo, rs.getString(metadata.getColumnName(cursor)));
-//								break;
-//							case "BIGINT":
-//								m.invoke(pojo, rs.getLong(metadata.getColumnName(cursor)));
-//								break;
-//							case "BIT":
-//								m.invoke(pojo, rs.getBoolean(metadata.getColumnName(cursor)));
-//								break;
-//							}
-//							System.out.println(
-//									metadata.getColumnName(cursor) + " -> " + metadata.getColumnTypeName(cursor));
-//						}
-//					}
-//				}
-//				data.put(metadata.getTableName(cursor), pojo);
-//				cursor++;
-//			}
-//		}
-//		return data;
-//	}
-
 	public HashMap<String, Object> executeJoinQuery(QueryBuilder query)
 			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
-		System.out.println(query);
 		Connection con = getConnection();
 		PreparedStatement ps = con.prepareStatement(query.toString());
 		ResultSet rs = ps.executeQuery();
 		HashMap<String, Object> data = new HashMap<String, Object>();
 		HashMap<String, ArrayList<String>> columns = new HashMap<String, ArrayList<String>>();
 		HashMap<String, ArrayList<String>> colDetails = new HashMap<String, ArrayList<String>>();
+		HashMap<String, String> tableAliases = new HashMap<String, String>();
+		for (Join j : query.join) {
+			tableAliases.putIfAbsent(j.column1.table.name.toString(), j.column1.table.alias);
+			tableAliases.putIfAbsent(j.column2.table.name.toString(), j.column2.table.alias);
+		}
 		ArrayList<String> tables = new ArrayList<String>();
 		ResultSetMetaData metadata = rs.getMetaData();
 		for (int i = 1; i <= metadata.getColumnCount(); i++) {
@@ -128,11 +78,10 @@ public class QueryExecutor {
 				columns.get(metadata.getTableName(i)).add(metadata.getColumnName(i).toLowerCase().replace("_", ""));
 			}
 			ArrayList<String> col = new ArrayList<String>();
-			col.add(metadata.getTableName(i) + "." + metadata.getColumnName(i));
+			col.add(tableAliases.get(metadata.getTableName(i)) + "." + metadata.getColumnName(i));
 			col.add(metadata.getColumnTypeName(i));
 			colDetails.put(metadata.getColumnName(i).toLowerCase().replace("_", ""), col);
 		}
-		System.out.println(columns);
 		Class<?> pojoClass = null;
 		Object pojo;
 		while (rs.next()) {
@@ -148,6 +97,7 @@ public class QueryExecutor {
 						if (m.getName().startsWith("set")
 								& columns.get(name).contains(m.getName().replace("set", "").toLowerCase())) {
 							ArrayList<String> col = colDetails.get(m.getName().replace("set", "").toLowerCase());
+							System.out.println(col.get(0) + " -> " + col.get(1));
 							switch (col.get(1)) {
 							case "INT":
 								m.invoke(pojo, rs.getInt(col.get(0)));
@@ -205,7 +155,6 @@ public class QueryExecutor {
 					}
 				}
 			}
-//			System.out.println(data);
 		}
 		return data;
 	}
@@ -382,8 +331,8 @@ public class QueryExecutor {
 				ResultSetMetaData metadata = rs.getMetaData();
 				Contact contact = new Contact();
 				if (query.columns.size() == 0) {
-					contact.setContact_id(rs.getInt(Contacts.CONTACTID.toString()));
-					contact.setUser_id(rs.getInt(Contacts.USERID.toString()));
+					contact.setContactId(rs.getInt(Contacts.CONTACTID.toString()));
+					contact.setUserId(rs.getInt(Contacts.USERID.toString()));
 					contact.setFirstName(rs.getString(Contacts.FIRSTNAME.toString()));
 					contact.setMiddleName(rs.getString(Contacts.MIDDLENAME.toString()));
 					contact.setLastName(rs.getString(Contacts.LASTNAME.toString()));
@@ -524,7 +473,7 @@ public class QueryExecutor {
 				ArrayList<Contact> contacts = new ArrayList<Contact>();
 				for (String contactId : rs.getString(GroupInfo.CONTACTID.toString()).split(",")) {
 					Contact c = new Contact();
-					c.setContact_id(Integer.parseInt(contactId));
+					c.setContactId(Integer.parseInt(contactId));
 					contacts.add(c);
 				}
 				group.setContact(contacts);

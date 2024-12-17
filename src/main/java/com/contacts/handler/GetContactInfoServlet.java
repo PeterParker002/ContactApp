@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.ContactDAO;
+import com.contacts.model.User;
 
 @WebServlet("/contact/*")
 public class GetContactInfoServlet extends HttpServlet {

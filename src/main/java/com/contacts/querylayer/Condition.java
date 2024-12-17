@@ -12,6 +12,9 @@ public class Condition<T> {
 	}
 
 	public String toString() {
+		if (this.value instanceof QueryBuilder) {
+			return this.column.toString() + this.operator + "(" + this.value.toString().replace(";", "") + ")";
+		}
 		if (this.value instanceof String) {
 			return this.column.toString() + this.operator + "\"" + this.value + "\"";
 		} else {

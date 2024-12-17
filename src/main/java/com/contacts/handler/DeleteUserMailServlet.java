@@ -1,6 +1,7 @@
 package com.contacts.handler;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
 import javax.servlet.annotation.WebServlet;
@@ -32,6 +33,12 @@ public class DeleteUserMailServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 
 		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		response.sendRedirect("/home.jsp");

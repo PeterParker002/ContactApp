@@ -17,7 +17,7 @@ import com.contacts.utils.Database.ContactMobileNumber;
 import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.TableInfo;
 
-public class ContactDAO {
+public class OldContactDAO {
 	private String username = "root";
 	private String password = "root";
 	private String db_name = "ContactsApp";
@@ -162,7 +162,7 @@ public class ContactDAO {
 		ps.setInt(2, group_id);
 		ResultSet r = ps.executeQuery();
 		if (r.next()) {
-			// Alternative Query -> SELECT c.contact_id, c.first_name, c.middle_name, c.last_name FROM Contacts c LEFT JOIN Group_info g ON c.contact_id = g.contact_id AND g.group_id = ? WHERE c.user_id = ?  AND g.contact_id IS NULL;
+			// Alternative Query -> SELECT c.contact_id, c.first_name, c.middle_name, c.last_name FROM Contacts c LEFT JOIN Group_info g ON c.contact_id = g.contact_id AND g.group_id = ? WHERE c.user_id = ? AND g.contact_id IS NULL;
 			PreparedStatement mail_ps = con.prepareStatement(
 					"select contact_id, first_name, middle_name, last_name from Contacts where user_id=? and contact_id not in (select contact_id from Group_info where group_id=?);");
 			mail_ps.setInt(1, user_id);

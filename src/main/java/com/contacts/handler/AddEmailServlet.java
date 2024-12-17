@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.UserDAO;
+import com.contacts.model.User;
 
 @WebServlet("/add-email")
 public class AddEmailServlet extends HttpServlet {

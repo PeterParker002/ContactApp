@@ -5,10 +5,10 @@
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 UserDAO u = new UserDAO();
 ContactDAO c = new ContactDAO();
-int id = (int) request.getSession().getAttribute("user");
-User userInfo = u.customGetUserInfo(id);
-ArrayList<Contact> contacts = c.getContacts(id);
-ArrayList<Group> groups = u.getGroups(id);
+int user_id = (int) request.getSession().getAttribute("user");
+User user = u.getUserInfo(user_id);
+ArrayList<Group> groups = (ArrayList<Group>) u.getGroups(user_id);
+ArrayList<Contact> contacts = c.getContacts(user_id);
 %>
 <html>
 <head>
@@ -38,14 +38,14 @@ ArrayList<Group> groups = u.getGroups(id);
 			<form id="edit-profile-form" action="edit-profile" method="post">
 				<div class="edit-profile-fields profile-fields">
 					<input type="text" name="fname" placeholder="Enter your first name"
-						value="<%=userInfo.getFirstName()%>" required /> <input
+						value="<%=user.getFirstName()%>" required /> <input
 						type="text" name="midname"
-						placeholder="Enter your middle name(optional)"
-						value="<%=userInfo.getMiddleName()%>" /> <input type="text"
+	placeholder="Enter your middle name(optional)"
+						value="<%=user.getMiddleName()%>" /> <input type="text"
 						name="lname" placeholder="Enter your last name(optional)"
-						value="<%=userInfo.getLastName()%>" />
+						value="<%=user.getLastName()%>" />
 					<%
-					if (userInfo.getGender().equalsIgnoreCase("male")) {
+					if (user.getGender().equalsIgnoreCase("male")) {
 					%>
 					<div class="gender">
 						Gender:
@@ -77,15 +77,15 @@ ArrayList<Group> groups = u.getGroups(id);
 					%>
 					<input type="date" name="dob" id="dob"
 						title="Enter your date of birth here"
-						value="<%=userInfo.getDateOfBirth()%>" required /> <input
+						value="<%=user.getDateOfBirth()%>" required /> <input
 						type="text" name="notes" id="notes"
-						placeholder="Tell us about yourself"
-						value="<%=userInfo.getNotes()%>" /> <input type="text"
+	placeholder="Tell us about yourself"
+						value="<%=user.getNotes()%>" /> <input type="text"
 						name="home" id="home" placeholder="Enter your home address"
-						value="<%=userInfo.getHomeAddress()%>" required /> <input
+						value="<%=user.getHomeAddress()%>" required /> <input
 						type="text" name="work" id="work"
-						placeholder="Enter your work address"
-						value="<%=userInfo.getWorkAddress()%>" required />
+	placeholder="Enter your work address"
+						value="<%=user.getWorkAddress()%>" required />
 
 				</div>
 				<input type="submit" value="Edit Profile">
@@ -100,15 +100,15 @@ ArrayList<Group> groups = u.getGroups(id);
 				<div class="add-contact-fields">
 					<div class="firstname">
 						<input type="text" name="fname"
-							placeholder="Enter your first name" required />
+		placeholder="Enter your first name" required />
 					</div>
 					<div class="middlename">
 						<input type="text" name="midname"
-							placeholder="Enter your middle name(optional)" />
+		placeholder="Enter your middle name(optional)" />
 					</div>
 					<div class="lastname">
 						<input type="text" name="lname"
-							placeholder="Enter your last name(optional)" />
+		placeholder="Enter your last name(optional)" />
 					</div>
 					<div class="gender">
 						Gender:
@@ -123,8 +123,8 @@ ArrayList<Group> groups = u.getGroups(id);
 					</div>
 					<div class="email">
 						<input type="email" name="email" class="custom-field"
-							placeholder="Enter your email"
-							pattern="^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
+		placeholder="Enter your email"
+		pattern="^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
 							title="Email should look like: example@gmail.com" required />
 					</div>
 					<div class="dob">
@@ -133,15 +133,15 @@ ArrayList<Group> groups = u.getGroups(id);
 					</div>
 					<div class="notes">
 						<input type="text" name="notes" id="notes"
-							placeholder="Tell us about yourself" />
+		placeholder="Tell us about yourself" />
 					</div>
 					<div class="homeaddress">
 						<input type="text" name="home" id="home"
-							placeholder="Enter your home address" required />
+		placeholder="Enter your home address" required />
 					</div>
 					<div class="workaddress">
 						<input type="text" name="work" id="work"
-							placeholder="Enter your work address" required />
+		placeholder="Enter your work address" required />
 					</div>
 					<div class="mobilenumber">
 						<input type="tel" pattern="[0-9]{10}" name="mobile" id="mobile"
@@ -160,8 +160,8 @@ ArrayList<Group> groups = u.getGroups(id);
 			<form action="add-email" method="post">
 				<div class="email-fields">
 					<input type="email" name="email" class="email-field"
-						placeholder="Enter your email"
-						pattern="^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
+	placeholder="Enter your email"
+	pattern="^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
 						title="Email should look like: example@gmail.com" required />
 				</div>
 				<div class="btn-group">
@@ -184,7 +184,7 @@ ArrayList<Group> groups = u.getGroups(id);
 			<form action="add-mobile-number" method="post">
 				<div class="mobile-fields">
 					<input type="mobile" name="mobile" class="mobile-field"
-						placeholder="Enter your Mobile Number" pattern="[0-9]{10}"
+	placeholder="Enter your Mobile Number" pattern="[0-9]{10}"
 						title="Mobile Number should look like: 1234567890" required />
 				</div>
 				<div class="btn-group">
@@ -207,7 +207,7 @@ ArrayList<Group> groups = u.getGroups(id);
 			<form action="add-group" method="post">
 				<div class="group-fields">
 					<input type="text" name="name" id="name"
-						placeholder="Enter your group name" required>
+	placeholder="Enter your group name" required>
 					<div class="contacts-list">
 						<%
 						int i = 1;
@@ -215,12 +215,12 @@ ArrayList<Group> groups = u.getGroups(id);
 						%>
 						<div class="contact-option">
 							<input type="checkbox" name="contact" id="contact<%=i%>"
-								value="<%=cont.getContact_id()%>"><label
+								value="<%=cont.getContactId()%>"><label
 								for="contact<%=i%>"><%=cont.getFirstName()%></label>
 						</div>
 						<%
-						i++;
-						}
+										i++;
+										}
 						%>
 					</div>
 				</div>
@@ -257,7 +257,7 @@ ArrayList<Group> groups = u.getGroups(id);
 			<h1 class="heading">Profile</h1>
 			<div class="profile-img">
 				<div class="photo"></div>
-				<p><%=userInfo.getUsername()%></p>
+				<p><%=user.getUsername()%></p>
 			</div>
 			<div class="user-info">
 				<div class="top">
@@ -267,28 +267,28 @@ ArrayList<Group> groups = u.getGroups(id);
 				</div>
 				<p class="profile-detail">
 					First Name:
-					<%=userInfo.getFirstName()%></p>
+					<%=user.getFirstName()%></p>
 				<p class="profile-detail">
 					Middle Name:
-					<%=userInfo.getMiddleName()%></p>
+					<%=user.getMiddleName()%></p>
 				<p class="profile-detail">
 					Last Name:
-					<%=userInfo.getLastName()%></p>
+					<%=user.getLastName()%></p>
 				<p class="profile-detail">
 					Gender:
-					<%=userInfo.getGender()%></p>
+					<%=user.getGender()%></p>
 				<p class="profile-detail">
 					Date Of Birth:
-					<%=userInfo.getDateOfBirth()%></p>
+					<%=user.getDateOfBirth()%></p>
 				<p class="profile-detail">
 					Notes:
-					<%=userInfo.getNotes()%></p>
+					<%=user.getNotes()%></p>
 				<p class="profile-detail">
 					Home Address:
-					<%=userInfo.getHomeAddress()%></p>
+					<%=user.getHomeAddress()%></p>
 				<p class="profile-detail">
 					Work Address:
-					<%=userInfo.getWorkAddress()%></p>
+					<%=user.getWorkAddress()%></p>
 				<div class="mail-container">
 					<div class="title">
 						Emails: <span class="add-email-icon"><img
@@ -296,29 +296,30 @@ ArrayList<Group> groups = u.getGroups(id);
 							alt="add-email"></span>
 					</div>
 					<%
-					for (Mail mail : userInfo.getEmail()) {
+								for (Mail mail : user.getEmail()) {
 					%>
 					<div class="mail">
 						<span class="left-side"> <%
- if (mail.getIsPrimary()) {
+
+  if (mail.getIsPrimary()) {
  %> <a href="#" class="primary"><img
 								src="assets/star-svgrepo-com.svg" alt="primary" width="24" /></a> <%
- } else {
+  } else {
  %> <a href="makePrimary/<%=mail.getId()%>" class="non-primary"><img
 								src="assets/star-gray.svg" alt="primary" width="24" /></a> <%
- }
+  }
  %> <span><%=mail.getEmail()%></span>
 						</span> <span class="right-side"> <%
- if (!mail.getIsPrimary()) {
+  if (!mail.getIsPrimary()) {
  %> <a href="deleteMail/<%=mail.getId()%>"> <img
 								src="assets/delete-icon.svg" alt="delete-mail" width="24">
 						</a> <%
- }
+  }
  %>
 						</span>
 					</div>
 					<%
-					}
+								}
 					%>
 				</div>
 				<div class="mobile-container">
@@ -328,7 +329,7 @@ ArrayList<Group> groups = u.getGroups(id);
 							alt="add-mobile-number"></span>
 					</div>
 					<%
-					for (MobileNumber mobile : userInfo.getMobileNumber()) {
+								for (MobileNumber mobile : user.getMobileNumber()) {
 					%>
 					<div class="mobile">
 						<span class="left-side"> <span><%=mobile.getMobileNumber()%></span>
@@ -339,7 +340,8 @@ ArrayList<Group> groups = u.getGroups(id);
 						</span>
 					</div>
 					<%
-					}
+
+								}
 					%>
 				</div>
 			</div>
@@ -356,13 +358,13 @@ ArrayList<Group> groups = u.getGroups(id);
 				</div>
 				<div class="contact-list list-container">
 					<%
-					for (Contact cont : contacts) {
+								for (Contact cont : contacts) {
 					%>
 					<div class="contact-card">
 						<div class="card-title">
-							<span class="contact-name" data-id="<%=cont.getContact_id()%>"><%=cont.getFirstName()%>
+							<span class="contact-name" data-id="<%=cont.getContactId()%>"><%=cont.getFirstName()%>
 								<%=cont.getMiddleName()%> <%=cont.getLastName()%></span> <a
-								href="deleteContact/<%=cont.getContact_id()%>"
+								href="deleteContact/<%=cont.getContactId()%>"
 								class="delete-contact delete-icon"><img
 								src="assets/delete-icon.svg" alt="delete-contact" width="24"></a>
 						</div>
@@ -378,7 +380,7 @@ ArrayList<Group> groups = u.getGroups(id);
 						</div>
 					</div>
 					<%
-					}
+								}
 					%>
 				</div>
 			</div>
@@ -391,9 +393,9 @@ ArrayList<Group> groups = u.getGroups(id);
 					</div>
 				</div>
 				<div class="groups list-container">
-					<%
-					int j = 1;
-					for (Group g : groups) {
+				<%
+								int j = 1;
+								for (Group g : u.getGroups(user.getUserId())) {
 					%>
 					<div class="card">
 						<div class="card-title">
@@ -418,15 +420,15 @@ ArrayList<Group> groups = u.getGroups(id);
 					</div>
 					<div class="collapse-container c<%=j%>">
 						<%
-						if (g.getContact().size() > 0) {
-							for (Contact contact : g.getContact()) {
+										if (g.getContact().size() > 0) {
+											for (Contact contact : g.getContact()) {
 						%>
 						<div class="contact">
-							<span class="contact-name" data-id="<%=contact.getContact_id()%>"><%=contact.getFirstName()%></span>
+							<span class="contact-name" data-id="<%=contact.getContactId()%>"><%=contact.getFirstName()%></span>
 							<form action="delete-group-contact" method="post"
 								id="delete-group-contact-form-<%=j%>">
 								<input type="hidden" name="contact-id"
-									value="<%=contact.getContact_id()%>"> <input
+									value="<%=contact.getContactId()%>"> <input
 									type="hidden" name="group-id" value="<%=g.getGroupId()%>">
 								<span class="delete-group-contact"
 									onclick="document.forms['delete-group-contact-form-<%=j%>'].submit()"><img

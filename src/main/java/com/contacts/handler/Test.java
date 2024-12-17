@@ -13,6 +13,8 @@ import java.util.HashMap;
 
 import com.contacts.model.User;
 import com.contacts.dao.UserDAO;
+import com.contacts.model.Contact;
+import com.contacts.model.Group;
 //import com.contacts.dao.UserDAO;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
@@ -26,6 +28,8 @@ import com.contacts.querylayer.Table;
 import com.contacts.utils.Database.ContactMail;
 import com.contacts.utils.Database.ContactMobileNumber;
 import com.contacts.utils.Database.Contacts;
+import com.contacts.utils.Database.GroupInfo;
+import com.contacts.utils.Database.Sample;
 import com.contacts.utils.Database.TableInfo;
 import com.contacts.utils.Database.UserEmail;
 import com.contacts.utils.Database.UserMobileNumber;
@@ -97,6 +101,45 @@ public class Test {
 
 //		QueryBuilder qb = new QueryBuilder();
 //		QueryExecutor qx = new QueryExecutor();
+
+//		select contact_id, first_name, middle_name, last_name from Contacts where user_id=? and contact_id not in (select contact_id from Group_info where group_id=?);
+
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.selectTable(TableInfo.CONTACTS);
+		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, 9);
+		QueryBuilder inner_qb = new QueryBuilder();
+		inner_qb.selectTable(TableInfo.GROUPINFO);
+		inner_qb.selectColumn(new Column(GroupInfo.CONTACTID, "", "", inner_qb.table));
+		inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, 45);
+		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.NOTIN, inner_qb.build());
+		ArrayList<Contact> c = (ArrayList<Contact>) qx.executeQuery(qb.build());
+		System.out.println(c);
+//		HashMap<String, Object> groupsData = qx.executeJoinQuery(qb.build());
+//		System.out.println(groupsData);
+//		ArrayList<Group> groups = (ArrayList<Group>) groupsData.get(groupInfoTable.name.toString());
+//		groupsData.forEach((k, v) -> {
+//			System.out.println(k + " -> " + v);
+//		});
+//		System.out.println();
+//		ArrayList<Contact> contacts = (ArrayList<Contact>) groupsData.get(TableInfo.CONTACTS.toString());
+		for (Contact g : c) {
+//			System.out.println(g);
+			Method[] ms = g.getClass().getDeclaredMethods();
+			for (Method m : ms) {
+				if (m.getName().startsWith("get")) {
+					System.out.println(m.getName() + " -> " + m.invoke(g));
+				}
+			}
+//			System.out.println();
+		}
+//		
+//		qb.selectTable(TableInfo.USEREMAIL);
+//		qb.selectColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table));
+//		qb.setCondition(new Column(UserEmail.ID, "", "", qb.table), Operators.EQUAL, 1);
+//		ArrayList<Mail> r = (ArrayList<Mail>) qx.executeQuery(qb.build());
+////		Mail m = (Mail) r.get(qb.table.name.toString());
+//		System.out.println(r);
 //
 ////	 select c.contact_id, c.first_name, c.middle_name, c.last_name, ma.email, mo.mobile_number from Contacts c inner join contacts_mail_ids ma on c.contact_id=ma.contact_id inner join contacts_mobile_numbers mo on c.contact_id=mo.contact_id where c.user_id=?;
 //		qb.selectTable(TableInfo.CONTACTS, "c");
@@ -116,41 +159,41 @@ public class Test {
 
 //		UserDAO userdao = new UserDAO();
 
-		QueryBuilder qb = new QueryBuilder();
-		QueryExecutor qx = new QueryExecutor();
+//		QueryBuilder qb = new QueryBuilder();
+//		QueryExecutor qx = new QueryExecutor();
 //		select * from User user join User_mail_ids mails on user.user_id=mails.user_id where mails.email=?;
-		qb.selectTable(TableInfo.USER);
+//		qb.selectTable(TableInfo.USER);
 //		Table emailTable = new Table(TableInfo.USEREMAIL);
-		Table mobileTable = new Table(TableInfo.USERMOBILENUMBER);
+//		Table mobileTable = new Table(TableInfo.USERMOBILENUMBER);
 //		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
 //				new Column(UserEmail.USERID, "", "", emailTable));
-		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
-				new Column(UserMobileNumber.USERID, "", "", mobileTable));
+//		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+//				new Column(UserMobileNumber.USERID, "", "", mobileTable));
 //		qb.setCondition(new Column(UserEmail.EMAIL, "", "", emailTable), Operators.EQUAL, email);
-		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, 1);
+//		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, 1);
 //		System.out.println(qb.build());
-		HashMap<String, Object> userWithMail = qx.executeJoinQuery(qb.build());
+//		HashMap<String, Object> userWithMail = qx.executeJoinQuery(qb.build());
 //		userWithMail.forEach((k, v) -> {
 //			System.out.println(k + " -> " + v);
 //		});
-		System.out.println(userWithMail);
-		User user = (User) userWithMail.get(qb.table.name.toString());
+//		System.out.println(userWithMail);
+//		User user = (User) userWithMail.get(qb.table.name.toString());
 //		User user = new User();
 //		ArrayList<Mail> mails = (ArrayList<Mail>) userWithMail.get(emailTable.name.toString());
 //		for (Mail mail : mails)
 //			user.setEmail(mail);
-		
-		ArrayList<MobileNumber> mobiles = (ArrayList<MobileNumber>) userWithMail.get(mobileTable.name.toString());
-		for (MobileNumber mobile: mobiles)
-			user.setMobileNumber(mobile);
+
+//		ArrayList<MobileNumber> mobiles = (ArrayList<MobileNumber>) userWithMail.get(mobileTable.name.toString());
+//		for (MobileNumber mobile: mobiles)
+//			user.setMobileNumber(mobile);
 
 		// User u = userdao.login("abc@gmail.com", "1233546");
-		Method[] ms = user.getClass().getDeclaredMethods();
-		for (Method m : ms) {
-			if (m.getName().startsWith("get")) {
-				System.out.println(m.getName() + " -> " + m.invoke(user));
-			}
-		}
+//		Method[] ms = user.getClass().getDeclaredMethods();
+//		for (Method m : ms) {
+//			if (m.getName().startsWith("get")) {
+//				System.out.println(m.getName() + " -> " + m.invoke(user));
+//			}
+//		}
 
 //		QueryBuilder qb = new QueryBuilder();
 //		QueryExecutor qx = new QueryExecutor();
@@ -218,6 +261,17 @@ public class Test {
 //		qb.insertValuesToColumns(new Column(Users.WORKADDRESS, "", "", qb.table), "sample");
 //		qb.insertValuesToColumns(new Column(Users.NOTES, "", "", qb.table), "sample");
 //		qb.insertValuesToColumns(new Column(Users.ISHASHED, "", "", qb.table), 1);
+
+//		qb.updateTable(TableInfo.SAMPLE);
+//		qb.updateColumn(new Column(Sample.AGE, "", "", qb.table), 20);
+//		qb.setCondition(new Column(Sample.NAME, "", "", qb.table), Operators.EQUAL, "abc");
+//		
+//		if (qx.executeAndUpdate(qb.build()) > 0) {
+//			System.out.println("Row Updated Successfully");
+//		}
+//		else {
+//			System.err.println("Error while updating row");
+//		}
 
 		/* Update Query */
 

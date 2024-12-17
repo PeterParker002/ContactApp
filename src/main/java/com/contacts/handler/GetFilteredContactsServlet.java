@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 
 import com.contacts.dao.ContactDAO;
 import com.contacts.model.Contact;
+import com.contacts.model.User;
 
 @WebServlet("/getContactsByGroup/*")
 public class GetFilteredContactsServlet extends HttpServlet {
@@ -36,7 +37,7 @@ public class GetFilteredContactsServlet extends HttpServlet {
 				ArrayList<JSONObject> contacts = new ArrayList<>();
 				for (Contact cont : rs) {
 					JSONObject contactJson = new JSONObject();
-					contactJson.put("id", cont.getContact_id());
+					contactJson.put("id", cont.getContactId());
 					contactJson.put("fname", cont.getFirstName());
 					contactJson.put("mname", cont.getMiddleName());
 					contactJson.put("lname", cont.getLastName());

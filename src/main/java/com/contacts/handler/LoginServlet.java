@@ -2,6 +2,7 @@ package com.contacts.handler;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.UserDAO;
+import com.contacts.model.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -28,22 +30,20 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		// out.println("Login Successful");
-		UserDAO user = new UserDAO();
+		UserDAO userDAO = new UserDAO();
 		try {
-			int user_id = user.LoginUser(email, password);
-			if (user_id != -1) {
-				// out.println("<div class='message'>User Login Successful!</div>");
+			User user = userDAO.LoginUser(email, password);
+			if (user != null) {
 				HttpSession session = request.getSession(true);
-				session.setAttribute("user", user_id);
+				session.setAttribute("user", user.getUserId());
 				session.setAttribute("message", "User Login Successful!");
-				// request.getRequestDispatcher("home.jsp").include(request, response);
 				response.sendRedirect("home.jsp");
 			} else {
 				out.println("<div class='message'>User Login Failed!</div>");
 				request.getRequestDispatcher("login.jsp").include(request, response);
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | IllegalAccessException | InvocationTargetException
+				| InstantiationException | IllegalArgumentException | NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		}
 	}

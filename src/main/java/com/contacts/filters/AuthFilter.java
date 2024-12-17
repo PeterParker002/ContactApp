@@ -24,6 +24,7 @@ public class AuthFilter extends HttpFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpRes = (HttpServletResponse) response;
+		System.out.println(httpReq.getRemoteAddr());
 		HttpSession session = httpReq.getSession(false);
 		boolean isAuthenticated = false;
 		System.out.println(httpReq.getRequestURI());

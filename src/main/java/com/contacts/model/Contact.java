@@ -94,19 +94,19 @@ public class Contact {
         this.workAddress = workAddress;
     }
 
-    public int getContact_id() {
+    public int getContactId() {
         return contact_id;
     }
 
-    public void setContact_id(int contact_id) {
+    public void setContactId(int contact_id) {
         this.contact_id = contact_id;
     }
 
-	public int getUser_id() {
+	public int getUserId() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUserId(int user_id) {
 		this.user_id = user_id;
 	}
     

@@ -33,6 +33,7 @@ public class EditUserInfoServlet extends HttpServlet {
 		try {
 			result = userdao.EditUserInfo(user_id, user);
 			if (result) {
+				session.setAttribute("user", user);
 				session.setAttribute("message", "User Profile Updated Successfully");
 			} else {
 				session.setAttribute("message", "Operation Failed");

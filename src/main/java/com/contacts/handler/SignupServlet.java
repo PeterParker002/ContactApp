@@ -57,7 +57,7 @@ public class SignupServlet extends HttpServlet {
 				if (user_id != -1) {
 					out.println("<div class='message'>Signup Successful</div>");
 					HttpSession session = request.getSession(true);
-					session.setAttribute("user", user_id);
+					session.setAttribute("user", user);
 					request.getRequestDispatcher("home.jsp").include(request, response);
 				} else {
 					out.println("<div class='message'>Signup Failed</div>");

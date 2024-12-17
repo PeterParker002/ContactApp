@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.UserDAO;
+import com.contacts.model.User;
 
 @WebServlet("/makePrimary/*")
 public class ChangePrimaryMailServlet extends HttpServlet {
