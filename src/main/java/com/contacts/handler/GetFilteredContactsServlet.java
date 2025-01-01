@@ -13,12 +13,16 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 
 import com.contacts.dao.ContactDAO;
+import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Contact;
 import com.contacts.model.User;
 
 @WebServlet("/getContactsByGroup/*")
 public class GetFilteredContactsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final MyCustomLogger logger = new MyCustomLogger(
+			"/home/karthik-tt0479/eclipse-workspace/FirstProject/src/main/resources/logs/application.log",
+			MyCustomLogger.LogLevel.INFO);
 
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -46,17 +50,22 @@ public class GetFilteredContactsServlet extends HttpServlet {
 				output.put("status", 1);
 				output.put("name", groupName);
 				output.put("contacts", contacts);
+				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+						"Contacts Filtered based on Groups has been Retreived Successfully.");
 				response.getWriter().println(output.toString());
 			} else {
 				output.put("status", 0);
 				output.put("name", groupName);
 				output.put("contacts", "[]");
+				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+						"No Entry Found.");
 				response.getWriter().println(output.toString());
 			}
 		} catch (NumberFormatException | SQLException | ClassNotFoundException n) {
 			output.put("status", -1);
 			output.put("name", "");
 			output.put("contacts", "[]");
+			logger.error("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(), n.getMessage());
 			response.getWriter().println(output.toString());
 		}
 	}

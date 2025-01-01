@@ -1,11 +1,13 @@
 <%@page language="java"%>
 <%@page
-	import="java.util.ArrayList,com.contacts.dao.UserDAO,com.contacts.dao.ContactDAO,java.sql.ResultSet,com.contacts.model.User,com.contacts.model.Contact,com.contacts.model.Mail,com.contacts.model.MobileNumber,com.contacts.model.Group"%>
+	import="java.util.ArrayList,com.contacts.dao.UserDAO,com.contacts.dao.ContactDAO,java.sql.ResultSet,com.contacts.model.User,com.contacts.model.Contact,com.contacts.model.UserMail,com.contacts.model.Mail,com.contacts.model.UserMobile,com.contacts.model.MobileNumber,com.contacts.model.Group,com.contacts.model.Session"%>
 <%
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 UserDAO u = new UserDAO();
 ContactDAO c = new ContactDAO();
-int user_id = (int) request.getSession().getAttribute("user");
+String sessionId = u.getSessionIdFromCookie(request, "session");
+Session userSession = u.getUserSession(sessionId);
+int user_id = userSession.getUserId();
 User user = u.getUserInfo(user_id);
 ArrayList<Group> groups = (ArrayList<Group>) u.getGroups(user_id);
 ArrayList<Contact> contacts = c.getContacts(user_id);
@@ -92,6 +94,47 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 			</form>
 		</div>
 	</div>
+	<div class="edit-contact-form modal hide">
+		<div class="form-wrapper">
+			<span class="close-edit-contact-form close-btn"><img
+				src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="48"></span>
+			<form id="edit-contact-form" action="edit-contact" method="post">
+				<div class="edit-profile-fields profile-fields">
+					<input type="text" name="fname" class="fname" placeholder="Enter your first name"
+						value="" required /> <input
+						type="text" name="midname" class="mname"
+	placeholder="Enter your middle name(optional)"
+						value="" /> <input type="text" class="lname"
+						name="lname" placeholder="Enter your last name(optional)"
+						value="" />
+					<div class="gender">
+						Gender:
+						<div class="opt">
+							<input type="radio" name="gender" class="male" value="Male" id="male" /><label
+								for="male">Male</label>
+						</div>
+						<div class="opt">
+							<input type="radio" name="gender" class="female" value="Female" id="female" /><label
+								for="female">Female</label>
+						</div>
+					</div>
+					<input type="date" class="dob" name="dob" id="dob"
+						title="Enter your date of birth here"
+						value="" required /> <input class="notes"
+						type="text" name="notes" id="notes"
+	placeholder="Tell us about yourself"
+						value="" /> <input type="text" class="home"
+						name="home" id="home" placeholder="Enter your home address"
+						value="" required /> <input class="work"
+						type="text" name="work" id="work"
+	placeholder="Enter your work address"
+						value="" required />
+
+				</div>
+				<input type="submit" value="Edit Profile">
+			</form>
+		</div>
+	</div>
 	<div class="add-contact-form modal hide">
 		<div class="form-wrapper">
 			<span class="close-contact-form close-btn"><img
@@ -159,6 +202,8 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="48"></span>
 			<form action="add-email" method="post">
 				<div class="email-fields">
+				<input type="hidden" name="type" id="hidden-type" value="user">
+				<input type="hidden" name="contact-id" id="hidden-contact-id">
 					<input type="email" name="email" class="email-field"
 	placeholder="Enter your email"
 	pattern="^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
@@ -296,7 +341,7 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 							alt="add-email"></span>
 					</div>
 					<%
-								for (Mail mail : user.getEmail()) {
+								for (UserMail mail : user.getEmail()) {
 					%>
 					<div class="mail">
 						<span class="left-side"> <%
@@ -491,7 +536,7 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				</p>
 				<div class="mail-container">
 					<div class="title">
-						Emails: <span class="add-email-icon"><img
+						Emails: <span class="add-contact-mail-icon"><img
 							src="assets/pencil-cursor-svgrepo-com.svg" width='16'
 							alt="add-email"></span>
 					</div>

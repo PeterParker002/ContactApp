@@ -1,5 +1,7 @@
 package com.contacts.handler;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
@@ -10,10 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 //import java.util.Scanner;
 import java.util.HashMap;
+import java.util.Scanner;
 
 import com.contacts.model.User;
+import com.contacts.model.UserMail;
+import com.contacts.connection.ConnectionPool;
 import com.contacts.dao.UserDAO;
 import com.contacts.model.Contact;
+import com.contacts.model.ContactMail;
 import com.contacts.model.Group;
 //import com.contacts.dao.UserDAO;
 import com.contacts.model.Mail;
@@ -25,9 +31,10 @@ import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
 import com.contacts.querylayer.Table;
-import com.contacts.utils.Database.ContactMail;
+import com.contacts.utils.Database.ContactEmail;
 import com.contacts.utils.Database.ContactMobileNumber;
 import com.contacts.utils.Database.Contacts;
+import com.contacts.utils.Database.GroupDetails;
 import com.contacts.utils.Database.GroupInfo;
 import com.contacts.utils.Database.Sample;
 import com.contacts.utils.Database.TableInfo;
@@ -99,22 +106,51 @@ public class Test {
 //			e.printStackTrace();
 //		}
 
+		try (Connection con = ConnectionPool.getDataSource().getConnection();
+				PreparedStatement ps = con.prepareStatement("select * from Contacts c join contacts_mail_ids cm on c.contact_id=cm.contact_id where c.contact_id=2;");
+				ResultSet rs = ps.executeQuery()) {
+			ResultSetMetaData metadata = rs.getMetaData();
+			
+			for (int i=1; i<=metadata.getColumnCount(); i++) {
+				System.out.println(metadata.getTableName(i) + "." + metadata.getColumnName(i));
+			}
+//			while (rs.next()) {
+//				System.out.println(rs.getString("username"));
+//			}
+		} catch (Exception e) {
+
+		}
 //		QueryBuilder qb = new QueryBuilder();
 //		QueryExecutor qx = new QueryExecutor();
-
+//
+//		qb.selectTable(TableInfo.USER);
+//		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.GREATERTHANEQUAL, 30);
+//
+//		ArrayList<User> users = (ArrayList<User>) qx.executeQuery(qb.build());
+//		if (users != null)
+//			for (User g : users) {
+////		System.out.println(g);
+//				Method[] ms = g.getClass().getMethods();
+//				for (Method m : ms) {
+//					if (m.getName().startsWith("get")) {
+//						System.out.println(m.getName() + " -> " + m.invoke(g));
+//					}
+//				}
+////		System.out.println();
+//			}
 //		select contact_id, first_name, middle_name, last_name from Contacts where user_id=? and contact_id not in (select contact_id from Group_info where group_id=?);
 
-		QueryBuilder qb = new QueryBuilder();
-		QueryExecutor qx = new QueryExecutor();
-		qb.selectTable(TableInfo.CONTACTS);
-		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, 9);
-		QueryBuilder inner_qb = new QueryBuilder();
-		inner_qb.selectTable(TableInfo.GROUPINFO);
-		inner_qb.selectColumn(new Column(GroupInfo.CONTACTID, "", "", inner_qb.table));
-		inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, 45);
-		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.NOTIN, inner_qb.build());
-		ArrayList<Contact> c = (ArrayList<Contact>) qx.executeQuery(qb.build());
-		System.out.println(c);
+//		QueryBuilder qb = new QueryBuilder();
+//		QueryExecutor qx = new QueryExecutor();
+//		qb.selectTable(TableInfo.CONTACTS);
+//		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, 9);
+//		QueryBuilder inner_qb = new QueryBuilder();
+//		inner_qb.selectTable(TableInfo.GROUPINFO);
+//		inner_qb.selectColumn(new Column(GroupInfo.CONTACTID, "", "", inner_qb.table));
+//		inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, 45);
+//		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.NOTIN, inner_qb.build());
+//		ArrayList<Contact> c = (ArrayList<Contact>) qx.executeQuery(qb.build());
+//		System.out.println(c);
 //		HashMap<String, Object> groupsData = qx.executeJoinQuery(qb.build());
 //		System.out.println(groupsData);
 //		ArrayList<Group> groups = (ArrayList<Group>) groupsData.get(groupInfoTable.name.toString());
@@ -123,20 +159,20 @@ public class Test {
 //		});
 //		System.out.println();
 //		ArrayList<Contact> contacts = (ArrayList<Contact>) groupsData.get(TableInfo.CONTACTS.toString());
-		for (Contact g : c) {
-//			System.out.println(g);
-			Method[] ms = g.getClass().getDeclaredMethods();
-			for (Method m : ms) {
-				if (m.getName().startsWith("get")) {
-					System.out.println(m.getName() + " -> " + m.invoke(g));
-				}
-			}
-//			System.out.println();
-		}
+//		for (Contact g : c) {
+////			System.out.println(g);
+//			Method[] ms = g.getClass().getDeclaredMethods();
+//			for (Method m : ms) {
+//				if (m.getName().startsWith("get")) {
+//					System.out.println(m.getName() + " -> " + m.invoke(g));
+//				}
+//			}
+////			System.out.println();
+//		}
 //		
 //		qb.selectTable(TableInfo.USEREMAIL);
-//		qb.selectColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table));
-//		qb.setCondition(new Column(UserEmail.ID, "", "", qb.table), Operators.EQUAL, 1);
+////		qb.selectColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table));
+//		qb.setCondition(new Column(UserEmail.USERID, "", "", qb.table), Operators.EQUAL, 1);
 //		ArrayList<Mail> r = (ArrayList<Mail>) qx.executeQuery(qb.build());
 ////		Mail m = (Mail) r.get(qb.table.name.toString());
 //		System.out.println(r);
@@ -149,9 +185,9 @@ public class Test {
 //		qb.selectColumn(new Column(Contacts.FIRSTNAME, "", "", qb.table));
 //		qb.selectColumn(new Column(Contacts.MIDDLENAME, "", "", qb.table));
 //		qb.selectColumn(new Column(Contacts.LASTNAME, "", "", qb.table));
-//		qb.selectColumn(new Column(ContactMail.EMAIL, "", "", c_mail));
+//		qb.selectColumn(new Column(ContactEmail.EMAIL, "", "", c_mail));
 //		qb.selectColumn(new Column(ContactMobileNumber.MOBILENUMBER, "", "", c_mob));
-//		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table), new Column(ContactMail.CONTACTID, "", "", c_mail));
+//		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table), new Column(ContactEmail.CONTACTID, "", "", c_mail));
 //		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table), new Column(ContactMobileNumber.CONTACTID, "", "", c_mob));
 //		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, true);
 //
@@ -296,6 +332,27 @@ public class Test {
 //			}
 //		} catch (ClassNotFoundException | SQLException e) {
 //			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		Scanner sc = new Scanner(System.in);
+//		String template = "<servlet>\n" + "    <servlet-name>%servletName%</servlet-name>\n"
+//				+ "    <servlet-class>%servletClass%</servlet-class>\n" + "</servlet>\n" + "\n" + "<servlet-mapping>\n"
+//				+ "    <servlet-name>%servletMappingName%</servlet-name>\n" + "    <url-pattern>/%url%</url-pattern>\n"
+//				+ "</servlet-mapping>";
+//		try (FileWriter fw = new FileWriter("/home/karthik-tt0479/Desktop/Sample.xml")) {
+//			System.out.println("Enter the servlet name: ");
+//			String servletName = sc.nextLine();
+//			System.out.println("Enter the servlet class: ");
+//			String servletClass = sc.nextLine();
+//			System.out.println("Enter the servlet name: ");
+//			String servletMappingName = sc.nextLine();
+//			System.out.println("Enter the servlet name: ");
+//			String servletUrl = sc.nextLine();
+//			template = template.replace("%servletName%", servletName).replace("%servletClass%", servletClass)
+//					.replace("%servletMappingName%", servletMappingName).replace("%url%", servletUrl);
+//			fw.write(template);
+//			System.out.println("File Writed Successfully!");
+//		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
 	}

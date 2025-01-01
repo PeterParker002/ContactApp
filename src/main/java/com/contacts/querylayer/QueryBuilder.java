@@ -261,11 +261,6 @@ public class QueryBuilder {
 		Condition<T> cnd = new Condition<>(col, op.toString(), val);
 		this.condition.add(cnd);
 	}
-	
-//	public void setCondition(Column col, Operators op, QueryBuilder val) {
-//		Condition<QueryBuilder> cnd = new Condition<>(col, op.toString(), val);
-//		this.condition.add(cnd);
-//	}
 
 	public void setOrder(Column col) {
 		this.order_by = new OrderBy(col, Order.asc);

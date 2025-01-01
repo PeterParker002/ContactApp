@@ -9,13 +9,18 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.contacts.model.Contact;
+import com.contacts.model.User;
 import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
-import com.contacts.utils.Database.ContactMail;
+import com.contacts.utils.Database.ContactEmail;
 import com.contacts.utils.Database.ContactMobileNumber;
 import com.contacts.utils.Database.Contacts;
+import com.contacts.utils.Database.GroupInfo;
 import com.contacts.utils.Database.TableInfo;
+import com.contacts.utils.Database.UserEmail;
+import com.contacts.utils.Database.Users;
+import com.contacts.utils.Operators;
 
 public class ContactDAO {
 	private String username = "root";
@@ -50,8 +55,8 @@ public class ContactDAO {
 		if (result > 0) {
 			qb = new QueryBuilder();
 			qb.insertTable(TableInfo.CONTACTMAIL);
-			qb.insertValuesToColumns(new Column(ContactMail.CONTACTID, "", "", qb.table), result);
-			qb.insertValuesToColumns(new Column(ContactMail.EMAIL, "", "", qb.table), contact.getEmail());
+			qb.insertValuesToColumns(new Column(ContactEmail.CONTACTID, "", "", qb.table), result);
+			qb.insertValuesToColumns(new Column(ContactEmail.EMAIL, "", "", qb.table), contact.getEmail());
 			if (qx.executeAndUpdate(qb.build()) > 0) {
 				qb = new QueryBuilder();
 				qb.insertTable(TableInfo.CONTACTMOBILENUMBER);
@@ -62,6 +67,38 @@ public class ContactDAO {
 			}
 		}
 		return false;
+	}
+	
+	public boolean editContactInfo(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.updateTable(TableInfo.CONTACTS);
+		qb.updateColumn(new Column(Contacts.FIRSTNAME, "", "", qb.table), contact.getFirstName());
+		qb.updateColumn(new Column(Contacts.MIDDLENAME, "", "", qb.table), contact.getMiddleName());
+		qb.updateColumn(new Column(Contacts.LASTNAME, "", "", qb.table), contact.getLastName());
+		qb.updateColumn(new Column(Contacts.GENDER, "", "", qb.table), contact.getGender());
+		qb.updateColumn(new Column(Contacts.DATEOFBIRTH, "", "", qb.table), contact.getDateOfBirth());
+		qb.updateColumn(new Column(Contacts.NOTES, "", "", qb.table), contact.getNotes());
+		qb.updateColumn(new Column(Contacts.HOMEADDRESS, "", "", qb.table), contact.getHomeAddress());
+		qb.updateColumn(new Column(Contacts.WORKADDRESS, "", "", qb.table), contact.getWorkAddress());
+		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
+		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.EQUAL, contact.getContactId());
+		int res = qx.executeAndUpdate(qb.build());
+		return res > 0;
+	}
+	
+	public boolean addEmails(int contact_id, String[] emails) throws ClassNotFoundException, SQLException {
+		QueryExecutor qx = new QueryExecutor();
+		for (String email : emails) {
+			QueryBuilder qb = new QueryBuilder();
+			qb.insertTable(TableInfo.CONTACTMAIL);
+			qb.insertValuesToColumns(new Column(ContactEmail.CONTACTID, "", "", qb.table), contact_id);
+			qb.insertValuesToColumns(new Column(ContactEmail.EMAIL, "", "", qb.table), email);
+			if (qx.executeAndUpdate(qb.build()) < 1) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 //	public boolean addContact(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
@@ -162,7 +199,9 @@ public class ContactDAO {
 		ps.setInt(2, group_id);
 		ResultSet r = ps.executeQuery();
 		if (r.next()) {
-			// Alternative Query -> SELECT c.contact_id, c.first_name, c.middle_name, c.last_name FROM Contacts c LEFT JOIN Group_info g ON c.contact_id = g.contact_id AND g.group_id = ? WHERE c.user_id = ?  AND g.contact_id IS NULL;
+			// Alternative Query -> SELECT c.contact_id, c.first_name, c.middle_name,
+			// c.last_name FROM Contacts c LEFT JOIN Group_info g ON c.contact_id =
+			// g.contact_id AND g.group_id = ? WHERE c.user_id = ? AND g.contact_id IS NULL;
 			PreparedStatement mail_ps = con.prepareStatement(
 					"select contact_id, first_name, middle_name, last_name from Contacts where user_id=? and contact_id not in (select contact_id from Group_info where group_id=?);");
 			mail_ps.setInt(1, user_id);
@@ -181,11 +220,15 @@ public class ContactDAO {
 	}
 
 	public boolean deleteContactFromGroups(int contact_id) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("delete from Group_info where contact_id=?;");
-//        ps.setInt(1, group_id);
-		ps.setInt(1, contact_id);
-		return ps.executeUpdate() > 0;
+//		Connection con = getConnection();
+//		PreparedStatement ps = con.prepareStatement("delete from Group_info where contact_id=?;");
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.deleteTable(TableInfo.GROUPINFO);
+		qb.setCondition(new Column(GroupInfo.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
+//		ps.setInt(1, contact_id);
+//		return ps.executeUpdate() > 0;
+		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
 	public boolean deleteGroupContact(int group_id, int contact_id) throws ClassNotFoundException, SQLException {

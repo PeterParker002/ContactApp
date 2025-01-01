@@ -12,11 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.ContactDAO;
+import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.User;
 
 @WebServlet("/contact/*")
 public class GetContactInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final MyCustomLogger logger = new MyCustomLogger(
+			"/home/karthik-tt0479/eclipse-workspace/FirstProject/src/main/resources/logs/application.log",
+			MyCustomLogger.LogLevel.INFO);
 
 	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -41,15 +45,21 @@ public class GetContactInfoServlet extends HttpServlet {
 				json.put("work", rs.getString(8));
 				json.put("mail", rs.getString(9));
 				json.put("mobile", rs.getString(10));
+				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+						"Contact Info Retreived Successfully.");
 				response.getWriter().println(json.toString());
 			} else {
 				json.put("status", 0);
 				json.put("message", "No Entry Found");
+				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+						"No Entry Found.");
 				response.getWriter().println(json.toString());
 			}
 		} catch (NumberFormatException | SQLException | ClassNotFoundException n) {
 			json.put("status", -1);
 			json.put("message", "");
+			logger.error("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+					n.getMessage());
 			response.getWriter().println(json.toString());
 		}
 	}

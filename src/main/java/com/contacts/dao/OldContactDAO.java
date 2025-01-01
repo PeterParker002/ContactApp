@@ -12,7 +12,7 @@ import com.contacts.model.Contact;
 import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
-import com.contacts.utils.Database.ContactMail;
+import com.contacts.utils.Database.ContactEmail;
 import com.contacts.utils.Database.ContactMobileNumber;
 import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.TableInfo;
@@ -50,8 +50,8 @@ public class OldContactDAO {
 		if (result > 0) {
 			qb = new QueryBuilder();
 			qb.insertTable(TableInfo.CONTACTMAIL);
-			qb.insertValuesToColumns(new Column(ContactMail.CONTACTID, "", "", qb.table), result);
-			qb.insertValuesToColumns(new Column(ContactMail.EMAIL, "", "", qb.table), contact.getEmail());
+			qb.insertValuesToColumns(new Column(ContactEmail.CONTACTID, "", "", qb.table), result);
+			qb.insertValuesToColumns(new Column(ContactEmail.EMAIL, "", "", qb.table), contact.getEmail());
 			if (qx.executeAndUpdate(qb.build()) > 0) {
 				qb = new QueryBuilder();
 				qb.insertTable(TableInfo.CONTACTMOBILENUMBER);

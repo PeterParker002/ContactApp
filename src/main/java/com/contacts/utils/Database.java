@@ -5,7 +5,7 @@ public class Database {
 	public enum TableInfo implements DatabaseImpl {
 		USER("User"), USEREMAIL("User_mail_ids"), USERMOBILENUMBER("user_mobile_numbers"), CONTACTS("Contacts"),
 		CONTACTMAIL("contacts_mail_ids"), CONTACTMOBILENUMBER("contacts_mobile_numbers"), GROUPINFO("Group_info"),
-		GROUPDETAILS("Group_details"), SAMPLE("Sample");
+		GROUPDETAILS("Group_details"), SAMPLE("Sample"), SESSION("Session");
 
 		private String table;
 
@@ -78,12 +78,12 @@ public class Database {
 		}
 	}
 
-	public enum ContactMail implements DatabaseImpl {
+	public enum ContactEmail implements DatabaseImpl {
 		ID("id"), CONTACTID("contact_id"), EMAIL("email"), POJO("Mail");
 
 		private String col;
 
-		private ContactMail(String col) {
+		private ContactEmail(String col) {
 			this.col = col;
 		}
 
@@ -140,6 +140,20 @@ public class Database {
 		private String col;
 
 		private Sample(String col) {
+			this.col = col;
+		}
+
+		public String toString() {
+			return this.col;
+		}
+	}
+	
+	public enum Session implements DatabaseImpl {
+		SESSIONID("session_id"), USERID("user_id"), CREATEDAT("created_at"), LASTACCESSEDAT("last_accessed_at");
+
+		private String col;
+
+		private Session(String col) {
 			this.col = col;
 		}
 

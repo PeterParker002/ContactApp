@@ -1,0 +1,240 @@
+192.168.1.9 - [INFO] [2024-12-25 15:00:25] "POST /login HTTP/1.1" 200 
+Message: User Login Failed
+192.168.1.9 - [INFO] [2024-12-25 15:00:29] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-25 15:00:39] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-25 21:44:57] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-25 21:45:17] "POST /login HTTP/1.1" 200 
+Message: User Login Failed
+192.168.1.9 - [INFO] [2024-12-25 21:45:25] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-25 22:20:52] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-25 22:24:37] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-25 22:27:27] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-25 22:29:28] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-25 23:00:25] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-25 23:00:38] "GET /signup HTTP/1.1" 200 
+Message: Redirecting to signup.jsp page.
+192.168.1.9 - [INFO] [2024-12-25 23:00:49] "GET /signup HTTP/1.1" 200 
+Message: Redirecting to signup.jsp page.
+192.168.1.9 - [INFO] [2024-12-25 23:00:52] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-25 23:11:43] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-25 23:13:00] "GET /makePrimary/23 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+192.168.1.9 - [INFO] [2024-12-25 23:13:05] "GET /makePrimary/1 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+192.168.1.9 - [INFO] [2024-12-25 23:13:51] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+192.168.1.9 - [INFO] [2024-12-25 23:15:14] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-25 23:15:19] "POST /login HTTP/1.1" 200 
+Message: User Login Failed
+192.168.1.9 - [INFO] [2024-12-25 23:15:41] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-25 23:16:14] "POST /add-mobile-number HTTP/1.1" 200 
+Message: User Mobile Numbers Added Successfully.
+192.168.1.9 - [INFO] [2024-12-25 23:20:16] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-25 23:20:21] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-26 00:10:36] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-26 00:10:42] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-26 00:10:46] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+192.168.1.9 - [INFO] [2024-12-26 00:11:06] "GET /contact/9 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+192.168.1.9 - [INFO] [2024-12-26 00:11:13] "GET /contact/28 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+192.168.1.9 - [INFO] [2024-12-26 00:11:28] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+192.168.1.9 - [INFO] [2024-12-26 00:11:43] "GET /getContactsByGroup/33 HTTP/1.1" 200 
+Message: Contacts Filtered based on Groups has been Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-27 23:25:25] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-27 23:25:35] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-27 23:27:25] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-27 23:27:28] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-27 23:27:34] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-27 23:33:41] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-27 23:33:47] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-27 23:34:02] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:50:26] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:50:32] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:51:20] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:51:28] "GET /signup HTTP/1.1" 200 
+Message: Redirecting to signup.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:51:32] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:53:16] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:53:22] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:53:56] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:59:14] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 14:59:20] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-28 15:00:06] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+192.168.1.9 - [INFO] [2024-12-28 15:04:43] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-28 15:04:49] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-28 15:13:03] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-28 15:13:09] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+192.168.1.9 - [INFO] [2024-12-28 15:14:07] "POST /add-mobile-number HTTP/1.1" 200 
+Message: User Mobile Numbers Added Successfully.
+192.168.1.9 - [INFO] [2024-12-28 15:14:38] "GET /deleteMobile/45 HTTP/1.1" 200 
+Message: Mobile Number Deleted Successfully.
+192.168.1.9 - [INFO] [2024-12-28 15:15:20] "GET /deleteMobile/45 HTTP/1.1" 200 
+Message: Mobile Number Deletion Failed.
+192.168.1.9 - [INFO] [2024-12-28 15:39:56] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-28 15:41:56] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-28 15:44:10] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+192.168.1.9 - [INFO] [2024-12-28 15:44:20] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:34:38] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:36:17] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:36:25] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:40:26] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:40:56] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:40:59] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:41:29] "GET /contact/9 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:41:31] "GET /contact/28 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:41:36] "GET /contact/9 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:41:38] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-29 13:42:24] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 11:34:29] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:23:51] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:23:58] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:24:07] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:25:05] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:25:35] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:26:26] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:27:44] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:29:52] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:29:58] "GET /contact/9 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:38:56] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:39:01] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:39:04] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 19:41:46] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 22:17:13] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-30 22:17:19] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+10.15.216.190 - [INFO] [2024-12-30 22:21:38] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+10.15.216.190 - [INFO] [2024-12-30 22:21:44] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+10.15.216.190 - [INFO] [2024-12-30 22:22:32] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:34:36] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:34:42] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:34:48] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:36:04] "GET /contact/9 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:42:36] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:42:42] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:42:46] "GET /contact/28 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:42:58] "POST /edit-contact HTTP/1.1" 200 
+Message: Contact Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:43:03] "GET /contact/28 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:43:16] "POST /edit-contact HTTP/1.1" 200 
+Message: Contact Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:43:19] "GET /contact/28 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:44:06] "GET /contact/9 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:44:23] "POST /edit-contact HTTP/1.1" 200 
+Message: Contact Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:44:27] "GET /contact/9 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 11:56:58] "GET /contact/9 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:13:31] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:13:37] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:14:29] "POST /add-email HTTP/1.1" 200 
+Message: User Emails Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:14:42] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:15:49] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:16:23] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:17:31] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:18:10] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:18:31] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:22:12] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:22:17] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:22:21] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:22:34] "POST /add-email HTTP/1.1" 200 
+Message: Contact Mails Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2024-12-31 12:22:37] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.

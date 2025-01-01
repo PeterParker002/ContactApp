@@ -16,10 +16,19 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>
+<%
+	if (session.getAttribute("message") != null) {
+		String msg = (String) session.getAttribute("message");
+	%>
+	<div class="message" id="message"><%=msg%></div>
+	<%
+	session.removeAttribute("message");
+	}
+	%>
 	<div class="wrapper">
 		<h1>My Contacts App</h1>
 		<div class="container">
-			<a href="login.jsp">Login</a> <a href="signup.jsp">Sign Up</a>
+			<a href="/login">Login</a> <a href="/signup">Sign Up</a>
 		</div>
 	</div>
 	<script src="js/script.js"></script>

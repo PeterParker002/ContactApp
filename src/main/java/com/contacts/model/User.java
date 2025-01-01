@@ -3,7 +3,7 @@ package com.contacts.model;
 import java.util.ArrayList;
 
 public class User {
-	private int UserId;
+	private int userId;
 	private String username;
 	private String password;
 	private String firstName;
@@ -15,18 +15,26 @@ public class User {
 	private String workAddress;
 	private String homeAddress;
 	private int isHashed;
-	private ArrayList<Mail> email = new ArrayList<>();
-	private ArrayList<MobileNumber> mobileNumber = new ArrayList<>();
+	private ArrayList<UserMail> email = new ArrayList<>();
+	private ArrayList<UserMobile> mobileNumber = new ArrayList<>();
 
-	public ArrayList<Mail> getEmail() {
+	public int getUserId() {
+		return this.userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public ArrayList<UserMail> getEmail() {
 		return email;
 	}
 
-	public void setEmail(Mail mail) {
+	public void setEmail(UserMail mail) {
 		this.email.add(mail);
 	}
 
-	public void setEmail(ArrayList<Mail> mail) {
+	public void setEmail(ArrayList<UserMail> mail) {
 		this.email = mail;
 	}
 
@@ -102,15 +110,15 @@ public class User {
 		this.homeAddress = homeAddress;
 	}
 
-	public ArrayList<MobileNumber> getMobileNumber() {
+	public ArrayList<UserMobile> getMobileNumber() {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(MobileNumber mobileNumber) {
+	public void setMobileNumber(UserMobile mobileNumber) {
 		this.mobileNumber.add(mobileNumber);
 	}
 
-	public void setMobileNumber(ArrayList<MobileNumber> mobileNumber) {
+	public void setMobileNumber(ArrayList<UserMobile> mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 
@@ -128,14 +136,6 @@ public class User {
 
 	public void setIsHashed(int isHashed) {
 		this.isHashed = isHashed;
-	}
-
-	public int getUserId() {
-		return UserId;
-	}
-
-	public void setUserId(int userId) {
-		UserId = userId;
 	}
 
 }

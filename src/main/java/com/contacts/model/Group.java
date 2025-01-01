@@ -25,10 +25,16 @@ public class Group {
 	}
 
 	public ArrayList<Contact> getContact() {
-		return Contact;
+		return this.Contact;
 	}
 
-	public void setContact(ArrayList<Contact> Contact) {
+	public void setContactId(int contact_id) {
+		Contact c = new Contact();
+		c.setContactId(contact_id);
+		this.Contact.add(c);
+	}
+
+	public void setContactId(ArrayList<Contact> Contact) {
 		this.Contact = Contact;
 	}
 
@@ -38,5 +44,9 @@ public class Group {
 
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+
+	public void update(Group g) {
+		this.Contact.add(g.getContact().get(0));
 	}
 }

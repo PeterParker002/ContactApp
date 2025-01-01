@@ -16,6 +16,10 @@ document.querySelector(".close-contact-form")?.addEventListener("click", () => {
 	document.querySelector(".add-contact-form").classList.toggle("hide");
 });
 
+document.querySelector(".close-edit-contact-form")?.addEventListener("click", () => {
+	document.querySelector(".edit-contact-form").classList.toggle("hide");	
+});
+
 document.querySelector(".close-group-form")?.addEventListener("click", () => {
 	document.querySelector(".add-group-form").classList.toggle("hide");
 });
@@ -134,6 +138,7 @@ document.querySelector(".add-mobile-btn")?.addEventListener("click", () => {
 
 let currentContact = "";
 let isOpen = false;
+let currentContactInfo = {};
 
 document.querySelectorAll(".contact-name").forEach((name) =>
 	name?.addEventListener("click", (e) => {
@@ -143,9 +148,10 @@ document.querySelectorAll(".contact-name").forEach((name) =>
 		} else {
 			currentContact = e.target.dataset.id;
 			let con_id = e.target.dataset.id;
-			fetch("http://localhost:8080/contact/" + con_id)
+			fetch("contact/" + con_id)
 				.then((res) => res.json())
 				.then((data) => {
+					currentContactInfo = data;
 					document.querySelector(".contact-fname").innerText = data.fname + " " + data.mname + " " + data.lname;
 					document.querySelector(".c-fname").innerText = data.fname;
 					document.querySelector(".c-mname").innerText = data.mname;
@@ -165,6 +171,36 @@ document.querySelectorAll(".contact-name").forEach((name) =>
 		}
 	})
 );
+
+document.querySelectorAll(".edit-contact").forEach((contact) => {
+	console.log(contact);
+	contact.addEventListener("click", () => {		
+	const editContactForm = document.querySelector(".edit-contact-form");
+	editContactForm.classList.toggle("hide");
+    editContactForm.querySelector("#hidden-contact-id").value = currentContact;
+	console.log(currentContact);
+	editContactForm.querySelector(".fname").value = currentContactInfo.fname;
+	editContactForm.querySelector(".mname").value = currentContactInfo.mname;
+	editContactForm.querySelector(".lname").value = currentContactInfo.lname;
+	if (currentContactInfo.gender.toLowerCase() == "male") {
+		editContactForm.querySelector(".male").setAttribute("checked", true);
+	} else {
+		editContactForm.querySelector(".female").setAttribute("checked", true);
+	}
+	editContactForm.querySelector(".dob").value = currentContactInfo.dob;
+	editContactForm.querySelector(".notes").value = currentContactInfo.notes;
+	editContactForm.querySelector(".home").value = currentContactInfo.home;
+	editContactForm.querySelector(".work").value = currentContactInfo.work;
+	});
+});
+
+document.querySelectorAll(".add-contact-mail-icon").forEach((btn) => {
+	btn?.addEventListener("click", () => {
+		document.querySelector(".add-email-form").querySelector("#hidden-type").value = "contact";
+		document.querySelector(".add-email-form").querySelector("#hidden-contact-id").value = currentContact;
+		document.querySelector(".add-email-form").classList.toggle("hide");
+	});
+});
 
 document.querySelectorAll(".group-name").forEach((group) =>
 	group?.addEventListener("click", (e) => {
@@ -212,7 +248,7 @@ document.querySelectorAll(".add-group-contact-btn").forEach((user) =>
 			.querySelector(".add-group-contact-form")
 			.querySelectorAll("contact-option").length;
 		let group_id = e.target.dataset.id;
-		fetch("http://localhost:8080/getContactsByGroup/" + group_id)
+		fetch("getContactsByGroup/" + group_id)
 			.then((res) => res.json())
 			.then((d) => {
 				console.log(d.contacts);

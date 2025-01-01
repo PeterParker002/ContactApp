@@ -1,27 +1,40 @@
 package com.contacts.dao;
 
 import java.lang.reflect.InvocationTargetException;
+import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
+
 import org.mindrot.jbcrypt.BCrypt;
+
+import com.contacts.connection.ConnectionPool;
 import com.contacts.model.Contact;
 import com.contacts.model.Group;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
 import com.contacts.model.User;
+import com.contacts.model.UserMail;
+import com.contacts.model.UserMobile;
+import com.contacts.model.Session;
 import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
 import com.contacts.querylayer.Table;
 import com.contacts.utils.JoinTypes;
 import com.contacts.utils.Operators;
+import com.contacts.utils.Database;
 import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.GroupDetails;
 import com.contacts.utils.Database.GroupInfo;
@@ -58,6 +71,17 @@ public class UserDAO {
 		return con;
 	}
 
+//	private Connection getConnection() throws ClassNotFoundException, SQLException {
+//		Connection con = null;
+//		try {
+////			DataSource dataSource = HikariCPConnection.getDataSource();
+//			con = HikariCPConnection.getConnection();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return con;
+//	}
+
 	// Insert Statement
 	/**
 	 * Sign Up Method
@@ -68,10 +92,6 @@ public class UserDAO {
 	 * @throws ClassNotFoundException
 	 */
 	public int SignupUser(User user) throws SQLException, ClassNotFoundException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(
-				"insert into User (username, password, first_name, middle_name, last_name, gender, date_of_birth, notes, home_address, work_address, isHashed) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
-				Statement.RETURN_GENERATED_KEYS);
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.insertTable(TableInfo.USER);
@@ -225,15 +245,20 @@ public class UserDAO {
 	 * @throws SQLException
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalArgumentException
+	 * @throws InstantiationException
 	 */
 	public boolean checkIsPrimaryMail(int mail_id)
-			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException {
+			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.selectTable(TableInfo.USEREMAIL);
 		qb.selectColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table));
 		qb.setCondition(new Column(UserEmail.ID, "", "", qb.table), Operators.EQUAL, mail_id);
-		ArrayList<Mail> r = (ArrayList<Mail>) qx.executeQuery(qb.build());
+		ArrayList<UserMail> r = (ArrayList<UserMail>) qx.executeQuery(qb.build());
 		return r.get(0).getIsPrimary();
 	}
 
@@ -334,9 +359,14 @@ public class UserDAO {
 	 * @throws SQLException
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalArgumentException
+	 * @throws InstantiationException
 	 */
 	public User getUserInfo(int user_id)
-			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException {
+			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USER);
 		qb.selectColumn(new Column(Users.USERID, "", "", qb.table));
@@ -369,9 +399,14 @@ public class UserDAO {
 	 * @throws SQLException
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalArgumentException
+	 * @throws InstantiationException
 	 */
-	public ArrayList<Mail> getUserMail(int user_id)
-			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException {
+	public ArrayList<UserMail> getUserMail(int user_id)
+			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USEREMAIL);
 		qb.selectColumn(new Column(UserEmail.ID, "", "", qb.table));
@@ -379,7 +414,7 @@ public class UserDAO {
 		qb.selectColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table));
 		qb.setCondition(new Column(UserEmail.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		QueryExecutor qx = new QueryExecutor();
-		ArrayList<Mail> r = (ArrayList<Mail>) qx.executeQuery(qb.build());
+		ArrayList<UserMail> r = (ArrayList<UserMail>) qx.executeQuery(qb.build());
 		return r;
 	}
 
@@ -393,21 +428,26 @@ public class UserDAO {
 	 * @throws SQLException
 	 * @throws IllegalAccessException
 	 * @throws InvocationTargetException
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalArgumentException
+	 * @throws InstantiationException
 	 */
-	public ArrayList<MobileNumber> getUserMobileNumber(int user_id)
-			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException {
+	public ArrayList<UserMobile> getUserMobileNumber(int user_id)
+			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USERMOBILENUMBER);
 		qb.selectColumn(new Column(UserMobileNumber.ID, "", "", qb.table));
 		qb.selectColumn(new Column(UserMobileNumber.MOBILENUMBER, "", "", qb.table));
 		qb.setCondition(new Column(UserMobileNumber.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		QueryExecutor qx = new QueryExecutor();
-		ArrayList<MobileNumber> r = (ArrayList<MobileNumber>) qx.executeQuery(qb.build());
+		ArrayList<UserMobile> r = (ArrayList<UserMobile>) qx.executeQuery(qb.build());
 		return r;
 	}
 
 	// Update Statement
-	public boolean EditUserInfo(int user_id, User user) throws ClassNotFoundException, SQLException {
+	public boolean editUserInfo(int user_id, User user) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.updateTable(TableInfo.USER);
@@ -426,19 +466,17 @@ public class UserDAO {
 
 	// Select Statement
 	public ArrayList<Group> getGroups(int user_id)
-			throws SQLException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("select * from Group_details where user_id=?;");
+			throws SQLException, ClassNotFoundException, IllegalAccessException, InvocationTargetException,
+			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.selectTable(TableInfo.GROUPDETAILS);
 		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, user_id);
-		ps.setInt(1, user_id);
 		ArrayList<Group> groupsData = (ArrayList<Group>) qx.executeQuery(qb.build());
 		ArrayList<Group> groups = new ArrayList<Group>();
 		for (Group group : groupsData) {
 			group.setGroupId(group.getGroupId());
-			group.setContact(getContactsByGroup(group.getGroupId()));
+			group.setContactId(getContactsByGroup(group.getGroupId()));
 			group.setGroupName(group.getGroupName());
 			groups.add(group);
 		}
@@ -472,7 +510,7 @@ public class UserDAO {
 		qb.insertTable(TableInfo.GROUPDETAILS);
 		qb.insertValuesToColumns(new Column(GroupDetails.USERID, "", "", qb.table), user_id);
 		qb.insertValuesToColumns(new Column(GroupDetails.GROUPNAME, "", "", qb.table), name);
-		int result = qx.executeAndUpdate(qb.build());
+		int result = qx.executeAndUpdateWithKeys(qb.build());
 		if (result > 0) {
 			return addGroupContact(result, contact_ids);
 		}
@@ -543,6 +581,109 @@ public class UserDAO {
 			break;
 		}
 		return check;
+	}
+
+	public Session getUserSession(String sessionId) {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.selectTable(TableInfo.SESSION);
+		qb.setCondition(new Column(Database.Session.SESSIONID, "", "", qb.table), Operators.EQUAL, sessionId);
+		try {
+			ArrayList<Session> session = (ArrayList<Session>) qx.executeQuery(qb.build());
+			if (session.size() > 0) {
+				return session.get(0);
+			} else {
+				return null;
+			}
+		} catch (IllegalAccessException | InvocationTargetException | InstantiationException | IllegalArgumentException
+				| NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Session createSession(Session session) throws ClassNotFoundException, SQLException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.insertTable(TableInfo.SESSION);
+		qb.insertValuesToColumns(new Column(Database.Session.SESSIONID, "", "", qb.table), session.getSessionId());
+		qb.insertValuesToColumns(new Column(Database.Session.USERID, "", "", qb.table), session.getUserId());
+		qb.insertValuesToColumns(new Column(Database.Session.CREATEDAT, "", "", qb.table), session.getCreatedAt());
+		qb.insertValuesToColumns(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table),
+				session.getLastAccessedAt());
+		if (qx.executeAndUpdate(qb.build()) > 0) {
+			return session;
+		}
+		return null;
+	}
+
+	public int updateSession(String sessionId, LocalDateTime lastAccessedAt) {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.updateTable(TableInfo.SESSION);
+		qb.updateColumn(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), lastAccessedAt.toString());
+		qb.setCondition(new Column(Database.Session.SESSIONID, "", "", qb.table), Operators.EQUAL, sessionId);
+		int res;
+		try {
+			res = qx.executeAndUpdate(qb.build());
+			if (res > 0) {
+				return res;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+
+		}
+		return -1;
+	}
+
+	public int clearSession(String sessionId) {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.deleteTable(TableInfo.SESSION);
+		qb.setCondition(new Column(Database.Session.SESSIONID, "", "", qb.table), Operators.EQUAL, sessionId);
+		int res = -1;
+		try {
+			res = qx.executeAndUpdate(qb.build());
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	public String generateSessionId() {
+		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		ArrayList<Character> charList = new ArrayList<>();
+		for (char c : characters.toCharArray()) {
+			charList.add(c);
+		}
+
+		// Shuffle using SecureRandom
+		SecureRandom secureRandom = new SecureRandom();
+		for (int i = charList.size() - 1; i > 0; i--) {
+			int j = secureRandom.nextInt(i + 1);
+			Collections.swap(charList, i, j);
+		}
+
+		// Generate the random string with unique characters
+		StringBuilder randomString = new StringBuilder();
+		for (int i = 0; i < 16; i++) {
+			randomString.append(charList.get(i));
+		}
+		return randomString.toString();
+	}
+
+	public String getSessionIdFromCookie(HttpServletRequest req, String cookieName) {
+		Cookie[] cookies = req.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equalsIgnoreCase(cookieName)) {
+//					System.out.println(cookie.getValue());
+					return cookie.getValue();
+				}
+			}
+		}
+		return "";
 	}
 
 //	public boolean migratePasswords() throws SQLException, ClassNotFoundException {

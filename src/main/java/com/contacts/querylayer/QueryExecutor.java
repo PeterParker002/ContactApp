@@ -11,12 +11,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.sql.DataSource;
+
 import com.contacts.model.User;
+import com.contacts.model.UserMail;
+import com.contacts.model.UserMobile;
+import com.contacts.connection.ConnectionPool;
 import com.contacts.model.Contact;
+import com.contacts.model.ContactMail;
+import com.contacts.model.ContactMobile;
 import com.contacts.model.Group;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
-import com.contacts.utils.Database.ContactMail;
+import com.contacts.model.Session;
+import com.contacts.utils.Database;
+import com.contacts.utils.Database.ContactEmail;
 import com.contacts.utils.Database.ContactMobileNumber;
 import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.GroupDetails;
@@ -40,6 +49,8 @@ public class QueryExecutor {
 	private String username = "root";
 	private String password = "root";
 	private String db_name = "ContactsApp";
+	private HashMap<Integer, Object> resultPojo = new HashMap<Integer, Object>();
+	private int currentPojoId = 0;
 
 	private Connection getConnection() throws ClassNotFoundException, SQLException {
 		Connection con = null;
@@ -55,108 +66,114 @@ public class QueryExecutor {
 	public HashMap<String, Object> executeJoinQuery(QueryBuilder query)
 			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(query.toString());
-		ResultSet rs = ps.executeQuery();
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		HashMap<String, ArrayList<String>> columns = new HashMap<String, ArrayList<String>>();
-		HashMap<String, ArrayList<String>> colDetails = new HashMap<String, ArrayList<String>>();
-		HashMap<String, String> tableAliases = new HashMap<String, String>();
-		for (Join j : query.join) {
-			tableAliases.putIfAbsent(j.column1.table.name.toString(), j.column1.table.alias);
-			tableAliases.putIfAbsent(j.column2.table.name.toString(), j.column2.table.alias);
-		}
-		ArrayList<String> tables = new ArrayList<String>();
-		ResultSetMetaData metadata = rs.getMetaData();
-		for (int i = 1; i <= metadata.getColumnCount(); i++) {
-			if (!tables.contains(metadata.getTableName(i))) {
-				tables.add(metadata.getTableName(i));
-				ArrayList<String> c = new ArrayList<String>();
-				c.add(metadata.getColumnName(i).toLowerCase().replace("_", ""));
-				columns.put(metadata.getTableName(i), c);
-			} else {
-				columns.get(metadata.getTableName(i)).add(metadata.getColumnName(i).toLowerCase().replace("_", ""));
+
+		try (Connection con = ConnectionPool.getDataSource().getConnection();
+				PreparedStatement ps = con.prepareStatement(query.toString());
+				ResultSet rs = ps.executeQuery();) {
+			HashMap<String, Object> data = new HashMap<String, Object>();
+			HashMap<String, ArrayList<String>> columns = new HashMap<String, ArrayList<String>>();
+			HashMap<String, ArrayList<String>> colDetails = new HashMap<String, ArrayList<String>>();
+			HashMap<String, String> tableAliases = new HashMap<String, String>();
+			for (Join j : query.join) {
+				tableAliases.putIfAbsent(j.column1.table.name.toString(), j.column1.table.alias);
+				tableAliases.putIfAbsent(j.column2.table.name.toString(), j.column2.table.alias);
 			}
-			ArrayList<String> col = new ArrayList<String>();
-			col.add(tableAliases.get(metadata.getTableName(i)) + "." + metadata.getColumnName(i));
-			col.add(metadata.getColumnTypeName(i));
-			colDetails.put(metadata.getColumnName(i).toLowerCase().replace("_", ""), col);
-		}
-		Class<?> pojoClass = null;
-		Object pojo;
-		while (rs.next()) {
-			for (String name : tables) {
-				if (name.equalsIgnoreCase(query.table.name.toString()) & data.containsKey(name)) {
-					continue;
-				}
-				if (name.equalsIgnoreCase(query.table.name.toString())) {
-					pojoClass = getModelClassForTable(name);
-					pojo = pojoClass.getDeclaredConstructor().newInstance();
-					Method[] ms = pojoClass.getDeclaredMethods();
-					for (Method m : ms) {
-						if (m.getName().startsWith("set")
-								& columns.get(name).contains(m.getName().replace("set", "").toLowerCase())) {
-							ArrayList<String> col = colDetails.get(m.getName().replace("set", "").toLowerCase());
-							System.out.println(col.get(0) + " -> " + col.get(1));
-							switch (col.get(1)) {
-							case "INT":
-								m.invoke(pojo, rs.getInt(col.get(0)));
-								break;
-							case "VARCHAR":
-							case "TEXT":
-							case "CHAR":
-							case "DATE":
-								m.invoke(pojo, rs.getString(col.get(0)));
-								break;
-							case "BIGINT":
-								m.invoke(pojo, rs.getLong(col.get(0)));
-								break;
-							case "BIT":
-								m.invoke(pojo, rs.getBoolean(col.get(0)));
-								break;
-							}
-						}
-					}
-					data.put(name, pojo);
+			ArrayList<String> tables = new ArrayList<String>();
+			ResultSetMetaData metadata = rs.getMetaData();
+			for (int i = 1; i <= metadata.getColumnCount(); i++) {
+				if (!tables.contains(metadata.getTableName(i))) {
+					tables.add(metadata.getTableName(i));
+					ArrayList<String> c = new ArrayList<String>();
+					c.add(metadata.getColumnName(i).toLowerCase().replace("_", ""));
+					columns.put(metadata.getTableName(i), c);
 				} else {
-					pojoClass = getModelClassForTable(name);
-					pojo = pojoClass.getDeclaredConstructor().newInstance();
-					Method[] ms = pojoClass.getDeclaredMethods();
-					for (Method m : ms) {
-						if (m.getName().startsWith("set")
-								& columns.get(name).contains(m.getName().replace("set", "").toLowerCase())) {
-							ArrayList<String> col = colDetails.get(m.getName().replace("set", "").toLowerCase());
-							switch (col.get(1)) {
-							case "INT":
-								m.invoke(pojo, rs.getInt(col.get(0)));
-								break;
-							case "VARCHAR":
-							case "TEXT":
-							case "CHAR":
-							case "DATE":
-								m.invoke(pojo, rs.getString(col.get(0)));
-								break;
-							case "BIGINT":
-								m.invoke(pojo, rs.getLong(col.get(0)));
-								break;
-							case "BIT":
-								m.invoke(pojo, rs.getBoolean(col.get(0)));
-								break;
+					columns.get(metadata.getTableName(i)).add(metadata.getColumnName(i).toLowerCase().replace("_", ""));
+				}
+				ArrayList<String> col = new ArrayList<String>();
+				col.add(tableAliases.get(metadata.getTableName(i)) + "." + metadata.getColumnName(i));
+				col.add(metadata.getColumnTypeName(i));
+				colDetails.put(metadata.getColumnName(i).toLowerCase().replace("_", ""), col);
+			}
+			Class<?> pojoClass = null;
+			Object pojo;
+			while (rs.next()) {
+				for (String name : tables) {
+					if (name.equalsIgnoreCase(query.table.name.toString()) & data.containsKey(name)) {
+						continue;
+					}
+					if (name.equalsIgnoreCase(query.table.name.toString())) {
+						pojoClass = getModelClassForTable(name);
+						pojo = pojoClass.getDeclaredConstructor().newInstance();
+						Method[] ms = pojoClass.getDeclaredMethods();
+						for (Method m : ms) {
+							if (m.getName().startsWith("set")
+									& columns.get(name).contains(m.getName().replace("set", "").toLowerCase())) {
+								ArrayList<String> col = colDetails.get(m.getName().replace("set", "").toLowerCase());
+//							System.out.println(col.get(0) + " -> " + col.get(1));
+								switch (col.get(1)) {
+								case "INT":
+									m.invoke(pojo, rs.getInt(col.get(0)));
+									break;
+								case "VARCHAR":
+								case "TEXT":
+								case "CHAR":
+								case "DATE":
+									m.invoke(pojo, rs.getString(col.get(0)));
+									break;
+								case "BIGINT":
+									m.invoke(pojo, rs.getLong(col.get(0)));
+									break;
+								case "BIT":
+									m.invoke(pojo, rs.getBoolean(col.get(0)));
+									break;
+								}
 							}
 						}
-					}
-					if (!data.containsKey(name)) {
-						ArrayList<Object> pojoList = new ArrayList<Object>();
-						pojoList.add(pojo);
-						data.put(name, pojoList);
+						data.put(name, pojo);
 					} else {
-						ArrayList<Object> pojoList = (ArrayList<Object>) data.get(name);
-						pojoList.add(pojo);
+						pojoClass = getModelClassForTable(name);
+						pojo = pojoClass.getDeclaredConstructor().newInstance();
+						Method[] ms = pojoClass.getDeclaredMethods();
+						for (Method m : ms) {
+							if (m.getName().startsWith("set")
+									& columns.get(name).contains(m.getName().replace("set", "").toLowerCase())) {
+								ArrayList<String> col = colDetails.get(m.getName().replace("set", "").toLowerCase());
+								switch (col.get(1)) {
+								case "INT":
+									m.invoke(pojo, rs.getInt(col.get(0)));
+									break;
+								case "VARCHAR":
+								case "TEXT":
+								case "CHAR":
+								case "DATE":
+									m.invoke(pojo, rs.getString(col.get(0)));
+									break;
+								case "BIGINT":
+									m.invoke(pojo, rs.getLong(col.get(0)));
+									break;
+								case "BIT":
+									m.invoke(pojo, rs.getBoolean(col.get(0)));
+									break;
+								}
+							}
+						}
+						if (!data.containsKey(name)) {
+							ArrayList<Object> pojoList = new ArrayList<Object>();
+							pojoList.add(pojo);
+							data.put(name, pojoList);
+						} else {
+							ArrayList<Object> pojoList = (ArrayList<Object>) data.get(name);
+							pojoList.add(pojo);
+						}
 					}
 				}
 			}
+//			closeConnection(con);
+			return data;
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		return data;
+		return null;
 	}
 
 	protected Class<?> getModelClassForTable(String table) {
@@ -166,362 +183,168 @@ public class QueryExecutor {
 		case "Contacts":
 			return Contact.class;
 		case "contacts_mail_ids":
+			return ContactMail.class;
 		case "User_mail_ids":
-			return Mail.class;
+			return UserMail.class;
 		case "contacts_mobile_numbers":
+			return ContactMobile.class;
 		case "user_mobile_numbers":
-			return MobileNumber.class;
+			return UserMobile.class;
+		case "Group_info":
+		case "Group_details":
+			return Group.class;
+		case "Session":
+			return Session.class;
 		default:
-			return Object.class;
+			return null;
 		}
 	}
 
-	public ArrayList<?> executeQuery(QueryBuilder query)
-			throws SQLException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(query.toString());
-		ResultSet rs = ps.executeQuery();
-		ArrayList<String> res = new ArrayList<String>();
-		switch (query.table.getName()) {
-		case TableInfo.USER: {
-			ArrayList<User> users = new ArrayList<User>();
+	private <T> T populateDataOverPojo(ResultSet rs, T pojo)
+			throws NoSuchMethodException, IllegalAccessException, InvocationTargetException {
+		try {
+			ResultSetMetaData metadata = rs.getMetaData();
+			for (int col = 1; col <= metadata.getColumnCount(); col++) {
+				String columnName = metadata.getColumnName(col);
+				String columnType = metadata.getColumnTypeName(col);
+				String tableName = metadata.getTableName(col);
+				String methodName = "set";
+				for (String s : columnName.split("_")) {
+					methodName += s.substring(0, 1).toUpperCase() + s.substring(1);
+				}
+				pojo = dataMapperForPojo(rs, pojo, methodName, tableName, columnName, columnType);
+			}
+		} catch (SQLException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return pojo;
+	}
+
+	public ArrayList<?> executeJoinQuery1(QueryBuilder query) throws InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		Class<?> pojoClass = getModelClassForTable(query.table.getName().toString());
+		Object pojo = pojoClass.getDeclaredConstructor().newInstance();
+		try (Connection con = ConnectionPool.getDataSource().getConnection();
+				PreparedStatement ps = con.prepareStatement(query.toString());
+				ResultSet rs = ps.executeQuery();) {
+			
 			while (rs.next()) {
-				ResultSetMetaData metadata = rs.getMetaData();
-				User user = new User();
-				if (query.columns.size() == 0) {
-					user.setUserId(rs.getInt(Users.USERID.toString()));
-					user.setUsername(rs.getString(Users.USERNAME.toString()));
-					user.setPassword(rs.getString(Users.PASSWORD.toString()));
-					user.setFirstName(rs.getString(Users.FIRSTNAME.toString()));
-					user.setMiddleName(rs.getString(Users.MIDDLENAME.toString()));
-					user.setLastName(rs.getString(Users.LASTNAME.toString()));
-					user.setGender(rs.getString(Users.GENDER.toString()));
-					user.setDateOfBirth(rs.getString(Users.DATEOFBIRTH.toString()));
-					user.setNotes(rs.getString(Users.NOTES.toString()));
-					user.setHomeAddress(rs.getString(Users.HOMEADDRESS.toString()));
-					user.setWorkAddress(rs.getString(Users.WORKADDRESS.toString()));
-					user.setIsHashed(rs.getInt(Users.ISHASHED.toString()));
-					users.add(user);
+				pojo = populateDataOverPojo(rs, pojo);
+				if (resultPojo.containsKey(currentPojoId)) {
+					Object prevPojo = resultPojo.get(currentPojoId);
+					prevPojo.getClass().getMethod("update", pojo.getClass()).invoke(prevPojo, pojo);
 				} else {
-					int i = 1;
-					for (Column col : query.columns) {
-						Method[] ms = user.getClass().getDeclaredMethods();
-						for (Method m : ms) {
-							if (m.getName().startsWith("set")) {
-								if (m.getName().substring(3).equalsIgnoreCase(col.toString().replace("_", ""))) {
-									switch (metadata.getColumnTypeName(i)) {
-									case "INT":
-										m.invoke(user, rs.getInt(col.toString()));
-										break;
-									case "VARCHAR":
-									case "TEXT":
-									case "CHAR":
-									case "DATE":
-										m.invoke(user, rs.getString(col.toString()));
-										break;
-									case "BIGINT":
-										m.invoke(user, rs.getLong(col.toString()));
-										break;
-									case "BIT":
-										m.invoke(user, rs.getBoolean(col.toString()));
-										break;
-									}
-									System.out.println(
-											metadata.getColumnName(i) + " -> " + metadata.getColumnTypeName(i));
-								}
-							}
-						}
-						i++;
-					}
-					users.add(user);
+					resultPojo.put(currentPojoId, pojo);
 				}
+				pojo = pojoClass.getDeclaredConstructor().newInstance();
 			}
-			return users;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		case TableInfo.USEREMAIL: {
-			ArrayList<Mail> mails = new ArrayList<Mail>();
+		System.out.println(resultPojo);
+		return new ArrayList<Object>(resultPojo.values());
+	}
+
+	public ArrayList<?> executeQuery(QueryBuilder query) throws InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		Class<?> pojoClass = getModelClassForTable(query.table.getName().toString());
+		Object pojo = pojoClass.getDeclaredConstructor().newInstance();
+		try (Connection con = ConnectionPool.getDataSource().getConnection();
+				PreparedStatement ps = con.prepareStatement(query.toString());
+				ResultSet rs = ps.executeQuery();) {
 			while (rs.next()) {
-				ResultSetMetaData metadata = rs.getMetaData();
-				Mail mail = new Mail();
-				if (query.columns.size() == 0) {
-					mail.setId(rs.getInt(UserEmail.ID.toString()));
-					mail.setEmail(rs.getString(UserEmail.EMAIL.toString()));
-					mail.setIsPrimary(rs.getBoolean(UserEmail.ISPRIMARY.toString()));
+				pojo = populateDataOverPojo(rs, pojo);
+				if (resultPojo.containsKey(currentPojoId)) {
+					Object prevPojo = resultPojo.get(currentPojoId);
+					prevPojo.getClass().getMethod("update", pojo.getClass()).invoke(prevPojo, pojo);
 				} else {
-					int i = 1;
-					for (Column col : query.columns) {
-						Method[] ms = mail.getClass().getDeclaredMethods();
-						for (Method m : ms) {
-							if (m.getName().startsWith("set")) {
-								if (m.getName().substring(3).equalsIgnoreCase(col.toString().replace("_", ""))) {
-									switch (metadata.getColumnTypeName(i)) {
-									case "INT":
-										m.invoke(mail, rs.getInt(col.toString()));
-										break;
-									case "VARCHAR":
-									case "TEXT":
-									case "CHAR":
-									case "DATE":
-										m.invoke(mail, rs.getString(col.toString()));
-										break;
-									case "BIGINT":
-										m.invoke(mail, rs.getLong(col.toString()));
-										break;
-									case "BIT":
-										m.invoke(mail, rs.getBoolean(col.toString()));
-										break;
-									}
-									System.out.println(
-											metadata.getColumnName(i) + " -> " + metadata.getColumnTypeName(i));
-								}
-							}
-						}
-						i++;
-					}
-					mails.add(mail);
+					resultPojo.put(currentPojoId, pojo);
 				}
+				pojo = pojoClass.getDeclaredConstructor().newInstance();
 			}
-			return mails;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
-		case TableInfo.USERMOBILENUMBER: {
-			ArrayList<MobileNumber> mobiles = new ArrayList<MobileNumber>();
-			while (rs.next()) {
-				ResultSetMetaData metadata = rs.getMetaData();
-				MobileNumber mobile = new MobileNumber();
-				if (query.columns.size() == 0) {
-					mobile.setId(rs.getInt(UserMobileNumber.ID.toString()));
-					mobile.setMobileNumber(rs.getLong(UserMobileNumber.MOBILENUMBER.toString()));
-				} else {
-					int i = 1;
-					for (Column col : query.columns) {
-						Method[] ms = mobile.getClass().getDeclaredMethods();
-						for (Method m : ms) {
-							if (m.getName().startsWith("set")) {
-								if (m.getName().substring(3).equalsIgnoreCase(col.toString().replace("_", ""))) {
-									switch (metadata.getColumnTypeName(i)) {
-									case "INT":
-										m.invoke(mobile, rs.getInt(col.toString()));
-										break;
-									case "VARCHAR":
-									case "TEXT":
-									case "CHAR":
-									case "DATE":
-										m.invoke(mobile, rs.getString(col.toString()));
-										break;
-									case "BIGINT":
-										m.invoke(mobile, rs.getLong(col.toString()));
-										break;
-									case "BIT":
-										m.invoke(mobile, rs.getBoolean(col.toString()));
-										break;
-									}
-								}
-							}
-						}
-						i++;
-					}
+		System.out.println(resultPojo);
+		return new ArrayList<Object>(resultPojo.values());
+	}
+
+	private String getUniqueIdColumn(String tableName) {
+		if (tableName.toLowerCase().startsWith("group")) {
+			tableName = "group";
+		}
+		String columnName = tableName.toLowerCase() + "_id";
+		return columnName;
+	}
+
+	private <T> T dataMapperForPojo(ResultSet rs, T pojo, String methodName, String tableName, String columnName,
+			String columnType)
+			throws SecurityException, IllegalAccessException, InvocationTargetException, SQLException {
+		try {
+			Method m;
+			switch (columnType) {
+			case "INT":
+				m = pojo.getClass().getMethod(methodName, int.class);
+				m.invoke(pojo, rs.getInt(columnName));
+				if (columnName.equalsIgnoreCase("id") | columnName.equalsIgnoreCase(getUniqueIdColumn(tableName))) {
+					currentPojoId = rs.getInt(columnName);
 				}
-				mobiles.add(mobile);
+				break;
+			case "VARCHAR":
+			case "TEXT":
+			case "CHAR":
+			case "DATE":
+				m = pojo.getClass().getMethod(methodName, String.class);
+				m.invoke(pojo, rs.getString(columnName));
+				break;
+			case "BIGINT":
+				m = pojo.getClass().getMethod(methodName, long.class);
+				m.invoke(pojo, rs.getLong(columnName));
+				break;
+			case "BIT":
+				m = pojo.getClass().getMethod(methodName, boolean.class);
+				m.invoke(pojo, rs.getBoolean(columnName));
+				break;
 			}
-			return mobiles;
+		} catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 		}
-		case TableInfo.CONTACTS: {
-			ArrayList<Contact> contacts = new ArrayList<Contact>();
-			while (rs.next()) {
-				ResultSetMetaData metadata = rs.getMetaData();
-				Contact contact = new Contact();
-				if (query.columns.size() == 0) {
-					contact.setContactId(rs.getInt(Contacts.CONTACTID.toString()));
-					contact.setUserId(rs.getInt(Contacts.USERID.toString()));
-					contact.setFirstName(rs.getString(Contacts.FIRSTNAME.toString()));
-					contact.setMiddleName(rs.getString(Contacts.MIDDLENAME.toString()));
-					contact.setLastName(rs.getString(Contacts.LASTNAME.toString()));
-					contact.setGender(rs.getString(Contacts.GENDER.toString()));
-					contact.setDateOfBirth(rs.getString(Contacts.DATEOFBIRTH.toString()));
-					contact.setNotes(rs.getString(Contacts.NOTES.toString()));
-					contact.setHomeAddress(rs.getString(Contacts.HOMEADDRESS.toString()));
-					contact.setWorkAddress(rs.getString(Contacts.WORKADDRESS.toString()));
-				} else {
-					int i = 1;
-					for (Column col : query.columns) {
-						Method[] ms = contact.getClass().getDeclaredMethods();
-						for (Method m : ms) {
-							if (m.getName().startsWith("set")) {
-								if (m.getName().substring(3).equalsIgnoreCase(col.toString().replace("_", ""))) {
-									switch (metadata.getColumnTypeName(i)) {
-									case "INT":
-										m.invoke(contact, rs.getInt(col.toString()));
-										break;
-									case "VARCHAR":
-									case "TEXT":
-									case "CHAR":
-									case "DATE":
-										m.invoke(contact, rs.getString(col.toString()));
-										break;
-									case "BIGINT":
-										m.invoke(contact, rs.getLong(col.toString()));
-										break;
-									case "BIT":
-										m.invoke(contact, rs.getBoolean(col.toString()));
-										break;
-									}
-									System.out.println(
-											metadata.getColumnName(i) + " -> " + metadata.getColumnTypeName(i));
-								}
-							}
-						}
-						i++;
-					}
-				}
-				contacts.add(contact);
-			}
-			return contacts;
-		}
-		case TableInfo.CONTACTMAIL: {
-			ArrayList<Mail> mails = new ArrayList<Mail>();
-			while (rs.next()) {
-				ResultSetMetaData metadata = rs.getMetaData();
-				Mail mail = new Mail();
-				if (query.columns.size() == 0) {
-					mail.setId(rs.getInt(ContactMail.ID.toString()));
-					mail.setEmail(rs.getString(ContactMail.EMAIL.toString()));
-				} else {
-					int i = 1;
-					for (Column col : query.columns) {
-						Method[] ms = mail.getClass().getDeclaredMethods();
-						for (Method m : ms) {
-							if (m.getName().startsWith("set")) {
-								if (m.getName().substring(3).equalsIgnoreCase(col.toString().replace("_", ""))) {
-									switch (metadata.getColumnTypeName(i)) {
-									case "INT":
-										m.invoke(mail, rs.getInt(col.toString()));
-										break;
-									case "VARCHAR":
-									case "TEXT":
-									case "CHAR":
-									case "DATE":
-										m.invoke(mail, rs.getString(col.toString()));
-										break;
-									case "BIGINT":
-										m.invoke(mail, rs.getLong(col.toString()));
-										break;
-									case "BIT":
-										m.invoke(mail, rs.getBoolean(col.toString()));
-										break;
-									}
-									System.out.println(
-											metadata.getColumnName(i) + " -> " + metadata.getColumnTypeName(i));
-								}
-							}
-						}
-						i++;
-					}
-				}
-				mails.add(mail);
-			}
-			return mails;
-		}
-		case TableInfo.CONTACTMOBILENUMBER: {
-			ArrayList<MobileNumber> mobiles = new ArrayList<MobileNumber>();
-			while (rs.next()) {
-				ResultSetMetaData metadata = rs.getMetaData();
-				MobileNumber mobile = new MobileNumber();
-				if (query.columns.size() == 0) {
-					mobile.setId(rs.getInt(ContactMobileNumber.ID.toString()));
-					mobile.setMobileNumber(rs.getLong(ContactMobileNumber.MOBILENUMBER.toString()));
-				} else {
-					int i = 1;
-					for (Column col : query.columns) {
-						Method[] ms = mobile.getClass().getDeclaredMethods();
-						for (Method m : ms) {
-							if (m.getName().startsWith("set")) {
-								if (m.getName().substring(3).equalsIgnoreCase(col.toString().replace("_", ""))) {
-									switch (metadata.getColumnTypeName(i)) {
-									case "INT":
-										m.invoke(mobile, rs.getInt(col.toString()));
-										break;
-									case "VARCHAR":
-									case "TEXT":
-									case "CHAR":
-									case "DATE":
-										m.invoke(mobile, rs.getString(col.toString()));
-										break;
-									case "BIGINT":
-										m.invoke(mobile, rs.getLong(col.toString()));
-										break;
-									case "BIT":
-										m.invoke(mobile, rs.getBoolean(col.toString()));
-										break;
-									}
-									System.out.println(
-											metadata.getColumnName(i) + " -> " + metadata.getColumnTypeName(i));
-								}
-							}
-						}
-						i++;
-					}
-				}
-				mobiles.add(mobile);
-			}
-			return mobiles;
-		}
-		case TableInfo.GROUPINFO: {
-			ArrayList<Group> groups = new ArrayList<Group>();
-			while (rs.next()) {
-				Group group = new Group();
-				group.setGroupId(rs.getInt(GroupInfo.GROUPID.toString()));
-				ArrayList<Contact> contacts = new ArrayList<Contact>();
-				for (String contactId : rs.getString(GroupInfo.CONTACTID.toString()).split(",")) {
-					Contact c = new Contact();
-					c.setContactId(Integer.parseInt(contactId));
-					contacts.add(c);
-				}
-				group.setContact(contacts);
-				groups.add(group);
-			}
-			return groups;
-		}
-		case TableInfo.GROUPDETAILS: {
-			ArrayList<Group> groups = new ArrayList<Group>();
-			while (rs.next()) {
-				Group group = new Group();
-				group.setGroupId(rs.getInt(GroupDetails.GROUPID.toString()));
-				group.setUserId(rs.getInt(GroupDetails.USERID.toString()));
-				group.setGroupName(rs.getString(GroupDetails.GROUPNAME.toString()));
-				groups.add(group);
-			}
-			return groups;
-		}
-		default:
-			break;
-		}
-		closeConnection(con);
-		return res;
+		return pojo;
 	}
 
 	public int executeAndUpdateWithKeys(QueryBuilder query) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);
-		int result = ps.executeUpdate();
-		if (result > 0) {
-			ResultSet rs = ps.getGeneratedKeys();
-			if (rs.next()) {
-				return rs.getInt(1);
+		try (Connection con = ConnectionPool.getDataSource().getConnection();
+				PreparedStatement ps = con.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);) {
+			int result = ps.executeUpdate();
+			if (result > 0) {
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
 			}
+			return -1;
+		} catch (Exception e) {
+			System.out.println(e);
 		}
-		closeConnection(con);
+
 		return -1;
 	}
 
 	public int executeAndUpdate(QueryBuilder query) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(query.toString());
-		int result = ps.executeUpdate();
-		closeConnection(con);
-		return result;
+		try (Connection con = ConnectionPool.getDataSource().getConnection();
+				PreparedStatement ps = con.prepareStatement(query.toString());) {
+			int result = ps.executeUpdate();
+			return result;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+		return -1;
 	}
 
-	private void closeConnection(Connection con) throws SQLException {
-		con.close();
-	}
+//	private void closeConnection(Connection con) throws SQLException {
+//		con.close();
+//	}
 }
