@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Session;
@@ -43,6 +44,7 @@ public class EditUserInfoServlet extends HttpServlet {
 				session.setAttribute("user", user);
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"User Profile Updated Successfully");
+				SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
 				session.setAttribute("message", "User Profile Updated Successfully");
 			} else {
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

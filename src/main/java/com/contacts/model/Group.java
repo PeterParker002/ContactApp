@@ -5,11 +5,15 @@ import java.util.ArrayList;
 public class Group {
 	private int groupId;
 	private int userId;
-	private ArrayList<Contact> Contact = new ArrayList<>();
+	private ArrayList<Contact> contacts = new ArrayList<>();
 	private String groupName;
 
 	public int getGroupId() {
 		return groupId;
+	}
+
+	public int getUniqueID() {
+		return this.groupId;
 	}
 
 	public void setGroupId(int groupId) {
@@ -25,17 +29,17 @@ public class Group {
 	}
 
 	public ArrayList<Contact> getContact() {
-		return this.Contact;
+		return this.contacts;
 	}
 
 	public void setContactId(int contact_id) {
 		Contact c = new Contact();
 		c.setContactId(contact_id);
-		this.Contact.add(c);
+		this.contacts.add(c);
 	}
 
 	public void setContactId(ArrayList<Contact> Contact) {
-		this.Contact = Contact;
+		this.contacts = Contact;
 	}
 
 	public int getUserId() {
@@ -47,6 +51,18 @@ public class Group {
 	}
 
 	public void update(Group g) {
-		this.Contact.add(g.getContact().get(0));
+		this.contacts.add(g.getContact().get(0));
+	}
+
+	public void update(Contact c) {
+		this.contacts.add(c);
+	}
+
+	public ArrayList<Contact> getData(Contact contact) {
+		return this.contacts;
+	}
+
+	public String toString() {
+		return this.groupId + "";
 	}
 }

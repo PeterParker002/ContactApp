@@ -6,6 +6,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
 	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/index.css" />
 <link rel="stylesheet" href="css/signup.css" />
 <div class="wrapper">
@@ -42,7 +43,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
 			<div class="email">
 				<input type="email" name="email" class="custom-field"
 					placeholder="Enter your email"
-					pattern="[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
+					pattern="[a-zA-Z]+(\.)?([a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
 					title="Email should look like: example@gmail.com" required />
 			</div>
 			<div class="dob">

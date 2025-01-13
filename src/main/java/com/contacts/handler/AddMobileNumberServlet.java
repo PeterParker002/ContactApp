@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.contacts.cache.SessionCache;
+import com.contacts.dao.ContactDAO;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
+import com.contacts.model.Session;
 import com.contacts.model.User;
 
 @WebServlet("/add-mobile-number")
@@ -37,23 +40,42 @@ public class AddMobileNumberServlet extends HttpServlet {
 			mobileNumbers[i] = Long.parseLong(mobileNumberString[i]);
 		}
 		response.setContentType("text/html");
+		boolean isUser = false;
+		if (request.getParameter("role").equals("user")) {
+			isUser = true;
+		}
 		UserDAO userdao = new UserDAO();
+		ContactDAO contactdao = new ContactDAO();
 		HttpSession session = request.getSession();
-		int user_id = (int) session.getAttribute("user");
+		String sessionId = userdao.getSessionIdFromCookie(request, "session");
+		Session userSession = userdao.getUserSession(sessionId);
+		int user_id = userSession.getUserId();
 		try {
-			if (userdao.addMobileNumbers(user_id, mobileNumbers)) {
-				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-						"User Mobile Numbers Added Successfully.");
-				session.setAttribute("message", "Mobile Numbers Added Successfully");
+			if (isUser) {
+				if (userdao.addMobileNumbers(user_id, mobileNumbers)) {
+					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+							"User Mobile Numbers Added Successfully.");
+					SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
+					session.setAttribute("message", "Mobile Numbers Added Successfully");
+				} else {
+					session.setAttribute("message", "Mobile Numbers Addition Failed");
+				}
 			} else {
-				session.setAttribute("message", "Mobile Numbers Addition Failed");
+				int contact_id = Integer.parseInt(request.getParameter("contact-id"));
+				if (contactdao.addMobileNumbers(contact_id, mobileNumbers)) {
+					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+							"Contact Mobile Numbers Added Successfully.");
+					session.setAttribute("message", "Contact Numbers Added Successfully");
+				} else {
+					session.setAttribute("message", "Contact Numbers Addition Failed");
+				}
 			}
 		} catch (BatchUpdateException e) {
 			try {
 				throw e.getCause();
 			} catch (SQLIntegrityConstraintViolationException se) {
 				String mail = se.getMessage().split("'")[1];
-				String msgString = "Can't add duplicate mobile number '" + mail + "'";
+				String msgString = "Can't add duplicate mobile number '" + mail + "' to the Contact";
 				session.setAttribute("message", msgString);
 				logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						se.getMessage());

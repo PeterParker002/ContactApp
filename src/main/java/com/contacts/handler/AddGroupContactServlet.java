@@ -41,8 +41,8 @@ public class AddGroupContactServlet extends HttpServlet {
 						"Added Contact to the group '" + (new ContactDAO()).getGroupNameById(group_id) + "'");
 			} else {
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-						"Group Already Full");
-				session.setAttribute("message", "Group Already Full!");
+						"No Contacts Left to Add.");
+				session.setAttribute("message", "No Contacts Left to Add.");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

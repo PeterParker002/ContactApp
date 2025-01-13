@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,38 +12,52 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.contacts.cache.SessionCache;
+import com.contacts.dao.ContactDAO;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Session;
-import com.contacts.model.User;
 
-@WebServlet("/makePrimary/*")
-public class ChangePrimaryMailServlet extends HttpServlet {
+/**
+ * Servlet implementation class DeleteContactMailServlet
+ */
+@WebServlet("/deleteContactMail/*")
+public class DeleteContactMailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final MyCustomLogger logger = new MyCustomLogger(
 			"/home/karthik-tt0479/eclipse-workspace/FirstProject/src/main/resources/logs/application.log",
 			MyCustomLogger.LogLevel.INFO);
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public DeleteContactMailServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		try {
-			UserDAO userdao = new UserDAO();
-			String sessionId = userdao.getSessionIdFromCookie(request, "session");
-			Session userSession = userdao.getUserSession(sessionId);
-			int user_id = userSession.getUserId();
+			ContactDAO contactdao = new ContactDAO();
 			HttpSession session = request.getSession();
 			int mail_id = Integer.parseInt(request.getPathInfo().substring(1));
-			if (userdao.changePrimaryMail(user_id, mail_id)) {
+			if (contactdao.deleteMail(mail_id)) {
 				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-						"User Primary Mail Changed Successfully.");
-				SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
-				session.setAttribute("message", "Primary Mail Changed");
+						"Contact Mail Deleted Successfully.");
+				session.setAttribute("message", "Mail Deleted Successfully");
 			} else {
-				session.setAttribute("message", "Primary Mail Change Failed");
+				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+						"Contact Mail Deletion Failed.");
+				session.setAttribute("message", "Mail Deletion Failed");
 			}
-		} catch (ClassNotFoundException | SQLException | IllegalArgumentException | SecurityException e) {
+		} catch (IllegalArgumentException | ClassNotFoundException | SecurityException | SQLException e) {
 			logger.error("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(), e.getMessage());
-			e.printStackTrace();
 		}
 		response.sendRedirect("/home.jsp");
 	}
+
 }

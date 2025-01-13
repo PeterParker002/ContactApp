@@ -1,3 +1,4 @@
+<%@page import="com.contacts.cache.SessionCache"%>
 <%@page language="java"%>
 <%@page
 	import="java.util.ArrayList,com.contacts.dao.UserDAO,com.contacts.dao.ContactDAO,java.sql.ResultSet,com.contacts.model.User,com.contacts.model.Contact,com.contacts.model.UserMail,com.contacts.model.Mail,com.contacts.model.UserMobile,com.contacts.model.MobileNumber,com.contacts.model.Group,com.contacts.model.Session"%>
@@ -8,7 +9,8 @@ ContactDAO c = new ContactDAO();
 String sessionId = u.getSessionIdFromCookie(request, "session");
 Session userSession = u.getUserSession(sessionId);
 int user_id = userSession.getUserId();
-User user = u.getUserInfo(user_id);
+//User user = u.getUserInfo(user_id);
+User user = SessionCache.userCache.get(user_id);
 ArrayList<Group> groups = (ArrayList<Group>) u.getGroups(user_id);
 ArrayList<Contact> contacts = c.getContacts(user_id);
 %>
@@ -19,6 +21,9 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
 	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.js.iife.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/driver.js@1.0.1/dist/driver.css"/>
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="css/home.css">
 <title>Contacts - Home</title>
@@ -100,6 +105,7 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="48"></span>
 			<form id="edit-contact-form" action="edit-contact" method="post">
 				<div class="edit-profile-fields profile-fields">
+				<input type="hidden" name="contact-id" id="hidden-contact-id">
 					<input type="text" name="fname" class="fname" placeholder="Enter your first name"
 						value="" required /> <input
 						type="text" name="midname" class="mname"
@@ -167,7 +173,7 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 					<div class="email">
 						<input type="email" name="email" class="custom-field"
 		placeholder="Enter your email"
-		pattern="^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
+		pattern="^[a-zA-Z]+(\.)?([a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
 							title="Email should look like: example@gmail.com" required />
 					</div>
 					<div class="dob">
@@ -202,11 +208,11 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="48"></span>
 			<form action="add-email" method="post">
 				<div class="email-fields">
-				<input type="hidden" name="type" id="hidden-type" value="user">
+				<input type="hidden" name="role" id="hidden-type" value="user">
 				<input type="hidden" name="contact-id" id="hidden-contact-id">
 					<input type="email" name="email" class="email-field"
 	placeholder="Enter your email"
-	pattern="^[a-zA-Z][a-zA-Z0-9]*(\.[a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
+	pattern="^[a-zA-Z]+(\.)?([a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
 						title="Email should look like: example@gmail.com" required />
 				</div>
 				<div class="btn-group">
@@ -228,6 +234,8 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="48"></span>
 			<form action="add-mobile-number" method="post">
 				<div class="mobile-fields">
+				<input type="hidden" name="role" id="hidden-type" value="user">
+				<input type="hidden" name="contact-id" id="hidden-contact-id">
 					<input type="mobile" name="mobile" class="mobile-field"
 	placeholder="Enter your Mobile Number" pattern="[0-9]{10}"
 						title="Mobile Number should look like: 1234567890" required />
@@ -259,9 +267,9 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 						for (Contact cont : contacts) {
 						%>
 						<div class="contact-option">
-							<input type="checkbox" name="contact" id="contact<%=i%>"
+							<input type="checkbox" name="contact" id="all-contact<%=i%>"
 								value="<%=cont.getContactId()%>"><label
-								for="contact<%=i%>"><%=cont.getFirstName()%></label>
+								for="all-contact<%=i%>"><%=cont.getFirstName()%></label>
 						</div>
 						<%
 										i++;
@@ -416,11 +424,11 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 						<div class="card-details">
 							<div class="emails">
 								Email ID:
-								<%=cont.getEmail()%>
+								<%=cont.getEmail().get(0).getEmail()%>
 							</div>
 							<div class="mobile-numbers">
 								Mobile Number:
-								<%=cont.getMobileNumber()%>
+								<%=cont.getMobileNumber().get(0).getMobileNumber()%>
 							</div>
 						</div>
 					</div>
@@ -475,7 +483,7 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 								<input type="hidden" name="contact-id"
 									value="<%=contact.getContactId()%>"> <input
 									type="hidden" name="group-id" value="<%=g.getGroupId()%>">
-								<span class="delete-group-contact"
+								<span class="delete-group-contact" title="Delete Contact From Group"
 									onclick="document.forms['delete-group-contact-form-<%=j%>'].submit()"><img
 									src="assets/remove-user.svg" alt="delete-group-contact"
 									width="16"></span>
@@ -534,35 +542,12 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				<p>
 					Work Address: <span class="c-work"></span>
 				</p>
-				<div class="mail-container">
-					<div class="title">
-						Emails: <span class="add-contact-mail-icon"><img
-							src="assets/pencil-cursor-svgrepo-com.svg" width='16'
-							alt="add-email"></span>
-					</div>
-				<div class="mail">
-				<span class="c-mail"></span> 
-				<span class="right-side">
-				<a href="deleteMail/1">
-							<img src="assets/delete-icon.svg" alt="delete-mail" width="24">
-						</a>
-				</span>
-					</div>
+				<div class="mail-container contact-mails">
+				
 				</div>
-				<div class="mobile-container">
-				<div class="title">
-						Mobile Numbers: <span class="add-email-icon"><img
-							src="assets/pencil-cursor-svgrepo-com.svg" width='16'
-							alt="add-email"></span>
-					</div>
-					<div class="mobile">
-					<span class="c-mobile"></span>
-					<span class="right-side">
-				<a href="deleteMail/1">
-							<img src="assets/delete-icon.svg" alt="delete-mail" width="24">
-						</a>
-				</span>
-					</div>
+				<div class="mobile-container contact-mobiles">
+				
+					
 				</div>
 			</div>
 		</div>

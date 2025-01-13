@@ -2,7 +2,7 @@ package com.contacts.connection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
+//import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigurationLoader {
@@ -10,8 +10,7 @@ public class ConfigurationLoader {
 	private static final String filePath = "/home/karthik-tt0479/eclipse-workspace/FirstProject/src/main/resources/application.properties";
 
 	public static void loadConfig() throws IOException {
-		try (FileInputStream fs = new FileInputStream(
-				filePath)) {
+		try (FileInputStream fs = new FileInputStream(filePath)) {
 			if (fs != null) {
 				System.out.println("Configuration File Loaded Successfully!");
 				prop.load(fs);

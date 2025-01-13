@@ -59,7 +59,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  max-height: 50%;
+  max-height: 48.5%;
 }
 
 .header {
@@ -75,7 +75,8 @@
 
 .heading {
   font-size: 2.5rem;
-  font-weight: 400;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
 }
 
 .contact-list,
@@ -86,7 +87,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  gap: 1rem;
+  gap: .75rem;
   overflow-y: scroll;
   background: #ffffff58;
   border-radius: 20px;
@@ -94,7 +95,7 @@
 }
 
 .contact-list {
-	gap: 1.75rem;
+	gap: 1.25rem;
 }
 
 .contact-card,
@@ -199,6 +200,7 @@
   flex-direction: column;
   gap: 0.5rem;
   color: white;
+  overflow-y: scroll;
 }
 
 .top {
@@ -224,6 +226,7 @@
   padding: 0 1rem 0.5rem 1rem;
   padding-right: 1rem;
   max-height: 100px;
+  min-height: 50px;
   overflow-y: scroll;
   color: black;
   gap: 0.5rem;
@@ -250,6 +253,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.c-mail {
+	width: 250px;
+	overflow-x: hidden;
 }
 
 .mail .left-side {

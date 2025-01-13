@@ -7,6 +7,10 @@ public class Mail {
 	public int getId() {
 		return id;
 	}
+	
+	public int getUniqueID() {
+		return this.id;
+	}
 
 	public void setId(int id) {
 		this.id = id;

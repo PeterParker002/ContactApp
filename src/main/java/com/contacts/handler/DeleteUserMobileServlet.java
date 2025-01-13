@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
+import com.contacts.model.Session;
 
 @WebServlet("/deleteMobile/*")
 public class DeleteUserMobileServlet extends HttpServlet {
@@ -21,12 +23,16 @@ public class DeleteUserMobileServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
-			HttpSession session = request.getSession();
-			int mobile_id = Integer.parseInt(request.getPathInfo().substring(1));
 			UserDAO userdao = new UserDAO();
+			HttpSession session = request.getSession();
+			String sessionId = userdao.getSessionIdFromCookie(request, "session");
+			Session userSession = userdao.getUserSession(sessionId);
+			int user_id = userSession.getUserId();
+			int mobile_id = Integer.parseInt(request.getPathInfo().substring(1));
 			if (userdao.deleteMobileNumber(mobile_id)) {
 				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"Mobile Number Deleted Successfully.");
+				SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
 				session.setAttribute("message", "Mobile Number Deleted Successfully");
 			} else {
 				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

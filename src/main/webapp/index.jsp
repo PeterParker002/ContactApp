@@ -13,6 +13,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
 	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/index.css" />
 </head>
 <body>

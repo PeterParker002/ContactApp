@@ -11,6 +11,10 @@ public class MobileNumber {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
+	public int getUniqueID() {
+		return this.id;
+	}
 
 	public Long getMobileNumber() {
 		return mobileNumber;

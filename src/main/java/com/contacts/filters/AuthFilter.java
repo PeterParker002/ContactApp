@@ -1,9 +1,7 @@
 package com.contacts.filters;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -39,21 +37,23 @@ public class AuthFilter extends HttpFilter implements Filter {
 		}
 		HttpSession httpsession = httpReq.getSession();
 		String sessionId = "";
-//		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		boolean isAuthenticated = false;
 		Cookie[] cookies = httpReq.getCookies();
 		if (cookies != null) {
 			for (Cookie c : cookies) {
 				if (c.getName().equals("session")) {
 					sessionId = c.getValue();
-					if (SessionCache.activeSessions.containsKey(sessionId)) {
-						SessionCache.updateUserSession(sessionId, LocalDateTime.now());
+					if (SessionCache.activeSessionObjects.containsKey(sessionId)) {
+						SessionCache.activeSessionObjects.get(sessionId)
+								.setLastAccessedAt(LocalDateTime.now().toString());
+//						SessionCache.updateUserSession(sessionId, LocalDateTime.now());
 						isAuthenticated = true;
 					} else {
 						UserDAO userdao = new UserDAO();
 						Session session = userdao.getUserSession(sessionId);
 						if (session != null) {
-							SessionCache.updateUserSession(sessionId, LocalDateTime.now());
+							SessionCache.activeSessionObjects.put(sessionId, session);
+//							SessionCache.updateUserSession(sessionId, LocalDateTime.now());
 							isAuthenticated = true;
 						} else {
 							c.setValue("");
@@ -66,17 +66,16 @@ public class AuthFilter extends HttpFilter implements Filter {
 			}
 		}
 		System.out.println(httpReq.getRequestURI());
-//		if (session != null) {
-//			if (session.getAttribute("user") != null) {
-//				isAuthenticated = true;
-//			}
-//		}
 		if (httpReq.getRequestURI().endsWith("logout")) {
 			if (isAuthenticated) {
 				chain.doFilter(request, response);
 				return;
 			}
 			httpRes.sendRedirect("/home.jsp");
+			return;
+		}
+		if (httpReq.getRequestURI().endsWith("notify")) {
+			chain.doFilter(httpReq, httpRes);
 			return;
 		}
 		if (httpReq.getRequestURI().endsWith("/") || httpReq.getRequestURI().endsWith("index.jsp")

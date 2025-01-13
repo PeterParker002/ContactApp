@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
+import com.contacts.model.Session;
 import com.contacts.model.User;
 
 @WebServlet("/add-group")
@@ -33,7 +34,9 @@ public class AddGroupServlet extends HttpServlet {
 		}
 		UserDAO userdao = new UserDAO();
 		HttpSession session = request.getSession(false);
-		int user_id = (int) session.getAttribute("user");
+		String sessionId = userdao.getSessionIdFromCookie(request, "session");
+		Session userSession = userdao.getUserSession(sessionId);
+		int user_id = userSession.getUserId();
 		try {
 			if (userdao.addGroup(user_id, group_name, contact_ids)) {
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

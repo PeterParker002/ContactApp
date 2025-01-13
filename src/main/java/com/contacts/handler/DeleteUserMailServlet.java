@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
+import com.contacts.model.Session;
 
 @WebServlet("/deleteMail/*")
 public class DeleteUserMailServlet extends HttpServlet {
@@ -22,9 +24,12 @@ public class DeleteUserMailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		try {
-			HttpSession session = request.getSession();
-			int mail_id = Integer.parseInt(request.getPathInfo().substring(1));
 			UserDAO userdao = new UserDAO();
+			HttpSession session = request.getSession();
+			String sessionId = userdao.getSessionIdFromCookie(request, "session");
+			Session userSession = userdao.getUserSession(sessionId);
+			int user_id = userSession.getUserId();
+			int mail_id = Integer.parseInt(request.getPathInfo().substring(1));
 			if (userdao.checkIsPrimaryMail(mail_id)) {
 				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"Can't Delete Primary Mail");
@@ -33,6 +38,7 @@ public class DeleteUserMailServlet extends HttpServlet {
 				if (userdao.deleteMail(mail_id)) {
 					logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 							"Mail Deleted Successfully.");
+					SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
 					session.setAttribute("message", "Mail Deleted Successfully");
 				} else {
 					logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

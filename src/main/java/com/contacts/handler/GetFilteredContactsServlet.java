@@ -13,8 +13,10 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 
 import com.contacts.dao.ContactDAO;
+import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Contact;
+import com.contacts.model.Session;
 import com.contacts.model.User;
 
 @WebServlet("/getContactsByGroup/*")
@@ -33,7 +35,10 @@ public class GetFilteredContactsServlet extends HttpServlet {
 			int group_id = Integer.parseInt(request.getPathInfo().substring(1));
 			ContactDAO c = new ContactDAO();
 			HttpSession session = request.getSession(false);
-			int user_id = (int) session.getAttribute("user");
+			UserDAO userdao = new UserDAO();
+			String sessionId = userdao.getSessionIdFromCookie(request, "session");
+			Session userSession = userdao.getUserSession(sessionId);
+			int user_id = userSession.getUserId();
 			ArrayList<Contact> rs = c.getContactsByGroupId(user_id, group_id);
 			String groupName = c.getGroupNameById(group_id);
 			if (rs.size() > 0) {
@@ -61,7 +66,7 @@ public class GetFilteredContactsServlet extends HttpServlet {
 						"No Entry Found.");
 				response.getWriter().println(output.toString());
 			}
-		} catch (NumberFormatException | SQLException | ClassNotFoundException n) {
+		} catch (NumberFormatException n) {
 			output.put("status", -1);
 			output.put("name", "");
 			output.put("contacts", "[]");

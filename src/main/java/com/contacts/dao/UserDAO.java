@@ -38,6 +38,7 @@ import com.contacts.utils.Database;
 import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.GroupDetails;
 import com.contacts.utils.Database.GroupInfo;
+import com.contacts.utils.Database.Servers;
 import com.contacts.utils.Database.TableInfo;
 import com.contacts.utils.Database.UserEmail;
 import com.contacts.utils.Database.UserMobileNumber;
@@ -70,17 +71,6 @@ public class UserDAO {
 		}
 		return con;
 	}
-
-//	private Connection getConnection() throws ClassNotFoundException, SQLException {
-//		Connection con = null;
-//		try {
-////			DataSource dataSource = HikariCPConnection.getDataSource();
-//			con = HikariCPConnection.getConnection();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return con;
-//	}
 
 	// Insert Statement
 	/**
@@ -115,7 +105,7 @@ public class UserDAO {
 			mail_qb.insertValuesToColumns(new Column(UserEmail.USERID, "", "", mail_qb.table), result);
 			mail_qb.insertValuesToColumns(new Column(UserEmail.EMAIL, "", "", mail_qb.table),
 					user.getEmail().get(0).getEmail());
-			mail_qb.insertValuesToColumns(new Column(UserEmail.ISPRIMARY, "", "", mail_qb.table), true);
+			mail_qb.insertValuesToColumns(new Column(UserEmail.ISPRIMARY, "", "", mail_qb.table), 1);
 			if (qx.executeAndUpdate(mail_qb.build()) > 0) {
 				QueryBuilder mobile_qb = new QueryBuilder();
 				mobile_qb.insertTable(TableInfo.USERMOBILENUMBER);
@@ -149,36 +139,40 @@ public class UserDAO {
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
-		qb.selectTable(TableInfo.USER, "user");
-		Table emailTable = new Table(TableInfo.USEREMAIL, "mails");
+		qb.selectTable(TableInfo.USER);
+		Table emailTable = new Table(TableInfo.USEREMAIL);
 		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
 				new Column(UserEmail.USERID, "", "", emailTable));
 		qb.setCondition(new Column(UserEmail.EMAIL, "", "", emailTable), Operators.EQUAL, email);
-		HashMap<String, Object> users = qx.executeJoinQuery(qb.build());
-		User u = (User) users.get(TableInfo.USER.toString());
-		if (u != null) {
-			u.setEmail(this.getUserMail(u.getUserId()));
-			u.setMobileNumber(this.getUserMobileNumber(u.getUserId()));
-			if (checkPassword(password, u.getPassword(), u.getIsHashed())) {
-				if (currentHashing != u.getIsHashed()) {
-					String newHashedPassword = hashPassword(password, currentHashing);
-					QueryBuilder passwordChangeQb = new QueryBuilder();
-					passwordChangeQb.updateTable(TableInfo.USER);
-					passwordChangeQb.updateColumn(new Column(Users.PASSWORD, "", "", passwordChangeQb.table),
-							newHashedPassword);
-					passwordChangeQb.updateColumn(new Column(Users.ISHASHED, "", "", passwordChangeQb.table),
-							currentHashing);
-					passwordChangeQb.setCondition(new Column(Users.USERID, "", "", passwordChangeQb.table),
-							Operators.EQUAL, u.getUserId());
-					qx.executeAndUpdate(passwordChangeQb.build());
+//		HashMap<String, Object> users = qx.executeJoinQuery(qb.build());
+		ArrayList<User> users = (ArrayList<User>) qx.executeJoinQuery1(qb.build());
+		System.out.println(users);
+		if (users != null) {
+			if (users.size() > 0) {
+				User u = (User) users.get(0);
+//			u.setEmail(this.getUserMail(u.getUserId()));
+//			u.setMobileNumber(this.getUserMobileNumber(u.getUserId()));
+				if (checkPassword(password, u.getPassword(), u.getIsHashed())) {
+					if (currentHashing != u.getIsHashed()) {
+						String newHashedPassword = hashPassword(password, currentHashing);
+						QueryBuilder passwordChangeQb = new QueryBuilder();
+						passwordChangeQb.updateTable(TableInfo.USER);
+						passwordChangeQb.updateColumn(new Column(Users.PASSWORD, "", "", passwordChangeQb.table),
+								newHashedPassword);
+						passwordChangeQb.updateColumn(new Column(Users.ISHASHED, "", "", passwordChangeQb.table),
+								currentHashing);
+						passwordChangeQb.setCondition(new Column(Users.USERID, "", "", passwordChangeQb.table),
+								Operators.EQUAL, u.getUserId());
+						qx.executeAndUpdate(passwordChangeQb.build());
+					}
+					u = getUserInfo(u.getUserId());
+					return u;
 				}
-				return u;
 			} else {
 				return null;
 			}
-		} else {
-			return null;
 		}
+		return null;
 	}
 
 	/**
@@ -364,28 +358,40 @@ public class UserDAO {
 	 * @throws IllegalArgumentException
 	 * @throws InstantiationException
 	 */
-	public User getUserInfo(int user_id)
-			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
-			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
+	public User getUserInfo(int user_id) {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USER);
-		qb.selectColumn(new Column(Users.USERID, "", "", qb.table));
-		qb.selectColumn(new Column(Users.USERNAME, "", "", qb.table));
-		qb.selectColumn(new Column(Users.FIRSTNAME, "", "", qb.table));
-		qb.selectColumn(new Column(Users.MIDDLENAME, "", "", qb.table));
-		qb.selectColumn(new Column(Users.LASTNAME, "", "", qb.table));
-		qb.selectColumn(new Column(Users.DATEOFBIRTH, "", "", qb.table));
-		qb.selectColumn(new Column(Users.GENDER, "", "", qb.table));
-		qb.selectColumn(new Column(Users.NOTES, "", "", qb.table));
-		qb.selectColumn(new Column(Users.HOMEADDRESS, "", "", qb.table));
-		qb.selectColumn(new Column(Users.WORKADDRESS, "", "", qb.table));
-		qb.selectColumn(new Column(Users.ISHASHED, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.USERID, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.USERNAME, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.FIRSTNAME, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.MIDDLENAME, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.LASTNAME, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.DATEOFBIRTH, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.GENDER, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.NOTES, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.HOMEADDRESS, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.WORKADDRESS, "", "", qb.table));
+//		qb.selectColumn(new Column(Users.ISHASHED, "", "", qb.table));
+		Table emailTable = new Table(TableInfo.USEREMAIL);
+		Table mobileTable = new Table(TableInfo.USERMOBILENUMBER);
+		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+				new Column(UserEmail.USERID, "", "", emailTable));
+		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+				new Column(UserMobileNumber.USERID, "", "", mobileTable));
 		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		QueryExecutor qx = new QueryExecutor();
-		ArrayList<User> r = (ArrayList<User>) qx.executeQuery(qb.build());
-		User user = r.get(0);
-		user.setEmail(getUserMail(user_id));
-		user.setMobileNumber(getUserMobileNumber(user_id));
+		ArrayList<User> r;
+		User user = null;
+		try {
+			r = (ArrayList<User>) qx.executeJoinQuery1(qb.build());
+			user = r.get(0);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		user.setEmail(getUserMail(user_id));
+//		user.setMobileNumber(getUserMobileNumber(user_id));
 		return user;
 	}
 
@@ -484,25 +490,65 @@ public class UserDAO {
 	}
 
 	// Select Statement with Join
-	public ArrayList<Contact> getContactsByGroup(int group_id) throws SQLException, ClassNotFoundException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(
-				"select g.contact_id, c.first_name, c.middle_name, c.last_name from Group_info g join Contacts c on g.contact_id=c.contact_id where group_id=?;");
-		ps.setInt(1, group_id);
-		ResultSet rs = ps.executeQuery();
-		ArrayList<Contact> contacts = new ArrayList<>();
-		while (rs.next()) {
-			Contact c = new Contact();
-			c.setContactId(rs.getInt(1));
-			c.setFirstName(rs.getString(2));
-			c.setMiddleName(rs.getString(3));
-			c.setLastName(rs.getString(4));
-			contacts.add(c);
-		}
+//	public ArrayList<Contact> getContactsByGroup(int group_id)
+//			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException,
+//			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+////		Connection con = getConnection();
+////		PreparedStatement ps = con.prepareStatement(
+////				"select g.contact_id, c.first_name, c.middle_name, c.last_name from Group_info g join Contact c on g.contact_id=c.contact_id where group_id=?;");
+////		ps.setInt(1, group_id);
+////		ResultSet rs = ps.executeQuery();
+////		ArrayList<Contact> contacts = new ArrayList<>();
+////		while (rs.next()) {
+////			Contact c = new Contact();
+////			c.setContactId(rs.getInt(1));
+////			c.setFirstName(rs.getString(2));
+////			c.setMiddleName(rs.getString(3));
+////			c.setLastName(rs.getString(4));
+////			contacts.add(c);
+////		}
+//		QueryBuilder qb = new QueryBuilder();
+//		QueryExecutor qx = new QueryExecutor();
+//		ArrayList<Contact> contacts = new ArrayList<Contact>();
+//		qb.selectTable(TableInfo.GROUPINFO);
+//		Table contactTable = new Table(TableInfo.CONTACTS);
+//		qb.joinTables(JoinTypes.inner, new Column(GroupInfo.CONTACTID, "", "", qb.table),
+//				new Column(Contacts.CONTACTID, "", "", contactTable));
+//		qb.setCondition(new Column(GroupInfo.GROUPID, "", "", qb.table), Operators.EQUAL, group_id);
+//		ArrayList<Group> groups = (ArrayList<Group>) qx.executeJoinQuery1(qb.build());
+//		if (groups.size() > 0) {
+//			contacts = groups.get(0).getContact();
+//		}
+//		return contacts;
+//	}
+
+	public ArrayList<Contact> getContactsByGroup(int group_id)
+			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.selectTable(TableInfo.CONTACTS);
+		QueryBuilder inner_qb = new QueryBuilder();
+		inner_qb.selectTable(TableInfo.GROUPINFO);
+		inner_qb.selectColumn(new Column(GroupInfo.CONTACTID, "", "", inner_qb.table));
+		inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, group_id);
+		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.IN, inner_qb.build());
+		ArrayList<Contact> contacts = (ArrayList<Contact>) qx.executeQuery(qb.build());
 		return contacts;
 	}
 
 	// Insert Statement
+	/**
+	 * Add Group Method
+	 * 
+	 * @param user_id
+	 * @param name
+	 * @param contact_ids
+	 * @return boolean value representing that whether the operation is success or
+	 *         not.
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public boolean addGroup(int user_id, String name, ArrayList<Integer> contact_ids)
 			throws SQLException, ClassNotFoundException {
 		QueryBuilder qb = new QueryBuilder();
@@ -684,6 +730,30 @@ public class UserDAO {
 			}
 		}
 		return "";
+	}
+
+	public int addEntryToAvailableServers(String ip, String port) throws ClassNotFoundException, SQLException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.insertTable(TableInfo.SERVERS);
+		qb.insertValuesToColumns(new Column(Servers.IP, "", "", qb.table), ip);
+		qb.insertValuesToColumns(new Column(Servers.PORT, "", "", qb.table), port);
+		if (qx.executeAndUpdate(qb.build()) > 0) {
+			return 1;
+		}
+		return -1;
+	}
+
+	public int deleteEntryFromAvailableServers(String ip, String port) throws ClassNotFoundException, SQLException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.deleteTable(TableInfo.SERVERS);
+		qb.setCondition(new Column(Servers.IP, "", "", qb.table), Operators.EQUAL, ip);
+		qb.setCondition(new Column(Servers.PORT, "", "", qb.table), Operators.EQUAL, port);
+		if (qx.executeAndUpdate(qb.build()) > 0) {
+			return 1;
+		}
+		return -1;
 	}
 
 //	public boolean migratePasswords() throws SQLException, ClassNotFoundException {

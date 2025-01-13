@@ -1,5 +1,7 @@
 package com.contacts.model;
 
+import java.util.ArrayList;
+
 public class Contact {
 	private int contact_id;
 	private int user_id;
@@ -11,23 +13,35 @@ public class Contact {
 	private String notes;
 	private String homeAddress;
 	private String workAddress;
-	private String Email;
-	private Long mobileNumber;
+	private ArrayList<ContactMail> Email = new ArrayList<ContactMail>();
+	private ArrayList<ContactMobile> mobileNumber = new ArrayList<ContactMobile>();
 
-	public String getEmail() {
-		return Email;
+	public ArrayList<ContactMail> getEmail() {
+		return this.Email;
 	}
 
 	public void setEmail(String email) {
-		Email = email;
+		ContactMail mail = new ContactMail();
+		mail.setEmail(email);
+		this.Email.add(mail);
 	}
 
-	public Long getMobileNumber() {
-		return mobileNumber;
+	public void setEmail(ContactMail mail) {
+		this.Email.add(mail);
+	}
+
+	public ArrayList<ContactMobile> getMobileNumber() {
+		return this.mobileNumber;
 	}
 
 	public void setMobileNumber(Long mobileNumber) {
-		this.mobileNumber = mobileNumber;
+		ContactMobile mobile = new ContactMobile();
+		mobile.setMobileNumber(mobileNumber);
+		this.mobileNumber.add(mobile);
+	}
+
+	public void setMobileNumber(ContactMobile mobile) {
+		this.mobileNumber.add(mobile);
 	}
 
 	public String getFirstName() {
@@ -112,5 +126,25 @@ public class Contact {
 
 	public String toString() {
 		return this.contact_id + "";
+	}
+
+	public void update(ContactMail mail) {
+		this.Email.add(mail);
+	}
+
+	public void update(ContactMobile mobile) {
+		this.mobileNumber.add(mobile);
+	}
+
+	public int getUniqueID() {
+		return this.contact_id;
+	}
+
+	public ArrayList<ContactMail> getData(ContactMail mail) {
+		return this.Email;
+	}
+	
+	public ArrayList<ContactMobile> getData(ContactMobile mobile) {
+		return this.mobileNumber;
 	}
 }

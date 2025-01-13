@@ -138,4 +138,24 @@ public class User {
 		this.isHashed = isHashed;
 	}
 
+	public void update(UserMail mail) {
+		this.email.add(mail);
+	}
+
+	public void update(UserMobile mobile) {
+		this.mobileNumber.add(mobile);
+	}
+
+	public int getUniqueID() {
+		return this.userId;
+	}
+
+	public ArrayList<UserMail> getData(UserMail mail) {
+		return this.email;
+	}
+
+	public ArrayList<UserMobile> getData(UserMobile mobile) {
+		return this.mobileNumber;
+	}
+
 }

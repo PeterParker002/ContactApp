@@ -3,9 +3,9 @@ package com.contacts.utils;
 public class Database {
 
 	public enum TableInfo implements DatabaseImpl {
-		USER("User"), USEREMAIL("User_mail_ids"), USERMOBILENUMBER("user_mobile_numbers"), CONTACTS("Contacts"),
+		USER("User"), USEREMAIL("User_mail_ids"), USERMOBILENUMBER("user_mobile_numbers"), CONTACTS("Contact"),
 		CONTACTMAIL("contacts_mail_ids"), CONTACTMOBILENUMBER("contacts_mobile_numbers"), GROUPINFO("Group_info"),
-		GROUPDETAILS("Group_details"), SAMPLE("Sample"), SESSION("Session");
+		GROUPDETAILS("Group_details"), SAMPLE("Sample"), SESSION("Session"), SERVERS("available_servers");
 
 		private String table;
 
@@ -147,13 +147,27 @@ public class Database {
 			return this.col;
 		}
 	}
-	
+
 	public enum Session implements DatabaseImpl {
 		SESSIONID("session_id"), USERID("user_id"), CREATEDAT("created_at"), LASTACCESSEDAT("last_accessed_at");
 
 		private String col;
 
 		private Session(String col) {
+			this.col = col;
+		}
+
+		public String toString() {
+			return this.col;
+		}
+	}
+
+	public enum Servers implements DatabaseImpl {
+		IP("server_ip"), PORT("server_port");
+
+		private String col;
+
+		private Servers(String col) {
 			this.col = col;
 		}
 

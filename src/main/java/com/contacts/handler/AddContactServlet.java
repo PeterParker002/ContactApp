@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.ContactDAO;
+import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Contact;
+import com.contacts.model.Session;
 import com.contacts.model.User;
 
 @WebServlet("/add-contact")
@@ -53,7 +55,10 @@ public class AddContactServlet extends HttpServlet {
 		}
 		ContactDAO contactdao = new ContactDAO();
 		HttpSession session = request.getSession();
-		int user_id = (int) session.getAttribute("user");
+		UserDAO userdao = new UserDAO();
+		String sessionId = userdao.getSessionIdFromCookie(request, "session");
+		Session userSession = userdao.getUserSession(sessionId);
+		int user_id = userSession.getUserId();
 		try {
 			if (contactdao.addContact(user_id, contact)) {
 				out.println("<div class='message'>Contact Added Successfully.</div>");

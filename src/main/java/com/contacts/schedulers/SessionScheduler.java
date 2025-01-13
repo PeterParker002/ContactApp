@@ -1,5 +1,9 @@
 package com.contacts.schedulers;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +19,7 @@ import javax.servlet.annotation.WebListener;
 import javax.servlet.http.Cookie;
 
 import com.contacts.cache.SessionCache;
+import com.contacts.connection.ConfigurationLoader;
 import com.contacts.dao.UserDAO;
 import com.contacts.model.Session;
 
@@ -26,6 +31,9 @@ import com.contacts.model.Session;
 public class SessionScheduler implements ServletContextListener {
 
 	ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+	public int count = 0;
+	public String server_ip, server_port;
+	public static String domain = "";
 
 	/**
 	 * Default constructor.
@@ -38,6 +46,13 @@ public class SessionScheduler implements ServletContextListener {
 	 * @see ServletContextListener#contextDestroyed(ServletContextEvent)
 	 */
 	public void contextDestroyed(ServletContextEvent sce) {
+		UserDAO u = new UserDAO();
+		try {
+			u.deleteEntryFromAvailableServers(server_ip, server_port);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (scheduler != null && !scheduler.isShutdown()) {
 			scheduler.shutdown();
 			System.out.println("Database Scheduler Shut Down.");
@@ -49,22 +64,37 @@ public class SessionScheduler implements ServletContextListener {
 	 */
 	public void contextInitialized(ServletContextEvent sce) {
 		UserDAO u = new UserDAO();
+		try {
+			server_ip = InetAddress.getLocalHost().getHostAddress();
+			ServletContext ctx = sce.getServletContext();
+			server_port = ctx.getInitParameter("server.port");
+			System.out.println("Server IP Address: " + server_ip);
+			System.out.println("Server Port: " + server_port);
+			domain = "http://" + server_ip + ":" + server_port;
+			u.addEntryToAvailableServers(server_ip, server_port);
+		} catch (UnknownHostException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
 		Runnable fetchSession = () -> {
-			Iterator<String> iterator = SessionCache.activeSessions.keySet().iterator();
+			Iterator<String> iterator = SessionCache.activeSessionObjects.keySet().iterator();
 			while (iterator.hasNext()) {
 				String sessionId = iterator.next();
-				LocalDateTime lastAccessed = SessionCache.activeSessions.get(sessionId);
+				Session session = SessionCache.activeSessionObjects.get(sessionId);
+				LocalDateTime lastAccessed = LocalDateTime.parse(session.getLastAccessedAt());
 				if (Duration.between(lastAccessed, LocalDateTime.now()).toMinutes() > SessionCache.EXPIRATION_TIME) {
 					u.clearSession(sessionId);
 					System.out.println("Cleared Session from DB");
-					SessionCache.activeSessions.remove(sessionId);
+					SessionCache.activeSessionObjects.remove(sessionId);
 					System.out.println("Cleared Session from Cache");
+					SessionCache.checkAndUpdateUserCache(session);
 				} else {
 					u.updateSession(sessionId, lastAccessed);
 				}
 			}
-			if (SessionCache.activeSessions.size() > 0)
-				System.out.println("Session Cache: " + SessionCache.activeSessions);
+			if (SessionCache.activeSessionObjects.size() > 0) {
+				System.out.println("Session Cache: " + SessionCache.activeSessionObjects);
+			}
+			System.out.println("User Cache: " + SessionCache.userCache);
 		};
 
 		scheduler.scheduleAtFixedRate(fetchSession, 1, 3, TimeUnit.SECONDS);

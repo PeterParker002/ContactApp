@@ -5,21 +5,35 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 //import java.util.Scanner;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.json.simple.JSONObject;
+
 import java.util.Scanner;
+import java.util.Set;
 
 import com.contacts.model.User;
 import com.contacts.model.UserMail;
+import com.contacts.model.UserMobile;
 import com.contacts.connection.ConnectionPool;
+import com.contacts.dao.ContactDAO;
 import com.contacts.dao.UserDAO;
 import com.contacts.model.Contact;
 import com.contacts.model.ContactMail;
+import com.contacts.model.ContactMobile;
 import com.contacts.model.Group;
 //import com.contacts.dao.UserDAO;
 import com.contacts.model.Mail;
@@ -62,6 +76,40 @@ public class Test {
 	public static void main(String[] args)
 			throws IllegalAccessException, InvocationTargetException, InstantiationException, IllegalArgumentException,
 			NoSuchMethodException, SecurityException, ClassNotFoundException, SQLException {
+
+		String url = "jdbc:mysql://localhost:3306/ContactsApp";
+		String user = "root";
+		String password = "root";
+
+		try (Connection connection = DriverManager.getConnection(url, user, password)) {
+			// DatabaseMetaData
+			DatabaseMetaData dbMetaData = connection.getMetaData();
+			System.out.println("Database Product Name: " + dbMetaData.getDatabaseProductName());
+			System.out.println("Database Version: " + dbMetaData.getDatabaseProductVersion());
+			System.out.println("Database Schemas: " + dbMetaData.getSchemas());
+			
+			// Get tables
+			ResultSet tables = dbMetaData.getTables(null, null, "%", new String[] { "TABLE" });
+			System.out.println("\nTables:");
+			while (tables.next()) {
+				System.out.println("  - " + tables.getString("TABLE_NAME"));
+			}
+
+			// ResultSetMetaData
+			Statement statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT user_id, username, gender FROM User");
+			ResultSetMetaData rsMetaData = resultSet.getMetaData();
+
+			System.out.println("\nResultSet Columns:");
+			int columnCount = rsMetaData.getColumnCount();
+			for (int i = 1; i <= columnCount; i++) {
+				System.out.println("  - Column Name: " + rsMetaData.getColumnName(i));
+				System.out.println("    Type: " + rsMetaData.getColumnTypeName(i));
+				System.out.println("    Size: " + rsMetaData.getColumnDisplaySize(i));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 //		String password = "";
 //		String email = "";
 //		QueryBuilder qb = new QueryBuilder();
@@ -106,20 +154,114 @@ public class Test {
 //			e.printStackTrace();
 //		}
 
-		try (Connection con = ConnectionPool.getDataSource().getConnection();
-				PreparedStatement ps = con.prepareStatement("select * from Contacts c join contacts_mail_ids cm on c.contact_id=cm.contact_id where c.contact_id=2;");
-				ResultSet rs = ps.executeQuery()) {
-			ResultSetMetaData metadata = rs.getMetaData();
-			
-			for (int i=1; i<=metadata.getColumnCount(); i++) {
-				System.out.println(metadata.getTableName(i) + "." + metadata.getColumnName(i));
-			}
-//			while (rs.next()) {
-//				System.out.println(rs.getString("username"));
-//			}
-		} catch (Exception e) {
+//		QueryBuilder qb = new QueryBuilder();
+//		QueryExecutor qx = new QueryExecutor();
 
-		}
+//		qb.selectTable(TableInfo.CONTACTS);
+//		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+//				new Column(ContactEmail.CONTACTID, "", "", new Table(TableInfo.CONTACTMAIL)));
+//		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+//				new Column(ContactMobileNumber.CONTACTID, "", "", new Table(TableInfo.CONTACTMOBILENUMBER)));
+//		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.EQUAL, 2);
+//		qb.selectTable(TableInfo.USER);
+//		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+//				new Column(UserEmail.USERID, "", "", new Table(TableInfo.USEREMAIL)));
+//		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+//				new Column(UserMobileNumber.USERID, "", "", new Table(TableInfo.USERMOBILENUMBER)));
+//		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.LESSTHANEQUAL, 9);
+//		ArrayList<Object> r = (ArrayList<Object>) qx.executeJoinQuery1(qb.build());
+//		System.out.println(r);
+//		for (Object g : r) {
+////			System.out.println(g);
+//			Method[] ms = g.getClass().getDeclaredMethods();
+//			for (Method m : ms) {
+//				if (m.getName().startsWith("get") & m.getParameterCount() == 0) {
+//					System.out.println(m.getName() + " -> " + m.invoke(g));
+//				}
+//			}
+////			System.out.println();
+//		}
+//
+//		try (Connection con = ConnectionPool.getDataSource().getConnection();
+//				PreparedStatement ps = con.prepareStatement(
+//						"select * from Contact c join contacts_mail_ids cm on c.contact_id=cm.contact_id join contacts_mobile_numbers cmo on c.contact_id=cmo.contact_id;");
+//				ResultSet rs = ps.executeQuery()) {
+//
+//			ResultSetMetaData metadata = rs.getMetaData();
+//			Map<String, Map<Integer, List<Object>>> result = new HashMap<>();
+//			Set<Integer> processedBasePojoIds = new HashSet<>(); // To track processed POJO IDs for the base table
+//
+//			QueryExecutor qx = new QueryExecutor();
+//			Map<String, int[]> columnIndex = qx.getTableIndexes(metadata);
+//
+//			// Define the base table name
+//			String baseTable = "Contact";
+//
+//			while (rs.next()) {
+//				for (String table : columnIndex.keySet()) {
+//					Class<?> pojoClass = qx.getModelClassForTable(table);
+//					Object pojo = pojoClass.getDeclaredConstructor().newInstance();
+//					pojo = qx.populateDataOverPojoWithBoundaries(rs, columnIndex.get(table), pojo);
+//
+//					if (table.equals(baseTable)) {
+//						// Prevent duplicate POJOs for the base table
+//						if (processedBasePojoIds.contains(qx.currentPojoId)) {
+//							continue;
+//						}
+//						processedBasePojoIds.add(qx.currentPojoId);
+//					}
+//
+//					// Grouping POJOs by table keys
+//					if (!result.containsKey(table)) {
+//						List<Object> pojoList = new ArrayList<>();
+//						pojoList.add(pojo);
+//						Map<Integer, List<Object>> resultPojo = new HashMap<>();
+//						resultPojo.put(qx.currentPojoId, pojoList);
+//						result.put(table, resultPojo);
+//					} else {
+//						if (result.get(table).containsKey(qx.currentPojoId)) {
+//							ArrayList<Object> r = (ArrayList<Object>) result.get(table).get(qx.currentPojoId);
+//							r.add(pojo);
+//						} else {
+//							List<Object> pojoList = new ArrayList<>();
+//							pojoList.add(pojo);
+//							result.get(table).put(qx.currentPojoId, pojoList);
+//						}
+//					}
+//				}
+//			}
+//
+//			System.out.println("Final Result: " + result);
+//			ArrayList<Object> finalPojo = new ArrayList<Object>();
+//			for (Entry<Integer, List<Object>> entry : result.get(baseTable).entrySet()) {
+//				for (Entry<String, Map<Integer, List<Object>>> otherPojos : result.entrySet()) {
+//					if (otherPojos.getKey().equals(baseTable)) {
+//						continue;
+//					} else {
+//						for (Object obj : otherPojos.getValue().get(entry.getKey())) {
+//							System.out.println(entry.getKey() + " -> " + obj.getClass());
+//							Method m = entry.getValue().get(0).getClass().getMethod("update", obj.getClass());
+//							m.invoke(entry.getValue().get(0), obj);
+//						}
+//					}
+//				}
+//				finalPojo.add(entry.getValue().get(0));
+//
+//			}
+//			System.out.println(finalPojo);
+//			for (Object g : finalPojo) {
+////				System.out.println(g);
+//				Method[] ms = g.getClass().getDeclaredMethods();
+//				for (Method m : ms) {
+//					if (m.getName().startsWith("get")) {
+//						System.out.println(m.getName() + " -> " + m.invoke(g));
+//					}
+//				}
+////				System.out.println();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 //		QueryBuilder qb = new QueryBuilder();
 //		QueryExecutor qx = new QueryExecutor();
 //
@@ -143,17 +285,19 @@ public class Test {
 //		QueryBuilder qb = new QueryBuilder();
 //		QueryExecutor qx = new QueryExecutor();
 //		qb.selectTable(TableInfo.CONTACTS);
-//		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, 9);
+//		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, 1);
 //		QueryBuilder inner_qb = new QueryBuilder();
 //		inner_qb.selectTable(TableInfo.GROUPINFO);
 //		inner_qb.selectColumn(new Column(GroupInfo.CONTACTID, "", "", inner_qb.table));
-//		inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, 45);
+//		inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, 33);
 //		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.NOTIN, inner_qb.build());
-//		ArrayList<Contact> c = (ArrayList<Contact>) qx.executeQuery(qb.build());
-//		System.out.println(c);
-//		HashMap<String, Object> groupsData = qx.executeJoinQuery(qb.build());
+////		ArrayList<Contact> c = (ArrayList<Contact>) qx.executeQuery(qb.build());
+////		System.out.println(c);
+//		ArrayList<Contact> groupsData = (ArrayList<Contact>) qx.executeQuery(qb.build());
 //		System.out.println(groupsData);
-//		ArrayList<Group> groups = (ArrayList<Group>) groupsData.get(groupInfoTable.name.toString());
+//		ContactDAO c = new ContactDAO();
+//		System.out.println(c.getContactsByGroupId(1, 33));
+//		ArrayList<Group> groups = (ArrayList<Group>) groupsData.get();
 //		groupsData.forEach((k, v) -> {
 //			System.out.println(k + " -> " + v);
 //		});
@@ -168,6 +312,18 @@ public class Test {
 //				}
 //			}
 ////			System.out.println();
+//		}
+//		UserDAO u = new UserDAO();
+//		User user = u.LoginUser("abc@gmail.com", "121212");
+////		for (User g : users) {
+////			System.out.println(g);
+//		Method[] ms = user.getClass().getDeclaredMethods();
+//		for (Method m : ms) {
+//			if (m.getName().startsWith("get") & m.getParameterCount() == 0) {
+//				System.out.println(m.getName() + " -> " + m.invoke(user));
+//			}
+//		}
+//			System.out.println();
 //		}
 //		
 //		qb.selectTable(TableInfo.USEREMAIL);
@@ -233,6 +389,27 @@ public class Test {
 
 //		QueryBuilder qb = new QueryBuilder();
 //		QueryExecutor qx = new QueryExecutor();
+//
+////		select * from Contact where contact_id in (select contact_id from Group_info where group_id=39);
+//		qb.selectTable(TableInfo.GROUPINFO);
+//		Table contactTable = new Table(TableInfo.CONTACTS);
+//		qb.joinTables(JoinTypes.inner, new Column(GroupInfo.CONTACTID, "", "", qb.table),
+//				new Column(Contacts.CONTACTID, "", "", contactTable));
+//		qb.setCondition(new Column(GroupInfo.GROUPID, "", "", qb.table), Operators.EQUAL, 33);
+//		ArrayList<Group> groups = (ArrayList<Group>) qx.executeJoinQuery1(qb.build());
+//		if (groups.size() > 0) {
+//			ArrayList<Contact> contacts = groups.get(0).getContact();
+//			for (Contact u : contacts) {
+//				Method[] ms = u.getClass().getDeclaredMethods();
+//				System.out.println("---------------- New Contact -------------------");
+//				for (Method m : ms) {
+//					if (m.getName().startsWith("get") & m.getParameterCount() == 0) {
+//						System.out.println(m.getName() + " -> " + m.invoke(u));
+//					}
+//				}
+//				System.out.println("------------------------------------------------");
+//			}
+//		}
 
 //		qb.selectTable(TableInfo.USER);
 ////		qb.selectColumn(new Column(UserEmail.EMAIL, "", "", new Table(TableInfo.USEREMAIL)));

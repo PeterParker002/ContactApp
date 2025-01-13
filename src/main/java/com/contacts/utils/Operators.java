@@ -1,7 +1,8 @@
 package com.contacts.utils;
 
 public enum Operators {
-	EQUAL("="), NOTEQUAL("!="), GREATERTHAN(">"), LESSTHAN("<"), GREATERTHANEQUAL(">="), LESSTHANEQUAL("<="), LIKE(" LIKE "), IN("IN"), NOTIN(" NOT IN ");
+	EQUAL("="), NOTEQUAL("!="), GREATERTHAN(">"), LESSTHAN("<"), GREATERTHANEQUAL(">="), LESSTHANEQUAL("<="),
+	LIKE(" LIKE "), IN(" IN "), NOTIN(" NOT IN ");
 
 	private String op;
 

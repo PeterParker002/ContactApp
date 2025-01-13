@@ -3,18 +3,23 @@ package com.contacts.handler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
+import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
+import com.contacts.model.Session;
 import com.contacts.model.User;
 import com.contacts.model.UserMail;
 import com.contacts.model.UserMobile;
@@ -42,6 +47,7 @@ public class SignupServlet extends HttpServlet {
 			user.setMobileNumber(mobile);
 			UserMail mail = new UserMail();
 			mail.setEmail(request.getParameter("email"));
+			mail.setIsPrimary(true);
 			user.setEmail(mail);
 			user.setNotes(request.getParameter("notes"));
 			user.setHomeAddress(request.getParameter("home"));
@@ -65,18 +71,37 @@ public class SignupServlet extends HttpServlet {
 			try {
 				int user_id = userdao.SignupUser(user);
 				if (user_id != -1) {
+					user.setUserId(user_id);
 					out.println("<div class='message'>Signup Successful</div>");
 					HttpSession session = request.getSession(true);
-					session.setAttribute("user", user);
+					String now = LocalDateTime.now().toString();
+					String sessionId = userdao.generateSessionId();
+					Session s = new Session();
+					s.setSessionId(sessionId);
+					s.setUserId(user.getUserId());
+					s.setCreatedAt(now);
+					s.setLastAccessedAt(now);
+					userdao.createSession(s);
+					SessionCache.activeSessionObjects.put(sessionId, s);
+					SessionCache.addUserToCache(user.getUserId(), user);
+					response.addCookie(new Cookie("session", sessionId));
+					session.setAttribute("user", user.getUserId());
 					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 							"User Signup Successful.");
-					request.getRequestDispatcher("home.jsp").include(request, response);
+					response.sendRedirect("home.jsp");
 				} else {
 					out.println("<div class='message'>Signup Failed</div>");
 					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 							"User Signup failed.");
 					request.getRequestDispatcher("signup.jsp").include(request, response);
 				}
+			} catch (SQLIntegrityConstraintViolationException e) {
+				String mail = e.getMessage().split("'")[1];
+				String msgString = "Can't add duplicate email '" + mail + "'";
+				out.println("<div class='message'>" + msgString + "</div>");
+				logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+						e.getMessage());
+				e.printStackTrace();
 			} catch (ClassNotFoundException | SQLException e) {
 				logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						e.getMessage());

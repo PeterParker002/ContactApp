@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
+import com.contacts.model.Session;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
@@ -21,13 +22,18 @@ public class LogoutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		UserDAO u = new UserDAO();
+		String sessionId = u.getSessionIdFromCookie(request, "session");
+		Session userSession = u.getUserSession(sessionId);
+		int user_id = userSession.getUserId();
 		request.getSession().invalidate();
 		HttpSession s = request.getSession(true);
 		for (Cookie c : request.getCookies()) {
 			if (c.getName().equals("session")) {
 				u.clearSession(c.getValue());
 				System.out.println("Cleared Session from DB");
-				SessionCache.activeSessions.remove(c.getValue());
+				SessionCache.activeSessionObjects.remove(c.getValue());
+				SessionCache.checkAndUpdateUserCache(userSession);
+//				SessionCache.userCache.remove(user_id);
 				System.out.println("Cleared Session from Cache");
 				c.setValue("");
 				c.setMaxAge(0);

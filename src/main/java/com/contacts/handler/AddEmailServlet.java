@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.contacts.cache.SessionCache;
 import com.contacts.dao.ContactDAO;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
+import com.contacts.model.Session;
 import com.contacts.model.User;
 
 @WebServlet("/add-email")
@@ -34,18 +36,22 @@ public class AddEmailServlet extends HttpServlet {
 			throws IOException, ServletException {
 		String[] emails = request.getParameterValues("email");
 		boolean isUser = false;
-		if (request.getParameter("type").equals("user")) {
+		if (request.getParameter("role").equals("user")) {
 			isUser = true;
 		}
 		UserDAO userdao = new UserDAO();
 		ContactDAO contactdao = new ContactDAO();
 		HttpSession session = request.getSession();
-		int user_id = (int) session.getAttribute("user");
+		String sessionId = userdao.getSessionIdFromCookie(request, "session");
+		Session userSession = userdao.getUserSession(sessionId);
+		int user_id = userSession.getUserId();
+		System.out.println(user_id);
 		try {
 			if (isUser) {
 				if (userdao.addEmails(user_id, emails)) {
 					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 							"User Emails Added Successfully.");
+					SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
 					session.setAttribute("message", "Email Added to Profile");
 				}
 			} else {

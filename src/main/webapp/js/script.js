@@ -77,7 +77,7 @@ document.querySelector(".add-mail-btn")?.addEventListener("click", () => {
 		field.name = "email";
 		field.placeholder = "Enter another email";
 		field.className = "email-field";
-		field.pattern = "[a-zA-Z]+(.[a-zA-Z0-9]+)*@[a-zA-Z]+.[a-zA-Z]{2,3}";
+		field.pattern = "[a-zA-Z]+(\.)?([a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}";
 		field.title = "Email should look like: example@gmail.com";
 		field.required = true;
 		const deleteBtn = document.createElement("span");
@@ -140,6 +140,30 @@ let currentContact = "";
 let isOpen = false;
 let currentContactInfo = {};
 
+const generateMailComponent = (id, mail) => {
+	const mailDiv = document.createElement("div");
+	mailDiv.className = "mail";
+	mailDiv.innerHTML = `	<span title="${mail}" class="c-mail">${mail}</span> 
+					<span class="right-side">
+					<a href="deleteContactMail/${id}">
+								<img src="assets/delete-icon.svg" alt="delete-mail" width="24">
+							</a>
+					</span>`;
+	document.querySelector(".contact-mails").appendChild(mailDiv);
+}
+
+const generateMobileComponent = (id, mobile) => {
+	const mobileDiv = document.createElement("div");
+	mobileDiv.className = "mail";
+	mobileDiv.innerHTML = `	<span class="c-mobile">${mobile}</span> 
+					<span class="right-side">
+					<a href="deleteContactMobile/${id}">
+								<img src="assets/delete-icon.svg" alt="delete-mail" width="24">
+							</a>
+					</span>`;
+	document.querySelector(".contact-mobiles").appendChild(mobileDiv);
+}
+
 document.querySelectorAll(".contact-name").forEach((name) =>
 	name?.addEventListener("click", (e) => {
 		if (currentContact === e.target.dataset.id) {
@@ -152,7 +176,8 @@ document.querySelectorAll(".contact-name").forEach((name) =>
 				.then((res) => res.json())
 				.then((data) => {
 					currentContactInfo = data;
-					document.querySelector(".contact-fname").innerText = data.fname + " " + data.mname + " " + data.lname;
+					//document.querySelector(".contact-fname").innerText = data.fname + " " + data.mname + " " + data.lname;
+					document.querySelector(".contact-fname").innerText = data.fname;
 					document.querySelector(".c-fname").innerText = data.fname;
 					document.querySelector(".c-mname").innerText = data.mname;
 					document.querySelector(".c-lname").innerText = data.lname;
@@ -161,8 +186,36 @@ document.querySelectorAll(".contact-name").forEach((name) =>
 					document.querySelector(".c-home").innerText = data.home;
 					document.querySelector(".c-work").innerText = data.work;
 					document.querySelector(".c-dob").innerText = data.dob;
-					document.querySelector(".c-mail").innerText = data.mail;
-					document.querySelector(".c-mobile").innerText = data.mobile;
+					document.querySelector(".contact-mails").innerHTML = `<div class="title">
+											Emails: <span class="add-contact-mail-icon"><img
+												src="assets/pencil-cursor-svgrepo-com.svg" width='16'
+												alt="add-email"></span>
+										</div>`;
+					document.querySelector(".contact-mobiles").innerHTML = `<div class="title">
+																Mobile Numbers: <span class="add-contact-mobile-icon"><img
+																	src="assets/pencil-cursor-svgrepo-com.svg" width='16'
+																	alt="add-email"></span>
+															</div>`;
+					data.mails.forEach((m) => {
+						generateMailComponent(m.id, m.mail);
+					});
+					data.mobiles.forEach((mo) => {
+						generateMobileComponent(mo.id, mo.mobile);
+					});
+					document.querySelectorAll(".add-contact-mail-icon").forEach((btn) => {
+						btn?.addEventListener("click", () => {
+							document.querySelector(".add-email-form").querySelector("#hidden-type").value = "contact";
+							document.querySelector(".add-email-form").querySelector("#hidden-contact-id").value = currentContact;
+							document.querySelector(".add-email-form").classList.toggle("hide");
+						});
+					});
+					document.querySelectorAll(".add-contact-mobile-icon").forEach((btn) => {
+						btn?.addEventListener("click", () => {
+							document.querySelector(".add-mobile-form").querySelector("#hidden-type").value = "contact";
+							document.querySelector(".add-mobile-form").querySelector("#hidden-contact-id").value = currentContact;
+							document.querySelector(".add-mobile-form").classList.toggle("hide");
+						});
+					});
 				});
 			if (!isOpen) {
 				document.querySelector(".contact-container").classList.toggle("hide");
@@ -199,6 +252,14 @@ document.querySelectorAll(".add-contact-mail-icon").forEach((btn) => {
 		document.querySelector(".add-email-form").querySelector("#hidden-type").value = "contact";
 		document.querySelector(".add-email-form").querySelector("#hidden-contact-id").value = currentContact;
 		document.querySelector(".add-email-form").classList.toggle("hide");
+	});
+});
+
+document.querySelectorAll(".add-contact-mobile-icon").forEach((btn) => {
+	btn?.addEventListener("click", () => {
+		document.querySelector(".add-mobile-form").querySelector("#hidden-type").value = "contact";
+		document.querySelector(".add-mobile-form").querySelector("#hidden-contact-id").value = currentContact;
+		document.querySelector(".add-mobile-form").classList.toggle("hide");
 	});
 });
 
@@ -247,6 +308,7 @@ document.querySelectorAll(".add-group-contact-btn").forEach((user) =>
 		let availableContacts = document
 			.querySelector(".add-group-contact-form")
 			.querySelectorAll("contact-option").length;
+		availableContacts = 1;
 		let group_id = e.target.dataset.id;
 		fetch("getContactsByGroup/" + group_id)
 			.then((res) => res.json())
@@ -262,10 +324,10 @@ document.querySelectorAll(".add-group-contact-btn").forEach((user) =>
 						const inp = document.createElement("input");
 						inp.type = "checkbox";
 						inp.name = "contact";
-						inp.id = "contact" + availableContacts;
+						inp.id = "contact" + cont.id;
 						inp.value = "" + cont.id;
 						const lab = document.createElement("label");
-						lab.htmlFor = "contact" + availableContacts;
+						lab.htmlFor = "contact" + cont.id;
 						lab.innerText = cont.fname;
 						availableContacts++;
 						div.appendChild(inp);
@@ -278,7 +340,7 @@ document.querySelectorAll(".add-group-contact-btn").forEach((user) =>
 				} else {
 					const msg = document.createElement("div");
 					msg.className = "message";
-					msg.innerText = "Group Already Full";
+					msg.innerText = "No Contact Left to Add.";
 					msg?.addEventListener("click", (e) => {
 						e.target.style.display = "none";
 					});

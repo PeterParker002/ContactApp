@@ -3,6 +3,7 @@ package com.contacts.handler;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.net.InetAddress;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
@@ -17,11 +18,13 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
 import com.contacts.logger.MyCustomLogger.LogLevel;
 import com.contacts.model.Session;
 import com.contacts.model.User;
+import com.contacts.schedulers.SessionScheduler;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -58,7 +61,10 @@ public class LoginServlet extends HttpServlet {
 				s.setCreatedAt(now);
 				s.setLastAccessedAt(now);
 				userDAO.createSession(s);
-				response.addCookie(new Cookie("session", sessionId));
+				SessionCache.activeSessionObjects.put(sessionId, s);
+				SessionCache.addUserToCache(user.getUserId(), user);
+				Cookie cookie = new Cookie("session", sessionId);
+				response.addCookie(cookie);
 				session.setAttribute("user", user.getUserId());
 				session.setAttribute("message", "User Login Successful!");
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

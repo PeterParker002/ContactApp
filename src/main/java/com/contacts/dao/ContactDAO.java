@@ -1,42 +1,50 @@
 package com.contacts.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.lang.reflect.InvocationTargetException;
+//import java.sql.Connection;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+//import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.contacts.model.Contact;
-import com.contacts.model.User;
+//import com.contacts.model.ContactMobile;
+import com.contacts.model.Group;
+//import com.contacts.model.User;
 import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
+import com.contacts.querylayer.Table;
 import com.contacts.utils.Database.ContactEmail;
 import com.contacts.utils.Database.ContactMobileNumber;
 import com.contacts.utils.Database.Contacts;
+import com.contacts.utils.Database.GroupDetails;
 import com.contacts.utils.Database.GroupInfo;
 import com.contacts.utils.Database.TableInfo;
-import com.contacts.utils.Database.UserEmail;
-import com.contacts.utils.Database.Users;
+//import com.contacts.utils.Database.UserEmail;
+//import com.contacts.utils.Database.UserMobileNumber;
+//import com.contacts.utils.Database.Users;
+import com.contacts.utils.JoinTypes;
 import com.contacts.utils.Operators;
 
 public class ContactDAO {
-	private String username = "root";
-	private String password = "root";
-	private String db_name = "ContactsApp";
-
-	private Connection getConnection() throws ClassNotFoundException, SQLException {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + db_name, username, password);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
+//	private String username = "root";
+//	private String password = "root";
+//	private String db_name = "ContactsApp";
+//
+//	
+//	private Connection getConnection() throws ClassNotFoundException, SQLException {
+//		Connection con = null;
+//		try {
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + db_name, username, password);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return con;
+//	}
 
 	public boolean addContact(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
@@ -56,19 +64,20 @@ public class ContactDAO {
 			qb = new QueryBuilder();
 			qb.insertTable(TableInfo.CONTACTMAIL);
 			qb.insertValuesToColumns(new Column(ContactEmail.CONTACTID, "", "", qb.table), result);
-			qb.insertValuesToColumns(new Column(ContactEmail.EMAIL, "", "", qb.table), contact.getEmail());
+			qb.insertValuesToColumns(new Column(ContactEmail.EMAIL, "", "", qb.table),
+					contact.getEmail().get(0).getEmail());
 			if (qx.executeAndUpdate(qb.build()) > 0) {
 				qb = new QueryBuilder();
 				qb.insertTable(TableInfo.CONTACTMOBILENUMBER);
 				qb.insertValuesToColumns(new Column(ContactMobileNumber.CONTACTID, "", "", qb.table), result);
 				qb.insertValuesToColumns(new Column(ContactMobileNumber.MOBILENUMBER, "", "", qb.table),
-						contact.getMobileNumber());
+						contact.getMobileNumber().get(0).getMobileNumber());
 				return qx.executeAndUpdate(qb.build()) > 0;
 			}
 		}
 		return false;
 	}
-	
+
 	public boolean editContactInfo(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
@@ -86,7 +95,7 @@ public class ContactDAO {
 		int res = qx.executeAndUpdate(qb.build());
 		return res > 0;
 	}
-	
+
 	public boolean addEmails(int contact_id, String[] emails) throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
 		for (String email : emails) {
@@ -101,154 +110,175 @@ public class ContactDAO {
 		return true;
 	}
 
-//	public boolean addContact(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
-//		Connection con = getConnection();
-//		PreparedStatement ps = con.prepareStatement(
-//				"insert into Contacts (user_id, first_name, middle_name, last_name, gender, date_of_birth, notes, home_address, work_address) values (?, ?, ?, ?, ?, ?, ?, ?, ?);",
-//				Statement.RETURN_GENERATED_KEYS);
-//		ps.setInt(1, user_id);
-//		ps.setString(2, contact.getFirstName());
-//		ps.setString(3, contact.getMiddleName());
-//		ps.setString(4, contact.getLastName());
-//		ps.setString(5, contact.getGender());
-//		ps.setString(6, contact.getDateOfBirth());
-//		ps.setString(7, contact.getNotes());
-//		ps.setString(8, contact.getHomeAddress());
-//		ps.setString(9, contact.getWorkAddress());
-//		int result = ps.executeUpdate();
-//		if (result > 0) {
-//			ResultSet r = ps.getGeneratedKeys();
-//			r.next();
-//			int contact_id = r.getInt(1);
-//			PreparedStatement mail_ps = con.prepareStatement("insert into contacts_mail_ids values (?, ?)");
-//			mail_ps.setInt(1, contact_id);
-//			mail_ps.setString(2, contact.getEmail());
-//			if (mail_ps.executeUpdate() > 0) {
-//				PreparedStatement mobile_ps = con.prepareStatement("insert into contacts_mobile_numbers values (?, ?)");
-//				mobile_ps.setInt(1, contact_id);
-//				mobile_ps.setLong(2, contact.getMobileNumber());
-//				return mobile_ps.executeUpdate() > 0;
-//			}
-//		}
-//		return false;
-//	}
+	public boolean deleteMail(int mail_id) throws ClassNotFoundException, SQLException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.deleteTable(TableInfo.CONTACTMAIL);
+		qb.setCondition(new Column(ContactEmail.ID, "", "", qb.table), Operators.EQUAL, mail_id);
+		return qx.executeAndUpdate(qb.build()) > 0;
+	}
 
+	public boolean addMobileNumbers(int contact_id, Long[] mobileNumbers) throws ClassNotFoundException, SQLException {
+		QueryExecutor qx = new QueryExecutor();
+		for (Long number : mobileNumbers) {
+			QueryBuilder qb = new QueryBuilder();
+			qb.insertTable(TableInfo.CONTACTMOBILENUMBER);
+			qb.insertValuesToColumns(new Column(ContactMobileNumber.CONTACTID, "", "", qb.table), contact_id);
+			qb.insertValuesToColumns(new Column(ContactMobileNumber.MOBILENUMBER, "", "", qb.table), number);
+			if (qx.executeAndUpdate(qb.build()) < 1) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean deleteMobileNumber(int mobile_id) throws ClassNotFoundException, SQLException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.deleteTable(TableInfo.CONTACTMOBILENUMBER);
+		qb.setCondition(new Column(ContactMobileNumber.ID, "", "", qb.table), Operators.EQUAL, mobile_id);
+		return qx.executeAndUpdate(qb.build()) > 0;
+	}
+
+	@SuppressWarnings("unchecked")
 	public ArrayList<Contact> getContacts(int user_id) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement(
-				"select c.contact_id, c.first_name, c.middle_name, c.last_name, ma.email, mo.mobile_number from Contacts c inner join contacts_mail_ids ma on c.contact_id=ma.contact_id inner join contacts_mobile_numbers mo on c.contact_id=mo.contact_id where c.user_id=?;");
-		ps.setInt(1, user_id);
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+
+		qb.selectTable(TableInfo.CONTACTS);
+		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+				new Column(ContactEmail.CONTACTID, "", "", new Table(TableInfo.CONTACTMAIL)));
+		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+				new Column(ContactMobileNumber.CONTACTID, "", "", new Table(TableInfo.CONTACTMOBILENUMBER)));
+		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		ArrayList<Contact> contacts = new ArrayList<>();
-		ResultSet rs = ps.executeQuery();
-		while (rs.next()) {
-			Contact contact = new Contact();
-			contact.setContactId(rs.getInt(1));
-			contact.setFirstName(rs.getString(2));
-			contact.setMiddleName(rs.getString(3));
-			contact.setLastName(rs.getString(4));
-			contact.setEmail(rs.getString(5));
-			contact.setMobileNumber(rs.getLong(6));
-			contacts.add(contact);
+		try {
+			contacts = (ArrayList<Contact>) qx.executeJoinQuery1(qb.build());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 		}
 		return contacts;
 	}
 
-	public ResultSet getContactInfo(int contact_id, int user_id) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		// PreparedStatement ps = con.prepareStatement(
-		// "select first_name, gender, notes, date_of_birth from Contacts where
-		// contact_id=?;");
-		PreparedStatement ps = con.prepareStatement(
-				"select c.first_name, c.middle_name, c.last_name, c.gender, c.notes, c.date_of_birth, c.home_address, c.work_address, ma.email, mo.mobile_number from Contacts c inner join contacts_mail_ids ma on c.contact_id=ma.contact_id inner join contacts_mobile_numbers mo on c.contact_id=mo.contact_id where c.contact_id=? and c.user_id=?;");
-		ps.setInt(1, contact_id);
-		ps.setInt(2, user_id);
-		return ps.executeQuery();
+	public Contact getContactInfo(int contact_id, int user_id) throws ClassNotFoundException, SQLException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+
+		qb.selectTable(TableInfo.CONTACTS);
+		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+				new Column(ContactEmail.CONTACTID, "", "", new Table(TableInfo.CONTACTMAIL)));
+		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+				new Column(ContactMobileNumber.CONTACTID, "", "", new Table(TableInfo.CONTACTMOBILENUMBER)));
+		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
+		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
+		ArrayList<Contact> contacts = new ArrayList<>();
+		try {
+			contacts = (ArrayList<Contact>) qx.executeJoinQuery1(qb.build());
+			return contacts.get(0);
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public boolean deleteContact(int contact_id) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		PreparedStatement mail_ps = con.prepareStatement("delete from contacts_mail_ids where contact_id=?;");
-		mail_ps.setInt(1, contact_id);
-		mail_ps.executeUpdate();
-		PreparedStatement mobile_ps = con.prepareStatement("delete from contacts_mobile_numbers where contact_id=?;");
-		mobile_ps.setInt(1, contact_id);
-		mobile_ps.executeUpdate();
-		deleteContactFromGroups(contact_id);
-		PreparedStatement ps = con.prepareStatement("delete from Contacts where contact_id=?;");
-		ps.setInt(1, contact_id);
-		return ps.executeUpdate() > 0;
+		QueryExecutor qx = new QueryExecutor();
+		QueryBuilder qb = new QueryBuilder();
+		qb.deleteTable(TableInfo.CONTACTMAIL);
+		qb.setCondition(new Column(ContactEmail.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
+		qx.executeAndUpdate(qb.build());
+		qb = new QueryBuilder();
+		qb.deleteTable(TableInfo.CONTACTMOBILENUMBER);
+		qb.setCondition(new Column(ContactMobileNumber.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
+		qx.executeAndUpdate(qb.build());
+		qb = new QueryBuilder();
+		qb.deleteTable(TableInfo.GROUPINFO);
+		qb.setCondition(new Column(GroupInfo.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
+		qx.executeAndUpdate(qb.build());
+		qb = new QueryBuilder();
+		qb.deleteTable(TableInfo.CONTACTS);
+		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
+		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
-	public String getGroupNameById(int group_id) throws SQLException, ClassNotFoundException {
-		Connection con = getConnection();
-		PreparedStatement mail_ps = con.prepareStatement("select group_name from Group_details where group_id=?;");
-		mail_ps.setInt(1, group_id);
-		ResultSet rs = mail_ps.executeQuery();
-		if (rs.next()) {
-			return rs.getString(1);
+	public String getGroupNameById(int group_id) {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.selectTable(TableInfo.GROUPDETAILS);
+		qb.setCondition(new Column(GroupDetails.GROUPID, "", "", qb.table), Operators.EQUAL, group_id);
+		ArrayList<Group> g;
+		try {
+			g = (ArrayList<Group>) qx.executeQuery(qb.build());
+			if (g.size() > 0) {
+				return g.get(0).getGroupName();
+			}
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 		}
 		return "";
 	}
 
-	public ArrayList<Contact> getContactsByGroupId(int user_id, int group_id)
-			throws ClassNotFoundException, SQLException {
+	public ArrayList<Contact> getContactsByGroupId(int user_id, int group_id) {
 		ArrayList<Contact> filteredContacts = new ArrayList<>();
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("select * from Group_details where user_id=? and group_id=?;");
-		ps.setInt(1, user_id);
-		ps.setInt(2, group_id);
-		ResultSet r = ps.executeQuery();
-		if (r.next()) {
-			// Alternative Query -> SELECT c.contact_id, c.first_name, c.middle_name,
-			// c.last_name FROM Contacts c LEFT JOIN Group_info g ON c.contact_id =
-			// g.contact_id AND g.group_id = ? WHERE c.user_id = ? AND g.contact_id IS NULL;
-			PreparedStatement mail_ps = con.prepareStatement(
-					"select contact_id, first_name, middle_name, last_name from Contacts where user_id=? and contact_id not in (select contact_id from Group_info where group_id=?);");
-			mail_ps.setInt(1, user_id);
-			mail_ps.setInt(2, group_id);
-			ResultSet rs = mail_ps.executeQuery();
-			while (rs.next()) {
-				Contact contact = new Contact();
-				contact.setContactId(rs.getInt(1));
-				contact.setFirstName(rs.getString(2));
-				contact.setMiddleName(rs.getString(3));
-				contact.setLastName(rs.getString(4));
-				filteredContacts.add(contact);
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.selectTable(TableInfo.GROUPDETAILS);
+		qb.setCondition(new Column(GroupDetails.USERID, "", "", qb.table), Operators.EQUAL, user_id);
+		ArrayList<Group> r;
+		try {
+			r = (ArrayList<Group>) qx.executeQuery(qb.build());
+			if (r.size() > 0) {
+				// Alternative Query -> SELECT c.contact_id, c.first_name, c.middle_name,
+				// c.last_name FROM Contacts c LEFT JOIN Group_info g ON c.contact_id =
+				// g.contact_id AND g.group_id = ? WHERE c.user_id = ? AND g.contact_id IS NULL;
+				qb = new QueryBuilder();
+				qx = new QueryExecutor();
+				qb.selectTable(TableInfo.CONTACTS);
+				qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
+				QueryBuilder inner_qb = new QueryBuilder();
+				inner_qb.selectTable(TableInfo.GROUPINFO);
+				inner_qb.selectColumn(new Column(GroupInfo.CONTACTID, "", "", inner_qb.table));
+				inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, group_id);
+				qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.NOTIN, inner_qb.build());
+				filteredContacts = (ArrayList<Contact>) qx.executeQuery(qb.build());
+//			}
 			}
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 		}
 		return filteredContacts;
 	}
 
 	public boolean deleteContactFromGroups(int contact_id) throws ClassNotFoundException, SQLException {
-//		Connection con = getConnection();
-//		PreparedStatement ps = con.prepareStatement("delete from Group_info where contact_id=?;");
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.GROUPINFO);
 		qb.setCondition(new Column(GroupInfo.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
-//		ps.setInt(1, contact_id);
-//		return ps.executeUpdate() > 0;
 		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
 	public boolean deleteGroupContact(int group_id, int contact_id) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("delete from Group_info where group_id=? and contact_id=?;");
-		ps.setInt(1, group_id);
-		ps.setInt(2, contact_id);
-		return ps.executeUpdate() > 0;
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.deleteTable(TableInfo.GROUPINFO);
+		qb.setCondition(new Column(GroupInfo.GROUPID, "", "", qb.table), Operators.EQUAL, group_id);
+		qb.setCondition(new Column(GroupInfo.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
+		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
 	public boolean deleteGroup(int group_id) throws ClassNotFoundException, SQLException {
-		Connection con = getConnection();
-		PreparedStatement ps = con.prepareStatement("delete from Group_info where group_id=?;");
-		ps.setInt(1, group_id);
-		// if (ps.executeUpdate() >= 0) {
-		ps.executeUpdate();
-		PreparedStatement ps1 = con.prepareStatement("delete from Group_details where group_id=?;");
-		ps1.setInt(1, group_id);
-		return ps1.executeUpdate() > 0;
-		// }
-		// return false;
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.deleteTable(TableInfo.GROUPINFO);
+		qb.setCondition(new Column(GroupInfo.GROUPID, "", "", qb.table), Operators.EQUAL, group_id);
+		qx.executeAndUpdate(qb.build());
+		qb = new QueryBuilder();
+		qb.deleteTable(TableInfo.GROUPDETAILS);
+		qb.setCondition(new Column(GroupDetails.GROUPID, "", "", qb.table), Operators.EQUAL, group_id);
+		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 }
