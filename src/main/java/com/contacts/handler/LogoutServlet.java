@@ -33,8 +33,8 @@ public class LogoutServlet extends HttpServlet {
 				System.out.println("Cleared Session from DB");
 				SessionCache.activeSessionObjects.remove(c.getValue());
 				SessionCache.checkAndUpdateUserCache(userSession);
-//				SessionCache.userCache.remove(user_id);
 				System.out.println("Cleared Session from Cache");
+				SessionCache.notifySessionRemove(userSession);
 				c.setValue("");
 				c.setMaxAge(0);
 				response.addCookie(c);

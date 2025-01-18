@@ -51,7 +51,9 @@ public class AddEmailServlet extends HttpServlet {
 				if (userdao.addEmails(user_id, emails)) {
 					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 							"User Emails Added Successfully.");
-					SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
+					User newUser = userdao.getUserInfo(user_id);
+					SessionCache.userCache.put(user_id, newUser);
+					SessionCache.notifyUserUpdate(newUser);
 					session.setAttribute("message", "Email Added to Profile");
 				}
 			} else {

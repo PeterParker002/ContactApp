@@ -24,6 +24,7 @@ import com.contacts.model.Contact;
 import com.contacts.model.Group;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
+import com.contacts.model.Server;
 import com.contacts.model.User;
 import com.contacts.model.UserMail;
 import com.contacts.model.UserMobile;
@@ -32,6 +33,7 @@ import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
 import com.contacts.querylayer.Table;
+import com.contacts.schedulers.SessionScheduler;
 import com.contacts.utils.JoinTypes;
 import com.contacts.utils.Operators;
 import com.contacts.utils.Database;
@@ -732,7 +734,19 @@ public class UserDAO {
 		return "";
 	}
 
-	public int addEntryToAvailableServers(String ip, String port) throws ClassNotFoundException, SQLException {
+	public ArrayList<Server> getAvailableServers() throws InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		qb.selectTable(TableInfo.SERVERS);
+		qb.setCondition(new Column(Servers.IP, "", "", qb.table), Operators.NOTEQUAL, SessionScheduler.server_ip);
+		qb.setCondition(new Column(Servers.PORT, "", "", qb.table), Operators.NOTEQUAL, SessionScheduler.server_port);
+		qb.changeConjuction("OR");
+		ArrayList<Server> result = (ArrayList<Server>) qx.executeQuery(qb.build());
+		return result;
+	}
+
+	public int addEntryToAvailableServers(String ip, int port) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.insertTable(TableInfo.SERVERS);
@@ -744,7 +758,7 @@ public class UserDAO {
 		return -1;
 	}
 
-	public int deleteEntryFromAvailableServers(String ip, String port) throws ClassNotFoundException, SQLException {
+	public int deleteEntryFromAvailableServers(String ip, int port) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.SERVERS);

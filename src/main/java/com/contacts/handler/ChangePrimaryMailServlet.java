@@ -34,7 +34,9 @@ public class ChangePrimaryMailServlet extends HttpServlet {
 			if (userdao.changePrimaryMail(user_id, mail_id)) {
 				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"User Primary Mail Changed Successfully.");
-				SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
+				User newUser = userdao.getUserInfo(user_id);
+				SessionCache.userCache.put(user_id, newUser);
+				SessionCache.notifyUserUpdate(newUser);
 				session.setAttribute("message", "Primary Mail Changed");
 			} else {
 				session.setAttribute("message", "Primary Mail Change Failed");

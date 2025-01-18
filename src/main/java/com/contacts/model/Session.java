@@ -38,4 +38,8 @@ public class Session {
 		this.lastAccessedAt = lastAccessedAt;
 	}
 
+	public String toString() {
+		return this.sessionId + " -> " + this.lastAccessedAt;
+	}
+
 }

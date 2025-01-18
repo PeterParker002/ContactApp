@@ -1,7 +1,15 @@
 package com.contacts.handler;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +20,11 @@ import javax.servlet.http.HttpSession;
 import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
+import com.contacts.model.Server;
 import com.contacts.model.Session;
 import com.contacts.model.User;
+import com.contacts.notifier.Notifier;
+import com.google.gson.Gson;
 
 @WebServlet("/edit-profile")
 public class EditUserInfoServlet extends HttpServlet {
@@ -28,7 +39,7 @@ public class EditUserInfoServlet extends HttpServlet {
 		Session userSession = userdao.getUserSession(sessionId);
 		int user_id = userSession.getUserId();
 		HttpSession session = request.getSession();
-		User user = new User();
+		User user = SessionCache.userCache.get(user_id);
 		user.setFirstName(request.getParameter("fname"));
 		user.setMiddleName(request.getParameter("midname"));
 		user.setLastName(request.getParameter("lname"));
@@ -44,14 +55,15 @@ public class EditUserInfoServlet extends HttpServlet {
 				session.setAttribute("user", user);
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"User Profile Updated Successfully");
-				SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
+				SessionCache.userCache.put(user_id, user);
+				SessionCache.notifyUserUpdate(user);
 				session.setAttribute("message", "User Profile Updated Successfully");
 			} else {
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"User Profile Updation Failed");
 				session.setAttribute("message", "Operation Failed");
 			}
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException | IllegalArgumentException | SecurityException e) {
 			logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 					e.getMessage());
 			e.printStackTrace();

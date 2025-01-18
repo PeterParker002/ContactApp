@@ -22,6 +22,8 @@ import com.contacts.cache.SessionCache;
 import com.contacts.connection.ConfigurationLoader;
 import com.contacts.dao.UserDAO;
 import com.contacts.model.Session;
+import com.contacts.notifier.Notifier;
+import com.google.gson.Gson;
 
 /**
  * Application Lifecycle Listener implementation class SessionScheduler
@@ -32,7 +34,8 @@ public class SessionScheduler implements ServletContextListener {
 
 	ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 	public int count = 0;
-	public String server_ip, server_port;
+	public static String server_ip;
+	public static int server_port;
 	public static String domain = "";
 
 	/**
@@ -49,6 +52,7 @@ public class SessionScheduler implements ServletContextListener {
 		UserDAO u = new UserDAO();
 		try {
 			u.deleteEntryFromAvailableServers(server_ip, server_port);
+			System.out.println("Removed the Server's Entry from DB.");
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -67,11 +71,13 @@ public class SessionScheduler implements ServletContextListener {
 		try {
 			server_ip = InetAddress.getLocalHost().getHostAddress();
 			ServletContext ctx = sce.getServletContext();
-			server_port = ctx.getInitParameter("server.port");
+			server_port = Integer.parseInt(ctx.getInitParameter("server.port"));
 			System.out.println("Server IP Address: " + server_ip);
 			System.out.println("Server Port: " + server_port);
 			domain = "http://" + server_ip + ":" + server_port;
 			u.addEntryToAvailableServers(server_ip, server_port);
+			SessionCache.updateAvailableServers();
+			SessionCache.notifyAvailableServerUpdate();
 		} catch (UnknownHostException | ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}

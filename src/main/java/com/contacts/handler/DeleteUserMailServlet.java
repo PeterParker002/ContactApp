@@ -14,6 +14,7 @@ import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Session;
+import com.contacts.model.User;
 
 @WebServlet("/deleteMail/*")
 public class DeleteUserMailServlet extends HttpServlet {
@@ -38,7 +39,9 @@ public class DeleteUserMailServlet extends HttpServlet {
 				if (userdao.deleteMail(mail_id)) {
 					logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 							"Mail Deleted Successfully.");
-					SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
+					User newUser = userdao.getUserInfo(user_id);
+					SessionCache.userCache.put(user_id, newUser);
+					SessionCache.notifyUserUpdate(newUser);
 					session.setAttribute("message", "Mail Deleted Successfully");
 				} else {
 					logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

@@ -2124,3 +2124,455 @@ Message: Contact Info Retreived Successfully.
 Message: No Entry Found.
 0:0:0:0:0:0:0:1 - [INFO] [2025-01-12 23:18:15] "GET /logout HTTP/1.1" 200 
 Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:14:52] "GET /signup HTTP/1.1" 200 
+Message: Redirecting to signup.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:15:43] "POST /signup HTTP/1.1" 200 
+Message: User Signup Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:16:00] "POST /add-email HTTP/1.1" 200 
+Message: User Emails Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:16:05] "GET /makePrimary/99 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:16:06] "GET /makePrimary/98 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:16:31] "POST /add-mobile-number HTTP/1.1" 200 
+Message: User Mobile Numbers Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:19:16] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:19:30] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:19:35] "GET /deleteMobile/55 HTTP/1.1" 200 
+Message: Mobile Number Deleted Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:03] "POST /add-contact HTTP/1.1" 200 
+Message: Contact Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:05] "GET /contact/38 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:12] "POST /add-email HTTP/1.1" 200 
+Message: Contact Mails Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:15] "GET /contact/38 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:18] "GET /deleteContactMail/28 HTTP/1.1" 200 
+Message: Contact Mail Deleted Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:21] "GET /contact/38 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:43] "POST /add-group HTTP/1.1" 200 
+Message: Group Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:48] "GET /getContactsByGroup/61 HTTP/1.1" 200 
+Message: Contacts Filtered based on Groups has been Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:51] "POST /add-group-contact HTTP/1.1" 200 
+Message: Added Contact to Group Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:20:56] "GET /getContactsByGroup/61 HTTP/1.1" 200 
+Message: No Entry Found.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:21:00] "GET /deleteContact/38 HTTP/1.1" 200 
+Message: Contact Deleted Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:21:05] "GET /getContactsByGroup/61 HTTP/1.1" 200 
+Message: No Entry Found.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:21:09] "POST /delete-group HTTP/1.1" 200 
+Message: Group Deleted Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-13 20:21:12] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-14 23:04:13] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-14 23:04:19] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-14 23:04:25] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-14 23:05:59] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 00:06:16] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 00:06:21] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 00:06:37] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 00:08:09] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 00:08:28] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 00:08:33] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 00:08:43] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 14:51:09] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 14:51:14] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 14:51:19] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 14:51:28] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 14:54:13] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 14:54:17] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 14:54:21] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 14:54:28] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 15:39:09] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 15:39:37] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 15:39:43] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 15:40:12] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 16:10:30] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 16:10:39] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 16:10:44] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 16:11:04] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 16:14:32] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 16:14:37] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-15 16:14:47] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:31:35] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:31:40] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:32:03] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:33:15] "GET /makePrimary/23 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:33:16] "GET /makePrimary/1 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:33:37] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:33:43] "GET /makePrimary/23 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:33:44] "GET /makePrimary/1 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:35:10] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:43:24] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:43:30] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:50:23] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:50:29] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:51:59] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:54:59] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:56:58] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:57:03] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 14:59:58] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:01:47] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:02:57] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:03:03] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:03:28] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:03:57] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:04:58] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:05:04] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:05:23] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:06:04] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:06:49] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:06:55] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:07:41] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:09:19] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:09:49] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:09:54] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:12:42] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:13:05] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:13:11] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:13:27] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:13:45] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:14:19] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:24:58] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:25:02] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:25:23] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:27:09] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:27:22] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:27:33] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:27:53] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 15:28:46] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 19:36:56] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 19:37:01] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 19:37:20] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 19:37:37] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 19:41:24] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 19:42:18] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 19:42:37] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-16 19:44:30] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 11:24:51] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 11:24:59] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 11:28:13] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 11:28:23] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 11:28:36] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 11:29:18] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:24:42] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:24:48] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:24:57] "GET /contact/2 HTTP/1.1" 200 
+Message: Contact Info Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:25:00] "GET /makePrimary/23 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:25:01] "GET /makePrimary/1 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:25:31] "GET /makePrimary/23 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:25:33] "GET /makePrimary/1 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:26:48] "GET /makePrimary/23 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:49:25] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 12:49:32] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 16:17:43] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 16:18:08] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 16:18:12] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 16:19:27] "GET /makePrimary/1 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 16:59:19] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 16:59:23] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:02:24] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:12:48] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:12:56] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:15:26] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:16:19] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:16:24] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:18:41] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:49:54] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:50:00] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:51:29] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:53:05] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-17 17:53:10] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:29:09] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:29:14] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:29:43] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:30:50] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:35:23] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:35:29] "POST /login HTTP/1.1" 200 
+Message: User Login Failed
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:35:35] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:42:13] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:42:18] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:43:57] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:50:41] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:50:46] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:59:35] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 18:59:40] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:03:10] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:12:02] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:12:08] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:13:12] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:15:02] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:15:05] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:25:40] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:25:44] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:28:56] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:45:49] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:45:53] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:49:23] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:49:28] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:50:37] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:53:18] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 19:53:23] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:06:18] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:06:22] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:09:51] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:13:36] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:13:41] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:19:48] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:21:33] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:21:42] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:22:53] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:23:38] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:23:43] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:24:17] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:25:02] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:25:06] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:33:47] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:33:56] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:34:12] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:34:46] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:47:59] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:48:04] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:48:20] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:48:50] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:48:53] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:48:57] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:49:02] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:50:27] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 20:50:41] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:01:01] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:01:06] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:01:21] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:02:53] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:02:58] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:03:19] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:04:46] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:06:56] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:07:00] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:07:32] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:07:57] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:12:24] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:15:48] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:15:53] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:16:36] "POST /edit-profile HTTP/1.1" 200 
+Message: User Profile Updated Successfully
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:16:56] "POST /add-email HTTP/1.1" 200 
+Message: User Emails Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:17:10] "GET /deleteMail/100 HTTP/1.1" 200 
+Message: Mail Deleted Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:17:40] "POST /add-mobile-number HTTP/1.1" 200 
+Message: User Mobile Numbers Added Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:17:50] "GET /deleteMobile/57 HTTP/1.1" 200 
+Message: Mobile Number Deleted Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:18:07] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:18:53] "GET /login HTTP/1.1" 200 
+Message: Redirecting to login.jsp page.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:18:57] "POST /login HTTP/1.1" 200 
+Message: User Login Successful.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:19:03] "GET /makePrimary/23 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:19:11] "GET /makePrimary/1 HTTP/1.1" 200 
+Message: User Primary Mail Changed Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:19:34] "GET /getContactsByGroup/60 HTTP/1.1" 200 
+Message: Contacts Filtered based on Groups has been Retreived Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:19:37] "POST /add-group-contact HTTP/1.1" 200 
+Message: Added Contact to Group Successfully.
+0:0:0:0:0:0:0:1 - [INFO] [2025-01-18 21:20:07] "GET /logout HTTP/1.1" 200 
+Message: User Logout Successful.

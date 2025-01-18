@@ -13,6 +13,7 @@ import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Session;
+import com.contacts.model.User;
 
 @WebServlet("/deleteMobile/*")
 public class DeleteUserMobileServlet extends HttpServlet {
@@ -32,7 +33,9 @@ public class DeleteUserMobileServlet extends HttpServlet {
 			if (userdao.deleteMobileNumber(mobile_id)) {
 				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"Mobile Number Deleted Successfully.");
-				SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
+				User newUser = userdao.getUserInfo(user_id);
+				SessionCache.userCache.put(user_id, newUser);
+				SessionCache.notifyUserUpdate(newUser);
 				session.setAttribute("message", "Mobile Number Deleted Successfully");
 			} else {
 				logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

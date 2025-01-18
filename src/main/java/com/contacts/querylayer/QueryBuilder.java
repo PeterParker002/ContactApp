@@ -56,6 +56,7 @@ public class QueryBuilder {
 	public OrderBy order_by;
 	public LinkedHashMap<Column, Value<?>> values = new LinkedHashMap<Column, Value<?>>();
 	public String limit = "";
+	public String conjuction = "AND";
 //	public boolean singleTable = true;
 
 	public enum resultModifierOptions {
@@ -82,6 +83,10 @@ public class QueryBuilder {
 
 	}
 
+	public void changeConjuction(String con) {
+		this.conjuction = con;
+	}
+
 	public String getColumns() {
 		if (this.columns.size() > 0) {
 			ArrayList<String> columnsList = new ArrayList<>();
@@ -106,7 +111,7 @@ public class QueryBuilder {
 		if (this.condition.size() > 0) {
 			ArrayList<String> conditionList = new ArrayList<>();
 			this.condition.forEach(cnd -> conditionList.add(cnd.toString()));
-			String conditionString = String.join(" AND ", conditionList);
+			String conditionString = String.join(" " + conjuction + " ", conditionList);
 			return "WHERE " + conditionString;
 		}
 		return "";

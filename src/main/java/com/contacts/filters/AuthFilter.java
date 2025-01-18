@@ -18,6 +18,10 @@ import javax.servlet.http.HttpSession;
 import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.model.Session;
+import com.contacts.model.User;
+import com.contacts.notifier.Notifier;
+import com.contacts.schedulers.SessionScheduler;
+import com.google.gson.Gson;
 
 /**
  * Servlet Filter implementation class AuthFilter
@@ -31,7 +35,13 @@ public class AuthFilter extends HttpFilter implements Filter {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpRes = (HttpServletResponse) response;
 		if (httpReq.getRequestURI().endsWith(".css") || httpReq.getRequestURI().endsWith(".js")
-				|| httpReq.getRequestURI().endsWith(".svg") || httpReq.getRequestURI().endsWith(".ico")) {
+				|| httpReq.getRequestURI().endsWith(".svg") || httpReq.getRequestURI().endsWith(".ico")
+				|| httpReq.getRequestURI().endsWith("notifyAvailableServerUpdate")
+				|| httpReq.getRequestURI().endsWith("notifyUserUpdate")) {
+			chain.doFilter(request, response);
+			return;
+		}
+		if (httpReq.getRequestURI().endsWith("notifySessionChange")) {
 			chain.doFilter(request, response);
 			return;
 		}
@@ -46,13 +56,16 @@ public class AuthFilter extends HttpFilter implements Filter {
 					if (SessionCache.activeSessionObjects.containsKey(sessionId)) {
 						SessionCache.activeSessionObjects.get(sessionId)
 								.setLastAccessedAt(LocalDateTime.now().toString());
-//						SessionCache.updateUserSession(sessionId, LocalDateTime.now());
+						System.out.println("Notifying Session Update");
+						SessionCache.notifySessionUpdate(SessionCache.activeSessionObjects.get(sessionId));
 						isAuthenticated = true;
 					} else {
 						UserDAO userdao = new UserDAO();
 						Session session = userdao.getUserSession(sessionId);
 						if (session != null) {
 							SessionCache.activeSessionObjects.put(sessionId, session);
+							User user = userdao.getUserInfo(session.getUserId());
+							SessionCache.addUserToCache(user.getUserId(), user);
 //							SessionCache.updateUserSession(sessionId, LocalDateTime.now());
 							isAuthenticated = true;
 						} else {

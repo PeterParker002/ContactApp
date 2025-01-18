@@ -25,6 +25,7 @@ import com.contacts.model.ContactMobile;
 import com.contacts.model.Group;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
+import com.contacts.model.Server;
 import com.contacts.model.Session;
 import com.contacts.utils.Database;
 import com.contacts.utils.Database.ContactEmail;
@@ -68,119 +69,6 @@ public class QueryExecutor {
 		return con;
 	}
 
-//	public HashMap<String, Object> executeJoinQuery(QueryBuilder query)
-//			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
-//			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
-//
-//		try (Connection con = ConnectionPool.getDataSource().getConnection();
-//				PreparedStatement ps = con.prepareStatement(query.toString());
-//				ResultSet rs = ps.executeQuery();) {
-//			HashMap<String, Object> data = new HashMap<String, Object>();
-//			HashMap<String, ArrayList<String>> columns = new HashMap<String, ArrayList<String>>();
-//			HashMap<String, ArrayList<String>> colDetails = new HashMap<String, ArrayList<String>>();
-//			HashMap<String, String> tableAliases = new HashMap<String, String>();
-//			for (Join j : query.join) {
-//				tableAliases.putIfAbsent(j.column1.table.name.toString(), j.column1.table.alias);
-//				tableAliases.putIfAbsent(j.column2.table.name.toString(), j.column2.table.alias);
-//			}
-//			ArrayList<String> tables = new ArrayList<String>();
-//			ResultSetMetaData metadata = rs.getMetaData();
-//			for (int i = 1; i <= metadata.getColumnCount(); i++) {
-//				if (!tables.contains(metadata.getTableName(i))) {
-//					tables.add(metadata.getTableName(i));
-//					ArrayList<String> c = new ArrayList<String>();
-//					c.add(metadata.getColumnName(i).toLowerCase().replace("_", ""));
-//					columns.put(metadata.getTableName(i), c);
-//				} else {
-//					columns.get(metadata.getTableName(i)).add(metadata.getColumnName(i).toLowerCase().replace("_", ""));
-//				}
-//				ArrayList<String> col = new ArrayList<String>();
-//				col.add(tableAliases.get(metadata.getTableName(i)) + "." + metadata.getColumnName(i));
-//				col.add(metadata.getColumnTypeName(i));
-//				colDetails.put(metadata.getColumnName(i).toLowerCase().replace("_", ""), col);
-//			}
-//			Class<?> pojoClass = null;
-//			Object pojo;
-//			while (rs.next()) {
-//				for (String name : tables) {
-//					if (name.equalsIgnoreCase(query.table.name.toString()) & data.containsKey(name)) {
-//						continue;
-//					}
-//					if (name.equalsIgnoreCase(query.table.name.toString())) {
-//						pojoClass = getModelClassForTable(name);
-//						pojo = pojoClass.getDeclaredConstructor().newInstance();
-//						Method[] ms = pojoClass.getDeclaredMethods();
-//						for (Method m : ms) {
-//							if (m.getName().startsWith("set")
-//									& columns.get(name).contains(m.getName().replace("set", "").toLowerCase())) {
-//								ArrayList<String> col = colDetails.get(m.getName().replace("set", "").toLowerCase());
-////							System.out.println(col.get(0) + " -> " + col.get(1));
-//								switch (col.get(1)) {
-//								case "INT":
-//									m.invoke(pojo, rs.getInt(col.get(0)));
-//									break;
-//								case "VARCHAR":
-//								case "TEXT":
-//								case "CHAR":
-//								case "DATE":
-//									m.invoke(pojo, rs.getString(col.get(0)));
-//									break;
-//								case "BIGINT":
-//									m.invoke(pojo, rs.getLong(col.get(0)));
-//									break;
-//								case "BIT":
-//									m.invoke(pojo, rs.getBoolean(col.get(0)));
-//									break;
-//								}
-//							}
-//						}
-//						data.put(name, pojo);
-//					} else {
-//						pojoClass = getModelClassForTable(name);
-//						pojo = pojoClass.getDeclaredConstructor().newInstance();
-//						Method[] ms = pojoClass.getDeclaredMethods();
-//						for (Method m : ms) {
-//							if (m.getName().startsWith("set")
-//									& columns.get(name).contains(m.getName().replace("set", "").toLowerCase())) {
-//								ArrayList<String> col = colDetails.get(m.getName().replace("set", "").toLowerCase());
-//								switch (col.get(1)) {
-//								case "INT":
-//									m.invoke(pojo, rs.getInt(col.get(0)));
-//									break;
-//								case "VARCHAR":
-//								case "TEXT":
-//								case "CHAR":
-//								case "DATE":
-//									m.invoke(pojo, rs.getString(col.get(0)));
-//									break;
-//								case "BIGINT":
-//									m.invoke(pojo, rs.getLong(col.get(0)));
-//									break;
-//								case "BIT":
-//									m.invoke(pojo, rs.getBoolean(col.get(0)));
-//									break;
-//								}
-//							}
-//						}
-//						if (!data.containsKey(name)) {
-//							ArrayList<Object> pojoList = new ArrayList<Object>();
-//							pojoList.add(pojo);
-//							data.put(name, pojoList);
-//						} else {
-//							ArrayList<Object> pojoList = (ArrayList<Object>) data.get(name);
-//							pojoList.add(pojo);
-//						}
-//					}
-//				}
-//			}
-////			closeConnection(con);
-//			return data;
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//		return null;
-//	}
-
 	public Class<?> getModelClassForTable(String table) {
 		switch (table) {
 		case "User":
@@ -200,6 +88,8 @@ public class QueryExecutor {
 			return Group.class;
 		case "Session":
 			return Session.class;
+		case "available_servers":
+			return Server.class;
 		default:
 			return null;
 		}
@@ -304,14 +194,19 @@ public class QueryExecutor {
 
 	public ArrayList<?> executeQuery(QueryBuilder query) throws InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+//		System.out.println(query);
 		Class<?> pojoClass = getModelClassForTable(query.table.getName().toString());
 		Object pojo = pojoClass.getDeclaredConstructor().newInstance();
+		int i = 1;
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
 				PreparedStatement ps = con.prepareStatement(query.toString());
 				ResultSet rs = ps.executeQuery();) {
 			while (rs.next()) {
 				pojo = populateDataOverPojo(rs, pojo);
-				if (resultPojo.containsKey(currentPojoId)) {
+				if (currentPojoId == 0) {
+					resultPojo.put(currentPojoId - i, pojo);
+					i++;
+				} else if (resultPojo.containsKey(currentPojoId)) {
 					Object prevPojo = resultPojo.get(currentPojoId);
 					prevPojo.getClass().getMethod("update", pojo.getClass()).invoke(prevPojo, pojo);
 				} else {
@@ -323,6 +218,7 @@ public class QueryExecutor {
 			e.printStackTrace();
 			return null;
 		}
+//		System.out.println(resultPojo);
 		return new ArrayList<Object>(resultPojo.values());
 	}
 

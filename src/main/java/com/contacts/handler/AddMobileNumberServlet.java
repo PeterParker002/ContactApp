@@ -55,7 +55,9 @@ public class AddMobileNumberServlet extends HttpServlet {
 				if (userdao.addMobileNumbers(user_id, mobileNumbers)) {
 					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 							"User Mobile Numbers Added Successfully.");
-					SessionCache.userCache.put(user_id, userdao.getUserInfo(user_id));
+					User newUser = userdao.getUserInfo(user_id);
+					SessionCache.userCache.put(user_id, newUser);
+					SessionCache.notifyUserUpdate(newUser);
 					session.setAttribute("message", "Mobile Numbers Added Successfully");
 				} else {
 					session.setAttribute("message", "Mobile Numbers Addition Failed");

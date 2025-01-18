@@ -4,6 +4,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -38,6 +42,7 @@ import com.contacts.model.Group;
 //import com.contacts.dao.UserDAO;
 import com.contacts.model.Mail;
 import com.contacts.model.MobileNumber;
+import com.contacts.model.Server;
 //import com.contacts.model.MobileNumber;
 //import com.contacts.model.Mail;
 //import com.contacts.model.User;
@@ -77,39 +82,58 @@ public class Test {
 			throws IllegalAccessException, InvocationTargetException, InstantiationException, IllegalArgumentException,
 			NoSuchMethodException, SecurityException, ClassNotFoundException, SQLException {
 
-		String url = "jdbc:mysql://localhost:3306/ContactsApp";
-		String user = "root";
-		String password = "root";
+//		String url = "jdbc:mysql://localhost:3306/ContactsApp";
+//		String user = "root";
+//		String password = "root";
+//
+//		try (Connection connection = DriverManager.getConnection(url, user, password)) {
+//			// DatabaseMetaData
+//			DatabaseMetaData dbMetaData = connection.getMetaData();
+//			System.out.println("Database Product Name: " + dbMetaData.getDatabaseProductName());
+//			System.out.println("Database Version: " + dbMetaData.getDatabaseProductVersion());
+//			System.out.println("Database Schemas: " + dbMetaData.getSchemas());
+//			
+//			// Get tables
+//			ResultSet tables = dbMetaData.getTables(null, null, "%", new String[] { "TABLE" });
+//			System.out.println("\nTables:");
+//			while (tables.next()) {
+//				System.out.println("  - " + tables.getString("TABLE_NAME"));
+//			}
+//
+//			// ResultSetMetaData
+//			Statement statement = connection.createStatement();
+//			ResultSet resultSet = statement.executeQuery("SELECT user_id, username, gender FROM User");
+//			ResultSetMetaData rsMetaData = resultSet.getMetaData();
+//
+//			System.out.println("\nResultSet Columns:");
+//			int columnCount = rsMetaData.getColumnCount();
+//			for (int i = 1; i <= columnCount; i++) {
+//				System.out.println("  - Column Name: " + rsMetaData.getColumnName(i));
+//				System.out.println("    Type: " + rsMetaData.getColumnTypeName(i));
+//				System.out.println("    Size: " + rsMetaData.getColumnDisplaySize(i));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
 
-		try (Connection connection = DriverManager.getConnection(url, user, password)) {
-			// DatabaseMetaData
-			DatabaseMetaData dbMetaData = connection.getMetaData();
-			System.out.println("Database Product Name: " + dbMetaData.getDatabaseProductName());
-			System.out.println("Database Version: " + dbMetaData.getDatabaseProductVersion());
-			System.out.println("Database Schemas: " + dbMetaData.getSchemas());
-			
-			// Get tables
-			ResultSet tables = dbMetaData.getTables(null, null, "%", new String[] { "TABLE" });
-			System.out.println("\nTables:");
-			while (tables.next()) {
-				System.out.println("  - " + tables.getString("TABLE_NAME"));
+		UserDAO u = new UserDAO();
+		ArrayList<Server> servers = (ArrayList<Server>) u.getAvailableServers();
+		for (Server s : servers) {
+			try {
+				HttpClient client = HttpClient.newHttpClient();
+				String jsonPayload = "{\"message\": \"User Changed\"}";
+				HttpRequest hrequest = HttpRequest.newBuilder()
+						.uri(URI.create("http://" + s.getServerIp() + ":" + s.getServerPort() + "/notify"))
+						.header("Content-Type", "application/json")
+						.POST(HttpRequest.BodyPublishers.ofString(jsonPayload)).build();
+				HttpResponse<String> hresponse = client.send(hrequest, HttpResponse.BodyHandlers.ofString());
+				System.out.println("Response Code: " + hresponse.statusCode());
+				System.out.println("Response Body: " + hresponse.body());
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-
-			// ResultSetMetaData
-			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT user_id, username, gender FROM User");
-			ResultSetMetaData rsMetaData = resultSet.getMetaData();
-
-			System.out.println("\nResultSet Columns:");
-			int columnCount = rsMetaData.getColumnCount();
-			for (int i = 1; i <= columnCount; i++) {
-				System.out.println("  - Column Name: " + rsMetaData.getColumnName(i));
-				System.out.println("    Type: " + rsMetaData.getColumnTypeName(i));
-				System.out.println("    Size: " + rsMetaData.getColumnDisplaySize(i));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
+
 //		String password = "";
 //		String email = "";
 //		QueryBuilder qb = new QueryBuilder();
