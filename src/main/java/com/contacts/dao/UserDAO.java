@@ -4,26 +4,19 @@ import java.lang.reflect.InvocationTargetException;
 import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-import javax.sql.DataSource;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.contacts.connection.ConnectionPool;
+import com.contacts.cache.SessionCache;
 import com.contacts.model.Contact;
 import com.contacts.model.Group;
-import com.contacts.model.Mail;
-import com.contacts.model.MobileNumber;
 import com.contacts.model.Server;
 import com.contacts.model.User;
 import com.contacts.model.UserMail;
@@ -99,6 +92,8 @@ public class UserDAO {
 		qb.insertValuesToColumns(new Column(Users.HOMEADDRESS, "", "", qb.table), user.getHomeAddress());
 		qb.insertValuesToColumns(new Column(Users.WORKADDRESS, "", "", qb.table), user.getWorkAddress());
 		qb.insertValuesToColumns(new Column(Users.ISHASHED, "", "", qb.table), currentHashing);
+		qb.insertValuesToColumns(new Column(Users.CREATEDAT, "", "", qb.table), user.getCreatedAt());
+		qb.insertValuesToColumns(new Column(Users.MODIFIEDAT, "", "", qb.table), user.getModifiedAt());
 		int result = qx.executeAndUpdateWithKeys(qb.build());
 
 		if (result > 0) {
@@ -108,13 +103,21 @@ public class UserDAO {
 			mail_qb.insertValuesToColumns(new Column(UserEmail.EMAIL, "", "", mail_qb.table),
 					user.getEmail().get(0).getEmail());
 			mail_qb.insertValuesToColumns(new Column(UserEmail.ISPRIMARY, "", "", mail_qb.table), 1);
-			if (qx.executeAndUpdate(mail_qb.build()) > 0) {
+			mail_qb.insertValuesToColumns(new Column(UserEmail.CREATEDAT, "", "", qb.table),
+					user.getEmail().get(0).getCreatedAt());
+			mail_qb.insertValuesToColumns(new Column(UserEmail.MODIFIEDAT, "", "", qb.table),
+					user.getEmail().get(0).getModifiedAt());
+			if (qx.executeAndUpdateWithKeys(mail_qb.build()) > 0) {
 				QueryBuilder mobile_qb = new QueryBuilder();
 				mobile_qb.insertTable(TableInfo.USERMOBILENUMBER);
 				mobile_qb.insertValuesToColumns(new Column(UserMobileNumber.USERID, "", "", mail_qb.table), result);
 				mobile_qb.insertValuesToColumns(new Column(UserMobileNumber.MOBILENUMBER, "", "", mail_qb.table),
 						user.getMobileNumber().get(0).getMobileNumber());
-				return qx.executeAndUpdate(mobile_qb.build()) > 0 ? result : -1;
+				mobile_qb.insertValuesToColumns(new Column(UserMobileNumber.CREATEDAT, "", "", qb.table),
+						user.getMobileNumber().get(0).getCreatedAt());
+				mobile_qb.insertValuesToColumns(new Column(UserMobileNumber.MODIFIEDAT, "", "", qb.table),
+						user.getMobileNumber().get(0).getModifiedAt());
+				return qx.executeAndUpdateWithKeys(mobile_qb.build()) > 0 ? result : -1;
 			}
 		}
 		return -1;
@@ -189,13 +192,16 @@ public class UserDAO {
 	 */
 	public boolean addEmails(int user_id, String[] emails) throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
+		long now = System.currentTimeMillis();
 		for (String email : emails) {
 			QueryBuilder qb = new QueryBuilder();
 			qb.insertTable(TableInfo.USEREMAIL);
 			qb.insertValuesToColumns(new Column(UserEmail.USERID, "", "", qb.table), user_id);
 			qb.insertValuesToColumns(new Column(UserEmail.EMAIL, "", "", qb.table), email);
 			qb.insertValuesToColumns(new Column(UserEmail.ISPRIMARY, "", "", qb.table), false);
-			if (qx.executeAndUpdate(qb.build()) < 1) {
+			qb.insertValuesToColumns(new Column(UserEmail.CREATEDAT, "", "", qb.table), now);
+			qb.insertValuesToColumns(new Column(UserEmail.MODIFIEDAT, "", "", qb.table), now);
+			if (qx.executeAndUpdateWithKeys(qb.build()) < 1) {
 				return false;
 			}
 		}
@@ -215,8 +221,10 @@ public class UserDAO {
 	public boolean changePrimaryMail(int user_id, int mail_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
+		long now = System.currentTimeMillis();
 		qb.updateTable(TableInfo.USEREMAIL);
 		qb.updateColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table), false);
+		qb.updateColumn(new Column(UserEmail.MODIFIEDAT, "", "", qb.table), now);
 		qb.setCondition(new Column(UserEmail.ISPRIMARY, "", "", qb.table), Operators.EQUAL, true);
 		qb.setCondition(new Column(UserEmail.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		System.out.println("Primary Mail Changed");
@@ -224,6 +232,7 @@ public class UserDAO {
 			qb = new QueryBuilder();
 			qb.updateTable(TableInfo.USEREMAIL);
 			qb.updateColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table), true);
+			qb.updateColumn(new Column(UserEmail.MODIFIEDAT, "", "", qb.table), now);
 			qb.setCondition(new Column(UserEmail.ID, "", "", qb.table), Operators.EQUAL, mail_id);
 			qb.setCondition(new Column(UserEmail.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 			return qx.executeAndUpdate(qb.build()) > 0;
@@ -290,12 +299,15 @@ public class UserDAO {
 	 */
 	public boolean addMobileNumbers(int user_id, Long[] mobileNumbers) throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
+		long now = System.currentTimeMillis();
 		for (Long number : mobileNumbers) {
 			QueryBuilder qb = new QueryBuilder();
 			qb.insertTable(TableInfo.USERMOBILENUMBER);
 			qb.insertValuesToColumns(new Column(UserMobileNumber.USERID, "", "", qb.table), user_id);
 			qb.insertValuesToColumns(new Column(UserMobileNumber.MOBILENUMBER, "", "", qb.table), number);
-			if (qx.executeAndUpdate(qb.build()) < 1) {
+			qb.insertValuesToColumns(new Column(UserMobileNumber.CREATEDAT, "", "", qb.table), now);
+			qb.insertValuesToColumns(new Column(UserMobileNumber.MODIFIEDAT, "", "", qb.table), now);
+			if (qx.executeAndUpdateWithKeys(qb.build()) < 1) {
 				return false;
 			}
 		}
@@ -319,32 +331,6 @@ public class UserDAO {
 		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
-	// select Statement
-//	public String getUsername(int id) throws SQLException, ClassNotFoundException, IllegalAccessException, InvocationTargetException {
-//		QueryBuilder qb = new QueryBuilder();
-//		QueryExecutor qx = new QueryExecutor();
-//		qb.selectTable(TableInfo.USER);
-//		qb.selectColumn(new Column(Users.USERNAME, "", "", qb.table));
-//		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, id);
-////		Connection c = getConnection();
-////		PreparedStatement ps = c.prepareStatement("select username from User where user_id=?;");
-////		ps.setInt(1, id);
-//		ArrayList<User> res = (ArrayList<User>) qx.executeQuery(qb.build());
-//		if (res.size() > 0) {
-//			return res.get(0).getUsername();
-//		} else {
-//			return "";
-//		}
-//	}
-
-//	public ResultSet getAllUsers() throws ClassNotFoundException, SQLException {
-//		Connection con = getConnection();
-//		PreparedStatement ps = con.prepareStatement(
-//				"select * from User user inner join User_mail_ids mail on user.user_id=mail.user_id inner join user_mobile_numbers mobile on user.user_id=mobile.user_id;");
-//		ResultSet r = ps.executeQuery();
-//		return r;
-//	}
-
 	// Select Statement
 	/**
 	 * Get User Info Method
@@ -363,17 +349,6 @@ public class UserDAO {
 	public User getUserInfo(int user_id) {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USER);
-//		qb.selectColumn(new Column(Users.USERID, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.USERNAME, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.FIRSTNAME, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.MIDDLENAME, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.LASTNAME, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.DATEOFBIRTH, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.GENDER, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.NOTES, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.HOMEADDRESS, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.WORKADDRESS, "", "", qb.table));
-//		qb.selectColumn(new Column(Users.ISHASHED, "", "", qb.table));
 		Table emailTable = new Table(TableInfo.USEREMAIL);
 		Table mobileTable = new Table(TableInfo.USERMOBILENUMBER);
 		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
@@ -389,11 +364,8 @@ public class UserDAO {
 			user = r.get(0);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		user.setEmail(getUserMail(user_id));
-//		user.setMobileNumber(getUserMobileNumber(user_id));
 		return user;
 	}
 
@@ -417,9 +389,6 @@ public class UserDAO {
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USEREMAIL);
-		qb.selectColumn(new Column(UserEmail.ID, "", "", qb.table));
-		qb.selectColumn(new Column(UserEmail.EMAIL, "", "", qb.table));
-		qb.selectColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table));
 		qb.setCondition(new Column(UserEmail.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		QueryExecutor qx = new QueryExecutor();
 		ArrayList<UserMail> r = (ArrayList<UserMail>) qx.executeQuery(qb.build());
@@ -446,8 +415,6 @@ public class UserDAO {
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USERMOBILENUMBER);
-		qb.selectColumn(new Column(UserMobileNumber.ID, "", "", qb.table));
-		qb.selectColumn(new Column(UserMobileNumber.MOBILENUMBER, "", "", qb.table));
 		qb.setCondition(new Column(UserMobileNumber.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		QueryExecutor qx = new QueryExecutor();
 		ArrayList<UserMobile> r = (ArrayList<UserMobile>) qx.executeQuery(qb.build());
@@ -459,14 +426,31 @@ public class UserDAO {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.updateTable(TableInfo.USER);
-		qb.updateColumn(new Column(Users.FIRSTNAME, "", "", qb.table), user.getFirstName());
-		qb.updateColumn(new Column(Users.MIDDLENAME, "", "", qb.table), user.getMiddleName());
-		qb.updateColumn(new Column(Users.LASTNAME, "", "", qb.table), user.getLastName());
-		qb.updateColumn(new Column(Users.GENDER, "", "", qb.table), user.getGender());
-		qb.updateColumn(new Column(Users.DATEOFBIRTH, "", "", qb.table), user.getDateOfBirth());
-		qb.updateColumn(new Column(Users.NOTES, "", "", qb.table), user.getNotes());
-		qb.updateColumn(new Column(Users.HOMEADDRESS, "", "", qb.table), user.getHomeAddress());
-		qb.updateColumn(new Column(Users.WORKADDRESS, "", "", qb.table), user.getWorkAddress());
+		if (user.getFirstName() != null) {
+			qb.updateColumn(new Column(Users.FIRSTNAME, "", "", qb.table), user.getFirstName());
+		}
+		if (user.getMiddleName() != null) {
+			qb.updateColumn(new Column(Users.MIDDLENAME, "", "", qb.table), user.getMiddleName());
+		}
+		if (user.getLastName() != null) {
+			qb.updateColumn(new Column(Users.LASTNAME, "", "", qb.table), user.getLastName());
+		}
+		if (user.getGender() != null) {
+			qb.updateColumn(new Column(Users.GENDER, "", "", qb.table), user.getGender());
+		}
+		if (user.getDateOfBirth() != null) {
+			qb.updateColumn(new Column(Users.DATEOFBIRTH, "", "", qb.table), user.getDateOfBirth());
+		}
+		if (user.getNotes() != null) {
+			qb.updateColumn(new Column(Users.NOTES, "", "", qb.table), user.getNotes());
+		}
+		if (user.getHomeAddress() != null) {
+			qb.updateColumn(new Column(Users.HOMEADDRESS, "", "", qb.table), user.getHomeAddress());
+		}
+		if (user.getWorkAddress() != null) {
+			qb.updateColumn(new Column(Users.WORKADDRESS, "", "", qb.table), user.getWorkAddress());
+		}
+		qb.updateColumn(new Column(Users.MODIFIEDAT, "", "", qb.table), user.getModifiedAt());
 		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		int res = qx.executeAndUpdate(qb.build());
 		return res > 0;
@@ -490,39 +474,6 @@ public class UserDAO {
 		}
 		return groups;
 	}
-
-	// Select Statement with Join
-//	public ArrayList<Contact> getContactsByGroup(int group_id)
-//			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException,
-//			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-////		Connection con = getConnection();
-////		PreparedStatement ps = con.prepareStatement(
-////				"select g.contact_id, c.first_name, c.middle_name, c.last_name from Group_info g join Contact c on g.contact_id=c.contact_id where group_id=?;");
-////		ps.setInt(1, group_id);
-////		ResultSet rs = ps.executeQuery();
-////		ArrayList<Contact> contacts = new ArrayList<>();
-////		while (rs.next()) {
-////			Contact c = new Contact();
-////			c.setContactId(rs.getInt(1));
-////			c.setFirstName(rs.getString(2));
-////			c.setMiddleName(rs.getString(3));
-////			c.setLastName(rs.getString(4));
-////			contacts.add(c);
-////		}
-//		QueryBuilder qb = new QueryBuilder();
-//		QueryExecutor qx = new QueryExecutor();
-//		ArrayList<Contact> contacts = new ArrayList<Contact>();
-//		qb.selectTable(TableInfo.GROUPINFO);
-//		Table contactTable = new Table(TableInfo.CONTACTS);
-//		qb.joinTables(JoinTypes.inner, new Column(GroupInfo.CONTACTID, "", "", qb.table),
-//				new Column(Contacts.CONTACTID, "", "", contactTable));
-//		qb.setCondition(new Column(GroupInfo.GROUPID, "", "", qb.table), Operators.EQUAL, group_id);
-//		ArrayList<Group> groups = (ArrayList<Group>) qx.executeJoinQuery1(qb.build());
-//		if (groups.size() > 0) {
-//			contacts = groups.get(0).getContact();
-//		}
-//		return contacts;
-//	}
 
 	public ArrayList<Contact> getContactsByGroup(int group_id)
 			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException,
@@ -555,9 +506,12 @@ public class UserDAO {
 			throws SQLException, ClassNotFoundException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
+		long now = System.currentTimeMillis();
 		qb.insertTable(TableInfo.GROUPDETAILS);
 		qb.insertValuesToColumns(new Column(GroupDetails.USERID, "", "", qb.table), user_id);
 		qb.insertValuesToColumns(new Column(GroupDetails.GROUPNAME, "", "", qb.table), name);
+		qb.insertValuesToColumns(new Column(GroupDetails.CREATEDAT, "", "", qb.table), now);
+		qb.insertValuesToColumns(new Column(GroupDetails.MODIFIEDAT, "", "", qb.table), now);
 		int result = qx.executeAndUpdateWithKeys(qb.build());
 		if (result > 0) {
 			return addGroupContact(result, contact_ids);
@@ -596,9 +550,9 @@ public class UserDAO {
 			hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 			break;
 		case 2:
-			int N = 32; // CPU cost
-			int r = 20; // Memory Cost
-			int p = 2; // Parallelization
+			int N = 32;
+			int r = 20;
+			int p = 2;
 			hashed = SCryptUtil.scrypt(password, N, r, p);
 			break;
 		default:
@@ -645,7 +599,6 @@ public class UserDAO {
 			}
 		} catch (IllegalAccessException | InvocationTargetException | InstantiationException | IllegalArgumentException
 				| NoSuchMethodException | SecurityException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -666,11 +619,11 @@ public class UserDAO {
 		return null;
 	}
 
-	public int updateSession(String sessionId, LocalDateTime lastAccessedAt) {
+	public int updateSession(String sessionId, long lastAccessedAt) {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.updateTable(TableInfo.SESSION);
-		qb.updateColumn(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), lastAccessedAt.toString());
+		qb.updateColumn(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), lastAccessedAt);
 		qb.setCondition(new Column(Database.Session.SESSIONID, "", "", qb.table), Operators.EQUAL, sessionId);
 		int res;
 		try {
@@ -693,13 +646,28 @@ public class UserDAO {
 		try {
 			res = qx.executeAndUpdate(qb.build());
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return res;
 	}
 
-	public String generateSessionId() {
+	public int clearExpiredSessions() {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+		long expired_time = System.currentTimeMillis() - SessionCache.EXPIRATION_TIME;
+		qb.deleteTable(TableInfo.SESSION);
+		qb.setCondition(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), Operators.LESSTHAN, expired_time);
+		qb.setLimit(200);
+		int res = -1;
+		try {
+			res = qx.executeAndUpdate(qb.build());
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+
+	public String generateCustomSessionId() {
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		ArrayList<Character> charList = new ArrayList<>();
 		for (char c : characters.toCharArray()) {
@@ -721,12 +689,15 @@ public class UserDAO {
 		return randomString.toString();
 	}
 
+	public String generateSessionId() {
+		return UUID.randomUUID().toString();
+	}
+
 	public String getSessionIdFromCookie(HttpServletRequest req, String cookieName) {
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
 				if (cookie.getName().equalsIgnoreCase(cookieName)) {
-//					System.out.println(cookie.getValue());
 					return cookie.getValue();
 				}
 			}
@@ -769,25 +740,4 @@ public class UserDAO {
 		}
 		return -1;
 	}
-
-//	public boolean migratePasswords() throws SQLException, ClassNotFoundException {
-//		Connection con = getConnection();
-//		PreparedStatement ps = con.prepareStatement("select * from User where isHashed=false;");
-////        ps.setInt(1, noOfRows);
-//		ResultSet rs = ps.executeQuery();
-//		while (rs.next()) {
-//			int user_id = rs.getInt("user_id");
-//			String password = rs.getString("password");
-//			String hashed = hashPasswor(password, user_id);
-//			PreparedStatement change_ps = con
-//					.prepareStatement("update User set password=?, isHashed=? where user_id=?;");
-//			change_ps.setString(1, hashed);
-//			change_ps.setInt(2, currentHashing);
-//			change_ps.setInt(3, user_id);
-//			int res = change_ps.executeUpdate();
-//			if (res < 0)
-//				return false;
-//		}
-//		return true;
-//	}
 }

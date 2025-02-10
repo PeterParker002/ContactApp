@@ -3,8 +3,8 @@ package com.contacts.model;
 public class Session {
 	private String sessionId;
 	private int userId;
-	private String createdAt;
-	private String lastAccessedAt;
+	private long createdAt;
+	private long lastAccessedAt;
 
 	public String getSessionId() {
 		return sessionId;
@@ -22,19 +22,19 @@ public class Session {
 		this.userId = userId;
 	}
 
-	public String getCreatedAt() {
+	public Long getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(long createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public String getLastAccessedAt() {
+	public Long getLastAccessedAt() {
 		return lastAccessedAt;
 	}
 
-	public void setLastAccessedAt(String lastAccessedAt) {
+	public void setLastAccessedAt(long lastAccessedAt) {
 		this.lastAccessedAt = lastAccessedAt;
 	}
 

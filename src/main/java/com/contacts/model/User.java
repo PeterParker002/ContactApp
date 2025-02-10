@@ -2,6 +2,8 @@ package com.contacts.model;
 
 import java.util.ArrayList;
 
+import com.contacts.utils.Database.Users;
+
 public class User {
 	private int userId;
 	private String username;
@@ -17,6 +19,8 @@ public class User {
 	private int isHashed;
 	private ArrayList<UserMail> email = new ArrayList<>();
 	private ArrayList<UserMobile> mobileNumber = new ArrayList<>();
+	private long createdAt;
+	private long modifiedAt;
 
 	public int getUserId() {
 		return this.userId;
@@ -149,6 +153,10 @@ public class User {
 	public int getUniqueID() {
 		return this.userId;
 	}
+	
+	public Users getPrimaryKeyColumn() {
+		return Users.USERID;
+	}
 
 	public ArrayList<UserMail> getData(UserMail mail) {
 		return this.email;
@@ -156,6 +164,22 @@ public class User {
 
 	public ArrayList<UserMobile> getData(UserMobile mobile) {
 		return this.mobileNumber;
+	}
+
+	public long getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(long createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public long getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(long modifiedAt) {
+		this.modifiedAt = modifiedAt;
 	}
 
 }

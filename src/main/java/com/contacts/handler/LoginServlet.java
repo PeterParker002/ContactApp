@@ -53,7 +53,8 @@ public class LoginServlet extends HttpServlet {
 			User user = userDAO.LoginUser(email, password);
 			if (user != null) {
 				HttpSession session = request.getSession(true);
-				String now = LocalDateTime.now().toString();
+//				String now = LocalDateTime.now().toString();
+				long now = System.currentTimeMillis();
 				String sessionId = userDAO.generateSessionId();
 				Session s = new Session();
 				s.setSessionId(sessionId);

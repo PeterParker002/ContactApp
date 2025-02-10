@@ -19,13 +19,7 @@ import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
 import com.contacts.model.Session;
 import com.contacts.model.User;
-import com.contacts.notifier.Notifier;
-import com.contacts.schedulers.SessionScheduler;
-import com.google.gson.Gson;
 
-/**
- * Servlet Filter implementation class AuthFilter
- */
 @WebFilter("/*")
 public class AuthFilter extends HttpFilter implements Filter {
 	private static final long serialVersionUID = 1L;
@@ -34,14 +28,13 @@ public class AuthFilter extends HttpFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest httpReq = (HttpServletRequest) request;
 		HttpServletResponse httpRes = (HttpServletResponse) response;
-		if (httpReq.getRequestURI().endsWith(".css") || httpReq.getRequestURI().endsWith(".js")
+		boolean isResources = httpReq.getRequestURI().endsWith(".css") || httpReq.getRequestURI().endsWith(".js")
 				|| httpReq.getRequestURI().endsWith(".svg") || httpReq.getRequestURI().endsWith(".ico")
 				|| httpReq.getRequestURI().endsWith("notifyAvailableServerUpdate")
-				|| httpReq.getRequestURI().endsWith("notifyUserUpdate")) {
-			chain.doFilter(request, response);
-			return;
-		}
-		if (httpReq.getRequestURI().endsWith("notifySessionChange")) {
+				|| httpReq.getRequestURI().endsWith("notifyUserUpdate")
+				|| httpReq.getRequestURI().endsWith("notifySessionChange")
+				|| httpReq.getRequestURI().endsWith("notify");
+		if (isResources) {
 			chain.doFilter(request, response);
 			return;
 		}
@@ -55,8 +48,8 @@ public class AuthFilter extends HttpFilter implements Filter {
 					sessionId = c.getValue();
 					if (SessionCache.activeSessionObjects.containsKey(sessionId)) {
 						SessionCache.activeSessionObjects.get(sessionId)
-								.setLastAccessedAt(LocalDateTime.now().toString());
-						System.out.println("Notifying Session Update");
+								.setLastAccessedAt(System.currentTimeMillis());
+						System.out.println(SessionCache.activeSessionObjects);
 						SessionCache.notifySessionUpdate(SessionCache.activeSessionObjects.get(sessionId));
 						isAuthenticated = true;
 					} else {
@@ -66,7 +59,6 @@ public class AuthFilter extends HttpFilter implements Filter {
 							SessionCache.activeSessionObjects.put(sessionId, session);
 							User user = userdao.getUserInfo(session.getUserId());
 							SessionCache.addUserToCache(user.getUserId(), user);
-//							SessionCache.updateUserSession(sessionId, LocalDateTime.now());
 							isAuthenticated = true;
 						} else {
 							c.setValue("");
@@ -78,7 +70,6 @@ public class AuthFilter extends HttpFilter implements Filter {
 				}
 			}
 		}
-		System.out.println(httpReq.getRequestURI());
 		if (httpReq.getRequestURI().endsWith("logout")) {
 			if (isAuthenticated) {
 				chain.doFilter(request, response);
@@ -87,14 +78,10 @@ public class AuthFilter extends HttpFilter implements Filter {
 			httpRes.sendRedirect("/home.jsp");
 			return;
 		}
-		if (httpReq.getRequestURI().endsWith("notify")) {
-			chain.doFilter(httpReq, httpRes);
-			return;
-		}
-		if (httpReq.getRequestURI().endsWith("/") || httpReq.getRequestURI().endsWith("index.jsp")
+		boolean isPublicPage = httpReq.getRequestURI().endsWith("/") || httpReq.getRequestURI().endsWith("index.jsp")
 				|| httpReq.getRequestURI().endsWith("login.jsp") || httpReq.getRequestURI().endsWith("login")
-				|| httpReq.getRequestURI().endsWith("signup.jsp") || httpReq.getRequestURI().endsWith("signup")) {
-			System.out.println(isAuthenticated);
+				|| httpReq.getRequestURI().endsWith("signup.jsp") || httpReq.getRequestURI().endsWith("signup");
+		if (isPublicPage) {
 			if (isAuthenticated) {
 				httpRes.sendRedirect("/home.jsp");
 				return;

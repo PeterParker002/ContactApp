@@ -1,8 +1,10 @@
 package com.contacts.handler;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -10,6 +12,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,34 +43,65 @@ public class EditUserInfoServlet extends HttpServlet {
 		Session userSession = userdao.getUserSession(sessionId);
 		int user_id = userSession.getUserId();
 		HttpSession session = request.getSession();
+		Gson gson = new Gson();
+		User u = gson.fromJson(request.getReader(), User.class);
 		User user = SessionCache.userCache.get(user_id);
-		user.setFirstName(request.getParameter("fname"));
-		user.setMiddleName(request.getParameter("midname"));
-		user.setLastName(request.getParameter("lname"));
-		user.setGender(request.getParameter("gender"));
-		user.setDateOfBirth(request.getParameter("dob"));
-		user.setNotes(request.getParameter("notes"));
-		user.setHomeAddress(request.getParameter("home"));
-		user.setWorkAddress(request.getParameter("work"));
+		boolean isChanged = false;
+		if (u.getFirstName() != null) {
+			isChanged = true;
+			user.setFirstName(u.getFirstName());
+		}
+		if (u.getMiddleName() != null) {
+			isChanged = true;
+			user.setMiddleName(u.getMiddleName());
+		}
+		if (u.getLastName() != null) {
+			isChanged = true;
+			user.setLastName(u.getLastName());
+		}
+		if (u.getGender() != null) {
+			isChanged = true;
+			user.setGender(u.getGender());
+		}
+		if (u.getDateOfBirth() != null) {
+			isChanged = true;
+			user.setDateOfBirth(u.getDateOfBirth());
+		}
+		if (u.getNotes() != null) {
+			isChanged = true;
+			user.setNotes(u.getNotes());
+		}
+		if (u.getHomeAddress() != null) {
+			isChanged = true;
+			user.setHomeAddress(u.getHomeAddress());
+		}
+		if (u.getWorkAddress() != null) {
+			isChanged = true;
+			user.setWorkAddress(u.getWorkAddress());
+		}
+		user.setModifiedAt(System.currentTimeMillis());
 		boolean result;
-		try {
-			result = userdao.editUserInfo(user_id, user);
-			if (result) {
-				session.setAttribute("user", user);
-				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-						"User Profile Updated Successfully");
-				SessionCache.userCache.put(user_id, user);
-				SessionCache.notifyUserUpdate(user);
-				session.setAttribute("message", "User Profile Updated Successfully");
-			} else {
-				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-						"User Profile Updation Failed");
-				session.setAttribute("message", "Operation Failed");
+		if (isChanged) {
+			try {
+				result = userdao.editUserInfo(user_id, u);
+				if (result) {
+//				session.setAttribute("user", user);
+					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+							"User Profile Updated Successfully");
+					
+					SessionCache.userCache.put(user_id, user);
+					SessionCache.notifyUserUpdate(user);
+//				session.setAttribute("message", "User Profile Updated Successfully");
+				} else {
+					logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+							"User Profile Updation Failed");
+					session.setAttribute("message", "Operation Failed");
+				}
+			} catch (ClassNotFoundException | SQLException | IllegalArgumentException | SecurityException e) {
+				logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
+						e.getMessage());
+				e.printStackTrace();
 			}
-		} catch (ClassNotFoundException | SQLException | IllegalArgumentException | SecurityException e) {
-			logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-					e.getMessage());
-			e.printStackTrace();
 		}
 		response.sendRedirect("home.jsp");
 	}

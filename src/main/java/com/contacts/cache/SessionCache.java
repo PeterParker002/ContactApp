@@ -22,7 +22,7 @@ public class SessionCache {
 	public static ConcurrentHashMap<Integer, User> userCache = new ConcurrentHashMap<>();
 	public static CopyOnWriteArrayList<Server> availableServers = new CopyOnWriteArrayList<Server>();
 	public static int count = 0;
-	public static final int EXPIRATION_TIME = 5;
+	public static final int EXPIRATION_TIME = 2 * 1000 * 60;
 
 //	public static void updateUserSession(String sessionId, LocalDateTime lastAccessedAt) {
 //		activeSessions.put(sessionId, lastAccessedAt);

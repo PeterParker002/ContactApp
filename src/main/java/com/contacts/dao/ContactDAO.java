@@ -23,6 +23,9 @@ import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.GroupDetails;
 import com.contacts.utils.Database.GroupInfo;
 import com.contacts.utils.Database.TableInfo;
+import com.contacts.utils.Database.UserEmail;
+import com.contacts.utils.Database.UserMobileNumber;
+import com.contacts.utils.Database.Users;
 //import com.contacts.utils.Database.UserEmail;
 //import com.contacts.utils.Database.UserMobileNumber;
 //import com.contacts.utils.Database.Users;
@@ -59,6 +62,8 @@ public class ContactDAO {
 		qb.insertValuesToColumns(new Column(Contacts.NOTES, "", "", qb.table), contact.getNotes());
 		qb.insertValuesToColumns(new Column(Contacts.HOMEADDRESS, "", "", qb.table), contact.getHomeAddress());
 		qb.insertValuesToColumns(new Column(Contacts.WORKADDRESS, "", "", qb.table), contact.getWorkAddress());
+		qb.insertValuesToColumns(new Column(Contacts.CREATEDAT, "", "", qb.table), contact.getCreatedAt());
+		qb.insertValuesToColumns(new Column(Contacts.MODIFIEDAT, "", "", qb.table), contact.getModifiedAt());
 		int result = qx.executeAndUpdateWithKeys(qb.build());
 		if (result > 0) {
 			qb = new QueryBuilder();
@@ -66,13 +71,21 @@ public class ContactDAO {
 			qb.insertValuesToColumns(new Column(ContactEmail.CONTACTID, "", "", qb.table), result);
 			qb.insertValuesToColumns(new Column(ContactEmail.EMAIL, "", "", qb.table),
 					contact.getEmail().get(0).getEmail());
-			if (qx.executeAndUpdate(qb.build()) > 0) {
+			qb.insertValuesToColumns(new Column(ContactEmail.CREATEDAT, "", "", qb.table),
+					contact.getEmail().get(0).getCreatedAt());
+			qb.insertValuesToColumns(new Column(ContactEmail.MODIFIEDAT, "", "", qb.table),
+					contact.getEmail().get(0).getModifiedAt());
+			if (qx.executeAndUpdateWithKeys(qb.build()) > 0) {
 				qb = new QueryBuilder();
 				qb.insertTable(TableInfo.CONTACTMOBILENUMBER);
 				qb.insertValuesToColumns(new Column(ContactMobileNumber.CONTACTID, "", "", qb.table), result);
 				qb.insertValuesToColumns(new Column(ContactMobileNumber.MOBILENUMBER, "", "", qb.table),
 						contact.getMobileNumber().get(0).getMobileNumber());
-				return qx.executeAndUpdate(qb.build()) > 0;
+				qb.insertValuesToColumns(new Column(ContactMobileNumber.CREATEDAT, "", "", qb.table),
+						contact.getMobileNumber().get(0).getCreatedAt());
+				qb.insertValuesToColumns(new Column(ContactMobileNumber.MODIFIEDAT, "", "", qb.table),
+						contact.getMobileNumber().get(0).getModifiedAt());
+				return qx.executeAndUpdateWithKeys(qb.build()) > 0;
 			}
 		}
 		return false;
@@ -82,14 +95,31 @@ public class ContactDAO {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.updateTable(TableInfo.CONTACTS);
-		qb.updateColumn(new Column(Contacts.FIRSTNAME, "", "", qb.table), contact.getFirstName());
-		qb.updateColumn(new Column(Contacts.MIDDLENAME, "", "", qb.table), contact.getMiddleName());
-		qb.updateColumn(new Column(Contacts.LASTNAME, "", "", qb.table), contact.getLastName());
-		qb.updateColumn(new Column(Contacts.GENDER, "", "", qb.table), contact.getGender());
-		qb.updateColumn(new Column(Contacts.DATEOFBIRTH, "", "", qb.table), contact.getDateOfBirth());
-		qb.updateColumn(new Column(Contacts.NOTES, "", "", qb.table), contact.getNotes());
-		qb.updateColumn(new Column(Contacts.HOMEADDRESS, "", "", qb.table), contact.getHomeAddress());
-		qb.updateColumn(new Column(Contacts.WORKADDRESS, "", "", qb.table), contact.getWorkAddress());
+		if (contact.getFirstName() != null) {
+			qb.updateColumn(new Column(Contacts.FIRSTNAME, "", "", qb.table), contact.getFirstName());
+		}
+		if (contact.getMiddleName() != null) {
+			qb.updateColumn(new Column(Contacts.MIDDLENAME, "", "", qb.table), contact.getMiddleName());
+		}
+		if (contact.getLastName() != null) {
+			qb.updateColumn(new Column(Contacts.LASTNAME, "", "", qb.table), contact.getLastName());
+		}
+		if (contact.getGender() != null) {
+			qb.updateColumn(new Column(Contacts.GENDER, "", "", qb.table), contact.getGender());
+		}
+		if (contact.getDateOfBirth() != null) {
+			qb.updateColumn(new Column(Contacts.DATEOFBIRTH, "", "", qb.table), contact.getDateOfBirth());
+		}
+		if (contact.getNotes() != null) {
+			qb.updateColumn(new Column(Contacts.NOTES, "", "", qb.table), contact.getNotes());
+		}
+		if (contact.getHomeAddress() != null) {
+			qb.updateColumn(new Column(Contacts.HOMEADDRESS, "", "", qb.table), contact.getHomeAddress());
+		}
+		if (contact.getWorkAddress() != null) {
+			qb.updateColumn(new Column(Contacts.WORKADDRESS, "", "", qb.table), contact.getWorkAddress());
+		}
+		qb.updateColumn(new Column(Contacts.MODIFIEDAT, "", "", qb.table), contact.getModifiedAt());
 		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.EQUAL, contact.getContactId());
 		int res = qx.executeAndUpdate(qb.build());
@@ -98,12 +128,15 @@ public class ContactDAO {
 
 	public boolean addEmails(int contact_id, String[] emails) throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
+		long now = System.currentTimeMillis();
 		for (String email : emails) {
 			QueryBuilder qb = new QueryBuilder();
 			qb.insertTable(TableInfo.CONTACTMAIL);
 			qb.insertValuesToColumns(new Column(ContactEmail.CONTACTID, "", "", qb.table), contact_id);
 			qb.insertValuesToColumns(new Column(ContactEmail.EMAIL, "", "", qb.table), email);
-			if (qx.executeAndUpdate(qb.build()) < 1) {
+			qb.insertValuesToColumns(new Column(ContactEmail.CREATEDAT, "", "", qb.table), now);
+			qb.insertValuesToColumns(new Column(ContactEmail.MODIFIEDAT, "", "", qb.table), now);
+			if (qx.executeAndUpdateWithKeys(qb.build()) < 1) {
 				return false;
 			}
 		}
@@ -120,12 +153,15 @@ public class ContactDAO {
 
 	public boolean addMobileNumbers(int contact_id, Long[] mobileNumbers) throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
+		long now = System.currentTimeMillis();
 		for (Long number : mobileNumbers) {
 			QueryBuilder qb = new QueryBuilder();
 			qb.insertTable(TableInfo.CONTACTMOBILENUMBER);
 			qb.insertValuesToColumns(new Column(ContactMobileNumber.CONTACTID, "", "", qb.table), contact_id);
 			qb.insertValuesToColumns(new Column(ContactMobileNumber.MOBILENUMBER, "", "", qb.table), number);
-			if (qx.executeAndUpdate(qb.build()) < 1) {
+			qb.insertValuesToColumns(new Column(ContactMobileNumber.CREATEDAT, "", "", qb.table), now);
+			qb.insertValuesToColumns(new Column(ContactMobileNumber.MODIFIEDAT, "", "", qb.table), now);
+			if (qx.executeAndUpdateWithKeys(qb.build()) < 1) {
 				return false;
 			}
 		}

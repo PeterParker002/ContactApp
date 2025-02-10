@@ -486,7 +486,7 @@
   width: 100%;
 }
 
-.collapse-container {
+/* .collapse-container {
   width: 100%;
   min-height: 0;
   height: 0;
@@ -499,6 +499,36 @@
   align-items: center;
   gap: 1rem;
   overflow: hidden;
+  transform-origin: top;
+}
+
+.collapse-container > .contact {
+  padding: 0.75rem 1rem;
+  background: #fff;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: #000;
+  cursor: pointer;
+  transform-origin: top;
+} */
+
+.collapse-container {
+  width: 100%;
+  min-height: 0;
+  height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #ffffff58;
+  border-radius: 20px;
+  transition: all 250ms ease;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 1rem;
   transform-origin: top;
 }
 

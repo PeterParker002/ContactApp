@@ -35,6 +35,7 @@ public class SignupServlet extends HttpServlet {
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		User user = new User();
+		long now = System.currentTimeMillis();
 		try {
 			user.setUsername(request.getParameter("username"));
 			user.setFirstName(request.getParameter("fname"));
@@ -44,15 +45,21 @@ public class SignupServlet extends HttpServlet {
 			user.setDateOfBirth(request.getParameter("dob"));
 			UserMobile mobile = new UserMobile();
 			mobile.setMobileNumber(Long.parseLong(request.getParameter("mobile")));
+			mobile.setCreatedAt(now);
+			mobile.setModifiedAt(now);
 			user.setMobileNumber(mobile);
 			UserMail mail = new UserMail();
 			mail.setEmail(request.getParameter("email"));
 			mail.setIsPrimary(true);
+			mail.setCreatedAt(now);
+			mail.setModifiedAt(now);
 			user.setEmail(mail);
 			user.setNotes(request.getParameter("notes"));
 			user.setHomeAddress(request.getParameter("home"));
 			user.setWorkAddress(request.getParameter("work"));
 			user.setPassword(request.getParameter("password"));
+			user.setCreatedAt(now);
+			user.setModifiedAt(now);
 		} catch (NumberFormatException numException) {
 			out.println("<div class='message'>Mobile Number should be a 10 digit number.</div>");
 			logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
@@ -74,7 +81,7 @@ public class SignupServlet extends HttpServlet {
 					user.setUserId(user_id);
 					out.println("<div class='message'>Signup Successful</div>");
 					HttpSession session = request.getSession(true);
-					String now = LocalDateTime.now().toString();
+//					String now = LocalDateTime.now().toString();
 					String sessionId = userdao.generateSessionId();
 					Session s = new Session();
 					s.setSessionId(sessionId);

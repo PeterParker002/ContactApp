@@ -518,9 +518,9 @@ public class QueryExecutor2 {
 					Session session = new Session();
 					session.setSessionId(rs.getString(Database.Session.SESSIONID.toString()));
 					session.setUserId(rs.getInt(Database.Session.USERID.toString()));
-					session.setCreatedAt(rs.getString(Database.Session.CREATEDAT.toString()));
-					session.setLastAccessedAt(rs.getString(Database.Session.LASTACCESSEDAT.toString()));
-					sessions.add(session);
+					session.setCreatedAt(rs.getLong(Database.Session.CREATEDAT.toString()));
+					session.setLastAccessedAt(rs.getLong(Database.Session.LASTACCESSEDAT.toString()));
+					sessions.add(session);	
 				}
 //				closeConnection(con);
 				return sessions;

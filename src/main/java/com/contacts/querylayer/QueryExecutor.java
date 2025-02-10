@@ -8,36 +8,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-
-import javax.sql.DataSource;
+import java.util.Map.Entry;
 
 import com.contacts.model.User;
 import com.contacts.model.UserMail;
 import com.contacts.model.UserMobile;
+import com.contacts.connection.ConfigurationLoader;
 import com.contacts.connection.ConnectionPool;
+import com.contacts.dao.AuditDAO;
 import com.contacts.model.Contact;
 import com.contacts.model.ContactMail;
 import com.contacts.model.ContactMobile;
 import com.contacts.model.Group;
-import com.contacts.model.Mail;
-import com.contacts.model.MobileNumber;
 import com.contacts.model.Server;
 import com.contacts.model.Session;
 import com.contacts.utils.Database;
-import com.contacts.utils.Database.ContactEmail;
-import com.contacts.utils.Database.ContactMobileNumber;
-import com.contacts.utils.Database.Contacts;
-import com.contacts.utils.Database.GroupDetails;
-import com.contacts.utils.Database.GroupInfo;
-import com.contacts.utils.Database.TableInfo;
-import com.contacts.utils.Database.UserEmail;
-import com.contacts.utils.Database.UserMobileNumber;
-import com.contacts.utils.Database.Users;
-import com.mysql.cj.exceptions.NumberOutOfRange;
+import com.contacts.utils.DatabaseImpl;
+import com.contacts.utils.MyCustomJsonObject;
 
 import java.sql.ResultSetMetaData;
 
@@ -57,16 +47,10 @@ public class QueryExecutor {
 	public Object currentPojo;
 	public Object basePojo;
 	public String currentTableName = "";
+	private static boolean audit = true;
 
-	private Connection getConnection() throws ClassNotFoundException, SQLException {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + db_name, username, password);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
+	static {
+		audit = "true".equals(ConfigurationLoader.getProperty("audit"));
 	}
 
 	public Class<?> getModelClassForTable(String table) {
@@ -268,10 +252,19 @@ public class QueryExecutor {
 	public int executeAndUpdateWithKeys(QueryBuilder query) throws ClassNotFoundException, SQLException {
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
 				PreparedStatement ps = con.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);) {
+			MyCustomJsonObject<String, Object> oldValue = new MyCustomJsonObject<String, Object>();
+			MyCustomJsonObject<String, Object> newValue = null;
+			if (query.statementType.equals("INSERT") & Database.auditableTables.contains(query.table.name)) {
+				oldValue = null;
+				newValue = new MyCustomJsonObject<String, Object>();
+			}
 			int result = ps.executeUpdate();
 			if (result > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
 				if (rs.next()) {
+					if (audit) {
+						triggerAudit(query, rs.getInt(1), oldValue, newValue);
+					}
 					return rs.getInt(1);
 				}
 			}
@@ -283,16 +276,105 @@ public class QueryExecutor {
 		return -1;
 	}
 
+	@SuppressWarnings("unchecked")
 	public int executeAndUpdate(QueryBuilder query) throws ClassNotFoundException, SQLException {
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
 				PreparedStatement ps = con.prepareStatement(query.toString());) {
+			MyCustomJsonObject<String, Object> oldValue = new MyCustomJsonObject<String, Object>();
+			MyCustomJsonObject<String, Object> newValue = null;
+			if (query.statementType.equals("INSERT") & Database.auditableTables.contains(query.table.name)) {
+				oldValue = null;
+				newValue = new MyCustomJsonObject<String, Object>();
+			}
+			if (query.statementType.equals("UPDATE") & Database.auditableTables.contains(query.table.name)) {
+				oldValue = retreiveOldData(query);
+				newValue = (MyCustomJsonObject<String, Object>) oldValue.clone();
+			}
+			if (query.statementType.equals("DELETE") & Database.auditableTables.contains(query.table.name)) {
+				oldValue = retreiveOldData(query);
+				newValue = null;
+			}
 			int result = ps.executeUpdate();
+			if (audit) {
+				triggerAudit(query, -1, oldValue, newValue);
+			}
 			return result;
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-
 		return -1;
+	}
+
+	private MyCustomJsonObject<String, Object> retreiveOldData(QueryBuilder query) {
+		MyCustomJsonObject<String, Object> jsonData = null;
+		QueryBuilder qb = new QueryBuilder();
+		boolean isDeleteQuery = query.statementType.equals("DELETE");
+		qb.selectTable(query.table.getName());
+		try {
+			Object clazz = getModelClassForTable(query.table.toString()).getDeclaredConstructor().newInstance();
+			Method m = clazz.getClass().getMethod("getPrimaryKeyColumn");
+			DatabaseImpl idColumnName = (DatabaseImpl) m.invoke(clazz);
+			if (!isDeleteQuery) {
+				qb.selectColumn(new Column(idColumnName, "", "", qb.table));
+				query.values.forEach((col, v) -> {
+					qb.selectColumn(col);
+				});
+			}
+			query.condition.forEach((cond) -> {
+				qb.setCondition(cond);
+			});
+			jsonData = dataMapperForJson(qb.build());
+			System.out.println(jsonData);
+		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return jsonData;
+	}
+
+	private MyCustomJsonObject<String, Object> dataMapperForJson(QueryBuilder query) {
+		MyCustomJsonObject<String, Object> jsonData = new MyCustomJsonObject<String, Object>();
+		try (Connection con = ConnectionPool.getDataSource().getConnection();
+				PreparedStatement ps = con.prepareStatement(query.toString());
+				ResultSet rs = ps.executeQuery();) {
+			ResultSetMetaData metadata = rs.getMetaData();
+			while (rs.next()) {
+				for (int i = 1; i <= metadata.getColumnCount(); i++) {
+					jsonData.put(metadata.getColumnName(i), rs.getString(i));
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return jsonData;
+	}
+
+	private void triggerAudit(QueryBuilder query, int primaryKey, MyCustomJsonObject<String, Object> oldValue,
+			MyCustomJsonObject<String, Object> newValue) {
+		String tableName = query.table.toString();
+		boolean isTableAuditable = Database.auditableTables.contains(query.table.name);
+		boolean isDeleteQuery = query.statementType.equals("DELETE");
+		if (isTableAuditable) {
+			if (primaryKey > 0) {
+				try {
+					Object clazz = getModelClassForTable(tableName).getDeclaredConstructor().newInstance();
+					Method m = clazz.getClass().getMethod("getPrimaryKeyColumn");
+					DatabaseImpl idColumnName = (DatabaseImpl) m.invoke(clazz);
+					newValue.put(idColumnName.toString(), primaryKey);
+				} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+						| IllegalArgumentException | InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+			if (!isDeleteQuery) {
+				for (Entry<Column, Value<?>> val : query.values.entrySet()) {
+					newValue.put(val.getKey().toString(), val.getValue().value);
+				}
+			}
+			System.out.println("Old Value: " + oldValue);
+			System.out.println("New Value: " + newValue);
+			AuditDAO.audit(tableName, oldValue, newValue, query.statementType, LocalDateTime.now());
+		}
 	}
 
 }

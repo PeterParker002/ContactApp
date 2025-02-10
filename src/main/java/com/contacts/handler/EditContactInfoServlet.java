@@ -15,6 +15,7 @@ import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Contact;
 import com.contacts.model.Session;
 import com.contacts.model.User;
+import com.google.gson.Gson;
 
 @WebServlet("/edit-contact")
 public class EditContactInfoServlet extends HttpServlet {
@@ -30,17 +31,9 @@ public class EditContactInfoServlet extends HttpServlet {
 		Session userSession = userdao.getUserSession(sessionId);
 		int user_id = userSession.getUserId();
 		HttpSession session = request.getSession();
-		Contact contact = new Contact();
-		int contactId = Integer.parseInt(request.getParameter("contact-id"));
-		contact.setContactId(contactId);
-		contact.setFirstName(request.getParameter("fname"));
-		contact.setMiddleName(request.getParameter("midname"));
-		contact.setLastName(request.getParameter("lname"));
-		contact.setGender(request.getParameter("gender"));
-		contact.setDateOfBirth(request.getParameter("dob"));
-		contact.setNotes(request.getParameter("notes"));
-		contact.setHomeAddress(request.getParameter("home"));
-		contact.setWorkAddress(request.getParameter("work"));
+		Gson gson = new Gson();
+		Contact contact = gson.fromJson(request.getReader(), Contact.class);
+		contact.setModifiedAt(System.currentTimeMillis());
 		boolean result;
 		try {
 			result = contactdao.editContactInfo(user_id, contact);

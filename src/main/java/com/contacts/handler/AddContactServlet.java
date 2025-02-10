@@ -36,6 +36,7 @@ public class AddContactServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		Contact contact = new Contact();
+		long now = System.currentTimeMillis();
 		try {
 			contact.setFirstName(request.getParameter("fname"));
 			contact.setMiddleName(request.getParameter("midname"));
@@ -47,6 +48,8 @@ public class AddContactServlet extends HttpServlet {
 			contact.setHomeAddress(request.getParameter("home"));
 			contact.setWorkAddress(request.getParameter("work"));
 			contact.setEmail(request.getParameter("email"));
+			contact.setCreatedAt(now);
+			contact.setModifiedAt(now);
 		} catch (NumberFormatException numException) {
 			out.println("<div class='message'>Mobile Number should be a 10 digit number.</div>");
 			logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
@@ -61,15 +64,15 @@ public class AddContactServlet extends HttpServlet {
 		int user_id = userSession.getUserId();
 		try {
 			if (contactdao.addContact(user_id, contact)) {
-				out.println("<div class='message'>Contact Added Successfully.</div>");
+				session.setAttribute("message", "Contact Added Successfully");
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"Contact Added Successfully.");
-				request.getRequestDispatcher("home.jsp").include(request, response);
+				response.sendRedirect("home.jsp");
 			} else {
-				out.println("<div class='message'>Contact Addition Failed.</div>");
+				session.setAttribute("message", "Contact Added Successfully");
 				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
 						"Contact Addition Failed.");
-				request.getRequestDispatcher("home.jsp").include(request, response);
+				response.sendRedirect("home.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),

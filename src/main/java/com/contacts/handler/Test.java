@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.json.simple.JSONObject;
+import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 import java.util.Set;
@@ -32,6 +33,7 @@ import java.util.Set;
 import com.contacts.model.User;
 import com.contacts.model.UserMail;
 import com.contacts.model.UserMobile;
+import com.contacts.cache.SessionCache;
 import com.contacts.connection.ConnectionPool;
 import com.contacts.dao.ContactDAO;
 import com.contacts.dao.UserDAO;
@@ -47,21 +49,28 @@ import com.contacts.model.Server;
 //import com.contacts.model.Mail;
 //import com.contacts.model.User;
 import com.contacts.querylayer.Column;
+import com.contacts.querylayer.Condition;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
 import com.contacts.querylayer.Table;
+import com.contacts.utils.Database;
 import com.contacts.utils.Database.ContactEmail;
 import com.contacts.utils.Database.ContactMobileNumber;
 import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.GroupDetails;
 import com.contacts.utils.Database.GroupInfo;
 import com.contacts.utils.Database.Sample;
+import com.contacts.utils.Database.Session;
 import com.contacts.utils.Database.TableInfo;
 import com.contacts.utils.Database.UserEmail;
 import com.contacts.utils.Database.UserMobileNumber;
 import com.contacts.utils.Database.Users;
 import com.contacts.utils.JoinTypes;
 import com.contacts.utils.Operators;
+import com.katach.pojobuilder.Builder;
+
+import ch.qos.logback.classic.Level;
+import ch.qos.logback.classic.Logger;
 //import com.contacts.querylayer.Table;
 //import com.contacts.utils.Database.Sample;
 //import com.contacts.utils.Database.TableInfo;
@@ -81,7 +90,8 @@ public class Test {
 	public static void main(String[] args)
 			throws IllegalAccessException, InvocationTargetException, InstantiationException, IllegalArgumentException,
 			NoSuchMethodException, SecurityException, ClassNotFoundException, SQLException {
-
+		UserDAO u = new UserDAO();
+		u.clearExpiredSessions();
 //		String url = "jdbc:mysql://localhost:3306/ContactsApp";
 //		String user = "root";
 //		String password = "root";
@@ -116,23 +126,33 @@ public class Test {
 //			e.printStackTrace();
 //		}
 
-		UserDAO u = new UserDAO();
-		ArrayList<Server> servers = (ArrayList<Server>) u.getAvailableServers();
-		for (Server s : servers) {
-			try {
-				HttpClient client = HttpClient.newHttpClient();
-				String jsonPayload = "{\"message\": \"User Changed\"}";
-				HttpRequest hrequest = HttpRequest.newBuilder()
-						.uri(URI.create("http://" + s.getServerIp() + ":" + s.getServerPort() + "/notify"))
-						.header("Content-Type", "application/json")
-						.POST(HttpRequest.BodyPublishers.ofString(jsonPayload)).build();
-				HttpResponse<String> hresponse = client.send(hrequest, HttpResponse.BodyHandlers.ofString());
-				System.out.println("Response Code: " + hresponse.statusCode());
-				System.out.println("Response Body: " + hresponse.body());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+//		UserDAO u = new UserDAO();
+//		ArrayList<Server> servers = (ArrayList<Server>) u.getAvailableServers();
+//		for (Server s : servers) {
+//			try {
+//				HttpClient client = HttpClient.newHttpClient();
+//				String jsonPayload = "{\"message\": \"User Changed\"}";
+//				HttpRequest hrequest = HttpRequest.newBuilder()
+//						.uri(URI.create("http://" + s.getServerIp() + ":" + s.getServerPort() + "/notify"))
+//						.header("Content-Type", "application/json")
+//						.POST(HttpRequest.BodyPublishers.ofString(jsonPayload)).build();
+//				HttpResponse<String> hresponse = client.send(hrequest, HttpResponse.BodyHandlers.ofString());
+//				System.out.println("Response Code: " + hresponse.statusCode());
+//				System.out.println("Response Body: " + hresponse.body());
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		QueryBuilder qb = new QueryBuilder();
+//		QueryExecutor qx = new QueryExecutor();
+//
+//		qb.updateTable(TableInfo.SAMPLE);
+//		qb.updateColumn(new Column(Sample.ISPRIME, "", "", qb.table),
+//				new Condition<Integer>(new Column(Sample.AGE, "", "", qb.table), Operators.EQUAL.toString(), 23));
+//		System.out.println(qx.executeAndUpdate(qb.build()));
+
+//		System.out.println(Database.auditableTables);
 
 //		String password = "";
 //		String email = "";

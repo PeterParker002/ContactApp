@@ -2,6 +2,9 @@ package com.contacts.model;
 
 import java.util.ArrayList;
 
+import com.contacts.utils.Database.Contacts;
+import com.contacts.utils.DatabaseImpl;
+
 public class Contact {
 	private int contact_id;
 	private int user_id;
@@ -15,6 +18,8 @@ public class Contact {
 	private String workAddress;
 	private ArrayList<ContactMail> Email = new ArrayList<ContactMail>();
 	private ArrayList<ContactMobile> mobileNumber = new ArrayList<ContactMobile>();
+	private long createdAt;
+	private long modifiedAt;
 
 	public ArrayList<ContactMail> getEmail() {
 		return this.Email;
@@ -140,10 +145,30 @@ public class Contact {
 		return this.contact_id;
 	}
 
+	public long getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(long createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public long getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(long modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public DatabaseImpl getPrimaryKeyColumn() {
+		return Contacts.CONTACTID;
+	}
+
 	public ArrayList<ContactMail> getData(ContactMail mail) {
 		return this.Email;
 	}
-	
+
 	public ArrayList<ContactMobile> getData(ContactMobile mobile) {
 		return this.mobileNumber;
 	}

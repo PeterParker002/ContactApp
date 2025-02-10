@@ -142,7 +142,7 @@ public class QueryBuilder {
 			ArrayList<String> valList = new ArrayList<String>();
 			this.values.forEach((k, v) -> {
 				if (v.value instanceof String) {
-					valList.add("\"" + v.value + "\"");
+					valList.add("\'" + v.value + "\'");
 				} else {
 					valList.add(v.value.toString());
 				}
@@ -157,12 +157,17 @@ public class QueryBuilder {
 			ArrayList<String> valList = new ArrayList<String>();
 			this.values.forEach((k, v) -> {
 				String val = "";
-				if (v.value instanceof String) {
+				if (v.value == null) {
+					val = null;
+				} else if (v.value instanceof String) {
 					val = "\"" + v.value + "\"";
+				} else if (v.value instanceof Condition) {
+					val = "(" + v.value.toString() + ")";
 				} else {
 					val = v.value.toString();
 				}
-				valList.add(k + "=" + val);
+				if (val != null)
+					valList.add(k + "=" + val);
 			});
 			return String.join(", ", valList);
 		}
@@ -264,6 +269,10 @@ public class QueryBuilder {
 
 	public <T> void setCondition(Column col, Operators op, T val) {
 		Condition<T> cnd = new Condition<>(col, op.toString(), val);
+		this.condition.add(cnd);
+	}
+
+	public void setCondition(Condition<?> cnd) {
 		this.condition.add(cnd);
 	}
 

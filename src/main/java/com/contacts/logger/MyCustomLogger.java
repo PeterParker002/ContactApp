@@ -29,16 +29,10 @@ public class MyCustomLogger {
 
 	public synchronized void log(LogLevel level, String requestType, String ip, String uri, int statusCode,
 			String message) {
-//		if (level.ordinal() >= currentLogLevel.ordinal()) {
 		String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-//			String logMessage = String.format("%s [%s] [%s] from %s, %s", timestamp, level, requestType, ip, message);
 		String logMessage = String.format(template, ip, level, timestamp, requestType, uri, "HTTP/1.1", statusCode,
 				message);
-
-		// Print to console
 		System.out.println(logMessage);
-
-		// Write to file
 		if (writer != null) {
 			writer.println(logMessage);
 		}

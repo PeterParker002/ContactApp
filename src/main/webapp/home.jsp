@@ -8,6 +8,17 @@ UserDAO u = new UserDAO();
 ContactDAO c = new ContactDAO();
 String sessionId = u.getSessionIdFromCookie(request, "session");
 Session userSession = u.getUserSession(sessionId);
+if (userSession == null) {
+	for(Cookie cook: request.getCookies()) {
+		if (cook.getName().equals("session")) {
+			cook.setValue("");
+			cook.setMaxAge(0);
+			response.addCookie(cook);
+			response.sendRedirect("/");
+			return;
+		}
+	}
+}
 int user_id = userSession.getUserId();
 //User user = u.getUserInfo(user_id);
 User user = SessionCache.userCache.get(user_id);
@@ -42,14 +53,14 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 		<div class="form-wrapper">
 			<span class="close-profile-form close-btn"><img
 				src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="48"></span>
-			<form id="edit-profile-form" action="edit-profile" method="post">
+			<form id="edit-profile-form" action="edit-profile" method="post" onsubmit="submitForm(event)">
 				<div class="edit-profile-fields profile-fields">
-					<input type="text" name="fname" placeholder="Enter your first name"
+					<input type="text" name="firstName" placeholder="Enter your first name"
 						value="<%=user.getFirstName()%>" required /> <input
-						type="text" name="midname"
+						type="text" name="middleName"
 	placeholder="Enter your middle name(optional)"
 						value="<%=user.getMiddleName()%>" /> <input type="text"
-						name="lname" placeholder="Enter your last name(optional)"
+						name="lastName" placeholder="Enter your last name(optional)"
 						value="<%=user.getLastName()%>" />
 					<%
 					if (user.getGender().equalsIgnoreCase("male")) {
@@ -82,20 +93,20 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 					<%
 					}
 					%>
-					<input type="date" name="dob" id="dob"
+					<input type="date" name="dateOfBirth" id="dob"
 						title="Enter your date of birth here"
 						value="<%=user.getDateOfBirth()%>" required /> <input
-						type="text" name="notes" id="notes"
+						type="text" name="Notes" id="notes"
 	placeholder="Tell us about yourself"
 						value="<%=user.getNotes()%>" /> <input type="text"
-						name="home" id="home" placeholder="Enter your home address"
+						name="home" id="homeAddress" placeholder="Enter your home address"
 						value="<%=user.getHomeAddress()%>" required /> <input
-						type="text" name="work" id="work"
+						type="text" name="workAddress" id="work"
 	placeholder="Enter your work address"
 						value="<%=user.getWorkAddress()%>" required />
 
 				</div>
-				<input type="submit" value="Edit Profile">
+				<input type="submit" class="submitBtn" value="Edit Profile">
 			</form>
 		</div>
 	</div>
@@ -103,15 +114,15 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 		<div class="form-wrapper">
 			<span class="close-edit-contact-form close-btn"><img
 				src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="48"></span>
-			<form id="edit-contact-form" action="edit-contact" method="post">
+			<form id="edit-contact-form" action="edit-contact" method="post" onsubmit="submitForm(event)">
 				<div class="edit-profile-fields profile-fields">
-				<input type="hidden" name="contact-id" id="hidden-contact-id">
-					<input type="text" name="fname" class="fname" placeholder="Enter your first name"
+				<input type="hidden" name="contact_id" id="hidden-contact-id">
+					<input type="text" name="firstName" class="fname" placeholder="Enter your first name"
 						value="" required /> <input
-						type="text" name="midname" class="mname"
+						type="text" name="middleName" class="mname"
 	placeholder="Enter your middle name(optional)"
 						value="" /> <input type="text" class="lname"
-						name="lname" placeholder="Enter your last name(optional)"
+						name="lastName" placeholder="Enter your last name(optional)"
 						value="" />
 					<div class="gender">
 						Gender:
@@ -124,20 +135,20 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 								for="female">Female</label>
 						</div>
 					</div>
-					<input type="date" class="dob" name="dob" id="dob"
+					<input type="date" class="dob" name="dateOfBirth" id="dob"
 						title="Enter your date of birth here"
 						value="" required /> <input class="notes"
 						type="text" name="notes" id="notes"
 	placeholder="Tell us about yourself"
 						value="" /> <input type="text" class="home"
-						name="home" id="home" placeholder="Enter your home address"
+						name="homeAddress" id="home" placeholder="Enter your home address"
 						value="" required /> <input class="work"
-						type="text" name="work" id="work"
+						type="text" name="workAddress" id="work"
 	placeholder="Enter your work address"
 						value="" required />
 
 				</div>
-				<input type="submit" value="Edit Profile">
+				<input type="submit" class="submitBtn" value="Edit Profile">
 			</form>
 		</div>
 	</div>
@@ -414,7 +425,7 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 								for (Contact cont : contacts) {
 					%>
 					<div class="contact-card">
-						<div class="card-title">
+						<div class="card-title" id="contact-<%=cont.getContactId() %>>">
 							<span class="contact-name" data-id="<%=cont.getContactId()%>"><%=cont.getFirstName()%>
 								<%=cont.getMiddleName()%> <%=cont.getLastName()%></span> <a
 								href="deleteContact/<%=cont.getContactId()%>"

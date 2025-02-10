@@ -1,4 +1,4 @@
-
+let initialFormValues = {};
 
 document.querySelector(".message")?.addEventListener("click", (e) => {
 	e.target.style.display = "none";
@@ -48,6 +48,109 @@ document
 
 document.querySelector(".edit-profile")?.addEventListener("click", () => {
 	document.querySelector(".edit-profile-form").classList.toggle("hide");
+
+	const form = document.getElementById("edit-profile-form");
+	const inputs = form.querySelectorAll("input");
+	inputs.forEach(input => {
+		if (input.type === "radio") {
+			console.log(input.name, input.checked);
+            if (input.checked) {
+                initialFormValues[input.name] = input.value;
+            }
+        } else {
+            initialFormValues[input.name] = input.value;
+        }
+		input.addEventListener("input", () => {
+			let isChanged = false;
+			inputs.forEach(input => {
+				if (input.type === "radio" & input.checked) {
+					if (initialFormValues[input.name] !== input.value) {
+		                isChanged = true;
+		            }
+				}
+				else if (initialFormValues[input.name] !== input.value & input.type !== "radio") {
+					console.log(initialFormValues[input.name], input.value);
+					isChanged = true;
+				}
+			});
+			console.log(isChanged);
+			form.getElementsByClassName("submitBtn")[0].disabled = !isChanged;
+		});
+	});
+	console.log(initialFormValues);
+	form.getElementsByClassName("submitBtn")[0].disabled = true;
+});
+
+function submitForm(event) {
+    event.preventDefault();
+    const form = event.target;
+    const inputs = form.querySelectorAll("input");
+    const formData = {};
+
+    inputs.forEach(input => {
+		if (input.type === "hidden") {
+			formData[input.name] = input.value;
+		} else if (input.type === "radio") {
+            if (input.checked) {
+				console.log(initialFormValues[input.name], input.value, initialFormValues[input.name] != input.value);
+				if (initialFormValues[input.name] != input.value) {					
+                	formData[input.name] = input.value;
+				}
+            }
+        } else {
+			console.log(initialFormValues[input.name], input.value, initialFormValues[input.name] != input.value);
+			if (initialFormValues[input.name] != input.value) {
+				formData[input.name] = input.value;
+			}
+        }
+    });
+	console.log(formData);
+	if (Object.keys(formData).length !== 0) {
+    fetch(form.action, {
+        method: form.method,
+		headers: {
+	        "Content-Type": "application/json",
+	    },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.text())
+    .then(data => {
+		//document.querySelector(".edit-profile-form").classList.toggle("hide");
+		sessionStorage.setItem("message", "Profile Updated successfully!");
+		location.reload();
+    })
+    .catch(error => console.error("Error:", error));
+	} else {
+		const msg = document.createElement("div");
+		msg.className = "message";
+		msg.innerText = "Don't Submit the same data.";
+		msg?.addEventListener("click", (e) => {
+			e.target.style.display = "none";
+		});
+		document.body.insertBefore(msg, document.body.firstChild);
+		document.querySelector(".add-mail-btn").setAttribute("disabled", true);
+
+		setTimeout(() => {
+			msg.remove();
+		}, 2000);
+	}
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const message = sessionStorage.getItem("message");
+    if (message) {
+		const msg = document.createElement("div");
+		msg.className = "message";
+		msg.textContent = message;
+		msg?.addEventListener("click", (e) => {
+			e.target.style.display = "none";
+		});
+		document.body.insertBefore(msg, document.body.firstChild);
+		setTimeout(() => {
+			msg.remove();
+		}, 2000);
+        sessionStorage.removeItem("message");
+    }
 });
 
 document.querySelector(".close-profile-form")?.addEventListener("click", () => {
@@ -229,7 +332,7 @@ document.querySelectorAll(".edit-contact").forEach((contact) => {
 	console.log(contact);
 	contact.addEventListener("click", () => {		
 	const editContactForm = document.querySelector(".edit-contact-form");
-	editContactForm.classList.toggle("hide");
+	//editContactForm.classList.toggle("hide");
     editContactForm.querySelector("#hidden-contact-id").value = currentContact;
 	console.log(currentContact);
 	editContactForm.querySelector(".fname").value = currentContactInfo.fname;
@@ -244,8 +347,47 @@ document.querySelectorAll(".edit-contact").forEach((contact) => {
 	editContactForm.querySelector(".notes").value = currentContactInfo.notes;
 	editContactForm.querySelector(".home").value = currentContactInfo.home;
 	editContactForm.querySelector(".work").value = currentContactInfo.work;
+	editContactFormHandler(editContactForm);
 	});
 });
+
+const editContactFormHandler = (form) => {
+	initialFormValues = {};
+	form.classList.toggle("hide");
+	
+	const inputs = form.querySelectorAll("input");
+	inputs.forEach(input => {
+		if (input.type === "radio") {
+			console.log(input.name, input.checked);
+            if (input.checked) {
+                initialFormValues[input.name] = input.value;
+            }
+        } else {
+            initialFormValues[input.name] = input.value;
+        }
+		input.addEventListener("input", () => {
+			let isChanged = false;
+			inputs.forEach(input => {
+				if (input.type === "hidden") {
+					isChanged = false;
+				}
+				if (input.type === "radio" & input.checked) {
+					if (initialFormValues[input.name] !== input.value) {
+		                isChanged = true;
+		            }
+				}
+				else if (initialFormValues[input.name] !== input.value & input.type !== "radio") {
+					console.log(initialFormValues[input.name], input.value);
+					isChanged = true;
+				}
+			});
+			console.log(isChanged);
+			form.getElementsByClassName("submitBtn")[0].disabled = !isChanged;
+		});
+	});
+	console.log(initialFormValues);
+	form.getElementsByClassName("submitBtn")[0].disabled = true;
+}
 
 document.querySelectorAll(".add-contact-mail-icon").forEach((btn) => {
 	btn?.addEventListener("click", () => {
