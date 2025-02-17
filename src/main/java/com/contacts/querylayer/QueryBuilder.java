@@ -55,6 +55,7 @@ public class QueryBuilder {
 	public GroupBy group_by;
 	public OrderBy order_by;
 	public LinkedHashMap<Column, Value<?>> values = new LinkedHashMap<Column, Value<?>>();
+	public ArrayList<Object> valuesList = new ArrayList<Object>();
 	public String limit = "";
 	public String conjuction = "AND";
 //	public boolean singleTable = true;
@@ -110,7 +111,13 @@ public class QueryBuilder {
 	public String getConditions() {
 		if (this.condition.size() > 0) {
 			ArrayList<String> conditionList = new ArrayList<>();
-			this.condition.forEach(cnd -> conditionList.add(cnd.toString()));
+			this.condition.forEach(cnd -> {
+				conditionList.add(cnd.toString());
+				if (cnd.value instanceof QueryBuilder) {	
+					QueryBuilder qb = (QueryBuilder) cnd.value;
+					valuesList.addAll(qb.valuesList);
+				}
+			});
 			String conditionString = String.join(" " + conjuction + " ", conditionList);
 			return "WHERE " + conditionString;
 		}
@@ -141,11 +148,15 @@ public class QueryBuilder {
 		if (this.values.size() > 0) {
 			ArrayList<String> valList = new ArrayList<String>();
 			this.values.forEach((k, v) -> {
-				if (v.value instanceof String) {
-					valList.add("\'" + v.value + "\'");
-				} else {
-					valList.add(v.value.toString());
-				}
+//				if (v.value == null) {
+//					valList.add(null);
+//				} else if (v.value instanceof String) {
+//					valList.add("\'" + v.value + "\'");
+//				} else {
+//					valList.add(v.value.toString());
+//				}
+				valuesList.add(v.value);
+				valList.add(" ? ");
 			});
 			return "(" + String.join(", ", valList) + ")";
 		}

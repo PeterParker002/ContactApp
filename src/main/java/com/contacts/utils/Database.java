@@ -3,8 +3,10 @@ package com.contacts.utils;
 import java.util.ArrayList;
 
 public class Database {
-
 	public static ArrayList<TableInfo> auditableTables = new ArrayList<>() {
+
+		private static final long serialVersionUID = 1L;
+
 		{
 			add(TableInfo.USER);
 			add(TableInfo.USEREMAIL);

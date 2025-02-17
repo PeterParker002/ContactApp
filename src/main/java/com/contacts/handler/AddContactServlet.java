@@ -13,21 +13,18 @@ import javax.servlet.http.HttpSession;
 
 import com.contacts.dao.ContactDAO;
 import com.contacts.dao.UserDAO;
-import com.contacts.logger.MyCustomLogger;
+
+
 import com.contacts.model.Contact;
+import com.contacts.model.ContactMail;
+import com.contacts.model.ContactMobile;
 import com.contacts.model.Session;
-import com.contacts.model.User;
 
 @WebServlet("/add-contact")
 public class AddContactServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final MyCustomLogger logger = new MyCustomLogger(
-			"/home/karthik-tt0479/eclipse-workspace/FirstProject/src/main/resources/logs/application.log",
-			MyCustomLogger.LogLevel.INFO);
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-				"Redirecting to home page (/).");
 		response.sendRedirect("/");
 	}
 
@@ -42,41 +39,43 @@ public class AddContactServlet extends HttpServlet {
 			contact.setMiddleName(request.getParameter("midname"));
 			contact.setLastName(request.getParameter("lname"));
 			contact.setGender(request.getParameter("gender"));
-			contact.setDateOfBirth(request.getParameter("dob"));
-			contact.setMobileNumber(Long.parseLong(request.getParameter("mobile")));
+			contact.setDateOfBirth(request.getParameter("dob").equals("") ? null : request.getParameter("dob"));
+			ContactMobile mobile = new ContactMobile();
+//			mobile.setMobileNumber(Long.parseLong(request.getParameter("mobile")));
+			mobile.setMobileNumber(request.getParameter("mobile"));
+			mobile.setCreatedAt(now);
+			mobile.setModifiedAt(now);
+			contact.setMobileNumber(mobile);
 			contact.setNotes(request.getParameter("notes"));
 			contact.setHomeAddress(request.getParameter("home"));
 			contact.setWorkAddress(request.getParameter("work"));
-			contact.setEmail(request.getParameter("email"));
+			String mailId = request.getParameter("email");
+			if (!mailId.equals("")) {
+				ContactMail mail = new ContactMail();
+				mail.setEmail(mailId);
+				mail.setCreatedAt(now);
+				mail.setModifiedAt(now);
+				contact.setEmail(mail);
+			}
 			contact.setCreatedAt(now);
 			contact.setModifiedAt(now);
 		} catch (NumberFormatException numException) {
 			out.println("<div class='message'>Mobile Number should be a 10 digit number.</div>");
-			logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-					"Mobile Number should be a 10 digit number.");
 			request.getRequestDispatcher("home.jsp").include(request, response);
 		}
-		ContactDAO contactdao = new ContactDAO();
 		HttpSession session = request.getSession();
-		UserDAO userdao = new UserDAO();
-		String sessionId = userdao.getSessionIdFromCookie(request, "session");
-		Session userSession = userdao.getUserSession(sessionId);
+		String sessionId = UserDAO.getSessionIdFromCookie(request, "session");
+		Session userSession = UserDAO.getUserSession(sessionId);
 		int user_id = userSession.getUserId();
 		try {
-			if (contactdao.addContact(user_id, contact)) {
+			if (ContactDAO.addContact(user_id, contact)) {
 				session.setAttribute("message", "Contact Added Successfully");
-				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-						"Contact Added Successfully.");
 				response.sendRedirect("home.jsp");
 			} else {
 				session.setAttribute("message", "Contact Added Successfully");
-				logger.info("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-						"Contact Addition Failed.");
 				response.sendRedirect("home.jsp");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
-			logger.error("POST", request.getRemoteAddr(), request.getRequestURI(), response.getStatus(),
-					e.getMessage());
 			e.printStackTrace();
 		}
 	}

@@ -299,9 +299,16 @@ document.querySelectorAll(".contact-name").forEach((name) =>
 																	src="assets/pencil-cursor-svgrepo-com.svg" width='16'
 																	alt="add-email"></span>
 															</div>`;
+					if (data.mails.length > 0) {						
 					data.mails.forEach((m) => {
 						generateMailComponent(m.id, m.mail);
 					});
+					} else {
+						const emptyContainer = document.createElement("small");
+						emptyContainer.className = "no-mail";
+						emptyContainer.innerText = "No Emails Found 🫤";
+						document.querySelector(".contact-mails").appendChild(emptyContainer);
+					}	
 					data.mobiles.forEach((mo) => {
 						generateMobileComponent(mo.id, mo.mobile);
 					});
@@ -338,10 +345,12 @@ document.querySelectorAll(".edit-contact").forEach((contact) => {
 	editContactForm.querySelector(".fname").value = currentContactInfo.fname;
 	editContactForm.querySelector(".mname").value = currentContactInfo.mname;
 	editContactForm.querySelector(".lname").value = currentContactInfo.lname;
+	if (currentContactInfo.gender != null) {	
 	if (currentContactInfo.gender.toLowerCase() == "male") {
 		editContactForm.querySelector(".male").setAttribute("checked", true);
 	} else {
 		editContactForm.querySelector(".female").setAttribute("checked", true);
+	}
 	}
 	editContactForm.querySelector(".dob").value = currentContactInfo.dob;
 	editContactForm.querySelector(".notes").value = currentContactInfo.notes;

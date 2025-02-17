@@ -2,26 +2,15 @@ package com.contacts.dao;
 
 import java.lang.reflect.InvocationTargetException;
 import java.security.SecureRandom;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.UUID;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
-
 import org.mindrot.jbcrypt.BCrypt;
-
 import com.contacts.cache.SessionCache;
-import com.contacts.model.Contact;
-import com.contacts.model.Group;
-import com.contacts.model.Server;
-import com.contacts.model.User;
-import com.contacts.model.UserMail;
-import com.contacts.model.UserMobile;
-import com.contacts.model.Session;
+import com.contacts.model.*;
 import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
@@ -41,31 +30,9 @@ import com.contacts.utils.Database.Users;
 import com.lambdaworks.crypto.SCryptUtil;
 
 public class UserDAO {
-	private String username = "root";
-	private String password = "root";
-	private String db_name = "ContactsApp";
-	// 1 -> Bcrypt, 2 -> Scrypt
-	private int currentHashing = 2;
+	private static int currentHashing = 2;
 	public static String[] Columns = { "Username", "First Name", "Middle Name", "Last Name", "Gender", "Date Of Birth",
 			"Notes", "Home Address", "Work Address" };
-
-	/**
-	 * Get Connection Method
-	 * 
-	 * @return the MySQL database connection Object for the specified database
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
-	 */
-	private Connection getConnection() throws ClassNotFoundException, SQLException {
-		Connection con = null;
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + db_name, username, password);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return con;
-	}
 
 	// Insert Statement
 	/**
@@ -76,7 +43,7 @@ public class UserDAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public int SignupUser(User user) throws SQLException, ClassNotFoundException {
+	public static int SignupUser(User user) throws SQLException, ClassNotFoundException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.insertTable(TableInfo.USER);
@@ -139,7 +106,8 @@ public class UserDAO {
 	 * @throws InvocationTargetException
 	 * @throws IllegalAccessException
 	 */
-	public User LoginUser(String email, String password)
+	@SuppressWarnings("unchecked")
+	public static User LoginUser(String email, String password)
 			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
@@ -149,14 +117,11 @@ public class UserDAO {
 		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
 				new Column(UserEmail.USERID, "", "", emailTable));
 		qb.setCondition(new Column(UserEmail.EMAIL, "", "", emailTable), Operators.EQUAL, email);
-//		HashMap<String, Object> users = qx.executeJoinQuery(qb.build());
 		ArrayList<User> users = (ArrayList<User>) qx.executeJoinQuery1(qb.build());
 		System.out.println(users);
 		if (users != null) {
 			if (users.size() > 0) {
 				User u = (User) users.get(0);
-//			u.setEmail(this.getUserMail(u.getUserId()));
-//			u.setMobileNumber(this.getUserMobileNumber(u.getUserId()));
 				if (checkPassword(password, u.getPassword(), u.getIsHashed())) {
 					if (currentHashing != u.getIsHashed()) {
 						String newHashedPassword = hashPassword(password, currentHashing);
@@ -190,7 +155,7 @@ public class UserDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public boolean addEmails(int user_id, String[] emails) throws ClassNotFoundException, SQLException {
+	public static boolean addEmails(int user_id, String[] emails) throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
 		long now = System.currentTimeMillis();
 		for (String email : emails) {
@@ -218,7 +183,7 @@ public class UserDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public boolean changePrimaryMail(int user_id, int mail_id) throws ClassNotFoundException, SQLException {
+	public static boolean changePrimaryMail(int user_id, int mail_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		long now = System.currentTimeMillis();
@@ -255,7 +220,8 @@ public class UserDAO {
 	 * @throws IllegalArgumentException
 	 * @throws InstantiationException
 	 */
-	public boolean checkIsPrimaryMail(int mail_id)
+	@SuppressWarnings("unchecked")
+	public static boolean checkIsPrimaryMail(int mail_id)
 			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
@@ -276,10 +242,7 @@ public class UserDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public boolean deleteMail(int mail_id) throws ClassNotFoundException, SQLException {
-//		Connection con = getConnection();
-//		PreparedStatement ps1 = con.prepareStatement("delete from User_mail_ids where id=?;");
-//		ps1.setInt(1, mail_id);
+	public static boolean deleteMail(int mail_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.USEREMAIL);
@@ -297,10 +260,11 @@ public class UserDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public boolean addMobileNumbers(int user_id, Long[] mobileNumbers) throws ClassNotFoundException, SQLException {
+	public static boolean addMobileNumbers(int user_id, String[] mobileNumbers)
+			throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
 		long now = System.currentTimeMillis();
-		for (Long number : mobileNumbers) {
+		for (String number : mobileNumbers) {
 			QueryBuilder qb = new QueryBuilder();
 			qb.insertTable(TableInfo.USERMOBILENUMBER);
 			qb.insertValuesToColumns(new Column(UserMobileNumber.USERID, "", "", qb.table), user_id);
@@ -323,7 +287,7 @@ public class UserDAO {
 	 * @throws ClassNotFoundException
 	 * @throws SQLException
 	 */
-	public boolean deleteMobileNumber(int mobile_id) throws ClassNotFoundException, SQLException {
+	public static boolean deleteMobileNumber(int mobile_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.USERMOBILENUMBER);
@@ -346,7 +310,8 @@ public class UserDAO {
 	 * @throws IllegalArgumentException
 	 * @throws InstantiationException
 	 */
-	public User getUserInfo(int user_id) {
+	@SuppressWarnings("unchecked")
+	public static User getUserInfo(int user_id) {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USER);
 		Table emailTable = new Table(TableInfo.USEREMAIL);
@@ -384,7 +349,8 @@ public class UserDAO {
 	 * @throws IllegalArgumentException
 	 * @throws InstantiationException
 	 */
-	public ArrayList<UserMail> getUserMail(int user_id)
+	@SuppressWarnings("unchecked")
+	public static ArrayList<UserMail> getUserMail(int user_id)
 			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
@@ -410,7 +376,8 @@ public class UserDAO {
 	 * @throws IllegalArgumentException
 	 * @throws InstantiationException
 	 */
-	public ArrayList<UserMobile> getUserMobileNumber(int user_id)
+	@SuppressWarnings("unchecked")
+	public static ArrayList<UserMobile> getUserMobileNumber(int user_id)
 			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
@@ -422,7 +389,7 @@ public class UserDAO {
 	}
 
 	// Update Statement
-	public boolean editUserInfo(int user_id, User user) throws ClassNotFoundException, SQLException {
+	public static boolean editUserInfo(int user_id, User user) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.updateTable(TableInfo.USER);
@@ -457,7 +424,8 @@ public class UserDAO {
 	}
 
 	// Select Statement
-	public ArrayList<Group> getGroups(int user_id)
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Group> getGroups(int user_id)
 			throws SQLException, ClassNotFoundException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
@@ -475,7 +443,8 @@ public class UserDAO {
 		return groups;
 	}
 
-	public ArrayList<Contact> getContactsByGroup(int group_id)
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Contact> getContactsByGroup(int group_id)
 			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
@@ -502,7 +471,7 @@ public class UserDAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public boolean addGroup(int user_id, String name, ArrayList<Integer> contact_ids)
+	public static boolean addGroup(int user_id, String name, ArrayList<Integer> contact_ids)
 			throws SQLException, ClassNotFoundException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
@@ -520,7 +489,7 @@ public class UserDAO {
 	}
 
 	// Insert Statement
-	public boolean addGroupContact(int group_id, ArrayList<Integer> contact_ids)
+	public static boolean addGroupContact(int group_id, ArrayList<Integer> contact_ids)
 			throws SQLException, ClassNotFoundException {
 		for (int contact : contact_ids) {
 			QueryBuilder qb = new QueryBuilder();
@@ -543,7 +512,7 @@ public class UserDAO {
 	 * @return returns the hashed password for the respective hashing algorithm
 	 *         mentioned
 	 */
-	public String hashPassword(String password, int type) {
+	public static String hashPassword(String password, int type) {
 		String hashed = "";
 		switch (type) {
 		case 1:
@@ -570,7 +539,7 @@ public class UserDAO {
 	 * @return checks whether the password is correct or not, based on the
 	 *         respective algorithm
 	 */
-	public boolean checkPassword(String password, String hashedPassword, int type) {
+	public static boolean checkPassword(String password, String hashedPassword, int type) {
 		boolean check = false;
 		switch (type) {
 		case 1:
@@ -585,7 +554,8 @@ public class UserDAO {
 		return check;
 	}
 
-	public Session getUserSession(String sessionId) {
+	@SuppressWarnings("unchecked")
+	public static Session getUserSession(String sessionId) {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.selectTable(TableInfo.SESSION);
@@ -604,7 +574,7 @@ public class UserDAO {
 		return null;
 	}
 
-	public Session createSession(Session session) throws ClassNotFoundException, SQLException {
+	public static Session createSession(Session session) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.insertTable(TableInfo.SESSION);
@@ -619,12 +589,13 @@ public class UserDAO {
 		return null;
 	}
 
-	public int updateSession(String sessionId, long lastAccessedAt) {
+	public static int updateSession(String sessionId, long lastAccessedAt) {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.updateTable(TableInfo.SESSION);
 		qb.updateColumn(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), lastAccessedAt);
 		qb.setCondition(new Column(Database.Session.SESSIONID, "", "", qb.table), Operators.EQUAL, sessionId);
+		qb.setCondition(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), Operators.LESSTHAN, lastAccessedAt);
 		int res;
 		try {
 			res = qx.executeAndUpdate(qb.build());
@@ -637,7 +608,7 @@ public class UserDAO {
 		return -1;
 	}
 
-	public int clearSession(String sessionId) {
+	public static int clearSession(String sessionId) {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.SESSION);
@@ -651,12 +622,13 @@ public class UserDAO {
 		return res;
 	}
 
-	public int clearExpiredSessions() {
+	public static int clearExpiredSessions() {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		long expired_time = System.currentTimeMillis() - SessionCache.EXPIRATION_TIME;
 		qb.deleteTable(TableInfo.SESSION);
-		qb.setCondition(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), Operators.LESSTHAN, expired_time);
+		qb.setCondition(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), Operators.LESSTHAN,
+				expired_time);
 		qb.setLimit(200);
 		int res = -1;
 		try {
@@ -667,7 +639,7 @@ public class UserDAO {
 		return res;
 	}
 
-	public String generateCustomSessionId() {
+	public static String generateCustomSessionId() {
 		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		ArrayList<Character> charList = new ArrayList<>();
 		for (char c : characters.toCharArray()) {
@@ -689,11 +661,11 @@ public class UserDAO {
 		return randomString.toString();
 	}
 
-	public String generateSessionId() {
+	public static String generateSessionId() {
 		return UUID.randomUUID().toString();
 	}
 
-	public String getSessionIdFromCookie(HttpServletRequest req, String cookieName) {
+	public static String getSessionIdFromCookie(HttpServletRequest req, String cookieName) {
 		Cookie[] cookies = req.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
@@ -705,7 +677,8 @@ public class UserDAO {
 		return "";
 	}
 
-	public ArrayList<Server> getAvailableServers() throws InstantiationException, IllegalAccessException,
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Server> getAvailableServers() throws InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
@@ -717,7 +690,7 @@ public class UserDAO {
 		return result;
 	}
 
-	public int addEntryToAvailableServers(String ip, int port) throws ClassNotFoundException, SQLException {
+	public static int addEntryToAvailableServers(String ip, int port) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.insertTable(TableInfo.SERVERS);
@@ -729,7 +702,7 @@ public class UserDAO {
 		return -1;
 	}
 
-	public int deleteEntryFromAvailableServers(String ip, int port) throws ClassNotFoundException, SQLException {
+	public static int deleteEntryFromAvailableServers(String ip, int port) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.SERVERS);

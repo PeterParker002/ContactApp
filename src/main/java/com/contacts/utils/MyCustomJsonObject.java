@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class MyCustomJsonObject<K, V> extends HashMap<K, V> {
 
+	private static final long serialVersionUID = 1L;
+
 	@Override
 	public String toString() {
 		StringBuilder jsonBuilder = new StringBuilder("{");

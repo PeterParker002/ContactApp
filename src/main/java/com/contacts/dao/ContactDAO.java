@@ -1,18 +1,10 @@
 package com.contacts.dao;
 
 import java.lang.reflect.InvocationTargetException;
-//import java.sql.Connection;
-//import java.sql.DriverManager;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.sql.Statement;
 import java.util.ArrayList;
-
 import com.contacts.model.Contact;
-//import com.contacts.model.ContactMobile;
 import com.contacts.model.Group;
-//import com.contacts.model.User;
 import com.contacts.querylayer.Column;
 import com.contacts.querylayer.QueryBuilder;
 import com.contacts.querylayer.QueryExecutor;
@@ -23,33 +15,13 @@ import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.Database.GroupDetails;
 import com.contacts.utils.Database.GroupInfo;
 import com.contacts.utils.Database.TableInfo;
-import com.contacts.utils.Database.UserEmail;
-import com.contacts.utils.Database.UserMobileNumber;
-import com.contacts.utils.Database.Users;
-//import com.contacts.utils.Database.UserEmail;
-//import com.contacts.utils.Database.UserMobileNumber;
-//import com.contacts.utils.Database.Users;
 import com.contacts.utils.JoinTypes;
 import com.contacts.utils.Operators;
+import com.contacts.utils.Order;
 
 public class ContactDAO {
-//	private String username = "root";
-//	private String password = "root";
-//	private String db_name = "ContactsApp";
-//
-//	
-//	private Connection getConnection() throws ClassNotFoundException, SQLException {
-//		Connection con = null;
-//		try {
-//			Class.forName("com.mysql.cj.jdbc.Driver");
-//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + db_name, username, password);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return con;
-//	}
 
-	public boolean addContact(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
+	public static boolean addContact(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.insertTable(TableInfo.CONTACTS);
@@ -65,7 +37,7 @@ public class ContactDAO {
 		qb.insertValuesToColumns(new Column(Contacts.CREATEDAT, "", "", qb.table), contact.getCreatedAt());
 		qb.insertValuesToColumns(new Column(Contacts.MODIFIEDAT, "", "", qb.table), contact.getModifiedAt());
 		int result = qx.executeAndUpdateWithKeys(qb.build());
-		if (result > 0) {
+		if (result > 0 && contact.getEmail().size() > 0) {
 			qb = new QueryBuilder();
 			qb.insertTable(TableInfo.CONTACTMAIL);
 			qb.insertValuesToColumns(new Column(ContactEmail.CONTACTID, "", "", qb.table), result);
@@ -75,23 +47,24 @@ public class ContactDAO {
 					contact.getEmail().get(0).getCreatedAt());
 			qb.insertValuesToColumns(new Column(ContactEmail.MODIFIEDAT, "", "", qb.table),
 					contact.getEmail().get(0).getModifiedAt());
-			if (qx.executeAndUpdateWithKeys(qb.build()) > 0) {
-				qb = new QueryBuilder();
-				qb.insertTable(TableInfo.CONTACTMOBILENUMBER);
-				qb.insertValuesToColumns(new Column(ContactMobileNumber.CONTACTID, "", "", qb.table), result);
-				qb.insertValuesToColumns(new Column(ContactMobileNumber.MOBILENUMBER, "", "", qb.table),
-						contact.getMobileNumber().get(0).getMobileNumber());
-				qb.insertValuesToColumns(new Column(ContactMobileNumber.CREATEDAT, "", "", qb.table),
-						contact.getMobileNumber().get(0).getCreatedAt());
-				qb.insertValuesToColumns(new Column(ContactMobileNumber.MODIFIEDAT, "", "", qb.table),
-						contact.getMobileNumber().get(0).getModifiedAt());
-				return qx.executeAndUpdateWithKeys(qb.build()) > 0;
-			}
+			qx.executeAndUpdateWithKeys(qb.build());
+		}
+		if (result > 0 && contact.getMobileNumber().size() > 0) {
+			qb = new QueryBuilder();
+			qb.insertTable(TableInfo.CONTACTMOBILENUMBER);
+			qb.insertValuesToColumns(new Column(ContactMobileNumber.CONTACTID, "", "", qb.table), result);
+			qb.insertValuesToColumns(new Column(ContactMobileNumber.MOBILENUMBER, "", "", qb.table),
+					contact.getMobileNumber().get(0).getMobileNumber());
+			qb.insertValuesToColumns(new Column(ContactMobileNumber.CREATEDAT, "", "", qb.table),
+					contact.getMobileNumber().get(0).getCreatedAt());
+			qb.insertValuesToColumns(new Column(ContactMobileNumber.MODIFIEDAT, "", "", qb.table),
+					contact.getMobileNumber().get(0).getModifiedAt());
+			return qx.executeAndUpdateWithKeys(qb.build()) > 0;
 		}
 		return false;
 	}
 
-	public boolean editContactInfo(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
+	public static boolean editContactInfo(int user_id, Contact contact) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.updateTable(TableInfo.CONTACTS);
@@ -126,7 +99,7 @@ public class ContactDAO {
 		return res > 0;
 	}
 
-	public boolean addEmails(int contact_id, String[] emails) throws ClassNotFoundException, SQLException {
+	public static boolean addEmails(int contact_id, String[] emails) throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
 		long now = System.currentTimeMillis();
 		for (String email : emails) {
@@ -143,7 +116,7 @@ public class ContactDAO {
 		return true;
 	}
 
-	public boolean deleteMail(int mail_id) throws ClassNotFoundException, SQLException {
+	public static boolean deleteMail(int mail_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.CONTACTMAIL);
@@ -151,10 +124,11 @@ public class ContactDAO {
 		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
-	public boolean addMobileNumbers(int contact_id, Long[] mobileNumbers) throws ClassNotFoundException, SQLException {
+	public static boolean addMobileNumbers(int contact_id, String[] mobileNumbers)
+			throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
 		long now = System.currentTimeMillis();
-		for (Long number : mobileNumbers) {
+		for (String number : mobileNumbers) {
 			QueryBuilder qb = new QueryBuilder();
 			qb.insertTable(TableInfo.CONTACTMOBILENUMBER);
 			qb.insertValuesToColumns(new Column(ContactMobileNumber.CONTACTID, "", "", qb.table), contact_id);
@@ -168,7 +142,7 @@ public class ContactDAO {
 		return true;
 	}
 
-	public boolean deleteMobileNumber(int mobile_id) throws ClassNotFoundException, SQLException {
+	public static boolean deleteMobileNumber(int mobile_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.CONTACTMOBILENUMBER);
@@ -177,12 +151,12 @@ public class ContactDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<Contact> getContacts(int user_id) throws ClassNotFoundException, SQLException {
+	public static ArrayList<Contact> getContacts(int user_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 
 		qb.selectTable(TableInfo.CONTACTS);
-		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+		qb.joinTables(JoinTypes.left, new Column(Contacts.CONTACTID, "", "", qb.table),
 				new Column(ContactEmail.CONTACTID, "", "", new Table(TableInfo.CONTACTMAIL)));
 		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
 				new Column(ContactMobileNumber.CONTACTID, "", "", new Table(TableInfo.CONTACTMOBILENUMBER)));
@@ -196,13 +170,32 @@ public class ContactDAO {
 		}
 		return contacts;
 	}
-
-	public Contact getContactInfo(int contact_id, int user_id) throws ClassNotFoundException, SQLException {
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Contact> getContactsInfo(int user_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 
 		qb.selectTable(TableInfo.CONTACTS);
-		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
+		qb.setOrder(new Column(Contacts.CONTACTID, "", "", qb.table), Order.asc);
+		ArrayList<Contact> contacts = new ArrayList<>();
+		try {
+			contacts = (ArrayList<Contact>) qx.executeQuery(qb.build());
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+		return contacts;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Contact getContactInfo(int contact_id, int user_id) throws ClassNotFoundException, SQLException {
+		QueryBuilder qb = new QueryBuilder();
+		QueryExecutor qx = new QueryExecutor();
+
+		qb.selectTable(TableInfo.CONTACTS);
+		qb.joinTables(JoinTypes.left, new Column(Contacts.CONTACTID, "", "", qb.table),
 				new Column(ContactEmail.CONTACTID, "", "", new Table(TableInfo.CONTACTMAIL)));
 		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
 				new Column(ContactMobileNumber.CONTACTID, "", "", new Table(TableInfo.CONTACTMOBILENUMBER)));
@@ -219,7 +212,7 @@ public class ContactDAO {
 		return null;
 	}
 
-	public boolean deleteContact(int contact_id) throws ClassNotFoundException, SQLException {
+	public static boolean deleteContact(int contact_id) throws ClassNotFoundException, SQLException {
 		QueryExecutor qx = new QueryExecutor();
 		QueryBuilder qb = new QueryBuilder();
 		qb.deleteTable(TableInfo.CONTACTMAIL);
@@ -239,7 +232,8 @@ public class ContactDAO {
 		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
-	public String getGroupNameById(int group_id) {
+	@SuppressWarnings("unchecked")
+	public static String getGroupNameById(int group_id) {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.selectTable(TableInfo.GROUPDETAILS);
@@ -257,7 +251,8 @@ public class ContactDAO {
 		return "";
 	}
 
-	public ArrayList<Contact> getContactsByGroupId(int user_id, int group_id) {
+	@SuppressWarnings("unchecked")
+	public static ArrayList<Contact> getContactsByGroupId(int user_id, int group_id) {
 		ArrayList<Contact> filteredContacts = new ArrayList<>();
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
@@ -267,9 +262,6 @@ public class ContactDAO {
 		try {
 			r = (ArrayList<Group>) qx.executeQuery(qb.build());
 			if (r.size() > 0) {
-				// Alternative Query -> SELECT c.contact_id, c.first_name, c.middle_name,
-				// c.last_name FROM Contacts c LEFT JOIN Group_info g ON c.contact_id =
-				// g.contact_id AND g.group_id = ? WHERE c.user_id = ? AND g.contact_id IS NULL;
 				qb = new QueryBuilder();
 				qx = new QueryExecutor();
 				qb.selectTable(TableInfo.CONTACTS);
@@ -289,7 +281,7 @@ public class ContactDAO {
 		return filteredContacts;
 	}
 
-	public boolean deleteContactFromGroups(int contact_id) throws ClassNotFoundException, SQLException {
+	public static boolean deleteContactFromGroups(int contact_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.GROUPINFO);
@@ -297,7 +289,7 @@ public class ContactDAO {
 		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
-	public boolean deleteGroupContact(int group_id, int contact_id) throws ClassNotFoundException, SQLException {
+	public static boolean deleteGroupContact(int group_id, int contact_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.GROUPINFO);
@@ -306,7 +298,7 @@ public class ContactDAO {
 		return qx.executeAndUpdate(qb.build()) > 0;
 	}
 
-	public boolean deleteGroup(int group_id) throws ClassNotFoundException, SQLException {
+	public static boolean deleteGroup(int group_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.deleteTable(TableInfo.GROUPINFO);

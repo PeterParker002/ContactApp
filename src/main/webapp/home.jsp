@@ -1,4 +1,5 @@
 <%@page import="com.contacts.cache.SessionCache"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page language="java"%>
 <%@page
 	import="java.util.ArrayList,com.contacts.dao.UserDAO,com.contacts.dao.ContactDAO,java.sql.ResultSet,com.contacts.model.User,com.contacts.model.Contact,com.contacts.model.UserMail,com.contacts.model.Mail,com.contacts.model.UserMobile,com.contacts.model.MobileNumber,com.contacts.model.Group,com.contacts.model.Session"%>
@@ -6,8 +7,8 @@
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 UserDAO u = new UserDAO();
 ContactDAO c = new ContactDAO();
-String sessionId = u.getSessionIdFromCookie(request, "session");
-Session userSession = u.getUserSession(sessionId);
+String sessionId = UserDAO.getSessionIdFromCookie(request, "session");
+Session userSession = UserDAO.getUserSession(sessionId);
 if (userSession == null) {
 	for(Cookie cook: request.getCookies()) {
 		if (cook.getName().equals("session")) {
@@ -20,13 +21,14 @@ if (userSession == null) {
 	}
 }
 int user_id = userSession.getUserId();
-//User user = u.getUserInfo(user_id);
-User user = SessionCache.userCache.get(user_id);
-ArrayList<Group> groups = (ArrayList<Group>) u.getGroups(user_id);
-ArrayList<Contact> contacts = c.getContacts(user_id);
+User user = SessionCache.getUserCache(user_id);
+ArrayList<Group> groups = (ArrayList<Group>) UserDAO.getGroups(user_id);
+ArrayList<Contact> contacts = ContactDAO.getContactsInfo(user_id);
 %>
 <html>
 <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -95,15 +97,15 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 					%>
 					<input type="date" name="dateOfBirth" id="dob"
 						title="Enter your date of birth here"
-						value="<%=user.getDateOfBirth()%>" required /> <input
+						value="<%=user.getDateOfBirth()%>" /> <input
 						type="text" name="Notes" id="notes"
 	placeholder="Tell us about yourself"
 						value="<%=user.getNotes()%>" /> <input type="text"
 						name="home" id="homeAddress" placeholder="Enter your home address"
-						value="<%=user.getHomeAddress()%>" required /> <input
+						value="<%=user.getHomeAddress()%>" /> <input
 						type="text" name="workAddress" id="work"
 	placeholder="Enter your work address"
-						value="<%=user.getWorkAddress()%>" required />
+						value="<%=user.getWorkAddress()%>" />
 
 				</div>
 				<input type="submit" class="submitBtn" value="Edit Profile">
@@ -137,15 +139,15 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 					</div>
 					<input type="date" class="dob" name="dateOfBirth" id="dob"
 						title="Enter your date of birth here"
-						value="" required /> <input class="notes"
+						value="" /> <input class="notes"
 						type="text" name="notes" id="notes"
 	placeholder="Tell us about yourself"
 						value="" /> <input type="text" class="home"
 						name="homeAddress" id="home" placeholder="Enter your home address"
-						value="" required /> <input class="work"
+						value="" /> <input class="work"
 						type="text" name="workAddress" id="work"
 	placeholder="Enter your work address"
-						value="" required />
+						value="" />
 
 				</div>
 				<input type="submit" class="submitBtn" value="Edit Profile">
@@ -185,11 +187,11 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 						<input type="email" name="email" class="custom-field"
 		placeholder="Enter your email"
 		pattern="^[a-zA-Z]+(\.)?([a-zA-Z0-9]+)*@[a-zA-Z]+\.[a-zA-Z]{2,3}"
-							title="Email should look like: example@gmail.com" required />
+							title="Email should look like: example@gmail.com" />
 					</div>
 					<div class="dob">
 						<input type="date" name="dob" id="dob"
-							title="Enter your date of birth here" required />
+							title="Enter your date of birth here" />
 					</div>
 					<div class="notes">
 						<input type="text" name="notes" id="notes"
@@ -197,14 +199,14 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 					</div>
 					<div class="homeaddress">
 						<input type="text" name="home" id="home"
-		placeholder="Enter your home address" required />
+		placeholder="Enter your home address" />
 					</div>
 					<div class="workaddress">
 						<input type="text" name="work" id="work"
-		placeholder="Enter your work address" required />
+		placeholder="Enter your work address" />
 					</div>
 					<div class="mobilenumber">
-						<input type="tel" pattern="[0-9]{10}" name="mobile" id="mobile"
+						<input type="tel" pattern="^(?:\+?[1-9]\d{6,14}|\d{1,6})$" name="mobile" id="mobile"
 							class="custom-field" placeholder="Enter your mobile number"
 							title="Phone number should look like: 1234567890" required />
 					</div>
@@ -247,8 +249,8 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				<div class="mobile-fields">
 				<input type="hidden" name="role" id="hidden-type" value="user">
 				<input type="hidden" name="contact-id" id="hidden-contact-id">
-					<input type="mobile" name="mobile" class="mobile-field"
-	placeholder="Enter your Mobile Number" pattern="[0-9]{10}"
+					<input type="tel" name="mobile" class="mobile-field"
+	placeholder="Enter your Mobile Number" pattern="^(?:\+?[1-9]\d{6,14}|\d{1,6})$"
 						title="Mobile Number should look like: 1234567890" required />
 				</div>
 				<div class="btn-group">
@@ -275,6 +277,7 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 					<div class="contacts-list">
 						<%
 						int i = 1;
+						if (contacts != null) {
 						for (Contact cont : contacts) {
 						%>
 						<div class="contact-option">
@@ -285,6 +288,7 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 						<%
 										i++;
 										}
+						}
 						%>
 					</div>
 				</div>
@@ -415,37 +419,34 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				<div class="header">
 					<p class="heading">All Contacts</p>
 					<div class="btn-group">
-						<button class="add-contact-popup" style="border: none;">Add
-							Contact</button>
+						<button class="add-contact-popup" style="border: none;">Add Contact</button>
+						<a class="btn" href="/login-with-google">Sync Contacts</a>
 						<a class="logout" href="/logout">Logout</a>
 					</div>
 				</div>
 				<div class="contact-list list-container">
 					<%
+					if (contacts != null && contacts.size() > 0) {
 								for (Contact cont : contacts) {
 					%>
 					<div class="contact-card">
 						<div class="card-title" id="contact-<%=cont.getContactId() %>>">
-							<span class="contact-name" data-id="<%=cont.getContactId()%>"><%=cont.getFirstName()%>
-								<%=cont.getMiddleName()%> <%=cont.getLastName()%></span> <a
-								href="deleteContact/<%=cont.getContactId()%>"
+							<div class="card-left">
+							<span class="card-avatar"><img
+								src="assets/avatar.svg" alt="delete-contact" width="24"></span>
+							<span class="contact-name" data-id="<%=cont.getContactId()%>"><%=cont.getFirstName()%></span> 
+							</div>
+							<a href="deleteContact/<%=cont.getContactId()%>"
 								class="delete-contact delete-icon"><img
 								src="assets/delete-icon.svg" alt="delete-contact" width="24"></a>
-						</div>
-						<div class="card-details">
-							<div class="emails">
-								Email ID:
-								<%=cont.getEmail().get(0).getEmail()%>
-							</div>
-							<div class="mobile-numbers">
-								Mobile Number:
-								<%=cont.getMobileNumber().get(0).getMobileNumber()%>
-							</div>
 						</div>
 					</div>
 					<%
 								}
+					} else {
 					%>
+					<div class="no-contact">No Contacts Found</div>
+					<% } %>
 				</div>
 			</div>
 			<div class="groups-container container">
@@ -458,8 +459,9 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 				</div>
 				<div class="groups list-container">
 				<%
+				if (groups != null && groups.size() > 0) {
 								int j = 1;
-								for (Group g : u.getGroups(user.getUserId())) {
+								for (Group g : groups) {
 					%>
 					<div class="card">
 						<div class="card-title">
@@ -513,7 +515,10 @@ ArrayList<Contact> contacts = c.getContacts(user_id);
 					<%
 					j++;
 					}
+				} else {
 					%>
+					<div class="no-contact">No Groups Found</div>
+					<% } %>
 				</div>
 			</div>
 		</div>

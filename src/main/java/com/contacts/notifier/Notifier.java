@@ -12,11 +12,8 @@ public class Notifier {
 		HttpRequest hrequest = HttpRequest.newBuilder().uri(URI.create("http://" + ip + ":" + port + "/" + endpoint))
 				.header("Content-Type", "application/json").header("Cookie", "session=" + cookie)
 				.POST(HttpRequest.BodyPublishers.ofString(payload)).build();
-//		HttpRequest hrequest = HttpRequest.newBuilder().uri(URI.create("http://" + ip + ":" + port + "/" + endpoint))
-//				.header("Content-Type", "application/json").POST(HttpRequest.BodyPublishers.ofString(payload)).build();
-		HttpResponse<String> hresponse;
 		try {
-			hresponse = client.send(hrequest, HttpResponse.BodyHandlers.ofString());
+			client.send(hrequest, HttpResponse.BodyHandlers.ofString());
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}

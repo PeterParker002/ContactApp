@@ -48,7 +48,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
 			</div>
 			<div class="dob">
 				<input type="date" name="dob" id="dob"
-					title="Enter your date of birth here" required />
+					title="Enter your date of birth here" />
 			</div>
 			<div class="notes">
 				<input type="text" name="notes" id="notes"
@@ -56,11 +56,11 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
 			</div>
 			<div class="Home-Address">
 				<input type="text" name="home" id="home"
-					placeholder="Enter your home address" required />
+					placeholder="Enter your home address" />
 			</div>
 			<div class="Work-Address">
 				<input type="text" name="work" id="work"
-					placeholder="Enter your work address" required />
+					placeholder="Enter your work address" />
 			</div>
 			<div class="mobile-number">
 				<input type="tel" pattern="[0-9]{10}" name="mobile" id="mobile"

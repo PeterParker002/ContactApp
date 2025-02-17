@@ -3,7 +3,6 @@ package com.contacts.querylayer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,17 +30,7 @@ import com.contacts.utils.MyCustomJsonObject;
 
 import java.sql.ResultSetMetaData;
 
-/*
- * 
- * QueryBuilder -> toString() -> QueryString
- * 				-> Table -> getName() -> TableInfo
- * 
- * */
-
 public class QueryExecutor {
-	private String username = "root";
-	private String password = "root";
-	private String db_name = "ContactsApp";
 	private HashMap<Integer, Object> resultPojo = new HashMap<Integer, Object>();
 	public int currentPojoId = 0;
 	public Object currentPojo;
@@ -51,6 +40,13 @@ public class QueryExecutor {
 
 	static {
 		audit = "true".equals(ConfigurationLoader.getProperty("audit"));
+	}
+
+	public PreparedStatement fillPreparedStatement(PreparedStatement ps, QueryBuilder qb) throws SQLException {
+		for (int i = 0; i < qb.valuesList.size(); i++) {
+			ps.setObject(i + 1, qb.valuesList.get(i));
+		}
+		return ps;
 	}
 
 	public Class<?> getModelClassForTable(String table) {
@@ -107,6 +103,7 @@ public class QueryExecutor {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean isPojoAlreadyExists(Object pojo)
 			throws NoSuchMethodException, SecurityException, IllegalAccessException, InvocationTargetException {
 		Method m = basePojo.getClass().getMethod("getData", pojo.getClass());
@@ -134,7 +131,7 @@ public class QueryExecutor {
 	public ArrayList<?> executeJoinQuery1(QueryBuilder query) throws InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
-				PreparedStatement ps = con.prepareStatement(query.toString());
+				PreparedStatement ps = fillPreparedStatement(con.prepareStatement(query.toString()), query);
 				ResultSet rs = ps.executeQuery();) {
 			ArrayList<Object> result = new ArrayList<Object>();
 			ResultSetMetaData metadata = rs.getMetaData();
@@ -142,7 +139,8 @@ public class QueryExecutor {
 				for (int i = 1; i <= metadata.getColumnCount(); i++) {
 					if (!currentTableName.equals(metadata.getTableName(i))) {
 						if (!currentTableName.equals("") & !currentTableName.equals(query.table.getName().toString())) {
-							updateBasePojo(currentPojo);
+							if (currentPojo != null)
+								updateBasePojo(currentPojo);
 						}
 						currentTableName = metadata.getTableName(i);
 						Class<?> pojoClass = getModelClassForTable(currentTableName);
@@ -156,6 +154,8 @@ public class QueryExecutor {
 						methodName += s.substring(0, 1).toUpperCase() + s.substring(1);
 					}
 					currentPojo = dataMapperForPojo(rs, currentPojo, methodName, tableName, columnName, columnType);
+					if (currentPojo == null)
+						continue;
 					if (basePojo == null) {
 						basePojo = currentPojo;
 					} else if (!isBasePojoAlreadyExists(result, currentPojo)
@@ -163,7 +163,8 @@ public class QueryExecutor {
 						basePojo = currentPojo;
 					}
 				}
-				updateBasePojo(currentPojo);
+				if (currentPojo != null)
+					updateBasePojo(currentPojo);
 				if (!isBasePojoAlreadyExists(result, basePojo)) {
 					result.add(basePojo);
 				}
@@ -178,12 +179,11 @@ public class QueryExecutor {
 
 	public ArrayList<?> executeQuery(QueryBuilder query) throws InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
-//		System.out.println(query);
 		Class<?> pojoClass = getModelClassForTable(query.table.getName().toString());
 		Object pojo = pojoClass.getDeclaredConstructor().newInstance();
 		int i = 1;
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
-				PreparedStatement ps = con.prepareStatement(query.toString());
+				PreparedStatement ps = fillPreparedStatement(con.prepareStatement(query.toString()), query);
 				ResultSet rs = ps.executeQuery();) {
 			while (rs.next()) {
 				pojo = populateDataOverPojo(rs, pojo);
@@ -202,7 +202,6 @@ public class QueryExecutor {
 			e.printStackTrace();
 			return null;
 		}
-//		System.out.println(resultPojo);
 		return new ArrayList<Object>(resultPojo.values());
 	}
 
@@ -219,29 +218,33 @@ public class QueryExecutor {
 			throws SecurityException, IllegalAccessException, InvocationTargetException, SQLException {
 		try {
 			Method m;
-			switch (columnType) {
-			case "INT":
-				m = pojo.getClass().getMethod(methodName, int.class);
-				m.invoke(pojo, rs.getInt(tableName + "." + columnName));
-				if (columnName.equalsIgnoreCase("id") | columnName.equalsIgnoreCase(getUniqueIdColumn(tableName))) {
-					currentPojoId = rs.getInt(columnName);
+			if (pojo != null) {
+				switch (columnType) {
+				case "INT":
+					m = pojo.getClass().getMethod(methodName, int.class);
+					if (rs.getInt(tableName + "." + columnName) == 0)
+						return null;
+					m.invoke(pojo, rs.getInt(tableName + "." + columnName));
+					if (columnName.equalsIgnoreCase("id") | columnName.equalsIgnoreCase(getUniqueIdColumn(tableName))) {
+						currentPojoId = rs.getInt(columnName);
+					}
+					break;
+				case "VARCHAR":
+				case "TEXT":
+				case "CHAR":
+				case "DATE":
+					m = pojo.getClass().getMethod(methodName, String.class);
+					m.invoke(pojo, rs.getString(tableName + "." + columnName));
+					break;
+				case "BIGINT":
+					m = pojo.getClass().getMethod(methodName, long.class);
+					m.invoke(pojo, rs.getLong(tableName + "." + columnName));
+					break;
+				case "BIT":
+					m = pojo.getClass().getMethod(methodName, boolean.class);
+					m.invoke(pojo, rs.getBoolean(tableName + "." + columnName));
+					break;
 				}
-				break;
-			case "VARCHAR":
-			case "TEXT":
-			case "CHAR":
-			case "DATE":
-				m = pojo.getClass().getMethod(methodName, String.class);
-				m.invoke(pojo, rs.getString(tableName + "." + columnName));
-				break;
-			case "BIGINT":
-				m = pojo.getClass().getMethod(methodName, long.class);
-				m.invoke(pojo, rs.getLong(tableName + "." + columnName));
-				break;
-			case "BIT":
-				m = pojo.getClass().getMethod(methodName, boolean.class);
-				m.invoke(pojo, rs.getBoolean(tableName + "." + columnName));
-				break;
 			}
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
@@ -251,7 +254,8 @@ public class QueryExecutor {
 
 	public int executeAndUpdateWithKeys(QueryBuilder query) throws ClassNotFoundException, SQLException {
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
-				PreparedStatement ps = con.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS);) {
+				PreparedStatement ps = fillPreparedStatement(
+						con.prepareStatement(query.toString(), Statement.RETURN_GENERATED_KEYS), query);) {
 			MyCustomJsonObject<String, Object> oldValue = new MyCustomJsonObject<String, Object>();
 			MyCustomJsonObject<String, Object> newValue = null;
 			if (query.statementType.equals("INSERT") & Database.auditableTables.contains(query.table.name)) {
@@ -279,7 +283,7 @@ public class QueryExecutor {
 	@SuppressWarnings("unchecked")
 	public int executeAndUpdate(QueryBuilder query) throws ClassNotFoundException, SQLException {
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
-				PreparedStatement ps = con.prepareStatement(query.toString());) {
+				PreparedStatement ps = fillPreparedStatement(con.prepareStatement(query.toString()), query);) {
 			MyCustomJsonObject<String, Object> oldValue = new MyCustomJsonObject<String, Object>();
 			MyCustomJsonObject<String, Object> newValue = null;
 			if (query.statementType.equals("INSERT") & Database.auditableTables.contains(query.table.name)) {
@@ -335,7 +339,7 @@ public class QueryExecutor {
 	private MyCustomJsonObject<String, Object> dataMapperForJson(QueryBuilder query) {
 		MyCustomJsonObject<String, Object> jsonData = new MyCustomJsonObject<String, Object>();
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
-				PreparedStatement ps = con.prepareStatement(query.toString());
+				PreparedStatement ps = fillPreparedStatement(con.prepareStatement(query.toString()), query);
 				ResultSet rs = ps.executeQuery();) {
 			ResultSetMetaData metadata = rs.getMetaData();
 			while (rs.next()) {

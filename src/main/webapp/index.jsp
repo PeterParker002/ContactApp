@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page language="java"%>
 <% 
 response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -27,7 +28,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 	}
 	%>
 	<div class="wrapper">
-		<h1>My Contacts App</h1>
+		<h1>My Contacts App 🌟</h1>
 		<div class="container">
 			<a href="/login">Login</a> <a href="/signup">Sign Up</a>
 		</div>

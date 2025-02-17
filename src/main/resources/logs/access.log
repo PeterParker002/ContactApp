@@ -1,0 +1,18 @@
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:08:32] "GET / HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:08:32] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:08:44] "GET /christo_bunda HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:08:48] "GET / HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:08:48] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:08:51] "GET /contact/32 HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:13:06] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:14:55] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:14:55] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:14:55] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:14:56] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:14:56] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:14:56] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:14:56] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 13:14:56] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: bba35269-e840-4904-b730-7dc8c8ec7277
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 14:37:42] "GET /home.jsp HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 14:37:42] "GET /index.jsp HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 14:39:51] "GET /login HTTP/1.1" 

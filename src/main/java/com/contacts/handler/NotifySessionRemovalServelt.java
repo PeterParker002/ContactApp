@@ -12,25 +12,10 @@ import com.contacts.cache.SessionCache;
 import com.contacts.model.Session;
 import com.google.gson.Gson;
 
-/**
- * Servlet implementation class NotifySessionRemovalServelt
- */
 @WebServlet("/notifySessionRemoval")
 public class NotifySessionRemovalServelt extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public NotifySessionRemovalServelt() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Gson gson = new Gson();

@@ -5,7 +5,7 @@ import com.contacts.utils.DatabaseImpl;
 
 public class MobileNumber {
 	private int id;
-	private Long mobileNumber;
+	private String mobileNumber;
 	private long createdAt;
 	private long modifiedAt;
 
@@ -25,11 +25,11 @@ public class MobileNumber {
 		return UserMobileNumber.ID;
 	}
 
-	public Long getMobileNumber() {
+	public String getMobileNumber() {
 		return mobileNumber;
 	}
 
-	public void setMobileNumber(long mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
 

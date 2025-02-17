@@ -310,7 +310,7 @@ public class QueryExecutor2 {
 					MobileNumber mobile = new MobileNumber();
 					if (query.columns.size() == 0) {
 						mobile.setId(rs.getInt(UserMobileNumber.ID.toString()));
-						mobile.setMobileNumber(rs.getLong(UserMobileNumber.MOBILENUMBER.toString()));
+						mobile.setMobileNumber(rs.getString(UserMobileNumber.MOBILENUMBER.toString()));
 					} else {
 						int i = 1;
 						for (Column col : query.columns) {
@@ -447,7 +447,7 @@ public class QueryExecutor2 {
 					MobileNumber mobile = new MobileNumber();
 					if (query.columns.size() == 0) {
 						mobile.setId(rs.getInt(ContactMobileNumber.ID.toString()));
-						mobile.setMobileNumber(rs.getLong(ContactMobileNumber.MOBILENUMBER.toString()));
+						mobile.setMobileNumber(rs.getString(ContactMobileNumber.MOBILENUMBER.toString()));
 					} else {
 						int i = 1;
 						for (Column col : query.columns) {

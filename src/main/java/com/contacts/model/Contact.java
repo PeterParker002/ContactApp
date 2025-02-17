@@ -26,8 +26,11 @@ public class Contact {
 	}
 
 	public void setEmail(String email) {
+		long now = System.currentTimeMillis();
 		ContactMail mail = new ContactMail();
 		mail.setEmail(email);
+		mail.setCreatedAt(now);
+		mail.setModifiedAt(now);
 		this.Email.add(mail);
 	}
 
@@ -39,9 +42,12 @@ public class Contact {
 		return this.mobileNumber;
 	}
 
-	public void setMobileNumber(Long mobileNumber) {
+	public void setMobileNumber(String mobileNumber) {
+		long now = System.currentTimeMillis();
 		ContactMobile mobile = new ContactMobile();
 		mobile.setMobileNumber(mobileNumber);
+		mobile.setCreatedAt(now);
+		mobile.setModifiedAt(now);
 		this.mobileNumber.add(mobile);
 	}
 

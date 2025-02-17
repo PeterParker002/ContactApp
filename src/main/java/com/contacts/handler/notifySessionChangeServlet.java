@@ -9,30 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.contacts.cache.SessionCache;
-import com.contacts.dao.UserDAO;
 import com.contacts.model.Session;
-import com.contacts.model.User;
 import com.google.gson.Gson;
 
-/**
- * Servlet implementation class notifySessionChangeServlet
- */
+
 @WebServlet("/notifySessionChange")
 public class notifySessionChangeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public notifySessionChangeServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Gson gson = new Gson();
@@ -48,12 +31,6 @@ public class notifySessionChangeServlet extends HttpServlet {
 				}
 			}
 		}
-//		else {
-//			SessionCache.activeSessionObjects.put(session.getSessionId(), session);
-//			UserDAO u = new UserDAO();
-//			User user = u.getUserInfo(session.getUserId());
-//			SessionCache.addUserToCache(user.getUserId(), user);
-//		}
 	}
 
 }

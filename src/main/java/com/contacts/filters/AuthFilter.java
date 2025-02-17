@@ -1,7 +1,6 @@
 package com.contacts.filters;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -17,12 +16,16 @@ import javax.servlet.http.HttpSession;
 
 import com.contacts.cache.SessionCache;
 import com.contacts.dao.UserDAO;
+import com.contacts.logger.LoggerFactory;
+import com.contacts.logger.MyCustomLogger;
 import com.contacts.model.Session;
 import com.contacts.model.User;
 
 @WebFilter("/*")
 public class AuthFilter extends HttpFilter implements Filter {
 	private static final long serialVersionUID = 1L;
+	private static final MyCustomLogger logger = LoggerFactory
+			.getLogger("/home/karthik-tt0479/eclipse-workspace/FirstProject/src/main/resources/logs/access.log");
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -40,6 +43,8 @@ public class AuthFilter extends HttpFilter implements Filter {
 		}
 		HttpSession httpsession = httpReq.getSession();
 		String sessionId = "";
+		int userId = 0;
+		String logMessage = "";
 		boolean isAuthenticated = false;
 		Cookie[] cookies = httpReq.getCookies();
 		if (cookies != null) {
@@ -47,18 +52,17 @@ public class AuthFilter extends HttpFilter implements Filter {
 				if (c.getName().equals("session")) {
 					sessionId = c.getValue();
 					if (SessionCache.activeSessionObjects.containsKey(sessionId)) {
-						SessionCache.activeSessionObjects.get(sessionId)
-								.setLastAccessedAt(System.currentTimeMillis());
+						SessionCache.activeSessionObjects.get(sessionId).setLastAccessedAt(System.currentTimeMillis());
+						userId = SessionCache.activeSessionObjects.get(sessionId).getUserId();
 						System.out.println(SessionCache.activeSessionObjects);
-						SessionCache.notifySessionUpdate(SessionCache.activeSessionObjects.get(sessionId));
 						isAuthenticated = true;
 					} else {
-						UserDAO userdao = new UserDAO();
-						Session session = userdao.getUserSession(sessionId);
+						Session session = UserDAO.getUserSession(sessionId);
 						if (session != null) {
 							SessionCache.activeSessionObjects.put(sessionId, session);
-							User user = userdao.getUserInfo(session.getUserId());
-							SessionCache.addUserToCache(user.getUserId(), user);
+							userId = session.getUserId();
+							User user = UserDAO.getUserInfo(userId);
+							SessionCache.addUserToCache(userId, user);
 							isAuthenticated = true;
 						} else {
 							c.setValue("");
@@ -70,6 +74,9 @@ public class AuthFilter extends HttpFilter implements Filter {
 				}
 			}
 		}
+		if (userId != 0 && !sessionId.equals(""))
+			logMessage = "User ID: " + userId + " Session ID: " + sessionId;
+		triggerLog(httpReq, logMessage);
 		if (httpReq.getRequestURI().endsWith("logout")) {
 			if (isAuthenticated) {
 				chain.doFilter(request, response);
@@ -78,6 +85,7 @@ public class AuthFilter extends HttpFilter implements Filter {
 			httpRes.sendRedirect("/home.jsp");
 			return;
 		}
+//		|| httpReq.getRequestURI().endsWith("login-with-google") || httpReq.getRequestURI().endsWith("google-callback") || httpReq.getRequestURI().endsWith("/profile")
 		boolean isPublicPage = httpReq.getRequestURI().endsWith("/") || httpReq.getRequestURI().endsWith("index.jsp")
 				|| httpReq.getRequestURI().endsWith("login.jsp") || httpReq.getRequestURI().endsWith("login")
 				|| httpReq.getRequestURI().endsWith("signup.jsp") || httpReq.getRequestURI().endsWith("signup");
@@ -96,6 +104,10 @@ public class AuthFilter extends HttpFilter implements Filter {
 				httpRes.sendRedirect("/index.jsp");
 			}
 		}
+	}
+
+	public void triggerLog(HttpServletRequest request, String message) {
+		logger.info("GET", request.getRemoteAddr(), request.getRequestURI(), message);
 	}
 
 }

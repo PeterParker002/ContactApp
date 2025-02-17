@@ -115,6 +115,21 @@
 .card-title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.card-left {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
+
+.card-avatar {
+	padding: 1rem;
+	background: var(--button-gradient);
+	border-radius: 50%;
 }
 
 .delete-icon {
@@ -572,11 +587,19 @@
   font-weight: 500;
 }
 
-.no-contact {
+.no-contact, .no-mail {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   font-size: 1.2rem;
   font-weight: 500;
+  height: 100%;
+}
+
+.no-mail {
+	font-size: 1.1rem;
+	color: rgb(94, 92, 100);
+	padding: .25rem;
+	height: auto;
 }
