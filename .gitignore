@@ -1,4 +1,5 @@
 .
-src/main/resources/application.properties
+.gitignore
+*.properties
 github_personal_token.txt
 .idea/
