@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.google.gson.Gson;
 
+@SuppressWarnings("unchecked")
 public class GoogleJSONParser {
 	public static List<Map<String, Object>> parse(String userInfo) {
 		Gson gson = new Gson();

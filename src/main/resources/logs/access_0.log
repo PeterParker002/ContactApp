@@ -1,0 +1,639 @@
+2025-02-25 18:07:25 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:07:25 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:07:29 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:07:29 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:07:29 [INFO] - Server startup in [2399] milliseconds
+2025-02-25 18:07:29 [INFO] - GET 127.0.0.1 / 
+2025-02-25 18:11:31 [INFO] - Reloading Context with name [] has started
+2025-02-25 18:11:31 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:11:31 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:11:31 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:11:32 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:11:32 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:11:33 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:11:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 18:11:51 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:11:59 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:12:07 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 18:12:07 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:12:07 [INFO] - Stopping service [Catalina]
+2025-02-25 18:12:07 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:12:07 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:12:07 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:12:07 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:12:07 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:12:13 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:12:13 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:12:13 [INFO] - Server startup in [2243] milliseconds
+2025-02-25 18:12:13 [INFO] - GET 127.0.0.1 / 
+2025-02-25 18:12:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 18:12:23 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:20:09 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 18:20:09 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:20:37 [INFO] - Reloading Context with name [] has started
+2025-02-25 18:20:37 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:20:37 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:20:37 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:20:38 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:20:38 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:20:42 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:20:43 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:20:46 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 18:20:46 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:20:46 [INFO] - Stopping service [Catalina]
+2025-02-25 18:20:46 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:20:46 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:20:46 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:20:46 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:20:46 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:20:51 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:20:51 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:20:51 [INFO] - Server startup in [1247] milliseconds
+2025-02-25 18:20:52 [INFO] - GET 127.0.0.1 / 
+2025-02-25 18:20:56 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 18:20:56 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:21:00 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 18:21:00 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:21:36 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 18:21:36 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:22:02 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp 
+2025-02-25 18:22:02 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:22:03 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 18:22:09 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 18:22:09 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 90496cff-18da-43a9-9ca0-9208d4923e91
+2025-02-25 18:22:09 [SEVERE] - Servlet.service() for servlet [jsp] in context with path [] threw exception [An exception occurred processing [home.jsp] at line [27]
+
+24: int user_id = userSession.getUserId();
+25: User user = SessionCache.getUserCache(user_id);
+26: List<Group> groups = (ArrayList<Group>) UserDAO.getGroups(user_id);
+27: List<Contact> contacts = ContactDAO.getContactsInfo(user_id);
+28: %>
+29: <html>
+30: <head>
+
+
+Stacktrace:] with root cause
+2025-02-25 18:22:35 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 90496cff-18da-43a9-9ca0-9208d4923e91
+2025-02-25 18:22:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 90496cff-18da-43a9-9ca0-9208d4923e91
+2025-02-25 18:23:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 90496cff-18da-43a9-9ca0-9208d4923e91
+2025-02-25 18:25:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 90496cff-18da-43a9-9ca0-9208d4923e91
+2025-02-25 18:31:19 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 90496cff-18da-43a9-9ca0-9208d4923e91
+2025-02-25 18:36:34 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 90496cff-18da-43a9-9ca0-9208d4923e91
+2025-02-25 18:38:40 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 18:38:40 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:38:43 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp 
+2025-02-25 18:38:43 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:38:45 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 18:38:50 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 18:38:50 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:38:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:39:05 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:39:30 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:39:31 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:39:31 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:39:45 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:39:49 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:39:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:40:16 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:41:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:41:47 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:43:42 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:43:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:43:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:43:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:43:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:43:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:43:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:44:45 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 18:44:45 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:44:45 [INFO] - Stopping service [Catalina]
+2025-02-25 18:44:45 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:44:45 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:44:45 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:44:45 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:44:45 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:44:50 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:44:50 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:44:50 [INFO] - Server startup in [1693] milliseconds
+2025-02-25 18:44:50 [INFO] - GET 127.0.0.1 / 
+2025-02-25 18:44:55 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 18:45:51 [INFO] - Reloading Context with name [] has started
+2025-02-25 18:45:51 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:45:51 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:45:51 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:45:51 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:45:51 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:45:55 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:46:20 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:46:32 [INFO] - Reloading Context with name [] has started
+2025-02-25 18:46:32 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:46:32 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:46:32 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:46:32 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:46:32 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:46:36 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:46:52 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 19:30:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 19:31:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 19:31:57 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 19:32:25 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-25 19:32:27 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 19:32:32 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 19:32:32 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:32:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:36:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:36:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:37:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:44:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:45:11 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-26 10:24:24 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-26 10:24:24 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-26 10:24:24 [INFO] - Server startup in [2112] milliseconds
+2025-02-26 10:24:24 [INFO] - GET 127.0.0.1 / 
+2025-02-26 10:24:34 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-26 10:24:36 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-26 10:24:41 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-26 10:24:41 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 76efcfc5-f69c-4140-bca3-14820aca30ca
+2025-02-26 10:25:19 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 1 Session ID: 76efcfc5-f69c-4140-bca3-14820aca30ca
+2025-02-26 10:25:26 [INFO] - GET 0:0:0:0:0:0:0:1 /logout User ID: 1 Session ID: 76efcfc5-f69c-4140-bca3-14820aca30ca
+2025-02-26 10:25:27 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-26 10:25:29 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-26 10:25:38 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-26 10:25:38 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:25:44 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/291 User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:25:44 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:25:49 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:25:51 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:25:52 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:25:52 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:25:57 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/302 User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:25:57 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:28:12 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:29:10 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:29:32 [INFO] - GET 0:0:0:0:0:0:0:1 /getContactsByGroup/73 User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:29:46 [INFO] - GET 0:0:0:0:0:0:0:1 /getContactsByGroup/73 User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:29:51 [INFO] - POST 0:0:0:0:0:0:0:1 /add-group-contact User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:29:51 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:29:58 [INFO] - GET 0:0:0:0:0:0:0:1 /contact/290 User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:30:37 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:31:01 [INFO] - GET 127.0.0.1 /ContactsServlet 
+2025-02-26 10:31:08 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:31:08 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:31:12 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:31:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:31:29 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:33:06 [INFO] - GET 0:0:0:0:0:0:0:1 /logout User ID: 44 Session ID: cead8a58-72ba-427e-a48a-20c00d66b1ff
+2025-02-26 10:33:06 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-26 10:33:08 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-26 10:33:14 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-26 10:33:14 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:33:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:36:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:35 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:42 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:39:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:05 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:07 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:09 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:13 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:16 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:17 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:33 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:40:39 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:42:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:42:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:44:05 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:44:31 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:44:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:44:35 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:44:36 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:44:42 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:44:59 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:06 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:16 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:16 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:17 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:18 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:39 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:40 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:49 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:45:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:46:02 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:46:35 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:46:42 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:46:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:46:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:46:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:47:04 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:47:09 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:47:13 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:47:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:47:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:47:40 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:47:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:47:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:48:05 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:48:12 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:48:12 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:48:25 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:48:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:48:34 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:48:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:49:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:49:34 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:49:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:49:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:49:41 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:49:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:49:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:50:13 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:50:21 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:50:25 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:50:25 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:50:27 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:51:25 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:51:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:51:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:00 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:05 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:19 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:25 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:41 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:45 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:47 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:52:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:00 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:13 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:18 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:19 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:45 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:47 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:50 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:53:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:54:12 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:54:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:54:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:54:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:54:36 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:54:42 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:54:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:55:47 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:06 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:08 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:15 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:16 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:56:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:00 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:13 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:17 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:20 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:30 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:37 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:41 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:55 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:57:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:02 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:06 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:17 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:20 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:27 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:42 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:44 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:58:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:59:01 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:59:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 10:59:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:13 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:28 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:34 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:45 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:55 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:56 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:00:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:01:37 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:01:37 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:01:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:01:55 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:01:56 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:01:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:02:27 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:02:37 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:02:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:02:39 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:02:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:02 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:04 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:40 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:41 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:03:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:05:11 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:05:16 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:05:16 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:05:16 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:05:17 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:05:17 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:05:17 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:05:17 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:00 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:01 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:06 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:15 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:18 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:35 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:37 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:41 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:08:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:09:33 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:09:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:09:45 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:09:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:10:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:10:20 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:10:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:10:59 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:11:02 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:11:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:11:06 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:12:09 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:12:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:12:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:12:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:12:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:12:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:13:47 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:13:50 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:13:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:14:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:14:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:15:37 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:15:42 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:15:45 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:15:47 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:17:30 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:17:39 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:17:41 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:17:41 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 8aa93aa7-7140-4ad8-8c3a-f969b4896bb9
+2025-02-26 11:54:29 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp 
+2025-02-26 11:54:29 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-26 11:54:33 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-26 11:54:33 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-26 11:54:35 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-26 12:06:32 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-26 12:06:32 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: f4d1504a-fb26-472c-9d0d-5370a6c5f9b2
+2025-02-26 12:20:17 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-26 12:20:17 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-26 12:20:17 [INFO] - Server startup in [2254] milliseconds
+2025-02-26 12:20:17 [INFO] - GET 127.0.0.1 / 
+2025-02-26 12:20:49 [INFO] - GET 0:0:0:0:0:0:0:1 /logout User ID: 1 Session ID: f4d1504a-fb26-472c-9d0d-5370a6c5f9b2
+2025-02-26 12:20:49 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-26 12:20:52 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-26 12:21:03 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-26 12:21:12 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-26 12:21:12 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:29 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/292 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:29 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:33 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/293 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:33 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:38 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/294 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:38 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:42 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/295 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:42 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:46 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/296 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:46 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:51 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/297 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:51 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:58 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/298 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:21:58 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:22:03 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/299 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:22:03 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:22:06 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/300 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:22:06 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:22:09 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/301 User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:22:09 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:26:04 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:26:04 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:26:07 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:28:08 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:28:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:28:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:28:18 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:28:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:28:30 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:28:33 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:29:18 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:29:33 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:30:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:30:28 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:30:30 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:30:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:30:37 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:30:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:30:40 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:31:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:31:11 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 56 Session ID: 8b2135ac-aca8-41fc-9119-f4021f0aec7b
+2025-02-26 12:52:23 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet 
+2025-02-26 12:52:23 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-26 12:52:24 [INFO] - GET 0:0:0:0:0:0:0:1 /login-with-google 
+2025-02-26 12:52:24 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-26 12:52:26 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-26 12:52:41 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-26 12:52:41 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:52:44 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:52:47 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:52:48 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:52:48 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:55:34 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:55:36 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:55:38 [INFO] - GET 0:0:0:0:0:0:0:1 /login-with-google User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:55:47 [INFO] - GET 0:0:0:0:0:0:0:1 /google-callback User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:55:48 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:55:48 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:55:51 [INFO] - GET 0:0:0:0:0:0:0:1 /contact/313 User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:56:05 [INFO] - POST 0:0:0:0:0:0:0:1 /edit-profile User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:56:05 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:56:05 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e
+2025-02-26 12:56:09 [INFO] - GET 0:0:0:0:0:0:0:1 /contact/313 User ID: 56 Session ID: 59c359e8-29eb-49c7-9157-a4beea66ec9e

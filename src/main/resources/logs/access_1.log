@@ -1,0 +1,962 @@
+2025-02-24 17:58:38 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:41 [INFO] - GET 0:0:0:0:0:0:0:1 /contact/288 User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:44 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:45 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:45 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:45 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:50 [INFO] - GET 0:0:0:0:0:0:0:1 /contact/289 User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:53 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:59 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/289 User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:58:59 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:59:32 [INFO] - POST 0:0:0:0:0:0:0:1 /edit-profile User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:59:32 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 17:59:33 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 18:00:36 [INFO] - GET 0:0:0:0:0:0:0:1 /contact/288 User ID: 58 Session ID: 9859af5e-10b9-459b-b7a4-9f63ce62cb65
+2025-02-24 18:16:11 [INFO] - GET 0:0:0:0:0:0:0:1 /logout 
+2025-02-24 18:16:11 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-24 18:16:13 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-24 18:16:26 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-24 18:16:26 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 4e646812-5882-42af-b395-634312ddabe6
+2025-02-24 18:16:31 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: 4e646812-5882-42af-b395-634312ddabe6
+2025-02-24 18:16:33 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 44 Session ID: 4e646812-5882-42af-b395-634312ddabe6
+2025-02-24 18:16:33 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 44 Session ID: 4e646812-5882-42af-b395-634312ddabe6
+2025-02-24 19:01:47 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-24 19:01:47 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-24 19:01:47 [INFO] - Server startup in [1770] milliseconds
+2025-02-24 19:01:47 [INFO] - GET 127.0.0.1 / 
+2025-02-24 19:02:04 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-24 19:02:07 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-24 19:02:18 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-24 19:02:18 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:23 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/278 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:23 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:26 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/279 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:26 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:29 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/280 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:29 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:31 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/281 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:31 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:34 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/282 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:34 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:38 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/283 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:38 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:50 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/284 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:50 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:53 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/285 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:53 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:56 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/286 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:56 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:59 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/287 User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:02:59 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:03:00 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:03:02 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:03:03 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:06:02 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-24 19:06:02 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-24 19:06:02 [INFO] - Server startup in [1651] milliseconds
+2025-02-24 19:06:02 [INFO] - GET 127.0.0.1 / 
+2025-02-24 19:06:07 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:06:07 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:06:09 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:06:10 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:06:11 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-24 19:06:11 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 356a9563-4512-4b25-a262-0fc7f31dabb6
+2025-02-25 11:22:01 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 11:22:01 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 11:22:01 [INFO] - Server startup in [1202] milliseconds
+2025-02-25 11:22:01 [INFO] - GET 127.0.0.1 / 
+2025-02-25 11:22:08 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 11:22:10 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp 
+2025-02-25 11:22:10 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 11:22:17 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-25 11:22:17 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp 
+2025-02-25 11:22:17 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 11:22:21 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 11:22:31 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 11:22:31 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:22:34 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:22:37 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:22:38 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:22:51 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:22:51 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:22:54 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:22:56 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:22:57 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:26:54 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:26:54 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:26:56 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:26:58 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:26:58 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:26:58 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:28:34 [INFO] - GET 0:0:0:0:0:0:0:1 /logout User ID: 44 Session ID: 99d80181-6c7e-4e8c-ae0e-bfe96e6e1971
+2025-02-25 11:28:34 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 11:28:44 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 11:29:00 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 11:29:00 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 58 Session ID: e862ca42-136b-44d3-b008-9245ee7c3c45
+2025-02-25 11:29:04 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 58 Session ID: e862ca42-136b-44d3-b008-9245ee7c3c45
+2025-02-25 11:29:07 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 58 Session ID: e862ca42-136b-44d3-b008-9245ee7c3c45
+2025-02-25 11:29:08 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 58 Session ID: e862ca42-136b-44d3-b008-9245ee7c3c45
+2025-02-25 11:30:45 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 11:30:45 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 11:30:45 [INFO] - Server startup in [1052] milliseconds
+2025-02-25 11:30:45 [INFO] - GET 127.0.0.1 / 
+2025-02-25 11:30:59 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 58 Session ID: e862ca42-136b-44d3-b008-9245ee7c3c45
+2025-02-25 11:30:59 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 58 Session ID: e862ca42-136b-44d3-b008-9245ee7c3c45
+2025-02-25 11:31:02 [INFO] - GET 0:0:0:0:0:0:0:1 /logout User ID: 58 Session ID: e862ca42-136b-44d3-b008-9245ee7c3c45
+2025-02-25 11:31:02 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 11:31:04 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 11:31:14 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 11:31:14 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:22 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/260 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:22 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:25 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/261 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:25 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:29 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/262 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:29 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:33 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/263 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:33 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:36 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/264 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:36 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:42 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/265 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:42 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:46 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/266 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:46 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:51 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/267 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:51 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:55 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/268 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:55 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:59 [INFO] - GET 0:0:0:0:0:0:0:1 /deleteContact/269 User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:31:59 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:32:06 [INFO] - GET 0:0:0:0:0:0:0:1 /getAvailableSyncMailsServlet User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:32:08 [INFO] - GET 0:0:0:0:0:0:0:1 /GoogleContactSyncServlet User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:32:09 [INFO] - GET 0:0:0:0:0:0:0:1 /profile User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 11:32:10 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 56 Session ID: ef578338-6cb6-4cbf-bee1-0c2ec02979a3
+2025-02-25 13:11:35 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 13:11:35 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 13:11:35 [INFO] - Stopping service [Catalina]
+2025-02-25 13:11:36 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 13:11:36 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 13:11:36 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 13:11:36 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 13:11:36 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 13:11:37 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 13:11:37 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 13:11:37 [INFO] - Server startup in [1084] milliseconds
+2025-02-25 13:11:38 [INFO] - GET 127.0.0.1 / 
+2025-02-25 13:11:41 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 13:11:41 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 13:11:41 [INFO] - Stopping service [Catalina]
+2025-02-25 13:11:41 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 13:11:41 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 13:11:41 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 13:11:41 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 13:11:41 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 13:11:41 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 15:31:28 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 15:31:28 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 15:31:28 [INFO] - Server startup in [1198] milliseconds
+2025-02-25 15:31:28 [INFO] - GET 127.0.0.1 / 
+2025-02-25 15:31:36 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-25 15:31:39 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 15:31:47 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 15:31:47 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 0615f306-d38e-4852-982f-acf2737303f0
+2025-02-25 15:33:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 15:33:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 15:34:01 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 15:34:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:14:40 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:17:36 [INFO] - Reloading Context with name [] has started
+2025-02-25 16:17:36 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:17:36 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:17:36 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:17:36 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:17:36 [INFO] - Reloading Context with name [] is completed
+2025-02-25 16:17:38 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 16:17:38 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 16:17:45 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:17:45 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:17:45 [INFO] - Stopping service [Catalina]
+2025-02-25 16:17:45 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:17:45 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:17:45 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:17:45 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:17:45 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:17:54 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:17:54 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:17:54 [INFO] - Server startup in [1901] milliseconds
+2025-02-25 16:17:54 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:18:04 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:19:20 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:19:20 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:19:20 [INFO] - Server startup in [1744] milliseconds
+2025-02-25 16:19:20 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:19:32 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-25 16:19:36 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 16:19:42 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 16:19:42 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:19:50 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:20:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:20:59 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:21:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:21:28 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:21:30 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:21:40 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:25:30 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:25:30 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:25:30 [INFO] - Server startup in [36622] milliseconds
+2025-02-25 16:26:07 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:26:07 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:26:07 [INFO] - Server startup in [5245] milliseconds
+2025-02-25 16:26:13 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:26:26 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-25 16:26:31 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:26:32 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:26:35 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:27:37 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:27:37 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:27:37 [INFO] - Server startup in [2077] milliseconds
+2025-02-25 16:27:50 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:27:53 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:27:57 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-25 16:29:47 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:31:21 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:31:21 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:31:21 [INFO] - Server startup in [1824] milliseconds
+2025-02-25 16:31:21 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:31:22 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-25 16:31:29 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:31:34 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:32:06 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:32:06 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:32:12 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:32:12 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:32:38 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:32:38 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:32:39 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:32:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:32:46 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:33:42 [INFO] - Reloading Context with name [] has started
+2025-02-25 16:33:42 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:33:42 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:33:42 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:33:42 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:33:43 [INFO] - Reloading Context with name [] is completed
+2025-02-25 16:33:45 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 16:33:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet/ 
+2025-02-25 16:33:51 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 16:33:59 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:33:59 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 16:34:02 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:34:02 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 16:34:37 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:34:37 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:34:37 [INFO] - Stopping service [Catalina]
+2025-02-25 16:34:38 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:34:38 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:34:38 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:34:38 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:34:38 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:34:50 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:34:50 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:34:50 [INFO] - Server startup in [1650] milliseconds
+2025-02-25 16:34:50 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:34:56 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:34:56 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 16:35:11 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:35:11 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:35:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:35:28 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:36:00 [INFO] - Reloading Context with name [] has started
+2025-02-25 16:36:00 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:36:00 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:36:00 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:36:01 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:36:01 [INFO] - Reloading Context with name [] is completed
+2025-02-25 16:36:04 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 16:36:12 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:36:12 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:36:12 [INFO] - Stopping service [Catalina]
+2025-02-25 16:36:12 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:36:12 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:36:12 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:36:12 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:36:12 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:36:17 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:36:17 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:36:17 [INFO] - Server startup in [1712] milliseconds
+2025-02-25 16:36:17 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:36:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:36:22 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 16:36:27 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:37:27 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:37:27 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:37:27 [INFO] - Stopping service [Catalina]
+2025-02-25 16:37:27 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:37:27 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:37:27 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:37:27 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:37:27 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:37:32 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:37:32 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:37:32 [INFO] - Server startup in [1883] milliseconds
+2025-02-25 16:37:32 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:37:33 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:38:02 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:38:02 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:38:02 [INFO] - Stopping service [Catalina]
+2025-02-25 16:38:02 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:38:02 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:38:02 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:38:02 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:38:02 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:38:07 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:38:07 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:38:07 [INFO] - Server startup in [1690] milliseconds
+2025-02-25 16:38:07 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:38:11 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:38:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:38:24 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 16:39:03 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:39:03 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:39:03 [INFO] - Stopping service [Catalina]
+2025-02-25 16:39:03 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:39:03 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:39:03 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:39:03 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:39:03 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:39:08 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:39:08 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:39:08 [INFO] - Server startup in [1686] milliseconds
+2025-02-25 16:39:08 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:39:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:39:10 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 16:40:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:40:38 [INFO] - OPTIONS 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:40:38 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 16:40:40 [INFO] - OPTIONS 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:40:42 [INFO] - OPTIONS 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:40:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:40:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:41:08 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:41:36 [INFO] - OPTIONS 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:41:42 [INFO] - OPTIONS 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:41:47 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:41:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:41:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:42:01 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:42:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:43:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:43:09 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:43:20 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:43:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:43:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:43:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:44:20 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:44:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:44:25 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:44:29 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:44:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:05 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:08 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:08 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:20 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:45:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:46:00 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:46:02 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:46:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:46:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:47:37 [INFO] - OPTIONS 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:47:39 [INFO] - OPTIONS 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:48:48 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:48:48 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:48:48 [INFO] - Stopping service [Catalina]
+2025-02-25 16:48:48 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:48:48 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:48:48 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:48:48 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:48:48 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:49:40 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:49:40 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:49:40 [INFO] - Server startup in [1639] milliseconds
+2025-02-25 16:49:40 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:49:56 [INFO] - OPTIONS 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 16:51:11 [INFO] - Reloading Context with name [] has started
+2025-02-25 16:51:11 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:51:11 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:51:11 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:51:11 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:51:12 [INFO] - Reloading Context with name [] is completed
+2025-02-25 16:51:14 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:51:14 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:51:14 [INFO] - Stopping service [Catalina]
+2025-02-25 16:51:14 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:51:14 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:51:14 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:51:14 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:51:14 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:51:15 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:51:18 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:51:18 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:51:18 [INFO] - Server startup in [1775] milliseconds
+2025-02-25 16:51:18 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:52:23 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:52:23 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:52:23 [INFO] - Stopping service [Catalina]
+2025-02-25 16:52:23 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:52:23 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:52:23 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:52:23 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:52:23 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:52:42 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:52:42 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:52:42 [INFO] - Server startup in [1801] milliseconds
+2025-02-25 16:52:42 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:54:23 [INFO] - Reloading Context with name [] has started
+2025-02-25 16:54:23 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:54:23 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:54:23 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:54:23 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:54:23 [INFO] - Reloading Context with name [] is completed
+2025-02-25 16:54:24 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:54:24 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:54:24 [INFO] - Stopping service [Catalina]
+2025-02-25 16:54:24 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:54:24 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:54:24 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:54:24 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/sun.security.ssl.HandshakeHash.determine(HandshakeHash.java:57)
+ java.base/sun.security.ssl.ServerHello$T13ServerHelloConsumer.consume(ServerHello.java:1224)
+ java.base/sun.security.ssl.ServerHello$ServerHelloConsumer.onServerHello(ServerHello.java:1001)
+ java.base/sun.security.ssl.ServerHello$ServerHelloConsumer.consume(ServerHello.java:889)
+ java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:393)
+ java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:476)
+ java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:447)
+ java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:201)
+ java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+ java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1506)
+ java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1421)
+ java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:455)
+ java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:426)
+ com.mysql.cj.protocol.ExportControlled.performTlsHandshake(ExportControlled.java:206)
+ com.mysql.cj.protocol.StandardSocketFactory.performTlsHandshake(StandardSocketFactory.java:183)
+ com.mysql.cj.protocol.a.NativeSocketConnection.performTlsHandshake(NativeSocketConnection.java:91)
+ com.mysql.cj.protocol.a.NativeProtocol.negotiateSSLConnection(NativeProtocol.java:358)
+ com.mysql.cj.protocol.a.NativeAuthenticationProvider.connect(NativeAuthenticationProvider.java:198)
+ com.mysql.cj.protocol.a.NativeProtocol.connect(NativeProtocol.java:1336)
+ com.mysql.cj.NativeSession.connect(NativeSession.java:153)
+ com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:969)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:833)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:420)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:238)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
+ com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:139)
+ com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:367)
+ com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:205)
+ com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:484)
+ com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:748)
+ com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:727)
+ java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:54:24 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:54:24 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:55:07 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 16:55:07 [INFO] - Starting ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:55:07 [INFO] - Server startup in [1743] milliseconds
+2025-02-25 16:55:07 [INFO] - GET 127.0.0.1 / 
+2025-02-25 16:58:33 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:58:36 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:59:36 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:59:47 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:59:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:59:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 16:59:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:00:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:00:12 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:00:18 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:00:37 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:00:45 [INFO] - GET 0:0:0:0:0:0:0:1 / User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:00:45 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:05 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:11 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:19 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:20 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:24 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:39 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:58 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:01:59 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:03 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:09 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:11 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:34 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:49 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:54 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:02:56 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:00 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:04 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:10 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:11 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:12 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:13 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:28 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:03:35 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:04:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:04:48 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:04:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:01 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:06 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:16 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:19 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:26 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:28 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:38 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:45 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:52 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:05:56 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:06:04 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:06:09 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:06:12 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:06:14 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:06:16 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:06:17 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 17:06:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 4672c32f-b39f-4363-8b0d-a1547dffe536
+2025-02-25 18:07:24 [INFO] - Reloading Context with name [] has started
+2025-02-25 18:07:24 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:07:24 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:07:24 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-1:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:07:24 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:07:24 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:07:25 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:07:25 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 18:07:25 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:07:25 [INFO] - Stopping service [Catalina]
+2025-02-25 18:07:25 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:07:25 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:07:25 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:07:25 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:07:25 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/java.util.zip.Inflater.inflateBytesBytes(Native Method)
+ java.base/java.util.zip.Inflater.inflate(Inflater.java:376)
+ java.base/java.util.zip.InflaterInputStream.read(InflaterInputStream.java:177)
+ java.base/java.io.InputStream.readNBytes(InputStream.java:509)
+ java.base/java.util.jar.JarFile.getBytes(JarFile.java:815)
+ java.base/java.util.jar.JarFile.checkForSpecialAttributes(JarFile.java:1027)
+ java.base/java.util.jar.JarFile.isMultiRelease(JarFile.java:387)
+ java.base/java.util.jar.JarFile.getEntry(JarFile.java:509)
+ java.base/java.util.jar.JarFile.getJarEntry(JarFile.java:471)
+ org.apache.catalina.webresources.AbstractSingleArchiveResourceSet.getArchiveEntry(AbstractSingleArchiveResourceSet.java:97)
+ org.apache.catalina.webresources.AbstractArchiveResourceSet.getResource(AbstractArchiveResourceSet.java:249)
+ org.apache.catalina.webresources.StandardRoot.getResourceInternal(StandardRoot.java:272)
+ org.apache.catalina.webresources.Cache.getResource(Cache.java:64)
+ org.apache.catalina.webresources.StandardRoot.getResource(StandardRoot.java:211)
+ org.apache.catalina.webresources.StandardRoot.getClassLoaderResource(StandardRoot.java:220)
+ org.apache.catalina.loader.WebappClassLoaderBase.findClassInternal(WebappClassLoaderBase.java:2170)
+ org.apache.catalina.loader.WebappClassLoaderBase.findClass(WebappClassLoaderBase.java:797)
+ org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1272)
+ org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1120)
+ ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:424)
+ ch.qos.logback.classic.Logger.filterAndLog_2(Logger.java:419)
+ ch.qos.logback.classic.Logger.debug(Logger.java:495)
+ com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:377)
+ com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:205)
+ com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:484)
+ com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:748)
+ com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:727)
+ java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)

@@ -1,7 +1,6 @@
 package com.contacts.handler;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 
@@ -29,7 +28,6 @@ public class SignupServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession(true);
 		User user = new User();
 		long now = System.currentTimeMillis();
@@ -39,7 +37,7 @@ public class SignupServlet extends HttpServlet {
 			user.setMiddleName(request.getParameter("midname"));
 			user.setLastName(request.getParameter("lname"));
 			user.setGender(request.getParameter("gender"));
-			user.setDateOfBirth(request.getParameter("dob"));
+			user.setDateOfBirth(request.getParameter("dob").equals("") ? null : request.getParameter("dob"));
 			if (MobileNumberValidator.validate(request.getParameter("mobile"))) {
 				UserMobile mobile = new UserMobile();				
 				mobile.setMobileNumber(request.getParameter("mobile"));
@@ -83,7 +81,7 @@ public class SignupServlet extends HttpServlet {
 					s.setCreatedAt(now);
 					s.setLastAccessedAt(now);
 					UserDAO.createSession(s);
-					SessionCache.activeSessionObjects.put(sessionId, s);
+					SessionCache.activeSessions.put(sessionId, s);
 					SessionCache.addUserToCache(user.getUserId(), user);
 					response.addCookie(new Cookie("session", sessionId));
 					response.sendRedirect("home.jsp");
@@ -94,8 +92,9 @@ public class SignupServlet extends HttpServlet {
 			} catch (SQLIntegrityConstraintViolationException e) {
 				String mail = e.getMessage().split("'")[1];
 				String msgString = "Can't add duplicate email '" + mail + "'";
-				out.println("<div class='message'>" + msgString + "</div>");
+				session.setAttribute("message", msgString);
 				e.printStackTrace();
+				request.getRequestDispatcher("signup.jsp").include(request, response);
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}

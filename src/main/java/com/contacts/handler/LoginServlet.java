@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 				s.setCreatedAt(now);
 				s.setLastAccessedAt(now);
 				UserDAO.createSession(s);
-				SessionCache.activeSessionObjects.put(sessionId, s);
+				SessionCache.activeSessions.put(sessionId, s);
 				SessionCache.addUserToCache(user.getUserId(), user);
 				Cookie cookie = new Cookie("session", sessionId);
 				response.addCookie(cookie);

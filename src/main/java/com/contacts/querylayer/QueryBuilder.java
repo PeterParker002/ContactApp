@@ -58,7 +58,6 @@ public class QueryBuilder {
 	public ArrayList<Object> valuesList = new ArrayList<Object>();
 	public String limit = "";
 	public String conjuction = "AND";
-//	public boolean singleTable = true;
 
 	public enum resultModifierOptions {
 		ALL, DISTINCT
@@ -148,13 +147,6 @@ public class QueryBuilder {
 		if (this.values.size() > 0) {
 			ArrayList<String> valList = new ArrayList<String>();
 			this.values.forEach((k, v) -> {
-//				if (v.value == null) {
-//					valList.add(null);
-//				} else if (v.value instanceof String) {
-//					valList.add("\'" + v.value + "\'");
-//				} else {
-//					valList.add(v.value.toString());
-//				}
 				valuesList.add(v.value);
 				valList.add(" ? ");
 			});

@@ -24,6 +24,10 @@ document.querySelector(".close-group-form")?.addEventListener("click", () => {
 	document.querySelector(".add-group-form").classList.toggle("hide");
 });
 
+document.querySelector(".close-sync-contact-form")?.addEventListener("click", () => {
+	document.querySelector(".available-sync-mails").classList.toggle("hide");
+});
+
 document.querySelector(".add-contact-popup")?.addEventListener("click", () => {
 	document.querySelector(".add-contact-form").classList.toggle("hide");
 });
@@ -304,14 +308,22 @@ document.querySelectorAll(".contact-name").forEach((name) =>
 						generateMailComponent(m.id, m.mail);
 					});
 					} else {
-						const emptyContainer = document.createElement("small");
-						emptyContainer.className = "no-mail";
-						emptyContainer.innerText = "No Emails Found 🫤";
-						document.querySelector(".contact-mails").appendChild(emptyContainer);
-					}	
-					data.mobiles.forEach((mo) => {
-						generateMobileComponent(mo.id, mo.mobile);
+						const emptyMailContainer = document.createElement("small");
+						emptyMailContainer.className = "no-mail";
+						emptyMailContainer.innerText = "No Emails Found 🫤";
+						document.querySelector(".contact-mails").appendChild(emptyMailContainer);
+					}
+					if (data.mobiles.length > 0) {						
+					data.mobiles.forEach((m) => {
+						generateMobileComponent(m.id, m.mobile);
 					});
+					} else {
+						const emptyMobileContainer = document.createElement("small");
+						emptyMobileContainer.className = "no-mail";
+						emptyMobileContainer.style.textAlign = "center";
+						emptyMobileContainer.innerText = "No Mobile Numbers Found 🫤";
+						document.querySelector(".contact-mobiles").appendChild(emptyMobileContainer);
+					}
 					document.querySelectorAll(".add-contact-mail-icon").forEach((btn) => {
 						btn?.addEventListener("click", () => {
 							document.querySelector(".add-email-form").querySelector("#hidden-type").value = "contact";
@@ -504,7 +516,55 @@ document.querySelectorAll(".add-group-contact-btn").forEach((user) =>
 	})
 );
 
+document.querySelector(".sync-contact-btn").addEventListener('click', () => {
+	const modal = document.querySelector(".available-sync-mails");
+	modal.classList.toggle("hide");
+	modal.querySelector(".sync-mails").innerHTML = "";
+	fetch("/getAvailableSyncMailsServlet").then(res => res.json()).then(data => {
+		if (Object.keys(data).length > 0) {
+		Object.entries(data).forEach(([id, mail]) => {
+			const linkEl = document.createElement("a");
+			linkEl.href = "/GoogleContactSyncServlet?id="+id;
+			linkEl.className = "mail-btn";
+			linkEl.innerText = mail;
+			modal.querySelector(".sync-mails").appendChild(linkEl);
+		});
+		} else {
+			const noContactsEl = document.createElement("div");
+			noContactsEl.classList.add("no-contact");
+			noContactsEl.classList.add("c-white");
+			noContactsEl.innerText = "There is no account currently in sync!";
+			modal.querySelector(".sync-mails").appendChild(noContactsEl);
+			modal.querySelector(".sync-mails").classList.add("center");
+		}
+	});
+});
+
 const msg = document.querySelector('.message');
+
+let currentLink = "";
+
+document.querySelectorAll(".delete-link").forEach(function(link) {
+    link.addEventListener("click", function(event) {
+        event.preventDefault();
+        
+        currentLink = link.href;
+		console.log(link.href);
+        document.querySelector(".consent-screen").classList.toggle("hide");
+    });
+});
+
+document.getElementById("yes-btn").addEventListener("click", function() {
+	console.log(currentLink);
+    if (currentLink) {
+        window.location.href = currentLink;
+    }
+	document.querySelector(".consent-screen").classList.toggle("hide");
+});
+
+document.getElementById("no-btn").addEventListener("click", function() {
+	document.querySelector(".consent-screen").classList.toggle("hide");
+});
 
 setTimeout(() => {
 	msg.remove();

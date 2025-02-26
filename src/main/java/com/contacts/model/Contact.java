@@ -1,6 +1,7 @@
 package com.contacts.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.contacts.utils.Database.Contacts;
 import com.contacts.utils.DatabaseImpl;
@@ -16,12 +17,12 @@ public class Contact {
 	private String notes;
 	private String homeAddress;
 	private String workAddress;
-	private ArrayList<ContactMail> Email = new ArrayList<ContactMail>();
-	private ArrayList<ContactMobile> mobileNumber = new ArrayList<ContactMobile>();
+	private List<ContactMail> Email = new ArrayList<ContactMail>();
+	private List<ContactMobile> mobileNumber = new ArrayList<ContactMobile>();
 	private long createdAt;
 	private long modifiedAt;
 
-	public ArrayList<ContactMail> getEmail() {
+	public List<ContactMail> getEmail() {
 		return this.Email;
 	}
 
@@ -38,7 +39,7 @@ public class Contact {
 		this.Email.add(mail);
 	}
 
-	public ArrayList<ContactMobile> getMobileNumber() {
+	public List<ContactMobile> getMobileNumber() {
 		return this.mobileNumber;
 	}
 
@@ -171,11 +172,11 @@ public class Contact {
 		return Contacts.CONTACTID;
 	}
 
-	public ArrayList<ContactMail> getData(ContactMail mail) {
+	public List<ContactMail> getData(ContactMail mail) {
 		return this.Email;
 	}
 
-	public ArrayList<ContactMobile> getData(ContactMobile mobile) {
+	public List<ContactMobile> getData(ContactMobile mobile) {
 		return this.mobileNumber;
 	}
 }

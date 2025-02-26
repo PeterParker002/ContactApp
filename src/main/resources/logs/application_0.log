@@ -1,0 +1,151 @@
+2025-02-20 16:31:12 [SEVERE] - com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+2025-02-20 16:31:55 [SEVERE] - com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2025-02-20T11:38:37.710515608Z</date>
+  <millis>1740051517710</millis>
+  <nanos>515608</nanos>
+  <sequence>38</sequence>
+  <logger>com.contacts.cache.SessionCache</logger>
+  <level>SEVERE</level>
+  <class>com.contacts.schedulers.SessionScheduler</class>
+  <method>contextInitialized</method>
+  <thread>47</thread>
+  <message>com.contacts.exception.InvalidConfigurationException: Error while loading configuration</message>
+</record>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2025-02-20T11:38:46.798338796Z</date>
+  <millis>1740051526798</millis>
+  <nanos>338796</nanos>
+  <sequence>29</sequence>
+  <logger>com.contacts.cache.SessionCache</logger>
+  <level>SEVERE</level>
+  <class>com.contacts.schedulers.SessionScheduler</class>
+  <method>contextInitialized</method>
+  <thread>1</thread>
+  <message>com.contacts.exception.InvalidConfigurationException: Error while loading configuration</message>
+</record>
+</log>
+Feb 20, 2025 5:15:16 PM com.contacts.schedulers.SessionScheduler contextInitialized
+SEVERE: com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+Feb 20, 2025 5:16:27 PM com.contacts.schedulers.SessionScheduler contextInitialized
+SEVERE: com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+Feb 20, 2025 5:21:09 PM com.contacts.schedulers.SessionScheduler contextInitialized
+SEVERE: 
+com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+	at com.contacts.connection.ConfigurationLoader.loadConfig(ConfigurationLoader.java:22)
+	at com.contacts.schedulers.SessionScheduler.contextInitialized(SessionScheduler.java:69)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4007)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4448)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3214)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:273)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:4803)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1172)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1176)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1176)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1154)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.io.FileNotFoundException: /home/karthik-tt0479eclipse-workspace/FirstProject/src/main/resources/application.properties (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at com.contacts.connection.ConfigurationLoader.loadConfig(ConfigurationLoader.java:15)
+	... 18 more
+
+Feb 20, 2025 5:21:23 PM com.contacts.schedulers.SessionScheduler contextInitialized
+SEVERE: 
+com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+	at com.contacts.connection.ConfigurationLoader.loadConfig(ConfigurationLoader.java:22)
+	at com.contacts.schedulers.SessionScheduler.contextInitialized(SessionScheduler.java:69)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4007)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4448)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:721)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:211)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:878)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:735)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:473)
+Caused by: java.io.FileNotFoundException: /home/karthik-tt0479eclipse-workspace/FirstProject/src/main/resources/application.properties (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at com.contacts.connection.ConfigurationLoader.loadConfig(ConfigurationLoader.java:15)
+	... 29 more
+
+Feb 21, 2025 11:57:29 AM com.contacts.schedulers.SessionScheduler contextInitialized
+SEVERE: 
+com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+	at com.contacts.connection.ConfigurationLoader.loadConfig(ConfigurationLoader.java:22)
+	at com.contacts.schedulers.SessionScheduler.contextInitialized(SessionScheduler.java:69)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4007)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4448)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:721)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1203)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1193)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75)
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145)
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:749)
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:211)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:415)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:878)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.startup.Catalina.start(Catalina.java:735)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.apache.catalina.startup.Bootstrap.start(Bootstrap.java:345)
+	at org.apache.catalina.startup.Bootstrap.main(Bootstrap.java:473)
+Caused by: java.io.FileNotFoundException: /home/karthik-tt0479eclipse-workspace/FirstProject/src/main/resources/application.properties (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at com.contacts.connection.ConfigurationLoader.loadConfig(ConfigurationLoader.java:15)
+	... 29 more
+

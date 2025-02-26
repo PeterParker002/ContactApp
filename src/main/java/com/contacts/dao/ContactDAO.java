@@ -3,6 +3,8 @@ package com.contacts.dao;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+
 import com.contacts.model.Contact;
 import com.contacts.model.Group;
 import com.contacts.querylayer.Column;
@@ -151,37 +153,38 @@ public class ContactDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Contact> getContacts(int user_id) throws ClassNotFoundException, SQLException {
+	public static List<Contact> getContacts(int user_id) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 
 		qb.selectTable(TableInfo.CONTACTS);
 		qb.joinTables(JoinTypes.left, new Column(Contacts.CONTACTID, "", "", qb.table),
 				new Column(ContactEmail.CONTACTID, "", "", new Table(TableInfo.CONTACTMAIL)));
-		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+		qb.joinTables(JoinTypes.left, new Column(Contacts.CONTACTID, "", "", qb.table),
 				new Column(ContactMobileNumber.CONTACTID, "", "", new Table(TableInfo.CONTACTMOBILENUMBER)));
 		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
-		ArrayList<Contact> contacts = new ArrayList<>();
+		List<Contact> contacts = new ArrayList<>();
 		try {
-			contacts = (ArrayList<Contact>) qx.executeJoinQuery1(qb.build());
+			contacts = (List<Contact>) qx.executeJoinQuery(qb.build());
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		}
 		return contacts;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Contact> getContactsInfo(int user_id) throws ClassNotFoundException, SQLException {
+	public static List<Contact> getContactsInfo(int user_id, int pageOffset) throws ClassNotFoundException, SQLException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 
 		qb.selectTable(TableInfo.CONTACTS);
 		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		qb.setOrder(new Column(Contacts.CONTACTID, "", "", qb.table), Order.asc);
-		ArrayList<Contact> contacts = new ArrayList<>();
+		qb.setLimit(10, pageOffset * 10);
+		List<Contact> contacts = new ArrayList<>();
 		try {
-			contacts = (ArrayList<Contact>) qx.executeQuery(qb.build());
+			contacts = (List<Contact>) qx.executeQuery(qb.build());
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
@@ -197,13 +200,13 @@ public class ContactDAO {
 		qb.selectTable(TableInfo.CONTACTS);
 		qb.joinTables(JoinTypes.left, new Column(Contacts.CONTACTID, "", "", qb.table),
 				new Column(ContactEmail.CONTACTID, "", "", new Table(TableInfo.CONTACTMAIL)));
-		qb.joinTables(JoinTypes.inner, new Column(Contacts.CONTACTID, "", "", qb.table),
+		qb.joinTables(JoinTypes.left, new Column(Contacts.CONTACTID, "", "", qb.table),
 				new Column(ContactMobileNumber.CONTACTID, "", "", new Table(TableInfo.CONTACTMOBILENUMBER)));
 		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.EQUAL, contact_id);
 		qb.setCondition(new Column(Contacts.USERID, "", "", qb.table), Operators.EQUAL, user_id);
-		ArrayList<Contact> contacts = new ArrayList<>();
+		List<Contact> contacts = new ArrayList<>();
 		try {
-			contacts = (ArrayList<Contact>) qx.executeJoinQuery1(qb.build());
+			contacts = (List<Contact>) qx.executeJoinQuery(qb.build());
 			return contacts.get(0);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
@@ -238,9 +241,9 @@ public class ContactDAO {
 		QueryExecutor qx = new QueryExecutor();
 		qb.selectTable(TableInfo.GROUPDETAILS);
 		qb.setCondition(new Column(GroupDetails.GROUPID, "", "", qb.table), Operators.EQUAL, group_id);
-		ArrayList<Group> g;
+		List<Group> g;
 		try {
-			g = (ArrayList<Group>) qx.executeQuery(qb.build());
+			g = (List<Group>) qx.executeQuery(qb.build());
 			if (g.size() > 0) {
 				return g.get(0).getGroupName();
 			}
@@ -252,15 +255,15 @@ public class ContactDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Contact> getContactsByGroupId(int user_id, int group_id) {
+	public static List<Contact> getContactsByGroupId(int user_id, int group_id) {
 		ArrayList<Contact> filteredContacts = new ArrayList<>();
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.selectTable(TableInfo.GROUPDETAILS);
 		qb.setCondition(new Column(GroupDetails.USERID, "", "", qb.table), Operators.EQUAL, user_id);
-		ArrayList<Group> r;
+		List<Group> r;
 		try {
-			r = (ArrayList<Group>) qx.executeQuery(qb.build());
+			r = (List<Group>) qx.executeQuery(qb.build());
 			if (r.size() > 0) {
 				qb = new QueryBuilder();
 				qx = new QueryExecutor();
@@ -272,7 +275,6 @@ public class ContactDAO {
 				inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, group_id);
 				qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.NOTIN, inner_qb.build());
 				filteredContacts = (ArrayList<Contact>) qx.executeQuery(qb.build());
-//			}
 			}
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {

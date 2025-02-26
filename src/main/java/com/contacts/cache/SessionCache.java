@@ -1,6 +1,7 @@
 package com.contacts.cache;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -11,11 +12,10 @@ import com.contacts.model.User;
 import com.contacts.notifier.Notifier;
 import com.google.gson.Gson;
 
-
 public class SessionCache {
-	public static ConcurrentHashMap<String, Session> activeSessionObjects = new ConcurrentHashMap<>();
-	public static ConcurrentHashMap<Integer, User> userCache = new ConcurrentHashMap<>();
-	public static CopyOnWriteArrayList<Server> availableServers = new CopyOnWriteArrayList<Server>();
+	public static Map<String, Session> activeSessions = new ConcurrentHashMap<>();
+	public static Map<Integer, User> userCache = new ConcurrentHashMap<>();
+	public static List<Server> availableServers = new CopyOnWriteArrayList<Server>();
 	public static int count = 0;
 	public static final int EXPIRATION_TIME = 15 * 1000 * 60;
 
@@ -26,7 +26,7 @@ public class SessionCache {
 	public static void updateAvailableServers() {
 		try {
 			availableServers = new CopyOnWriteArrayList<Server>();
-			ArrayList<Server> servers = UserDAO.getAvailableServers();
+			List<Server> servers = UserDAO.getAvailableServers();
 			for (Server s : servers) {
 				availableServers.add(s);
 			}
@@ -65,11 +65,12 @@ public class SessionCache {
 			return userCache.get(userId);
 		}
 		User user = UserDAO.getUserInfo(userId);
+		addUserToCache(userId, user);
 		return user;
 	}
 
 	public static void checkAndUpdateUserCache(Session session) {
-		SessionCache.activeSessionObjects.forEach((sId, s) -> {
+		SessionCache.activeSessions.forEach((sId, s) -> {
 			if (session.getUserId() == s.getUserId()) {
 				count++;
 			}
@@ -80,5 +81,15 @@ public class SessionCache {
 			SessionCache.userCache.remove(session.getUserId());
 		}
 		count = 0;
+	}
+
+	public static void addSessionCache(Session session) {
+		activeSessions.put(session.getSessionId(), session);
+	}
+
+	public static Session updateSessionCache(String sessionId) {
+		Session session = activeSessions.get(sessionId);
+		session.setLastAccessedAt(System.currentTimeMillis());
+		return session;
 	}
 }

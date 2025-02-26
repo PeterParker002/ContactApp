@@ -193,7 +193,7 @@
   border-radius: 50%;
 }
 
-.logout {
+.logout, .mail-btn {
   font-size: 1.2rem;
   text-decoration: none;
   color: #000;
@@ -371,7 +371,28 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
   gap: 1rem;
+}
+
+.sync-mails {
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 0.5rem;
+	background: var(--button-gradient);
+	border-radius: 15px;
+	padding: 1rem;
+}
+
+.mail-btn {
+	width: 100%;
+}
+
+.c-white {
+	color: #fff;
 }
 
 .close-btn {
@@ -602,4 +623,14 @@
 	color: rgb(94, 92, 100);
 	padding: .25rem;
 	height: auto;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sync-mails {
+	min-height: 200px;
 }

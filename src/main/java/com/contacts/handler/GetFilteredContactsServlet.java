@@ -2,6 +2,7 @@ package com.contacts.handler;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,7 +31,7 @@ public class GetFilteredContactsServlet extends HttpServlet {
 			String sessionId = UserDAO.getSessionIdFromCookie(request, "session");
 			Session userSession = UserDAO.getUserSession(sessionId);
 			int user_id = userSession.getUserId();
-			ArrayList<Contact> rs = ContactDAO.getContactsByGroupId(user_id, group_id);
+			List<Contact> rs = ContactDAO.getContactsByGroupId(user_id, group_id);
 			String groupName = ContactDAO.getGroupNameById(group_id);
 			if (rs.size() > 0) {
 				ArrayList<JSONObject> contacts = new ArrayList<>();

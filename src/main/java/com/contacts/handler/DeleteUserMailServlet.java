@@ -29,7 +29,6 @@ public class DeleteUserMailServlet extends HttpServlet {
 			int user_id = userSession.getUserId();
 			int mail_id = Integer.parseInt(request.getPathInfo().substring(1));
 			if (UserDAO.checkIsPrimaryMail(mail_id)) {
-				
 				session.setAttribute("message", "Can't Delete Primary Mail");
 			} else {
 				if (UserDAO.deleteMail(mail_id)) {

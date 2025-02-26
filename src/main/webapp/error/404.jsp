@@ -10,11 +10,13 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
 	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../css/index.css">
 </head>
 <body>
 	<div class="wrapper">
-		<h1>Don't Play with the URL 🫤</h1>
+		<img src="assets/404_not_found.svg" width="300"/>
+		<h1>Sorry, Page Not found 🥲</h1>
 		<div class="container">
 			<a href="/" class="home-btn">Home</a>
 		</div>

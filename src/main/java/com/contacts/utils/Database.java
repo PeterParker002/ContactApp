@@ -24,7 +24,7 @@ public class Database {
 		USER("User"), USEREMAIL("User_mail_ids"), USERMOBILENUMBER("user_mobile_numbers"), CONTACTS("Contact"),
 		CONTACTMAIL("contacts_mail_ids"), CONTACTMOBILENUMBER("contacts_mobile_numbers"), GROUPINFO("Group_info"),
 		GROUPDETAILS("Group_details"), SAMPLE("Sample"), SESSION("Session"), SERVERS("available_servers"),
-		AUDIT("audit_log");
+		OAUTHDETAILS("oauth_details"), AUDIT("audit_log");
 
 		private String table;
 
@@ -40,7 +40,8 @@ public class Database {
 	public enum Users implements DatabaseImpl {
 		USERID("user_id"), USERNAME("username"), PASSWORD("password"), FIRSTNAME("first_name"),
 		MIDDLENAME("middle_name"), LASTNAME("last_name"), GENDER("gender"), DATEOFBIRTH("date_of_birth"),
-		NOTES("notes"), HOMEADDRESS("home_address"), WORKADDRESS("work_address"), ISHASHED("isHashed"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"), POJO("User");
+		NOTES("notes"), HOMEADDRESS("home_address"), WORKADDRESS("work_address"), ISHASHED("isHashed"),
+		CREATEDAT("created_at"), MODIFIEDAT("modified_at"), POJO("User");
 
 		private String col;
 
@@ -54,7 +55,8 @@ public class Database {
 	}
 
 	public enum UserEmail implements DatabaseImpl {
-		USERID("user_id"), EMAIL("email"), ISPRIMARY("isPrimary"), ID("id"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"), POJO("Mail");
+		USERID("user_id"), EMAIL("email"), ISPRIMARY("isPrimary"), ID("id"), CREATEDAT("created_at"),
+		MODIFIEDAT("modified_at"), POJO("Mail");
 
 		private String col;
 
@@ -68,7 +70,8 @@ public class Database {
 	}
 
 	public enum UserMobileNumber implements DatabaseImpl {
-		USERID("user_id"), MOBILENUMBER("mobile_number"), ID("id"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"), POJO("MobileNumber");
+		USERID("user_id"), MOBILENUMBER("mobile_number"), ID("id"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"),
+		POJO("MobileNumber");
 
 		private String col;
 
@@ -84,7 +87,8 @@ public class Database {
 	public enum Contacts implements DatabaseImpl {
 		CONTACTID("contact_id"), USERID("user_id"), FIRSTNAME("first_name"), MIDDLENAME("middle_name"),
 		LASTNAME("last_name"), GENDER("gender"), DATEOFBIRTH("date_of_birth"), NOTES("notes"),
-		HOMEADDRESS("home_address"), WORKADDRESS("work_address"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"), POJO("Contact");
+		HOMEADDRESS("home_address"), WORKADDRESS("work_address"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"),
+		POJO("Contact");
 
 		private String col;
 
@@ -98,7 +102,8 @@ public class Database {
 	}
 
 	public enum ContactEmail implements DatabaseImpl {
-		ID("id"), CONTACTID("contact_id"), EMAIL("email"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"), POJO("Mail");
+		ID("id"), CONTACTID("contact_id"), EMAIL("email"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"),
+		POJO("Mail");
 
 		private String col;
 
@@ -112,7 +117,8 @@ public class Database {
 	}
 
 	public enum ContactMobileNumber implements DatabaseImpl {
-		ID("id"), CONTACTID("contact_id"), MOBILENUMBER("mobile_number"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"), POJO("MobileNumber");
+		ID("id"), CONTACTID("contact_id"), MOBILENUMBER("mobile_number"), CREATEDAT("created_at"),
+		MODIFIEDAT("modified_at"), POJO("MobileNumber");
 
 		private String col;
 
@@ -140,7 +146,8 @@ public class Database {
 	}
 
 	public enum GroupDetails implements DatabaseImpl {
-		GROUPID("group_id"), USERID("user_id"), GROUPNAME("group_name"), CREATEDAT("created_at"), MODIFIEDAT("modified_at"), POJO("Group");
+		GROUPID("group_id"), USERID("user_id"), GROUPNAME("group_name"), CREATEDAT("created_at"),
+		MODIFIEDAT("modified_at"), POJO("Group");
 
 		private String col;
 
@@ -187,6 +194,21 @@ public class Database {
 		private String col;
 
 		private Servers(String col) {
+			this.col = col;
+		}
+
+		public String toString() {
+			return this.col;
+		}
+	}
+
+	public enum OAuthDetailsEnum implements DatabaseImpl {
+		ID("id"), USERID("user_id"), EMAIL("email"), REFRESHTOKEN("refresh_token"), ACCESSTOKEN("access_token"),
+		CREATEDAT("created_at"), MODIFIEDAT("modified_at");
+
+		private String col;
+
+		private OAuthDetailsEnum(String col) {
 			this.col = col;
 		}
 

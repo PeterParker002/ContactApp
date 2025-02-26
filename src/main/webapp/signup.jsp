@@ -63,7 +63,7 @@ response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
 					placeholder="Enter your work address" />
 			</div>
 			<div class="mobile-number">
-				<input type="tel" pattern="[0-9]{10}" name="mobile" id="mobile"
+				<input type="tel" pattern="^(?:\+?[1-9]\d{6,14}|\d{1,6})$" name="mobile" id="mobile"
 					class="custom-field" placeholder="Enter your mobile number"
 					title="Phone number should look like: 1234567890" required />
 			</div>

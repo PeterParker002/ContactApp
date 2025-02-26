@@ -27,7 +27,7 @@ public class LogoutServlet extends HttpServlet {
 			if (c.getName().equals("session")) {
 				UserDAO.clearSession(c.getValue());
 				System.out.println("Cleared Session from DB");
-				SessionCache.activeSessionObjects.remove(c.getValue());
+				SessionCache.activeSessions.remove(c.getValue());
 				SessionCache.checkAndUpdateUserCache(userSession);
 				System.out.println("Cleared Session from Cache");
 				SessionCache.notifySessionRemove(userSession);

@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.contacts.model.User;
@@ -22,6 +24,7 @@ import com.contacts.model.Contact;
 import com.contacts.model.ContactMail;
 import com.contacts.model.ContactMobile;
 import com.contacts.model.Group;
+import com.contacts.model.OAuthDetails;
 import com.contacts.model.Server;
 import com.contacts.model.Session;
 import com.contacts.utils.Database;
@@ -31,7 +34,7 @@ import com.contacts.utils.MyCustomJsonObject;
 import java.sql.ResultSetMetaData;
 
 public class QueryExecutor {
-	private HashMap<Integer, Object> resultPojo = new HashMap<Integer, Object>();
+	private Map<Integer, Object> resultPojo = new LinkedHashMap<Integer, Object>();
 	public int currentPojoId = 0;
 	public Object currentPojo;
 	public Object basePojo;
@@ -70,6 +73,8 @@ public class QueryExecutor {
 			return Session.class;
 		case "available_servers":
 			return Server.class;
+		case "oauth_details":
+			return OAuthDetails.class;
 		default:
 			return null;
 		}
@@ -97,17 +102,18 @@ public class QueryExecutor {
 
 	public void updateBasePojo(Object pojo)
 			throws NoSuchMethodException, SecurityException, IllegalAccessException, InvocationTargetException {
-		if (!isPojoAlreadyExists(pojo)) {
-			Method m = basePojo.getClass().getMethod("update", pojo.getClass());
-			m.invoke(basePojo, pojo);
+		if (isPojoAlreadyExists(pojo)) {
+			return;
 		}
+		Method m = basePojo.getClass().getMethod("update", pojo.getClass());
+		m.invoke(basePojo, pojo);
 	}
 
 	@SuppressWarnings("unchecked")
 	public boolean isPojoAlreadyExists(Object pojo)
 			throws NoSuchMethodException, SecurityException, IllegalAccessException, InvocationTargetException {
 		Method m = basePojo.getClass().getMethod("getData", pojo.getClass());
-		ArrayList<Object> pojoList = (ArrayList<Object>) m.invoke(basePojo, pojo);
+		List<Object> pojoList = (List<Object>) m.invoke(basePojo, pojo);
 		int pojoId = (int) pojo.getClass().getMethod("getUniqueID").invoke(pojo);
 		for (Object obj : pojoList) {
 			if (pojoId == (int) obj.getClass().getMethod("getUniqueID").invoke(obj)) {
@@ -117,7 +123,7 @@ public class QueryExecutor {
 		return false;
 	}
 
-	public boolean isBasePojoAlreadyExists(ArrayList<Object> pojoList, Object pojo)
+	public boolean isBasePojoAlreadyExists(List<Object> pojoList, Object pojo)
 			throws NoSuchMethodException, SecurityException, IllegalAccessException, InvocationTargetException {
 		int pojoId = (int) pojo.getClass().getMethod("getUniqueID").invoke(pojo);
 		for (Object obj : pojoList) {
@@ -128,12 +134,12 @@ public class QueryExecutor {
 		return false;
 	}
 
-	public ArrayList<?> executeJoinQuery1(QueryBuilder query) throws InstantiationException, IllegalAccessException,
+	public List<?> executeJoinQuery(QueryBuilder query) throws InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		try (Connection con = ConnectionPool.getDataSource().getConnection();
 				PreparedStatement ps = fillPreparedStatement(con.prepareStatement(query.toString()), query);
 				ResultSet rs = ps.executeQuery();) {
-			ArrayList<Object> result = new ArrayList<Object>();
+			List<Object> result1 = new ArrayList<Object>();
 			ResultSetMetaData metadata = rs.getMetaData();
 			while (rs.next()) {
 				for (int i = 1; i <= metadata.getColumnCount(); i++) {
@@ -158,18 +164,18 @@ public class QueryExecutor {
 						continue;
 					if (basePojo == null) {
 						basePojo = currentPojo;
-					} else if (!isBasePojoAlreadyExists(result, currentPojo)
+					} else if (!isBasePojoAlreadyExists(result1, currentPojo)
 							& currentTableName.equals(query.table.getName().toString())) {
 						basePojo = currentPojo;
 					}
 				}
 				if (currentPojo != null)
 					updateBasePojo(currentPojo);
-				if (!isBasePojoAlreadyExists(result, basePojo)) {
-					result.add(basePojo);
+				if (!isBasePojoAlreadyExists(result1, basePojo)) {
+					result1.add(basePojo);
 				}
 			}
-			return result;
+			return result1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -177,7 +183,7 @@ public class QueryExecutor {
 
 	}
 
-	public ArrayList<?> executeQuery(QueryBuilder query) throws InstantiationException, IllegalAccessException,
+	public List<?> executeQuery(QueryBuilder query) throws InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		Class<?> pojoClass = getModelClassForTable(query.table.getName().toString());
 		Object pojo = pojoClass.getDeclaredConstructor().newInstance();
@@ -202,7 +208,8 @@ public class QueryExecutor {
 			e.printStackTrace();
 			return null;
 		}
-		return new ArrayList<Object>(resultPojo.values());
+		List<Object> result = new ArrayList<Object>(resultPojo.values());
+		return result;
 	}
 
 	private String getUniqueIdColumn(String tableName) {
@@ -358,27 +365,28 @@ public class QueryExecutor {
 		String tableName = query.table.toString();
 		boolean isTableAuditable = Database.auditableTables.contains(query.table.name);
 		boolean isDeleteQuery = query.statementType.equals("DELETE");
-		if (isTableAuditable) {
-			if (primaryKey > 0) {
-				try {
-					Object clazz = getModelClassForTable(tableName).getDeclaredConstructor().newInstance();
-					Method m = clazz.getClass().getMethod("getPrimaryKeyColumn");
-					DatabaseImpl idColumnName = (DatabaseImpl) m.invoke(clazz);
-					newValue.put(idColumnName.toString(), primaryKey);
-				} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
-						| IllegalArgumentException | InvocationTargetException e) {
-					e.printStackTrace();
-				}
-			}
-			if (!isDeleteQuery) {
-				for (Entry<Column, Value<?>> val : query.values.entrySet()) {
-					newValue.put(val.getKey().toString(), val.getValue().value);
-				}
-			}
-			System.out.println("Old Value: " + oldValue);
-			System.out.println("New Value: " + newValue);
-			AuditDAO.audit(tableName, oldValue, newValue, query.statementType, LocalDateTime.now());
+		if (!isTableAuditable) {
+			return;
 		}
+		if (primaryKey > 0) {
+			try {
+				Object clazz = getModelClassForTable(tableName).getDeclaredConstructor().newInstance();
+				Method m = clazz.getClass().getMethod("getPrimaryKeyColumn");
+				DatabaseImpl idColumnName = (DatabaseImpl) m.invoke(clazz);
+				newValue.put(idColumnName.toString(), primaryKey);
+			} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
+					| IllegalArgumentException | InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		}
+		if (!isDeleteQuery) {
+			for (Entry<Column, Value<?>> val : query.values.entrySet()) {
+				newValue.put(val.getKey().toString(), val.getValue().value);
+			}
+		}
+		System.out.println("Old Value: " + oldValue);
+		System.out.println("New Value: " + newValue);
+		AuditDAO.audit(tableName, oldValue, newValue, query.statementType, LocalDateTime.now());
 	}
 
 }

@@ -19,9 +19,7 @@ public class Column {
 	}
 
 	protected void init() {
-		// Handle the table alias
 		this.name = !this.table.alias.equals("") ? this.table.alias + "." + this.name : this.name;
-		// Handle the aggregate function
 		this.name = !this.aggregateFunction.equals("") ? this.aggregateFunction + "(" + this.name + ")" : this.name;
 	}
 

@@ -22,7 +22,7 @@ public class GoogleLoginServlet extends HttpServlet {
 		String REDIRECT_URI = ConfigurationLoader.getProperty("googleOAuthRedirectURI");
 		String authRequestUrl = AUTH_URL + "?response_type=code" + "&client_id=" + CLIENT_ID + "&redirect_uri="
 				+ URLEncoder.encode(REDIRECT_URI, "UTF-8") + "&scope="
-				+ URLEncoder.encode("openid email profile https://www.googleapis.com/auth/contacts.readonly", "UTF-8");
+				+ URLEncoder.encode("openid email profile https://www.googleapis.com/auth/contacts.readonly", "UTF-8") + "&access_type=offline&prompt=consent";
 		response.sendRedirect(authRequestUrl);
 	}
 

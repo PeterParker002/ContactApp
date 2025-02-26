@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="com.contacts.cache.SessionCache"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page language="java"%>
@@ -22,8 +23,8 @@ if (userSession == null) {
 }
 int user_id = userSession.getUserId();
 User user = SessionCache.getUserCache(user_id);
-ArrayList<Group> groups = (ArrayList<Group>) UserDAO.getGroups(user_id);
-ArrayList<Contact> contacts = ContactDAO.getContactsInfo(user_id);
+List<Group> groups = (ArrayList<Group>) UserDAO.getGroups(user_id);
+List<Contact> contacts = ContactDAO.getContactsInfo(user_id, 0);
 %>
 <html>
 <head>
@@ -51,6 +52,15 @@ ArrayList<Contact> contacts = ContactDAO.getContactsInfo(user_id);
 	session.removeAttribute("message");
 	}
 	%>
+	<div class="consent-screen modal hide">
+	<div class="form-wrapper">
+		<h1>Are you Sure?</h1>
+		<div class="btn-group">
+		<button class="btn" id="yes-btn">Yes</button>
+		<button class="btn" id="no-btn">No</button>
+		</div>
+	</div>
+	</div>
 	<div class="edit-profile-form modal hide">
 		<div class="form-wrapper">
 			<span class="close-profile-form close-btn"><img
@@ -320,6 +330,18 @@ ArrayList<Contact> contacts = ContactDAO.getContactsInfo(user_id);
 			</form>
 		</div>
 	</div>
+	<div class="available-sync-mails modal hide">
+		<div class="form-wrapper">
+			<span class="close-sync-contact-form close-btn"><img
+				src="assets/close-line-svgrepo-com.svg" alt="close-btn" width="48"></span>
+			<h1 class="heading">Synced Mails</h1>
+			<div class="sync-mails">
+			</div>
+			<div class="center">
+			<a class="mail-btn" href="/login-with-google">Sync With Another Account</a>
+			</div>
+		</div>
+	</div>
 	<div class="main-container">
 		<div class="left-container">
 			<h1 class="heading">Profile</h1>
@@ -401,7 +423,7 @@ ArrayList<Contact> contacts = ContactDAO.getContactsInfo(user_id);
 					%>
 					<div class="mobile">
 						<span class="left-side"> <span><%=mobile.getMobileNumber()%></span>
-						</span> <span class="right-side"> <a
+						</span> <span class="right-side"> <a class="delete-link"
 							href="deleteMobile/<%=mobile.getId()%>"> <img
 								src="assets/delete-icon.svg" alt="delete-mail" width="24">
 						</a>
@@ -419,8 +441,9 @@ ArrayList<Contact> contacts = ContactDAO.getContactsInfo(user_id);
 				<div class="header">
 					<p class="heading">All Contacts</p>
 					<div class="btn-group">
+						<button class="duplicate-contact-popup" style="border: none;">Duplicate Contacts</button>
 						<button class="add-contact-popup" style="border: none;">Add Contact</button>
-						<a class="btn" href="/login-with-google">Sync Contacts</a>
+						<button class="sync-contact-btn btn" style="border: none;">Sync Contacts</button>
 						<a class="logout" href="/logout">Logout</a>
 					</div>
 				</div>
@@ -437,7 +460,7 @@ ArrayList<Contact> contacts = ContactDAO.getContactsInfo(user_id);
 							<span class="contact-name" data-id="<%=cont.getContactId()%>"><%=cont.getFirstName()%></span> 
 							</div>
 							<a href="deleteContact/<%=cont.getContactId()%>"
-								class="delete-contact delete-icon"><img
+								class="delete-contact delete-icon delete-link"><img
 								src="assets/delete-icon.svg" alt="delete-contact" width="24"></a>
 						</div>
 					</div>
@@ -562,7 +585,6 @@ ArrayList<Contact> contacts = ContactDAO.getContactsInfo(user_id);
 				
 				</div>
 				<div class="mobile-container contact-mobiles">
-				
 					
 				</div>
 			</div>

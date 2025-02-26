@@ -1,6 +1,7 @@
 package com.contacts.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.contacts.utils.Database.GroupInfo;
 import com.contacts.utils.DatabaseImpl;
@@ -8,7 +9,7 @@ import com.contacts.utils.DatabaseImpl;
 public class Group {
 	private int groupId;
 	private int userId;
-	private ArrayList<Contact> contacts = new ArrayList<>();
+	private List<Contact> contacts = new ArrayList<>();
 	private String groupName;
 	private long createdAt;
 	private long modifiedAt;
@@ -37,7 +38,7 @@ public class Group {
 		this.groupName = groupName;
 	}
 
-	public ArrayList<Contact> getContact() {
+	public List<Contact> getContact() {
 		return this.contacts;
 	}
 
@@ -47,7 +48,7 @@ public class Group {
 		this.contacts.add(c);
 	}
 
-	public void setContactId(ArrayList<Contact> Contact) {
+	public void setContactId(List<Contact> Contact) {
 		this.contacts = Contact;
 	}
 
@@ -83,7 +84,7 @@ public class Group {
 		this.modifiedAt = modifiedAt;
 	}
 
-	public ArrayList<Contact> getData(Contact contact) {
+	public List<Contact> getData(Contact contact) {
 		return this.contacts;
 	}
 

@@ -1,6 +1,7 @@
 package com.contacts.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.contacts.utils.Database.Users;
 
@@ -17,8 +18,8 @@ public class User {
 	private String workAddress;
 	private String homeAddress;
 	private int isHashed;
-	private ArrayList<UserMail> email = new ArrayList<>();
-	private ArrayList<UserMobile> mobileNumber = new ArrayList<>();
+	private List<UserMail> email = new ArrayList<>();
+	private List<UserMobile> mobileNumber = new ArrayList<>();
 	private long createdAt;
 	private long modifiedAt;
 
@@ -30,7 +31,7 @@ public class User {
 		this.userId = userId;
 	}
 
-	public ArrayList<UserMail> getEmail() {
+	public List<UserMail> getEmail() {
 		return email;
 	}
 
@@ -114,7 +115,7 @@ public class User {
 		this.homeAddress = homeAddress;
 	}
 
-	public ArrayList<UserMobile> getMobileNumber() {
+	public List<UserMobile> getMobileNumber() {
 		return mobileNumber;
 	}
 
@@ -158,11 +159,11 @@ public class User {
 		return Users.USERID;
 	}
 
-	public ArrayList<UserMail> getData(UserMail mail) {
+	public List<UserMail> getData(UserMail mail) {
 		return this.email;
 	}
 
-	public ArrayList<UserMobile> getData(UserMobile mobile) {
+	public List<UserMobile> getData(UserMobile mobile) {
 		return this.mobileNumber;
 	}
 

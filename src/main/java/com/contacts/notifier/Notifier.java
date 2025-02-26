@@ -1,6 +1,5 @@
 package com.contacts.notifier;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -12,10 +11,6 @@ public class Notifier {
 		HttpRequest hrequest = HttpRequest.newBuilder().uri(URI.create("http://" + ip + ":" + port + "/" + endpoint))
 				.header("Content-Type", "application/json").header("Cookie", "session=" + cookie)
 				.POST(HttpRequest.BodyPublishers.ofString(payload)).build();
-		try {
-			client.send(hrequest, HttpResponse.BodyHandlers.ofString());
-		} catch (IOException | InterruptedException e) {
-			e.printStackTrace();
-		}
+		client.sendAsync(hrequest, HttpResponse.BodyHandlers.ofString());
 	}
 }

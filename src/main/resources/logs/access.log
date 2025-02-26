@@ -16,3 +16,130 @@
 0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 14:37:42] "GET /home.jsp HTTP/1.1" 
 0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 14:37:42] "GET /index.jsp HTTP/1.1" 
 0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 14:39:51] "GET /login HTTP/1.1" 
+127.0.0.1 - [INFO] [2025-02-17 15:43:17] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:29] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:36] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:36] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: 0273c77c-3f2e-4fa1-bf18-78e127c6d90d
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:40] "GET /contact/46 HTTP/1.1" User ID: 1 Session ID: 0273c77c-3f2e-4fa1-bf18-78e127c6d90d
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:45] "GET /logout HTTP/1.1" User ID: 1 Session ID: 0273c77c-3f2e-4fa1-bf18-78e127c6d90d
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:45] "GET /index.jsp HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:46] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:58] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:43:59] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:44:02] "GET /contact/99 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:44:37] "GET /contact/98 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:44:50] "GET /contact/101 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:44:54] "GET /contact/102 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:44:57] "GET /contact/100 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:05] "GET /deleteContact/98 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:05] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:07] "GET /deleteContact/99 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:07] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:08] "GET /deleteContact/100 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:08] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:09] "GET /deleteContact/101 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:09] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:12] "GET /deleteContact/102 HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:48:12] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:55:04] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:55:08] "GET /login-with-google HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+127.0.0.1 - [INFO] [2025-02-17 15:55:32] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:55:34] "GET / HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:55:34] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:55:36] "GET /login-with-google HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+127.0.0.1 - [INFO] [2025-02-17 15:56:39] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:57:02] "GET /login-with-google HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 15:57:06] "GET /google-callback HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 16:02:04] "GET / HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 16:02:04] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 16:02:06] "GET /login-with-google HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 16:02:11] "GET /google-callback HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+127.0.0.1 - [INFO] [2025-02-17 16:02:46] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 16:02:49] "GET /google-callback HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 16:02:57] "GET /google-callback HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 16:02:57] "GET /profile HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 16:02:58] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 6ce39d78-592b-4849-8c5f-639bfd8c6399
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:18:39] "GET /contact/103 HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:18:39] "GET /index.jsp HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:18:41] "GET /home.jsp HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:18:41] "GET /index.jsp HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:18:43] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:18:58] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:18:59] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:10] "GET /deleteContact/103 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:10] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:10] "GET /deleteContact/104 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:10] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:11] "GET /deleteContact/105 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:11] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:11] "GET /deleteContact/106 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:11] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:12] "GET /deleteContact/107 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:12] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:22] "GET /login-with-google HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:25] "GET /google-callback HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:26] "GET /profile HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:27] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:34] "GET /contact/112 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:20:39] "GET /contact/108 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:21:31] "GET /contact/111 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:21:51] "GET /add-mobile-number HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:21:51] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:21:54] "GET /contact/111 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:00] "GET /deleteContactMobile/99 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:00] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:04] "GET /contact/111 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:09] "GET /deleteContactMobile/97 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:09] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:12] "GET /contact/111 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:35] "GET /deleteContact/111 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:35] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:22:37] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:26:15] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:26:35] "GET /contact/110 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+127.0.0.1 - [INFO] [2025-02-17 18:29:53] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:29:57] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:29:59] "GET /contact/110 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:30:40] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:30:42] "GET /contact/112 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:30:44] "GET /contact/110 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:03] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:05] "GET /contact/112 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:15] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:17] "GET /contact/112 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+127.0.0.1 - [INFO] [2025-02-17 18:31:26] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:45] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:47] "GET /contact/112 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:50] "GET /contact/110 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:52] "GET /contact/109 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:54] "GET /contact/108 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:58] "GET /deleteContactMobile/94 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:31:58] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:32:00] "GET /contact/108 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+127.0.0.1 - [INFO] [2025-02-17 18:32:39] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:32:40] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:32:43] "GET /contact/108 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:33:43] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:33:45] "GET /contact/108 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:43:23] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:43:25] "GET /contact/112 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:43:40] "GET /add-group HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:43:41] "GET /home.jsp HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:43:46] "GET /contact/112 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:48:04] "GET /contact/108 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 18:57:17] "GET /contact/109 HTTP/1.1" User ID: 44 Session ID: 66f860c9-a6b6-4f96-9d8f-9eb5d99fe2c3
+10.15.199.111 - [INFO] [2025-02-17 19:04:15] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 19:05:53] "GET /delete-group-contact HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 19:05:53] "GET /index.jsp HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 19:06:01] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 19:08:41] "GET / HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-17 19:09:06] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:47:13] "GET /login HTTP/1.1" 
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:47:13] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: 58b710a5-6a93-41b6-b4bd-341db58e4071
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:47:37] "GET /contact/2 HTTP/1.1" User ID: 1 Session ID: 58b710a5-6a93-41b6-b4bd-341db58e4071
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:51:24] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: 58b710a5-6a93-41b6-b4bd-341db58e4071
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:51:31] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: 58b710a5-6a93-41b6-b4bd-341db58e4071
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:51:31] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: 58b710a5-6a93-41b6-b4bd-341db58e4071
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:51:32] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: 58b710a5-6a93-41b6-b4bd-341db58e4071
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:51:32] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: 58b710a5-6a93-41b6-b4bd-341db58e4071
+0:0:0:0:0:0:0:1 - [INFO] [2025-02-18 10:52:55] "GET /home.jsp HTTP/1.1" User ID: 1 Session ID: 58b710a5-6a93-41b6-b4bd-341db58e4071

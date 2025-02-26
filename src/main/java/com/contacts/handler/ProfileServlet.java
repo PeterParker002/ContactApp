@@ -61,7 +61,7 @@ public class ProfileServlet extends HttpServlet {
 			}
 			response.sendRedirect("home.jsp");
 		} else {
-			out.println("{ \"message\": \"No user information available.\"");
+			out.println("{ \"message\": \"No user information available.\" }");
 		}
 	}
 }

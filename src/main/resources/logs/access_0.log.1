@@ -1,0 +1,241 @@
+2025-02-25 16:51:14 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:460)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1069)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:51:14 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:51:15 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:54:23 [INFO] - Reloading Context with name [] is completed
+2025-02-25 16:54:24 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 16:54:24 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:54:24 [INFO] - Stopping service [Catalina]
+2025-02-25 16:54:24 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 16:54:24 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:54:24 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:54:24 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/sun.security.ssl.HandshakeHash.determine(HandshakeHash.java:57)
+ java.base/sun.security.ssl.ServerHello$T13ServerHelloConsumer.consume(ServerHello.java:1224)
+ java.base/sun.security.ssl.ServerHello$ServerHelloConsumer.onServerHello(ServerHello.java:1001)
+ java.base/sun.security.ssl.ServerHello$ServerHelloConsumer.consume(ServerHello.java:889)
+ java.base/sun.security.ssl.SSLHandshake.consume(SSLHandshake.java:393)
+ java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:476)
+ java.base/sun.security.ssl.HandshakeContext.dispatch(HandshakeContext.java:447)
+ java.base/sun.security.ssl.TransportContext.dispatch(TransportContext.java:201)
+ java.base/sun.security.ssl.SSLTransport.decode(SSLTransport.java:172)
+ java.base/sun.security.ssl.SSLSocketImpl.decode(SSLSocketImpl.java:1506)
+ java.base/sun.security.ssl.SSLSocketImpl.readHandshakeRecord(SSLSocketImpl.java:1421)
+ java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:455)
+ java.base/sun.security.ssl.SSLSocketImpl.startHandshake(SSLSocketImpl.java:426)
+ com.mysql.cj.protocol.ExportControlled.performTlsHandshake(ExportControlled.java:206)
+ com.mysql.cj.protocol.StandardSocketFactory.performTlsHandshake(StandardSocketFactory.java:183)
+ com.mysql.cj.protocol.a.NativeSocketConnection.performTlsHandshake(NativeSocketConnection.java:91)
+ com.mysql.cj.protocol.a.NativeProtocol.negotiateSSLConnection(NativeProtocol.java:358)
+ com.mysql.cj.protocol.a.NativeAuthenticationProvider.connect(NativeAuthenticationProvider.java:198)
+ com.mysql.cj.protocol.a.NativeProtocol.connect(NativeProtocol.java:1336)
+ com.mysql.cj.NativeSession.connect(NativeSession.java:153)
+ com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:969)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:833)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:420)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:238)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
+ com.zaxxer.hikari.util.DriverDataSource.getConnection(DriverDataSource.java:139)
+ com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:367)
+ com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:205)
+ com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:484)
+ com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:748)
+ com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:727)
+ java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 16:54:24 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 16:54:24 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:07:25 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:07:25 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 18:07:25 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:07:25 [INFO] - Stopping service [Catalina]
+2025-02-25 18:07:25 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:07:25 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:07:25 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:07:25 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:07:25 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:connection-adder] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/java.util.zip.Inflater.inflateBytesBytes(Native Method)
+ java.base/java.util.zip.Inflater.inflate(Inflater.java:376)
+ java.base/java.util.zip.InflaterInputStream.read(InflaterInputStream.java:177)
+ java.base/java.io.InputStream.readNBytes(InputStream.java:509)
+ java.base/java.util.jar.JarFile.getBytes(JarFile.java:815)
+ java.base/java.util.jar.JarFile.checkForSpecialAttributes(JarFile.java:1027)
+ java.base/java.util.jar.JarFile.isMultiRelease(JarFile.java:387)
+ java.base/java.util.jar.JarFile.getEntry(JarFile.java:509)
+ java.base/java.util.jar.JarFile.getJarEntry(JarFile.java:471)
+ org.apache.catalina.webresources.AbstractSingleArchiveResourceSet.getArchiveEntry(AbstractSingleArchiveResourceSet.java:97)
+ org.apache.catalina.webresources.AbstractArchiveResourceSet.getResource(AbstractArchiveResourceSet.java:249)
+ org.apache.catalina.webresources.StandardRoot.getResourceInternal(StandardRoot.java:272)
+ org.apache.catalina.webresources.Cache.getResource(Cache.java:64)
+ org.apache.catalina.webresources.StandardRoot.getResource(StandardRoot.java:211)
+ org.apache.catalina.webresources.StandardRoot.getClassLoaderResource(StandardRoot.java:220)
+ org.apache.catalina.loader.WebappClassLoaderBase.findClassInternal(WebappClassLoaderBase.java:2170)
+ org.apache.catalina.loader.WebappClassLoaderBase.findClass(WebappClassLoaderBase.java:797)
+ org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1272)
+ org.apache.catalina.loader.WebappClassLoaderBase.loadClass(WebappClassLoaderBase.java:1120)
+ ch.qos.logback.classic.Logger.buildLoggingEventAndAppend(Logger.java:424)
+ ch.qos.logback.classic.Logger.filterAndLog_2(Logger.java:419)
+ ch.qos.logback.classic.Logger.debug(Logger.java:495)
+ com.zaxxer.hikari.pool.PoolBase.newConnection(PoolBase.java:377)
+ com.zaxxer.hikari.pool.PoolBase.newPoolEntry(PoolBase.java:205)
+ com.zaxxer.hikari.pool.HikariPool.createPoolEntry(HikariPool.java:484)
+ com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:748)
+ com.zaxxer.hikari.pool.HikariPool$PoolEntryCreator.call(HikariPool.java:727)
+ java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:07:25 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:07:25 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:11:32 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:11:33 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:11:51 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 18:11:51 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 18:11:59 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:12:07 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 18:12:07 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:12:07 [INFO] - Stopping service [Catalina]
+2025-02-25 18:12:07 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:12:07 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:12:07 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:12:07 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:12:07 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:20:38 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:20:42 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:20:43 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:20:46 [INFO] - A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+2025-02-25 18:20:46 [INFO] - Pausing ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:20:46 [INFO] - Stopping service [Catalina]
+2025-02-25 18:20:46 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:20:46 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:20:46 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:20:46 [INFO] - Stopping ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:20:46 [INFO] - Destroying ProtocolHandler ["http-nio-8080"]
+2025-02-25 18:45:51 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:45:55 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:46:20 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:46:32 [INFO] - Reloading Context with name [] has started
+2025-02-25 18:46:32 [WARNING] - The web application [ROOT] registered the JDBC driver [com.mysql.cj.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+2025-02-25 18:46:32 [WARNING] - The web application [ROOT] appears to have started a thread named [mysql-cj-abandoned-connection-cleanup] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:1847)
+ java.base/java.lang.ref.ReferenceQueue.await(ReferenceQueue.java:71)
+ java.base/java.lang.ref.ReferenceQueue.remove0(ReferenceQueue.java:143)
+ java.base/java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:218)
+ com.mysql.cj.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:84)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:46:32 [WARNING] - The web application [ROOT] appears to have started a thread named [HikariPool-2:housekeeper] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.base/jdk.internal.misc.Unsafe.park(Native Method)
+ java.base/java.util.concurrent.locks.LockSupport.parkNanos(LockSupport.java:269)
+ java.base/java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:1758)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1182)
+ java.base/java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:899)
+ java.base/java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1070)
+ java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+ java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+ java.base/java.lang.Thread.run(Thread.java:1583)
+2025-02-25 18:46:32 [INFO] - At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2025-02-25 18:46:32 [INFO] - Reloading Context with name [] is completed
+2025-02-25 18:46:36 [INFO] - Illegal access: this web application instance has been stopped already. Could not load []. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 18:46:52 [INFO] - Illegal access: this web application instance has been stopped already. Could not load [ch.qos.logback.classic.spi.LoggingEvent]. The following stack trace is thrown for debugging purposes as well as to attempt to terminate the thread which caused the illegal access.
+2025-02-25 19:30:53 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: 67ef63b4-811a-4c60-95f5-92beb7c48fb0
+2025-02-25 19:31:57 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet 
+2025-02-25 19:31:57 [INFO] - GET 0:0:0:0:0:0:0:1 /index.jsp 
+2025-02-25 19:32:25 [INFO] - GET 0:0:0:0:0:0:0:1 / 
+2025-02-25 19:32:27 [INFO] - GET 0:0:0:0:0:0:0:1 /login 
+2025-02-25 19:32:32 [INFO] - POST 0:0:0:0:0:0:0:1 /login 
+2025-02-25 19:32:32 [INFO] - GET 0:0:0:0:0:0:0:1 /home.jsp User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:32:43 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:36:23 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:36:32 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:37:22 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:44:46 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a
+2025-02-25 19:45:11 [INFO] - GET 0:0:0:0:0:0:0:1 /ContactsServlet User ID: 1 Session ID: a78fbb67-126c-403d-bb4d-f2a90050a40a

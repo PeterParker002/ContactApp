@@ -1,7 +1,6 @@
 package com.contacts.handler;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -14,11 +13,11 @@ import javax.servlet.http.HttpSession;
 import com.contacts.dao.ContactDAO;
 import com.contacts.dao.UserDAO;
 
-
 import com.contacts.model.Contact;
 import com.contacts.model.ContactMail;
 import com.contacts.model.ContactMobile;
 import com.contacts.model.Session;
+import com.contacts.utils.MobileNumberValidator;
 
 @WebServlet("/add-contact")
 public class AddContactServlet extends HttpServlet {
@@ -30,7 +29,7 @@ public class AddContactServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
 		response.setContentType("text/html");
 		Contact contact = new Contact();
 		long now = System.currentTimeMillis();
@@ -40,12 +39,15 @@ public class AddContactServlet extends HttpServlet {
 			contact.setLastName(request.getParameter("lname"));
 			contact.setGender(request.getParameter("gender"));
 			contact.setDateOfBirth(request.getParameter("dob").equals("") ? null : request.getParameter("dob"));
-			ContactMobile mobile = new ContactMobile();
-//			mobile.setMobileNumber(Long.parseLong(request.getParameter("mobile")));
-			mobile.setMobileNumber(request.getParameter("mobile"));
-			mobile.setCreatedAt(now);
-			mobile.setModifiedAt(now);
-			contact.setMobileNumber(mobile);
+			if (MobileNumberValidator.validate(request.getParameter("mobile"))) {
+				ContactMobile mobile = new ContactMobile();
+				mobile.setMobileNumber(request.getParameter("mobile"));
+				mobile.setCreatedAt(now);
+				mobile.setModifiedAt(now);
+				contact.setMobileNumber(mobile);
+			} else {
+				throw new NumberFormatException();
+			}
 			contact.setNotes(request.getParameter("notes"));
 			contact.setHomeAddress(request.getParameter("home"));
 			contact.setWorkAddress(request.getParameter("work"));
@@ -60,10 +62,9 @@ public class AddContactServlet extends HttpServlet {
 			contact.setCreatedAt(now);
 			contact.setModifiedAt(now);
 		} catch (NumberFormatException numException) {
-			out.println("<div class='message'>Mobile Number should be a 10 digit number.</div>");
+			session.setAttribute("message", "Mobile Number should be a 10 digit number.");
 			request.getRequestDispatcher("home.jsp").include(request, response);
 		}
-		HttpSession session = request.getSession();
 		String sessionId = UserDAO.getSessionIdFromCookie(request, "session");
 		Session userSession = UserDAO.getUserSession(sessionId);
 		int user_id = userSession.getUserId();

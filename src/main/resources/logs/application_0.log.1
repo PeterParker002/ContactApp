@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+</log>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2025-02-20T11:38:37.710515608Z</date>
+  <millis>1740051517710</millis>
+  <nanos>515608</nanos>
+  <sequence>38</sequence>
+  <logger>com.contacts.cache.SessionCache</logger>
+  <level>SEVERE</level>
+  <class>com.contacts.schedulers.SessionScheduler</class>
+  <method>contextInitialized</method>
+  <thread>47</thread>
+  <message>com.contacts.exception.InvalidConfigurationException: Error while loading configuration</message>
+</record>
+</log>
+Feb 20, 2025 5:21:09 PM com.contacts.schedulers.SessionScheduler contextInitialized
+SEVERE: 
+com.contacts.exception.InvalidConfigurationException: Error while loading configuration
+	at com.contacts.connection.ConfigurationLoader.loadConfig(ConfigurationLoader.java:22)
+	at com.contacts.schedulers.SessionScheduler.contextInitialized(SessionScheduler.java:69)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4007)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4448)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:171)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3214)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:273)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:4803)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1172)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1176)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1176)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1154)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:572)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:358)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: java.io.FileNotFoundException: /home/karthik-tt0479eclipse-workspace/FirstProject/src/main/resources/application.properties (No such file or directory)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:152)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:106)
+	at com.contacts.connection.ConfigurationLoader.loadConfig(ConfigurationLoader.java:15)
+	... 18 more
+

@@ -25,8 +25,8 @@ public class NotifySessionRemovalServelt extends HttpServlet {
 			for (Cookie c : cookies) {
 				if (c.getName().equals("session")) {
 					String sessionId = c.getValue();
-					if (SessionCache.activeSessionObjects.containsKey(sessionId)) {
-						SessionCache.activeSessionObjects.remove(sessionId);
+					if (SessionCache.activeSessions.containsKey(sessionId)) {
+						SessionCache.activeSessions.remove(sessionId);
 						SessionCache.checkAndUpdateUserCache(session);
 					}
 				}

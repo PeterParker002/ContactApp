@@ -1,10 +1,9 @@
 package com.contacts.dao;
 
 import java.lang.reflect.InvocationTargetException;
-import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +33,6 @@ public class UserDAO {
 	public static String[] Columns = { "Username", "First Name", "Middle Name", "Last Name", "Gender", "Date Of Birth",
 			"Notes", "Home Address", "Work Address" };
 
-	// Insert Statement
 	/**
 	 * Sign Up Method
 	 * 
@@ -117,7 +115,7 @@ public class UserDAO {
 		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
 				new Column(UserEmail.USERID, "", "", emailTable));
 		qb.setCondition(new Column(UserEmail.EMAIL, "", "", emailTable), Operators.EQUAL, email);
-		ArrayList<User> users = (ArrayList<User>) qx.executeJoinQuery1(qb.build());
+		List<User> users = (List<User>) qx.executeJoinQuery(qb.build());
 		System.out.println(users);
 		if (users != null) {
 			if (users.size() > 0) {
@@ -229,7 +227,7 @@ public class UserDAO {
 		qb.selectTable(TableInfo.USEREMAIL);
 		qb.selectColumn(new Column(UserEmail.ISPRIMARY, "", "", qb.table));
 		qb.setCondition(new Column(UserEmail.ID, "", "", qb.table), Operators.EQUAL, mail_id);
-		ArrayList<UserMail> r = (ArrayList<UserMail>) qx.executeQuery(qb.build());
+		List<UserMail> r = (List<UserMail>) qx.executeQuery(qb.build());
 		return r.get(0).getIsPrimary();
 	}
 
@@ -316,16 +314,16 @@ public class UserDAO {
 		qb.selectTable(TableInfo.USER);
 		Table emailTable = new Table(TableInfo.USEREMAIL);
 		Table mobileTable = new Table(TableInfo.USERMOBILENUMBER);
-		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+		qb.joinTables(JoinTypes.left, new Column(Users.USERID, "", "", qb.table),
 				new Column(UserEmail.USERID, "", "", emailTable));
-		qb.joinTables(JoinTypes.inner, new Column(Users.USERID, "", "", qb.table),
+		qb.joinTables(JoinTypes.left, new Column(Users.USERID, "", "", qb.table),
 				new Column(UserMobileNumber.USERID, "", "", mobileTable));
 		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		QueryExecutor qx = new QueryExecutor();
-		ArrayList<User> r;
+		List<User> r;
 		User user = null;
 		try {
-			r = (ArrayList<User>) qx.executeJoinQuery1(qb.build());
+			r = (List<User>) qx.executeJoinQuery(qb.build());
 			user = r.get(0);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
 				| NoSuchMethodException | SecurityException e) {
@@ -350,14 +348,14 @@ public class UserDAO {
 	 * @throws InstantiationException
 	 */
 	@SuppressWarnings("unchecked")
-	public static ArrayList<UserMail> getUserMail(int user_id)
+	public static List<UserMail> getUserMail(int user_id)
 			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USEREMAIL);
 		qb.setCondition(new Column(UserEmail.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		QueryExecutor qx = new QueryExecutor();
-		ArrayList<UserMail> r = (ArrayList<UserMail>) qx.executeQuery(qb.build());
+		List<UserMail> r = (List<UserMail>) qx.executeQuery(qb.build());
 		return r;
 	}
 
@@ -377,14 +375,14 @@ public class UserDAO {
 	 * @throws InstantiationException
 	 */
 	@SuppressWarnings("unchecked")
-	public static ArrayList<UserMobile> getUserMobileNumber(int user_id)
+	public static List<UserMobile> getUserMobileNumber(int user_id)
 			throws ClassNotFoundException, SQLException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		qb.selectTable(TableInfo.USERMOBILENUMBER);
 		qb.setCondition(new Column(UserMobileNumber.USERID, "", "", qb.table), Operators.EQUAL, user_id);
 		QueryExecutor qx = new QueryExecutor();
-		ArrayList<UserMobile> r = (ArrayList<UserMobile>) qx.executeQuery(qb.build());
+		List<UserMobile> r = (List<UserMobile>) qx.executeQuery(qb.build());
 		return r;
 	}
 
@@ -425,15 +423,15 @@ public class UserDAO {
 
 	// Select Statement
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Group> getGroups(int user_id)
+	public static List<Group> getGroups(int user_id)
 			throws SQLException, ClassNotFoundException, IllegalAccessException, InvocationTargetException,
 			InstantiationException, IllegalArgumentException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
 		qb.selectTable(TableInfo.GROUPDETAILS);
 		qb.setCondition(new Column(Users.USERID, "", "", qb.table), Operators.EQUAL, user_id);
-		ArrayList<Group> groupsData = (ArrayList<Group>) qx.executeQuery(qb.build());
-		ArrayList<Group> groups = new ArrayList<Group>();
+		List<Group> groupsData = (List<Group>) qx.executeQuery(qb.build());
+		List<Group> groups = new ArrayList<Group>();
 		for (Group group : groupsData) {
 			group.setGroupId(group.getGroupId());
 			group.setContactId(getContactsByGroup(group.getGroupId()));
@@ -444,7 +442,7 @@ public class UserDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Contact> getContactsByGroup(int group_id)
+	public static List<Contact> getContactsByGroup(int group_id)
 			throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
@@ -455,7 +453,7 @@ public class UserDAO {
 		inner_qb.selectColumn(new Column(GroupInfo.CONTACTID, "", "", inner_qb.table));
 		inner_qb.setCondition(new Column(GroupInfo.GROUPID, "", "", inner_qb.table), Operators.EQUAL, group_id);
 		qb.setCondition(new Column(Contacts.CONTACTID, "", "", qb.table), Operators.IN, inner_qb.build());
-		ArrayList<Contact> contacts = (ArrayList<Contact>) qx.executeQuery(qb.build());
+		List<Contact> contacts = (List<Contact>) qx.executeQuery(qb.build());
 		return contacts;
 	}
 
@@ -561,11 +559,9 @@ public class UserDAO {
 		qb.selectTable(TableInfo.SESSION);
 		qb.setCondition(new Column(Database.Session.SESSIONID, "", "", qb.table), Operators.EQUAL, sessionId);
 		try {
-			ArrayList<Session> session = (ArrayList<Session>) qx.executeQuery(qb.build());
+			List<Session> session = (List<Session>) qx.executeQuery(qb.build());
 			if (session.size() > 0) {
 				return session.get(0);
-			} else {
-				return null;
 			}
 		} catch (IllegalAccessException | InvocationTargetException | InstantiationException | IllegalArgumentException
 				| NoSuchMethodException | SecurityException e) {
@@ -595,7 +591,8 @@ public class UserDAO {
 		qb.updateTable(TableInfo.SESSION);
 		qb.updateColumn(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), lastAccessedAt);
 		qb.setCondition(new Column(Database.Session.SESSIONID, "", "", qb.table), Operators.EQUAL, sessionId);
-		qb.setCondition(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), Operators.LESSTHAN, lastAccessedAt);
+		qb.setCondition(new Column(Database.Session.LASTACCESSEDAT, "", "", qb.table), Operators.LESSTHAN,
+				lastAccessedAt);
 		int res;
 		try {
 			res = qx.executeAndUpdate(qb.build());
@@ -639,28 +636,6 @@ public class UserDAO {
 		return res;
 	}
 
-	public static String generateCustomSessionId() {
-		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-		ArrayList<Character> charList = new ArrayList<>();
-		for (char c : characters.toCharArray()) {
-			charList.add(c);
-		}
-
-		// Shuffle using SecureRandom
-		SecureRandom secureRandom = new SecureRandom();
-		for (int i = charList.size() - 1; i > 0; i--) {
-			int j = secureRandom.nextInt(i + 1);
-			Collections.swap(charList, i, j);
-		}
-
-		// Generate the random string with unique characters
-		StringBuilder randomString = new StringBuilder();
-		for (int i = 0; i < 16; i++) {
-			randomString.append(charList.get(i));
-		}
-		return randomString.toString();
-	}
-
 	public static String generateSessionId() {
 		return UUID.randomUUID().toString();
 	}
@@ -678,7 +653,7 @@ public class UserDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static ArrayList<Server> getAvailableServers() throws InstantiationException, IllegalAccessException,
+	public static List<Server> getAvailableServers() throws InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		QueryBuilder qb = new QueryBuilder();
 		QueryExecutor qx = new QueryExecutor();
@@ -686,7 +661,7 @@ public class UserDAO {
 		qb.setCondition(new Column(Servers.IP, "", "", qb.table), Operators.NOTEQUAL, SessionScheduler.server_ip);
 		qb.setCondition(new Column(Servers.PORT, "", "", qb.table), Operators.NOTEQUAL, SessionScheduler.server_port);
 		qb.changeConjuction("OR");
-		ArrayList<Server> result = (ArrayList<Server>) qx.executeQuery(qb.build());
+		List<Server> result = (List<Server>) qx.executeQuery(qb.build());
 		return result;
 	}
 

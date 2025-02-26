@@ -25,8 +25,8 @@ public class notifySessionChangeServlet extends HttpServlet {
 			for (Cookie c : cookies) {
 				if (c.getName().equals("session")) {
 					String sessionId = c.getValue();
-					if (SessionCache.activeSessionObjects.containsKey(sessionId)) {
-						SessionCache.activeSessionObjects.put(sessionId, session);
+					if (SessionCache.activeSessions.containsKey(sessionId)) {
+						SessionCache.activeSessions.put(sessionId, session);
 					}
 				}
 			}
